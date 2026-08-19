@@ -1,0 +1,16 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+      - run: dotnet build Cpa.BoundedMindsLab.sln -c Release
+      - run: dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- --self-test

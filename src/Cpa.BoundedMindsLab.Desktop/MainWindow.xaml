@@ -1,0 +1,276 @@
+<Window x:Class="Cpa.BoundedMindsLab.Desktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:Cpa.BoundedMindsLab.Desktop.Controls"
+        Title="CPA Bounded Minds Laboratory"
+        Width="1540"
+        Height="930"
+        MinWidth="1120"
+        MinHeight="680"
+        SourceInitialized="WindowSourceInitialized"
+        Closing="WindowClosing">
+    <Grid Margin="8" Background="{StaticResource WindowBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="310" MinWidth="250" />
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="*" MinWidth="470" />
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="390" MinWidth="310" />
+        </Grid.ColumnDefinitions>
+
+        <ScrollViewer Grid.Row="0" Grid.Column="0" Background="{StaticResource WindowBrush}" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <TextBlock Text="CPA Bounded Minds Laboratory" FontSize="21" FontWeight="SemiBold" Margin="6,4,6,0" />
+                <TextBlock Text="Development among bounded minds" Foreground="{StaticResource MutedBrush}" Margin="6,0,6,10" />
+
+                <GroupBox Header="Experiments">
+                    <StackPanel>
+                        <ItemsControl ItemsSource="{Binding Experiments}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsSelected}">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Name}" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                            <TextBlock Text="{Binding Question}" Foreground="{StaticResource MutedBrush}" FontSize="11" TextWrapping="Wrap" Margin="18,1,4,5" />
+                                        </StackPanel>
+                                    </CheckBox>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="Select all" Click="SelectAllClicked" />
+                            <Button Content="Select none" Click="SelectNoneClicked" />
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Run">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Seeds" VerticalAlignment="Top" Margin="2,7,8,5" />
+                        <TextBox x:Name="SeedTextBox" Grid.Row="0" Grid.Column="1" Text="101" MinHeight="44" TextWrapping="Wrap" AcceptsReturn="True" ToolTip="Enter one or more unsigned seeds separated by commas, spaces, semicolons, or new lines." />
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Pace" VerticalAlignment="Center" Margin="2,5,8,5" />
+                        <ComboBox x:Name="PaceComboBox" Grid.Row="1" Grid.Column="1" SelectedIndex="0">
+                            <ComboBoxItem Content="Maximum" />
+                            <ComboBoxItem Content="2 ms / observation" />
+                            <ComboBoxItem Content="10 ms / observation" />
+                        </ComboBox>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Output" VerticalAlignment="Top" Margin="2,7,8,5" />
+                        <TextBox x:Name="OutputTextBox" Grid.Row="2" Grid.Column="1" MinHeight="54" TextWrapping="Wrap" AcceptsReturn="True" />
+                        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Margin="0,6,0,0">
+                            <Button x:Name="RunButton" Content="Run session" Click="RunClicked" />
+                            <UniformGrid Columns="2">
+                                <Button x:Name="PauseButton" Content="Pause" Click="PauseClicked" IsEnabled="False" />
+                                <Button x:Name="StepButton" Content="Step observation" Click="StepClicked" IsEnabled="False" />
+                                <Button x:Name="ResumeButton" Content="Resume" Click="ResumeClicked" IsEnabled="False" />
+                                <Button x:Name="CancelButton" Content="Cancel" Click="CancelClicked" IsEnabled="False" />
+                            </UniformGrid>
+                            <Button Content="Open output" Click="OpenOutputClicked" />
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox Header="Visualization">
+                    <StackPanel>
+                        <CheckBox x:Name="FreezeGraphCheckBox" Content="Freeze graph (experiment continues)" />
+                        <TextBlock Text="The display samples background telemetry. Dropped display frames never alter the durable journal or experiment state." Foreground="{StaticResource MutedBrush}" FontSize="11" TextWrapping="Wrap" Margin="2,5" />
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+
+        <GridSplitter Grid.Row="0" Grid.Column="1" Width="5" HorizontalAlignment="Stretch" Background="{StaticResource BorderBrush}" />
+
+        <Grid Grid.Row="0" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="6" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Background="{StaticResource PanelBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="8,6">
+                <StackPanel>
+                    <DockPanel Margin="1,0,0,5">
+                        <TextBlock Text="Protocol progress" FontWeight="SemiBold" />
+                        <TextBlock x:Name="SessionProgressText" Text="Session: idle" Foreground="{StaticResource MutedBrush}" HorizontalAlignment="Right" Margin="14,0,0,0" />
+                    </DockPanel>
+                    <UniformGrid Columns="3">
+                        <Border x:Name="SourceProgressCard" Margin="1" Padding="7,5" Background="{StaticResource PanelAltBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+                            <StackPanel>
+                                <TextBlock x:Name="SourceStepText" TextWrapping="Wrap" Tag="1. Source develops" FontWeight="SemiBold" Text="[ ] 1. Source develops" />
+                                <TextBlock x:Name="SourceDirectProgressText" TextWrapping="Wrap" Tag="Direct local consequence" Text="[ ] Direct local consequence" FontSize="10.5" Foreground="{StaticResource MutedBrush}" Margin="10,3,0,0" />
+                                <TextBlock x:Name="SourcePublishProgressText" TextWrapping="Wrap" Tag="Publish compact traces" Text="[ ] Publish compact traces" FontSize="10.5" Foreground="{StaticResource MutedBrush}" Margin="10,1,0,0" />
+                            </StackPanel>
+                        </Border>
+                        <Border x:Name="ReceiverProgressCard" Margin="1" Padding="7,5" Background="{StaticResource PanelAltBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+                            <StackPanel>
+                                <TextBlock x:Name="ReceiverStepText" TextWrapping="Wrap" Tag="2. Receivers develop" FontWeight="SemiBold" Text="[ ] 2. Receivers develop" />
+                                <TextBlock x:Name="ReceiverLocalProgressText" TextWrapping="Wrap" Tag="Local-only baseline" Text="[ ] Local-only baseline" FontSize="10.5" Foreground="{StaticResource MutedBrush}" Margin="10,3,0,0" />
+                                <TextBlock x:Name="ReceiverProvisionalProgressText" TextWrapping="Wrap" Tag="Provisional transfer" Text="[ ] Provisional transfer" FontSize="10.5" Foreground="{StaticResource MutedBrush}" Margin="10,1,0,0" />
+                                <TextBlock x:Name="ReceiverLivedProgressText" TextWrapping="Wrap" Tag="Lived-equivalent control" Text="[ ] Lived-equivalent control" FontSize="10.5" Foreground="{StaticResource MutedBrush}" Margin="10,1,0,0" />
+                            </StackPanel>
+                        </Border>
+                        <Border x:Name="EvaluationProgressCard" Margin="1" Padding="7,5" Background="{StaticResource PanelAltBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+                            <StackPanel>
+                                <TextBlock x:Name="EvaluationStepText" TextWrapping="Wrap" Tag="3. Evaluate" FontWeight="SemiBold" Text="[ ] 3. Evaluate" />
+                                <TextBlock x:Name="EvaluationAssertionsProgressText" TextWrapping="Wrap" Tag="Six falsification checks" Text="[ ] Six falsification checks" FontSize="10.5" Foreground="{StaticResource MutedBrush}" Margin="10,3,0,0" />
+                                <TextBlock x:Name="EvaluationVerdictProgressText" TextWrapping="Wrap" Tag="Protocol verdict" Text="[ ] Protocol verdict" FontSize="10.5" Foreground="{StaticResource MutedBrush}" Margin="10,1,0,0" />
+                            </StackPanel>
+                        </Border>
+                    </UniformGrid>
+                </StackPanel>
+            </Border>
+
+            <TabControl Grid.Row="2" x:Name="CenterTabs">
+                <TabItem Header="Live metrics">
+                    <Grid Margin="8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Margin="0,0,0,6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="220" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Metric" VerticalAlignment="Center" Margin="0,0,7,0" />
+                            <Button x:Name="PreviousMetricButton" Grid.Column="1" Content="&lt;" Click="PreviousMetricClicked" Padding="5,2" MinWidth="28" ToolTip="Previous metric" />
+                            <ComboBox x:Name="MetricComboBox" Grid.Column="2" SelectionChanged="MetricSelectionChanged" />
+                            <Button x:Name="NextMetricButton" Grid.Column="3" Content="&gt;" Click="NextMetricClicked" Padding="5,2" MinWidth="28" ToolTip="Next metric" />
+                            <TextBlock Grid.Column="4" Text="Focus path" VerticalAlignment="Center" Margin="12,0,7,0" />
+                            <Button x:Name="PreviousSeriesButton" Grid.Column="5" Content="&lt;" Click="PreviousSeriesClicked" Padding="5,2" MinWidth="28" ToolTip="Previous focus path" />
+                            <ComboBox x:Name="SeriesComboBox" Grid.Column="6" SelectionChanged="SeriesSelectionChanged" ToolTip="Focus path" />
+                            <Button x:Name="NextSeriesButton" Grid.Column="7" Content="&gt;" Click="NextSeriesClicked" Padding="5,2" MinWidth="28" ToolTip="Next focus path" />
+                            <Button Grid.Column="8" Content="Maximize graph" Click="MaximizeGraphClicked" Margin="10,2,2,2" ToolTip="Open the live graph in a maximized window" />
+                        </Grid>
+                        <Border Grid.Row="1" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Background="{StaticResource InputBrush}">
+                            <controls:FastMetricPlot x:Name="MetricPlot" />
+                        </Border>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Timeline">
+                    <DataGrid x:Name="TimelineGrid" Margin="8" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="#" Binding="{Binding Sequence}" Width="70" />
+                            <DataGridTextColumn Header="Tick" Binding="{Binding Tick}" Width="60" />
+                            <DataGridTextColumn Header="Series" Binding="{Binding Series}" Width="180" />
+                            <DataGridTextColumn Header="Kind" Binding="{Binding Kind}" Width="150" />
+                            <DataGridTextColumn Header="Event" Binding="{Binding Text}" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+                <TabItem Header="Protocol results">
+                    <Grid Margin="8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="2*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Background="{StaticResource PanelAltBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="8,6" Margin="0,0,0,7">
+                            <TextBlock x:Name="ProtocolResultsSummaryText" Text="No protocol has reached a judged result yet." TextWrapping="Wrap" />
+                        </Border>
+                        <DataGrid x:Name="ProtocolResultsGrid" Grid.Row="1" AutoGenerateColumns="False" SelectionChanged="ProtocolResultSelectionChanged" IsReadOnly="True" SelectionMode="Single">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Seed" Binding="{Binding Seed}" Width="75" />
+                                <DataGridTextColumn Header="Protocol" Binding="{Binding Experiment}" Width="230" />
+                                <DataGridTextColumn Header="Judgment" Binding="{Binding Judgment}" Width="95" />
+                                <DataGridTextColumn Header="Passed" Binding="{Binding PassedAssertions}" Width="60" />
+                                <DataGridTextColumn Header="Failed" Binding="{Binding FailedAssertions}" Width="60" />
+                                <DataGridTextColumn Header="Interpretation" Binding="{Binding Interpretation}" Width="*" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <TextBlock Grid.Row="2" Text="Falsification checks for selected result" FontWeight="SemiBold" Margin="2,9,2,4" />
+                        <DataGrid x:Name="ResultAssertionsGrid" Grid.Row="3" AutoGenerateColumns="False" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridCheckBoxColumn Header="Pass" Binding="{Binding Passed}" Width="48" />
+                                <DataGridTextColumn Header="Check" Binding="{Binding Name}" Width="180" />
+                                <DataGridTextColumn Header="Actual" Binding="{Binding Actual, StringFormat=0.######}" Width="75" />
+                                <DataGridTextColumn Header="Boundary" Binding="{Binding Boundary, StringFormat=0.######}" Width="75" />
+                                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+
+        <GridSplitter Grid.Row="0" Grid.Column="3" Width="5" HorizontalAlignment="Stretch" Background="{StaticResource BorderBrush}" />
+
+        <TabControl Grid.Row="0" Grid.Column="4">
+            <TabItem Header="Public mind state">
+                <Grid Margin="8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="180" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Latest compact public surface for the selected path" Foreground="{StaticResource MutedBrush}" Margin="2,0,2,5" TextWrapping="Wrap" />
+                    <DataGrid x:Name="MindGrid" Grid.Row="1" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Mind" Binding="{Binding MindId}" Width="*" />
+                            <DataGridTextColumn Header="Local" Binding="{Binding LocalTraceCount}" Width="54" />
+                            <DataGridTextColumn Header="Foreign" Binding="{Binding ForeignTraceCount}" Width="62" />
+                            <DataGridTextColumn Header="Local standing" Binding="{Binding MeanLocalStanding, StringFormat=0.000}" Width="90" />
+                            <DataGridTextColumn Header="Foreign standing" Binding="{Binding MeanForeignStanding, StringFormat=0.000}" Width="95" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBlock Grid.Row="2" Text="Trace surface" FontWeight="SemiBold" Margin="2,9,2,4" />
+                    <DataGrid x:Name="TraceGrid" Grid.Row="3" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Cell" Binding="{Binding ContextCell}" Width="44" />
+                            <DataGridTextColumn Header="Provenance" Binding="{Binding Provenance}" Width="76" />
+                            <DataGridTextColumn Header="Source" Binding="{Binding SourceMindId}" Width="95" />
+                            <DataGridTextColumn Header="Estimate" Binding="{Binding Estimate, StringFormat=0.000}" Width="70" />
+                            <DataGridTextColumn Header="Standing" Binding="{Binding Standing, StringFormat=0.000}" Width="70" />
+                            <DataGridTextColumn Header="Direct" Binding="{Binding DirectEvidenceCount}" Width="52" />
+                            <DataGridTextColumn Header="Imported" Binding="{Binding ImportedEvidenceCount}" Width="62" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Run notes">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="10">
+                        <TextBlock Text="Protocol 01" FontSize="18" FontWeight="SemiBold" />
+                        <TextBlock Text="Local versus shared memory contamination" FontSize="14" Margin="0,2,0,9" />
+                        <TextBlock Text="The source develops from direct consequence, then exposes compact public traces. The receiver either gets no transfer, imports those traces provisionally as foreign influence, or receives the control treatment that grants them lived-equivalent authority. The synthetic world agrees with the source in six context cells and diverges in two." TextWrapping="Wrap" />
+                        <TextBlock Text="The graph and tables are observational only. The experiment never reads UI state, render timing, selected metric, splitter geometry, or display telemetry backlog." Foreground="{StaticResource MutedBrush}" TextWrapping="Wrap" Margin="0,10,0,0" />
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+
+        <Border Grid.Row="1" Grid.ColumnSpan="5" Margin="0,7,0,0" Padding="7,4" Background="{StaticResource PanelBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="StatusText" Grid.Column="0" Text="Ready" />
+                <TextBlock x:Name="PerformanceText" Grid.Column="1" Foreground="{StaticResource MutedBrush}" Margin="12,0,0,0" />
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

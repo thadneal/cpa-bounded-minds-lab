@@ -1,0 +1,35 @@
+<Window x:Class="Cpa.BoundedMindsLab.Desktop.MetricPlotWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:Cpa.BoundedMindsLab.Desktop.Controls"
+        Title="CPA Bounded Minds Laboratory - Maximized graph"
+        Width="1440"
+        Height="900"
+        MinWidth="760"
+        MinHeight="500"
+        WindowState="Maximized"
+        SourceInitialized="WindowSourceInitialized">
+    <Grid Margin="8" Background="{StaticResource WindowBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="6" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="{StaticResource PanelBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="8,6">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock x:Name="MetricText" FontSize="16" FontWeight="SemiBold" />
+                    <TextBlock x:Name="FocusText" Foreground="{StaticResource MutedBrush}" Margin="0,2,0,0" />
+                </StackPanel>
+                <Button Grid.Column="1" Content="Close maximized graph" Click="CloseClicked" VerticalAlignment="Center" />
+            </Grid>
+        </Border>
+        <Border Grid.Row="2" Background="{StaticResource InputBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+            <controls:FastMetricPlot x:Name="MetricPlot" />
+        </Border>
+    </Grid>
+</Window>

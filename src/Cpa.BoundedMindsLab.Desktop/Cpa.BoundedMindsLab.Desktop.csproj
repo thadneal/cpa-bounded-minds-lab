@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <AssemblyName>Cpa.BoundedMindsLab.Desktop</AssemblyName>
+    <RootNamespace>Cpa.BoundedMindsLab.Desktop</RootNamespace>
+    <Version>0.1.9</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cpa.BoundedMindsLab.Core\Cpa.BoundedMindsLab.Core.csproj" />
+  </ItemGroup>
+</Project>
