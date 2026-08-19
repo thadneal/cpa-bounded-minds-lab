@@ -157,3 +157,36 @@ For multi-seed sessions, these result rows accumulate across completed seeds whi
 
 Some protocol metrics, including `rmse`, are published only when a receiver path completes. Such a series contains one observation, which is valid scientific telemetry but has no line segment to stroke. The custom plot therefore renders a point marker for one-observation series and symmetrically expands a degenerate x-axis around that observation. This prevents a valid final metric from looking like an empty or filtered graph after the run.
 
+
+## Active seed indicator
+
+v0.2.0 adds a dedicated seed badge beside the session-progress text above Protocol progress. During a multi-seed session it shows both the actual seed value and the current history position, for example `SEED 307 (3/5)`. This remains visible independently of the status bar so screenshots and focused graph inspection still reveal which deterministic history is active.
+
+The same seed value is mirrored into the maximized graph header. After a completed or interrupted session, the main badge retains the last displayed seed so the graph left on screen remains attributable to a deterministic history. The badge is presentation-only. It reads session status and cannot alter experiment execution or seed selection.
+
+## Protocol-aware progress
+
+The progress strip is no longer hard-coded to Protocol 01. It derives the most recently started experiment from the structural timeline and switches labels and completion rules accordingly.
+
+Protocol 02 is shown as:
+
+```text
+1. Peers develop
+   Mind A private history
+   Mind B private history
+
+2. Compare conditions
+   Preserved interiors
+   Collapse to synchronized state
+   Synchronized shared consequence
+
+3. Evaluate
+   Six falsification checks
+   Protocol verdict
+```
+
+When several experiments run within one seed, the progress surface changes as the next protocol starts rather than leaving the completed Protocol 01 steps on screen. The timeline remains the complete projected structural record for the current seed.
+
+## Default experiment selection
+
+The newest protocol is selected by default when the Desktop Lab opens, while frozen earlier protocols remain available but unselected. In v0.2.0 this means Protocol 02 is the ordinary targeted run. `Select all` remains available for the full-suite checkpoint.

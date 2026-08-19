@@ -5,6 +5,7 @@ public static class ExperimentCatalog
     private static readonly IExperiment[] Experiments =
     [
         new LocalSharedMemoryContaminationExperiment(),
+        new PeerDisagreementPreservedInteriorsExperiment(),
     ];
 
     public static IReadOnlyList<IExperiment> All => Experiments;

@@ -22,7 +22,7 @@ receiving mind
 revised local readiness
 ```
 
-A sender never exposes its `DevelopmentalMemory` object to another mind. A receiver can obtain only `PublicTracePacket` values through `SharedTraceChannel`.
+In ordinary/preserved experimental paths, a sender never exposes its private memory object to another mind. Protocol 01 receivers obtain only `PublicTracePacket` values through `SharedTraceChannel`; Protocol 02 peers expose only current public prediction-and-standing postures. Deliberately invasive controls may violate this boundary only when the violation itself is the experimental contrast.
 
 ## Developmental memory
 
@@ -68,3 +68,31 @@ The prior laboratory's strongest architectural lesson was restraint: many succes
 It intentionally leaves behind the old protocol catalog and its specialized controllers.
 
 The desktop application is also rebuilt rather than copied. The old workbench already used a bounded display channel, custom drawing, point compaction, display downsampling, and throttled hover. Its remaining performance weakness was that WPF still drained frames and applied each frame to several UI-owned views. The new workbench puts experiment execution on a dedicated below-normal-priority thread, moves frame projection itself off the dispatcher, and lets WPF sample already-projected state. Fine live graph levels can retire when they cease to offer useful display resolution; full-fidelity history remains a durable artifact rather than UI heap pressure.
+
+## Protocol 02 peer boundary
+
+Protocol 02 adds no general-purpose collective-mind abstraction. Its two `PeerMind` instances remain protocol-local experimental instruments with context-indexed private estimates, local developmental standing, and consequence-revisable public standing.
+
+The preserved condition uses this boundary:
+
+```text
+peer A private state                 peer B private state
+        |                                    |
+        | current prediction + standing      | current prediction + standing
+        v                                    v
+       compact public postures under explicit packet cost
+                         |
+                         | simple experimental negotiation readout
+                         v
+                 shared consequence
+                    /           \
+                   v             v
+          peer A updates      peer B updates
+          its own interior    its own interior
+```
+
+The negotiation readout can see only the two current public postures. It cannot inspect either peer's private history, evidence arrays, future consequence, or evaluator labels. Shared consequence is returned to each peer separately and changes each peer's own estimate and public standing.
+
+The `synchronized-control` is intentionally invasive. It averages both private states before the shared phase and creates two identical copies. This is a falsification contrast for premature consensus. It does not cross `SharedTraceChannel`, it is not counted as legitimate inter-mind communication, and it must not be mistaken for a proposed CPA mechanism.
+
+`PeerDisagreementWorld` remains semantically anonymous. One peer has the more useful private history for four context cells and the other peer for the complementary four. Small deterministic noise prevents the histories from becoming literal duplicate constants while keeping the first disagreement assay interpretable.

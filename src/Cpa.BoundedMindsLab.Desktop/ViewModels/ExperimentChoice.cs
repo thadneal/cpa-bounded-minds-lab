@@ -4,12 +4,13 @@ namespace Cpa.BoundedMindsLab.Desktop.ViewModels;
 
 public sealed class ExperimentChoice : INotifyPropertyChanged
 {
-    private bool _isSelected = true;
+    private bool _isSelected;
 
-    public ExperimentChoice(string name, string question)
+    public ExperimentChoice(string name, string question, bool isSelected = true)
     {
         Name = name;
         Question = question;
+        _isSelected = isSelected;
     }
 
     public string Name { get; }

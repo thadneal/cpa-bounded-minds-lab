@@ -20,6 +20,7 @@ public static class SelfTestSuite
         Run("foreign-standing-rises-under-local-confirmation", TestForeignStandingRises, passed);
         Run("public-export-requires-earned-standing", TestExportStanding, passed);
         Run("protocol-01-supports-seed-101", TestProtocolOne, passed);
+        Run("protocol-02-supports-seed-101", TestProtocolTwo, passed);
         Run("frame-sequence-is-contiguous", TestFrameSequence, passed);
         return passed;
     }
@@ -106,6 +107,20 @@ public static class SelfTestSuite
         {
             var run = ExperimentRunner.Run([ExperimentCatalog.Get("01-local-shared-memory-contamination")], 101, output, quiet: true);
             Assert(run.Experiments.Single().Verdict == ExperimentVerdict.Support, "Protocol 01 should meet its preregistered synthetic boundaries for seed 101.");
+        }
+        finally
+        {
+            Directory.Delete(output, recursive: true);
+        }
+    }
+
+    private static void TestProtocolTwo()
+    {
+        var output = CreateTemporaryDirectory();
+        try
+        {
+            var run = ExperimentRunner.Run([ExperimentCatalog.Get("02-peer-disagreement-preserved-interiors")], 101, output, quiet: true);
+            Assert(run.Experiments.Single().Verdict == ExperimentVerdict.Support, "Protocol 02 should meet its preregistered synthetic boundaries for seed 101.");
         }
         finally
         {

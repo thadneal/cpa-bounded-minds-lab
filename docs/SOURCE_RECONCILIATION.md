@@ -48,3 +48,11 @@ They should not be read as a requirement that the successor lab implement the bo
 The old Desktop Lab source was inspected for final reference. Its later `MetricChart` already used stream geometry, cached static drawing, display downsampling, bounded per-path history, binary-search-neighborhood hover, and a throttled hover timer. Its coordinator also used a bounded non-blocking channel.
 
 The successor changes the division of labor rather than merely tuning those constants. A background projector now consumes display frames and owns telemetry aggregation. WPF no longer drains up to hundreds of experiment frames per dispatcher tick or applies each one to several controls. The graph sees sampled snapshots whose size is governed by display resolution.
+
+## Protocol 02 reconciliation
+
+Protocol 02 makes the handoff's second proposed question concrete: peer disagreement with preserved interiors. It treats the CPA claim that no local perspective carries the whole terrain as an experimental pressure rather than as a guarantee that disagreement is beneficial.
+
+The preserved condition keeps the two private developmental histories distinct and exchanges only current public posture. This follows the handoff's constraint that compact public surfaces should not collapse independent interiors. The synchronized control intentionally violates that condition so the assay can ask what corrective structure is lost when local models are averaged too early.
+
+The simple weighted public readout is deliberately not imported from the CPA book or the old .NET lab as architecture. It exists only to compare the two conditions under the same public negotiation rule. A successful result would justify further experiments on preserved plurality, not a permanent consensus reducer.

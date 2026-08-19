@@ -7,7 +7,7 @@
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <AssemblyName>Cpa.BoundedMindsLab.Desktop</AssemblyName>
     <RootNamespace>Cpa.BoundedMindsLab.Desktop</RootNamespace>
-    <Version>0.1.9</Version>
+    <Version>0.2.0</Version>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cpa.BoundedMindsLab.Core\Cpa.BoundedMindsLab.Core.csproj" />

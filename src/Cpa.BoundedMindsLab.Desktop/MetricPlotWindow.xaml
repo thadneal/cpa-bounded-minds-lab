@@ -20,12 +20,16 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
                     <TextBlock x:Name="MetricText" FontSize="16" FontWeight="SemiBold" />
                     <TextBlock x:Name="FocusText" Foreground="{StaticResource MutedBrush}" Margin="0,2,0,0" />
                 </StackPanel>
-                <Button Grid.Column="1" Content="Close maximized graph" Click="CloseClicked" VerticalAlignment="Center" />
+                <Border Grid.Column="1" Background="{StaticResource SelectionBrush}" BorderBrush="{StaticResource AccentBrush}" BorderThickness="1" CornerRadius="3" Padding="8,3" Margin="10,0,8,0" VerticalAlignment="Center">
+                    <TextBlock x:Name="SeedText" Text="SEED --" FontWeight="SemiBold" />
+                </Border>
+                <Button Grid.Column="2" Content="Close maximized graph" Click="CloseClicked" VerticalAlignment="Center" />
             </Grid>
         </Border>
         <Border Grid.Row="2" Background="{StaticResource InputBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">

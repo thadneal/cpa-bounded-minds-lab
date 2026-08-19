@@ -27,11 +27,13 @@ The first experiments preserve these constraints unless a protocol explicitly ch
 
 Can a receiver gain useful prior structure from a source without treating another history as lived consequence?
 
-Status: **implemented, result pending**.
+Status: **frozen Supported baseline**. The accepted five-seed matrix (`101,211,307,401,503`) returned Support in all five histories with all 30 component assertions passing. v0.2.0 does not alter Protocol 01 mechanics or thresholds.
 
-### Protocol 02 candidate: peer disagreement with preserved interiors
+### Protocol 02: peer disagreement with preserved interiors
 
-Give bounded peers different evidence about one phenomenon. Compare compact public exchange with full-state synchronization. Test whether independent error structure improves later correction even if consensus is slower.
+Status: **implemented in v0.2.0, result pending**.
+
+Give two bounded peers complementary but conflicting private histories. Compare a preserved-interiors condition, where only compact prediction-and-standing postures cross the boundary, with an explicitly invasive synchronized-state control. Test whether independent error structure reduces early and total correction cost while still converging under later shared consequence.
 
 ### Protocol 03 candidate: developmental versus doctrinal transfer
 
@@ -51,9 +53,9 @@ Prior work assumed evidence-origin identity was available. A successor assay sho
 
 ## Result cadence
 
-For ordinary iteration, prefer the smallest targeted result set that can answer the current question. Protocol 01 should first run across seeds `101,211,307,401,503` after the invariant suite passes.
+For ordinary iteration, prefer the smallest targeted result set that can answer the current question. Protocol 02 should first run across seeds `101,211,307,401,503` after the invariant suite passes. Because the repository now contains only two protocols and v0.2.0 also extends common catalog/visualization handling, a full two-protocol five-seed matrix is a useful checkpoint after the targeted Protocol 02 result is understood.
 
-A full current-suite rerun becomes useful after changes to shared experiment runtime, public frame/artifact contracts, inter-mind communication infrastructure, standing semantics, or other common mechanisms that could alter older protocols. Early in this repository the targeted matrix and full suite are identical because only Protocol 01 exists.
+Future full-suite reruns become especially useful after changes to shared experiment runtime, public frame/artifact contracts, inter-mind communication infrastructure, standing semantics, or other common mechanisms that could alter older protocols.
 
 ## Explicitly deferred
 

@@ -17,6 +17,7 @@ namespace Cpa.BoundedMindsLab.Desktop;
 public partial class MainWindow : Window
 {
     private const string Protocol01Name = "01-local-shared-memory-contamination";
+    private const string Protocol02Name = "02-peer-disagreement-preserved-interiors";
     private static readonly int[] BoundaryDelays = [0, 2, 10];
     private static readonly char[] SeedSeparators = [',', ';', ' ', '\t', '\r', '\n'];
     private readonly DesktopRunCoordinator _coordinator = new();
@@ -34,11 +35,17 @@ public partial class MainWindow : Window
     private bool _updatingSelectors;
     private bool _closeAfterRun;
     private bool _allowClose;
+    private string? _progressExperiment;
 
     public MainWindow()
     {
+        var catalog = ExperimentCatalog.All;
+        var latestExperiment = catalog[catalog.Count - 1].Name;
         Experiments = new ObservableCollection<ExperimentChoice>(
-            ExperimentCatalog.All.Select(experiment => new ExperimentChoice(experiment.Name, experiment.Question)));
+            catalog.Select(experiment => new ExperimentChoice(
+                experiment.Name,
+                experiment.Question,
+                string.Equals(experiment.Name, latestExperiment, StringComparison.Ordinal))));
         InitializeComponent();
         MetricPlot.SeriesVisibilityChanged += PlotSeriesVisibilityChanged;
         DataContext = this;
@@ -219,6 +226,8 @@ public partial class MainWindow : Window
         window.Plot.SetHiddenSeriesVisibility(MetricPlot.GetHiddenSeriesVisibility(), rebuild: false);
         window.UpdateSelection(MetricComboBox.SelectedItem as string, SeriesComboBox.SelectedItem as string);
         _maximizedPlotWindow = window;
+        var session = _coordinator.GetSessionStatus();
+        window.UpdateSeed(session.ActiveSeed, session.ActiveSeedIndex, session.SeedCount);
         _lastPlotStoreVersion = -1;
         _lastPlotWidth = 0;
         _nextGraphRefreshTimestamp = 0;
@@ -470,16 +479,49 @@ public partial class MainWindow : Window
 
     private void UpdateProtocolProgress(TelemetryTimelineSnapshot timeline)
     {
-        var experimentStarted = HasTimelineEvent(timeline, ExperimentFrameKind.ExperimentStarted);
-        var sourceStarted = HasTimelineEvent(timeline, ExperimentFrameKind.PhaseChanged, "source", "source-development");
-        var publicTransfer = HasTimelineEvent(timeline, ExperimentFrameKind.DevelopmentalEvent, "source", "public-transfer");
-        var localStarted = HasTimelineEvent(timeline, ExperimentFrameKind.PhaseChanged, "local-only", "receiver-development");
-        var localComplete = HasTimelineEvent(timeline, ExperimentFrameKind.DevelopmentalEvent, "local-only", "path-complete");
-        var provisionalStarted = HasTimelineEvent(timeline, ExperimentFrameKind.PhaseChanged, "shared-provisional", "receiver-development");
-        var provisionalComplete = HasTimelineEvent(timeline, ExperimentFrameKind.DevelopmentalEvent, "shared-provisional", "path-complete");
-        var livedStarted = HasTimelineEvent(timeline, ExperimentFrameKind.PhaseChanged, "shared-lived-equivalent", "receiver-development");
-        var livedComplete = HasTimelineEvent(timeline, ExperimentFrameKind.DevelopmentalEvent, "shared-lived-equivalent", "path-complete");
-        var experimentComplete = HasTimelineEvent(timeline, ExperimentFrameKind.ExperimentCompleted);
+        var experiment = GetCurrentExperimentName(timeline);
+        if (!string.Equals(_progressExperiment, experiment, StringComparison.Ordinal))
+        {
+            _progressExperiment = experiment;
+            if (string.Equals(experiment, Protocol02Name, StringComparison.Ordinal))
+            {
+                SetProtocol02ProgressLabels();
+            }
+            else
+            {
+                SetProtocol01ProgressLabels();
+            }
+
+            SetAllProgressPending();
+        }
+
+        if (string.Equals(experiment, Protocol02Name, StringComparison.Ordinal))
+        {
+            UpdateProtocol02Progress(timeline);
+            return;
+        }
+
+        if (string.Equals(experiment, Protocol01Name, StringComparison.Ordinal))
+        {
+            UpdateProtocol01Progress(timeline);
+            return;
+        }
+
+        SetAllProgressPending();
+    }
+
+    private void UpdateProtocol01Progress(TelemetryTimelineSnapshot timeline)
+    {
+        var experimentStarted = HasTimelineEvent(timeline, Protocol01Name, ExperimentFrameKind.ExperimentStarted);
+        var sourceStarted = HasTimelineEvent(timeline, Protocol01Name, ExperimentFrameKind.PhaseChanged, "source", "source-development");
+        var publicTransfer = HasTimelineEvent(timeline, Protocol01Name, ExperimentFrameKind.DevelopmentalEvent, "source", "public-transfer");
+        var localStarted = HasTimelineEvent(timeline, Protocol01Name, ExperimentFrameKind.PhaseChanged, "local-only", "receiver-development");
+        var localComplete = HasTimelineEvent(timeline, Protocol01Name, ExperimentFrameKind.DevelopmentalEvent, "local-only", "path-complete");
+        var provisionalStarted = HasTimelineEvent(timeline, Protocol01Name, ExperimentFrameKind.PhaseChanged, "shared-provisional", "receiver-development");
+        var provisionalComplete = HasTimelineEvent(timeline, Protocol01Name, ExperimentFrameKind.DevelopmentalEvent, "shared-provisional", "path-complete");
+        var livedStarted = HasTimelineEvent(timeline, Protocol01Name, ExperimentFrameKind.PhaseChanged, "shared-lived-equivalent", "receiver-development");
+        var livedComplete = HasTimelineEvent(timeline, Protocol01Name, ExperimentFrameKind.DevelopmentalEvent, "shared-lived-equivalent", "path-complete");
+        var experimentComplete = HasTimelineEvent(timeline, Protocol01Name, ExperimentFrameKind.ExperimentCompleted);
 
         SetProgressLine(SourceDirectProgressText,
             publicTransfer ? ProgressMark.Complete : sourceStarted || experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
@@ -509,6 +551,83 @@ public partial class MainWindow : Window
             experimentComplete ? ProgressMark.Complete : livedComplete ? ProgressMark.Current : ProgressMark.Pending);
         SetProgressCard(EvaluationProgressCard,
             experimentComplete ? ProgressMark.Complete : livedComplete ? ProgressMark.Current : ProgressMark.Pending);
+    }
+
+    private void UpdateProtocol02Progress(TelemetryTimelineSnapshot timeline)
+    {
+        var experimentStarted = HasTimelineEvent(timeline, Protocol02Name, ExperimentFrameKind.ExperimentStarted);
+        var peerAStarted = HasTimelineEvent(timeline, Protocol02Name, ExperimentFrameKind.PhaseChanged, "peer-a", "peer-a-private-development");
+        var peerBStarted = HasTimelineEvent(timeline, Protocol02Name, ExperimentFrameKind.PhaseChanged, "peer-b", "peer-b-private-development");
+        var privateComplete = HasTimelineEvent(timeline, Protocol02Name, ExperimentFrameKind.DevelopmentalEvent, "peers", "private-histories-complete");
+        var preservedStarted = HasTimelineEvent(timeline, Protocol02Name, ExperimentFrameKind.PhaseChanged, "preserved-interiors", "shared-consequence");
+        var preservedComplete = HasTimelineEvent(timeline, Protocol02Name, ExperimentFrameKind.DevelopmentalEvent, "preserved-interiors", "path-complete");
+        var syncStarted = HasTimelineEvent(timeline, Protocol02Name, ExperimentFrameKind.PhaseChanged, "synchronized-control", "synchronization-control");
+        var syncSharedStarted = HasTimelineEvent(timeline, Protocol02Name, ExperimentFrameKind.PhaseChanged, "synchronized-control", "shared-consequence");
+        var syncComplete = HasTimelineEvent(timeline, Protocol02Name, ExperimentFrameKind.DevelopmentalEvent, "synchronized-control", "path-complete");
+        var experimentComplete = HasTimelineEvent(timeline, Protocol02Name, ExperimentFrameKind.ExperimentCompleted);
+
+        SetProgressLine(SourceDirectProgressText,
+            peerBStarted || privateComplete ? ProgressMark.Complete : peerAStarted || experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(SourcePublishProgressText,
+            privateComplete || preservedStarted ? ProgressMark.Complete : peerBStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(SourceStepText,
+            preservedStarted || experimentComplete ? ProgressMark.Complete : experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressCard(SourceProgressCard,
+            preservedStarted || experimentComplete ? ProgressMark.Complete : experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
+
+        SetProgressLine(ReceiverLocalProgressText,
+            preservedComplete || syncStarted ? ProgressMark.Complete : preservedStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(ReceiverProvisionalProgressText,
+            syncSharedStarted || syncComplete ? ProgressMark.Complete : syncStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(ReceiverLivedProgressText,
+            syncComplete ? ProgressMark.Complete : syncSharedStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(ReceiverStepText,
+            syncComplete || experimentComplete ? ProgressMark.Complete : preservedStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressCard(ReceiverProgressCard,
+            syncComplete || experimentComplete ? ProgressMark.Complete : preservedStarted ? ProgressMark.Current : ProgressMark.Pending);
+
+        SetProgressLine(EvaluationAssertionsProgressText,
+            experimentComplete ? ProgressMark.Complete : syncComplete ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(EvaluationVerdictProgressText,
+            experimentComplete ? ProgressMark.Complete : ProgressMark.Pending);
+        SetProgressLine(EvaluationStepText,
+            experimentComplete ? ProgressMark.Complete : syncComplete ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressCard(EvaluationProgressCard,
+            experimentComplete ? ProgressMark.Complete : syncComplete ? ProgressMark.Current : ProgressMark.Pending);
+    }
+
+    private void SetProtocol01ProgressLabels()
+    {
+        SetProgressLabel(SourceStepText, "1. Source develops");
+        SetProgressLabel(SourceDirectProgressText, "Direct local consequence");
+        SetProgressLabel(SourcePublishProgressText, "Publish compact traces");
+        SetProgressLabel(ReceiverStepText, "2. Receivers develop");
+        SetProgressLabel(ReceiverLocalProgressText, "Local-only baseline");
+        SetProgressLabel(ReceiverProvisionalProgressText, "Provisional transfer");
+        SetProgressLabel(ReceiverLivedProgressText, "Lived-equivalent control");
+        SetProgressLabel(EvaluationStepText, "3. Evaluate");
+        SetProgressLabel(EvaluationAssertionsProgressText, "Six falsification checks");
+        SetProgressLabel(EvaluationVerdictProgressText, "Protocol verdict");
+    }
+
+    private void SetProtocol02ProgressLabels()
+    {
+        SetProgressLabel(SourceStepText, "1. Peers develop");
+        SetProgressLabel(SourceDirectProgressText, "Mind A private history");
+        SetProgressLabel(SourcePublishProgressText, "Mind B private history");
+        SetProgressLabel(ReceiverStepText, "2. Compare conditions");
+        SetProgressLabel(ReceiverLocalProgressText, "Preserved interiors");
+        SetProgressLabel(ReceiverProvisionalProgressText, "Collapse to synchronized state");
+        SetProgressLabel(ReceiverLivedProgressText, "Synchronized shared consequence");
+        SetProgressLabel(EvaluationStepText, "3. Evaluate");
+        SetProgressLabel(EvaluationAssertionsProgressText, "Six falsification checks");
+        SetProgressLabel(EvaluationVerdictProgressText, "Protocol verdict");
+    }
+
+    private static void SetProgressLabel(TextBlock textBlock, string label)
+    {
+        textBlock.Tag = label;
+        textBlock.Text = $"[ ] {label}";
     }
 
     private void ResetVisualization()
@@ -541,6 +660,13 @@ public partial class MainWindow : Window
     }
 
     private void ResetProtocolProgress()
+    {
+        _progressExperiment = null;
+        SetProtocol01ProgressLabels();
+        SetAllProgressPending();
+    }
+
+    private void SetAllProgressPending()
     {
         SetProgressLine(SourceStepText, ProgressMark.Pending);
         SetProgressLine(SourceDirectProgressText, ProgressMark.Pending);
@@ -658,18 +784,37 @@ public partial class MainWindow : Window
         if (session.SeedCount == 0)
         {
             SessionProgressText.Text = "Session: idle";
+            SeedIndicatorText.Text = "SEED --";
+            SeedIndicatorBorder.BorderBrush = (Brush)FindResource("BorderBrush");
+            _maximizedPlotWindow?.UpdateSeed(null, 0, 0);
             return;
         }
 
         if (session.ActiveSeed is { } activeSeed)
         {
-            SessionProgressText.Text = $"Seed {session.ActiveSeedIndex}/{session.SeedCount}: {activeSeed} | completed {session.CompletedSeedCount}";
+            SessionProgressText.Text = $"History {session.ActiveSeedIndex}/{session.SeedCount} | completed {session.CompletedSeedCount}";
+            SeedIndicatorText.Text = $"SEED {activeSeed}  ({session.ActiveSeedIndex}/{session.SeedCount})";
+            SeedIndicatorBorder.BorderBrush = (Brush)FindResource("AccentBrush");
+            _maximizedPlotWindow?.UpdateSeed(activeSeed, session.ActiveSeedIndex, session.SeedCount);
             return;
         }
 
         SessionProgressText.Text = session.CompletedSeedCount == session.SeedCount
             ? $"Session complete: {session.CompletedSeedCount}/{session.SeedCount} seeds"
             : $"Session: {session.CompletedSeedCount}/{session.SeedCount} seeds completed";
+        if (_displayedSeed is { } displayedSeed)
+        {
+            var suffix = session.CompletedSeedCount == session.SeedCount ? " complete" : " partial";
+            SeedIndicatorText.Text = $"SEED {displayedSeed} ({session.ActiveSeedIndex}/{session.SeedCount}){suffix}";
+            _maximizedPlotWindow?.UpdateSeed(displayedSeed, session.ActiveSeedIndex, session.SeedCount);
+        }
+        else
+        {
+            SeedIndicatorText.Text = "SEED --";
+            _maximizedPlotWindow?.UpdateSeed(null, session.ActiveSeedIndex, session.SeedCount);
+        }
+
+        SeedIndicatorBorder.BorderBrush = (Brush)FindResource("BorderBrush");
     }
 
     private static bool TryParseSeeds(string text, out ulong[] seeds, out string error)
@@ -721,8 +866,23 @@ public partial class MainWindow : Window
         next.IsEnabled = comboBox.SelectedIndex >= 0 && comboBox.SelectedIndex < comboBox.Items.Count - 1;
     }
 
+    private static string? GetCurrentExperimentName(TelemetryTimelineSnapshot timeline)
+    {
+        for (var index = timeline.Items.Count - 1; index >= 0; index--)
+        {
+            var item = timeline.Items[index];
+            if (item.Kind == ExperimentFrameKind.ExperimentStarted && !string.Equals(item.Experiment, "run", StringComparison.Ordinal))
+            {
+                return item.Experiment;
+            }
+        }
+
+        return null;
+    }
+
     private static bool HasTimelineEvent(
         TelemetryTimelineSnapshot timeline,
+        string experiment,
         ExperimentFrameKind kind,
         string? series = null,
         string? phase = null)
@@ -730,7 +890,7 @@ public partial class MainWindow : Window
         for (var index = 0; index < timeline.Items.Count; index++)
         {
             var item = timeline.Items[index];
-            if (!string.Equals(item.Experiment, Protocol01Name, StringComparison.Ordinal) || item.Kind != kind)
+            if (!string.Equals(item.Experiment, experiment, StringComparison.Ordinal) || item.Kind != kind)
             {
                 continue;
             }

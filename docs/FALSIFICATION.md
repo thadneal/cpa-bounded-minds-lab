@@ -1,6 +1,6 @@
 # Falsification Boundaries
 
-Protocol 01 is evaluated component by component. A visually pleasing graph is not evidence.
+Protocol 01 is evaluated component by component. A visually pleasing graph is not evidence. Its accepted five-seed result is now frozen; the boundaries below remain unchanged as the baseline moves forward.
 
 ## 01 local/shared memory contamination
 
@@ -50,3 +50,59 @@ This prevents hidden full-state transfer from masquerading as public memory exch
 - `Disconfirm`: fewer than four pass.
 
 The boundary is intentionally strict for the founding protocol. If a result fails narrowly, change the interpretation before changing the threshold.
+
+---
+
+## 02 peer disagreement with preserved interiors
+
+Protocol 02 also uses six preregistered component checks.
+
+### A. Complementary private histories
+
+Before shared consequence begins, the RMSE of the better peer prediction for each context must be at most `0.08`.
+
+Failure means the synthetic history did not actually create useful alternative local hypotheses, so the disagreement assay is underpowered or malformed.
+
+### B. Preserved disagreement
+
+At the start of shared consequence:
+
+- preserved-interiors mean disagreement over the first 32 observations must be at least `0.45`;
+- synchronized-control disagreement over the same window must be at most `0.02`.
+
+Failure means the two conditions did not produce the intended contrast between retained and collapsed private structure.
+
+### C. Early correction benefit
+
+Preserved-interiors early RMSE over the first 64 shared observations must be no more than 82% of synchronized-control early RMSE.
+
+Failure means keeping independent error structure did not materially improve early correction.
+
+### D. Whole-history benefit
+
+Preserved-interiors lifetime shared-phase RMSE must be no more than 82% of synchronized-control lifetime RMSE.
+
+Failure prevents a transient early advantage from being mistaken for a net developmental benefit.
+
+### E. Plurality remains correctable
+
+For preserved interiors:
+
+- late RMSE from tick 128 onward must be at most `0.06`;
+- mean disagreement over the final 32 observations must be at most `0.08`.
+
+Failure means disagreement remained too inertial or too costly under common consequence.
+
+### F. Bounded public exchange
+
+The preserved path must publish exactly two compact public postures per shared observation, and total communication work must remain at or below `4.0`.
+
+The invasive synchronization operation in the control is not counted as legitimate public communication. It exists only to create the collapse condition and must never be promoted into the architecture.
+
+## Protocol 02 verdict rule
+
+- `Support`: all six components pass.
+- `Mixed`: at least four components pass.
+- `Disconfirm`: fewer than four pass.
+
+As with Protocol 01, interpretation changes before thresholds do if a result lands narrowly near a preregistered boundary.

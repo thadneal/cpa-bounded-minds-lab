@@ -1,6 +1,6 @@
 # CPA Bounded Minds Laboratory
 
-Version **0.1.9**
+Version **0.2.0**
 
 This repository begins the successor experimental program to the completed CPA Cognitive Development Lab.
 
@@ -10,21 +10,24 @@ The earlier lab asked what useful organization could develop **inside one bounde
 
 The implementation is intentionally a new laboratory rather than a port of the previous .NET solution. The old `1.0.0` source was used as a final reference for experiment ergonomics, artifact discipline, run control, and visualization lessons. Protocol-local mechanisms from the old lab are not copied into the new cognitive architecture by default.
 
-## Current experiment
+## Current experiments
 
-`01-local-shared-memory-contamination`
+### Protocol 01 - local/shared memory contamination
 
-The first protocol asks whether one mind can benefit from another mind's compressed public trace without granting second-hand history the same authority as direct local consequence.
+`01-local-shared-memory-contamination` is now the frozen founding baseline. Across the accepted five-seed run (`101,211,307,401,503`), all five histories returned `Support` and all 30 preregistered component checks passed. The narrow result is that compact second-hand developmental traces can provide useful prior structure while remaining weak enough for direct local consequence to selectively retain or extinguish their influence.
 
-Three receiver paths are compared:
+No Protocol 01 thresholds or mechanics are changed in v0.2.0.
 
-- `local-only`: no transfer;
-- `shared-provisional`: public traces remain explicitly foreign and begin with bounded provisional standing;
-- `shared-lived-equivalent`: control condition that admits the same transfer with the source's accumulated authority and evidential inertia.
+### Protocol 02 - peer disagreement with preserved interiors
 
-The synthetic world agrees with the source in six context cells and differs in two. A useful transfer mechanism should help early on the compatible cells, withdraw from locally contradictory cells, and remain cheaper than copying private developmental history.
+`02-peer-disagreement-preserved-interiors` asks whether independent private histories have corrective value of their own. Two bounded peers first develop under complementary but conflicting local histories. They then encounter the same shared consequence under two conditions:
 
-See `docs/EXPERIMENTS.md` and `docs/FALSIFICATION.md` before interpreting results.
+- `preserved-interiors`: both minds retain their private hypotheses and exchange only a compact public prediction plus revisable standing;
+- `synchronized-control`: an explicitly invasive control collapses the two private states into the same consensus before shared consequence begins.
+
+The assay asks whether useful disagreement lets later consequence distinguish among competing local models faster than a premature consensus can relearn what synchronization erased. Success also requires the peers to converge later, so preserved plurality cannot claim victory by remaining permanently fragmented.
+
+See `docs/EXPERIMENTS.md` and `docs/FALSIFICATION.md` before interpreting Protocol 02 results.
 
 ## Solution
 
@@ -45,8 +48,9 @@ The projects target .NET 10. The WPF desktop application targets `net10.0-window
 ```powershell
 dotnet build Cpa.BoundedMindsLab.sln -c Release
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --experiment 01-local-shared-memory-contamination --seed 101
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --all --replicate 101,211,307,401,503 --output _artifacts/protocol-01-five-seed
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --experiment 02-peer-disagreement-preserved-interiors --seed 101
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --experiment 02-peer-disagreement-preserved-interiors --replicate 101,211,307,401,503 --output _artifacts/protocol-02-five-seed
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --all --replicate 101,211,307,401,503 --output _artifacts/full-suite-0.2.0
 ```
 
 For live inspection on Windows 11:

@@ -45,3 +45,37 @@ Required next evidence:
 3. run Protocol 01 for seeds `101,211,307,401,503`;
 4. inspect the aggregate result without changing preregistered thresholds;
 5. use the desktop app during at least one maximum-pace run and record whether display backlog/drops or graph rebuild times reveal a remaining UI bottleneck.
+
+---
+
+## 2026-08-19 - Protocol 01 accepted; move from transfer to disagreement
+
+### Accepted result
+
+The five-seed Protocol 01 session (`101,211,307,401,503`) returned `Support` in all five histories. All 30 preregistered component checks passed.
+
+The accepted claim remains narrow: compact second-hand developmental traces can help where histories overlap while foreign provenance leaves enough room for direct local consequence to remove authority where the receiver's world disagrees. The mechanism is frozen as a baseline rather than tuned after success.
+
+### Remaining pressure
+
+Protocol 01 showed that a membrane can transmit experience without making another mind's history equivalent to lived local evidence. It did not show whether keeping minds genuinely different has value once they begin interacting.
+
+A system that synchronizes peers too quickly may remove precisely the alternative error structure needed to correct a shared mistake. Conversely, preserving disagreement without later convergence would merely preserve fragmentation.
+
+### Protocol 02
+
+Protocol 02 creates two bounded peers with complementary, conflicting private histories. The preserved condition allows only compact prediction-and-standing postures to cross the boundary. The control deliberately averages the private states into one shared consensus before both paths encounter the same later consequence.
+
+The experiment asks whether distinct private models provide a temporary corrective reservoir: later consequence should be able to increase the influence of the locally useful hypothesis, suppress the poor one, and eventually bring the peers back toward agreement.
+
+### Architectural caution
+
+The public weighted reducer used to score the two postures is an experimental instrument. It is deliberately simple so the assay can isolate the value of preserved error structure. A passing result would not justify installing a permanent central consensus manager in CPA.
+
+### Next evidence
+
+1. rebuild under the pinned .NET 10 SDK;
+2. run the invariant suite, now including Protocol 02 seed 101;
+3. run Protocol 02 across seeds `101,211,307,401,503` without changing thresholds;
+4. inspect both the early-error advantage and late convergence;
+5. after interpreting the targeted result, run the small two-protocol five-seed full suite as a checkpoint.

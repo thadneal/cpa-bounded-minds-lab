@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.0 - 2026-08-19
+
+- froze Protocol 01 as the accepted five-seed Supported baseline without changing its mechanics or thresholds;
+- added Protocol 02, `02-peer-disagreement-preserved-interiors`, comparing preserved private histories with an explicitly invasive synchronized-state control;
+- added the complementary/noisy `PeerDisagreementWorld`, compact public prediction-and-standing exchange, shared-consequence standing revision, and six preregistered Protocol 02 falsification checks;
+- added a Protocol 02 seed-101 invariant fixture and expanded the self-test suite to ten checks;
+- made the Desktop Lab Protocol progress surface aware of both protocols and able to switch step/substep labels as experiments advance within a seed;
+- added a persistent active-seed badge showing the actual seed and current/total position during multi-seed visualization sessions;
+- mirrored the active seed into the maximized graph window and retained the last displayed seed after completion so saved/inspected graphs remain attributable;
+- made the newest protocol the default Desktop selection, leaving frozen earlier protocols available for explicit full-suite runs;
+- updated runbook, experiments, falsification, architecture, validation, research ledger, and quick-start documentation for the new research step.
+
 ## 0.1.9 - 2026-08-19
 
 - Added a Protocol results tab beside Timeline. Each completed seed/protocol is judged as `Supported`, `Mixed`, `Refuted`, or `Inconclusive`, with passed/failed falsification-check counts, interpretation, and the full assertion table for the selected result.

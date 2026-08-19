@@ -1,73 +1,84 @@
 # Runbook
 
+## Prerequisites
+
+- Windows 11 for the WPF Desktop Lab;
+- .NET SDK pinned by `global.json`;
+- repository working directory at the solution root.
+
 ## Build and invariants
 
 ```powershell
+dotnet restore Cpa.BoundedMindsLab.sln
 dotnet build Cpa.BoundedMindsLab.sln -c Release
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
 ```
 
-## List experiments
+Treat analyzer failures as build failures. The repository enables warnings as errors.
+
+## Targeted Protocol 02 check
+
+Start with one seed only after the invariant suite passes:
 
 ```powershell
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --list
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- `
+  --experiment 02-peer-disagreement-preserved-interiors `
+  --seed 101 `
+  --output _artifacts/protocol-02-seed-101
 ```
 
-## Single history
+Then run the preregistered five-seed matrix without changing thresholds:
 
 ```powershell
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- \
-  --experiment 01-local-shared-memory-contamination \
-  --seed 101 \
-  --output _artifacts/p01-seed-101
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- `
+  --experiment 02-peer-disagreement-preserved-interiors `
+  --replicate 101,211,307,401,503 `
+  --output _artifacts/protocol-02-five-seed
 ```
 
-## Five-seed targeted result
+## Full-suite checkpoint
+
+Protocol 01 is frozen, but the suite is currently only two protocols. After the targeted Protocol 02 result is interpreted, a complete checkpoint is inexpensive and useful:
 
 ```powershell
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- \
-  --experiment 01-local-shared-memory-contamination \
-  --replicate 101,211,307,401,503 \
-  --output _artifacts/p01-five-seed
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- `
+  --all `
+  --replicate 101,211,307,401,503 `
+  --output _artifacts/full-suite-0.2.0
 ```
 
-## Desktop
+This produces ten histories, five seeds for each protocol, under one replication report.
+
+## Desktop inspection
 
 ```powershell
 dotnet run --project src/Cpa.BoundedMindsLab.Desktop
 ```
 
-Use **Maximum** pace when testing whether the observer/UI can keep up. Use 2 ms or 10 ms pacing only for human inspection of phase progression. Pacing changes wall-clock duration and is not an experimental input.
+The Seeds field accepts several values, for example:
 
-The desktop accepts one or more seeds in the **Seeds** field. Separate values with commas, spaces, semicolons, or new lines. Histories run sequentially. The live visualization is reset at each seed boundary and follows the currently active history, while durable output is retained for every seed. For the planned Protocol 01 matrix, enter `101,211,307,401,503`.
+```text
+101, 211, 307, 401, 503
+```
+
+Each seed runs in succession. The accent seed indicator above Protocol progress shows the currently active seed and its position in the session. Protocol progress changes its labels when execution moves from Protocol 01 to Protocol 02.
+
+For a targeted Protocol 02 desktop run, select only `02-peer-disagreement-preserved-interiors`. Use maximum pace first. Watch the status-bar display backlog and graph build time, but do not treat presentation drops as scientific evidence.
 
 ## Artifacts
 
-A completed single run contains:
+Desktop sessions default to `<repo>/_artifacts/desktop-YYYYMMDD-HHMMSS`.
+
+Each seed directory contains:
 
 ```text
 frames.ndjson
 manifest.json
-01-local-shared-memory-contamination/
+<protocol-name>/
   result.json
   metrics.csv
 ```
 
-A CLI replication root contains one `seed-N` directory per history plus `replication-report.json`.
+The session root contains `session-manifest.json`, and a fully completed multi-seed session also contains `replication-report.json`.
 
-A desktop session root contains:
-
-```text
-session-manifest.json
-replication-report.json          # written after all planned seeds complete
-seed-101/
-  frames.ndjson
-  manifest.json
-  01-local-shared-memory-contamination/
-    result.json
-    metrics.csv
-seed-211/
-  ...
-```
-
-`session-manifest.json` records the planned seeds, completed seeds, selected experiments, active seed when applicable, and session status. Cancelled/faulted sessions retain every completed seed directory plus the partial artifacts produced by the interrupted seed. The aggregate replication report is reserved for a fully completed desktop session so it cannot be mistaken for the planned full matrix.
+`frames.ndjson` is the authoritative high-resolution observation record. The live graph is intentionally a bounded projection of that record.
