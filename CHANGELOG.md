@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.3.1 - 2026-08-19
+
+- Added a graph Seed selector with previous/next navigation beside Metric and Focus path so completed multi-seed histories can be inspected independently.
+- Retained each seed's bounded display telemetry store for the duration of the Desktop Lab session instead of discarding prior seed visualization state when the next seed begins.
+- Seed selection now scopes the graph, Focus path/Metric catalogs, public-state detail tables, Timeline, and Protocol Progress to the chosen history.
+- Live visualization follows the active seed by default. Manually selecting another seed stops auto-follow so an earlier history can remain under inspection while later seeds continue running.
+- The maximized graph now reports the seed actually selected for graph inspection rather than always reporting the currently executing seed.
+- Seed completion and seed-store rotation drain queued display frames before a history is considered ready for inspection, preserving the UI's expendable/bounded telemetry contract without clipping the tail of the final or an intermediate seed.
+- Kept graph rendering and experiment execution isolated: archived stores are read-only after rotation and the experiment still never reads visualization selection or rendering state.
+
+## 0.3.0 - 2026-08-19
+
+- Froze Protocol 02 as a 5/5 Supported result while recording its replication qualification: the five histories mostly varied encounter order and noise rather than developmental circumstance.
+- Changed the replication methodology for Protocol 03 and later work. A seed may now generate a different member of a preregistered developmental-world family, varying context-history type, target landscape, evidence depth, observation noise, regime transition, and encounter order while keeping treatment paths within a seed controlled.
+- Added `ExperimentDefaults.ReplicationSeeds` for the canonical `101,211,307,401,503` matrix and added an invariant requiring Protocol 03 to produce five unique world fingerprints plus materially different context-history layouts.
+- Added Protocol 03, `03-developmental-versus-doctrinal-transfer`, comparing local-only development, bounded consequence-history transfer, and a cheaper final-rule doctrinal control.
+- Added seed-specific stable-compatible, stable-divergent, unstable-transition, and sparse-ambiguous source histories. Evaluator labels remain unavailable to receiver cognition.
+- Added seven preregistered Protocol 03 falsification checks covering world heterogeneity, history-calibrated standing, stable-history transfer benefit, unstable-history contamination, whole-history noninferiority, receiver-consequence sovereignty, and bounded communication cost.
+- Added two Protocol 03 self-tests, bringing the invariant suite to 12 checks.
+- Changed the Desktop Lab Seeds default to `101, 211, 307, 401, 503`.
+- Added Protocol 03 major-step/substep visualization to the existing Protocol Progress surface while retaining active-seed indication and observer-only UI semantics.
+- Updated artifact, CLI, assembly, documentation, runbook, validation, and research-ledger versioning to 0.3.0.
+- Protocols 01 and 02 remain byte-for-behavior frozen; their accepted historical seed semantics and thresholds are not retroactively changed.
+
 ## 0.2.0 - 2026-08-19
 
 - froze Protocol 01 as the accepted five-seed Supported baseline without changing its mechanics or thresholds;

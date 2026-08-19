@@ -89,7 +89,7 @@ This is useful when manipulating tables, splitters, or another application durin
 
 The Seeds field accepts one or more unsigned seeds separated by commas, spaces, semicolons, or new lines. Duplicate values are ignored so a session cannot accidentally overwrite the same `seed-N` directory. Selected experiments run to completion for one seed before the next seed begins.
 
-The display telemetry store is reset between seeds. The graph, timeline, public mind state, trace state, and protocol progress therefore represent the currently active history only. Independent histories are never merged into one live series. The complete scientific record remains in the per-seed durable artifacts, and `replication-report.json` aggregates the completed session after the final seed. A compact session indicator above the protocol steps shows the active seed index and number of completed histories.
+Each seed has its own bounded display telemetry store for the lifetime of the Desktop Lab session. When execution advances, the completed store becomes read-only and a fresh store receives the next seed. Independent histories are never merged into one series, but an operator can return to an earlier seed without reloading the durable artifacts. The complete scientific record still belongs to the per-seed `frames.ndjson` artifacts, and `replication-report.json` aggregates the completed session after the final seed. A compact session indicator above the protocol steps shows the actively executing seed index and number of completed histories.
 
 ## Run control
 
@@ -151,7 +151,7 @@ When the focus path changes, the current metric is preserved if the new path als
 
 Each completed seed/protocol row shows the Desktop Lab vocabulary `Supported`, `Mixed`, `Refuted`, or `Inconclusive`, plus passed/failed falsification-check counts and the experiment interpretation. Selecting a row exposes every preregistered assertion with its pass state, actual value, boundary, and description. The internal core verdict `Disconfirm` remains unchanged in scientific artifacts and is presented as `Refuted` only in the UI.
 
-For multi-seed sessions, these result rows accumulate across completed seeds while the live telemetry store continues to reset at seed boundaries. The summary strip reports counts of the four judgments for each protocol. It does not manufacture an additional aggregate verdict; replication interpretation remains grounded in the saved per-seed results and `replication-report.json`.
+For multi-seed sessions, these result rows accumulate across completed seeds independently of the per-seed visualization stores. The summary strip reports counts of the four judgments for each protocol. It does not manufacture an additional aggregate verdict; replication interpretation remains grounded in the saved per-seed results and `replication-report.json`.
 
 ## Final-only graph metrics
 
@@ -162,7 +162,7 @@ Some protocol metrics, including `rmse`, are published only when a receiver path
 
 v0.2.0 adds a dedicated seed badge beside the session-progress text above Protocol progress. During a multi-seed session it shows both the actual seed value and the current history position, for example `SEED 307 (3/5)`. This remains visible independently of the status bar so screenshots and focused graph inspection still reveal which deterministic history is active.
 
-The same seed value is mirrored into the maximized graph header. After a completed or interrupted session, the main badge retains the last displayed seed so the graph left on screen remains attributable to a deterministic history. The badge is presentation-only. It reads session status and cannot alter experiment execution or seed selection.
+The maximized graph header reports the seed selected in the graph Seed selector. This can differ from the actively executing seed when an operator has pinned an earlier history for inspection. After a completed or interrupted session, the main active-seed badge retains the last executed seed while the graph selector remains free to inspect any retained history. Both surfaces are presentation-only and cannot alter experiment execution.
 
 ## Protocol-aware progress
 
@@ -189,4 +189,26 @@ When several experiments run within one seed, the progress surface changes as th
 
 ## Default experiment selection
 
-The newest protocol is selected by default when the Desktop Lab opens, while frozen earlier protocols remain available but unselected. In v0.2.0 this means Protocol 02 is the ordinary targeted run. `Select all` remains available for the full-suite checkpoint.
+The newest protocol is selected by default when the Desktop Lab opens, while frozen earlier protocols remain available but unselected. In v0.3.0 this means Protocol 03 is the ordinary targeted run. `Select all` remains available for the full-suite checkpoint.
+
+## v0.3.0 seed and Protocol 03 updates
+
+The Seeds field now defaults to the canonical replication matrix:
+
+```text
+101, 211, 307, 401, 503
+```
+
+The values are unchanged for continuity, but Protocol 03 gives them stronger semantics: each seed selects a materially different developmental-world circumstance rather than mostly perturbing one fixed curriculum.
+
+Protocol Progress now recognizes `03-developmental-versus-doctrinal-transfer` and displays its actual major steps and substeps: scenario generation, source development/transfer packaging, local-only receiver development, developmental transfer, doctrinal transfer, and seven-check evaluation.
+
+The active-seed badge continues to identify the currently executing deterministic history. Seed histories remain separate visualization stores, which is especially important now that different seeds are intentionally different worlds; the graph never overlays them as though they formed one continuous history.
+
+## v0.3.1 seed-scoped graph inspection
+
+The Live metrics toolbar now includes a third selector, `Seed`, with previous/next navigation. Seed is an outer scope for the visualization. Choosing it switches the graph, Focus path catalog, Metric catalog, public mind/trace detail, Timeline, and Protocol Progress to that retained history.
+
+During a new session the graph follows the active seed automatically. The first manual seed selection disables auto-follow for the rest of that run, allowing an earlier seed to remain under inspection while later histories continue executing. Selecting a retained seed never changes experiment state or scheduling.
+
+At seed completion the display projector drains the remaining queued frames before the history is considered ready for inspection. A following seed then archives that bounded store and opens a fresh one. This prevents a visualization-only rotation from clipping the tail of a history. Retention remains intentionally display-bounded; the durable per-seed NDJSON journal is still the only complete scientific record.

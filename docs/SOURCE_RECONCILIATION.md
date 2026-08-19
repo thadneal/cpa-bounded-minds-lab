@@ -56,3 +56,13 @@ Protocol 02 makes the handoff's second proposed question concrete: peer disagree
 The preserved condition keeps the two private developmental histories distinct and exchanges only current public posture. This follows the handoff's constraint that compact public surfaces should not collapse independent interiors. The synchronized control intentionally violates that condition so the assay can ask what corrective structure is lost when local models are averaged too early.
 
 The simple weighted public readout is deliberately not imported from the CPA book or the old .NET lab as architecture. It exists only to compare the two conditions under the same public negotiation rule. A successful result would justify further experiments on preserved plurality, not a permanent consensus reducer.
+
+## Protocol 03 reconciliation and the meaning of replication
+
+The successor handoff explicitly proposed comparing developmental transfer with doctrinal transfer. Protocol 03 implements that question without copying the old single-organism memory controllers into a general inter-mind teaching architecture.
+
+The comparison preserves the CPA/WHUP distinction between a conclusion and the pressure that made it answerable. A final rule is useful compression. A bounded consequence-history packet preserves a little more of the rule's warrant shape: how much evidence existed and whether the observed relationship stayed stable through development.
+
+The receiver still treats both as foreign. History metadata changes permission, not provenance.
+
+The seed-policy correction also follows the larger project trajectory. The architecture claims that history changes future cognition. Replication that only reorders nearly identical histories tests numerical stability more than development. From Protocol 03 onward, deterministic seeds can generate different members of a declared world family so long as all treatment paths within a seed share the same circumstance and evaluator-only world labels remain inaccessible to cognition.

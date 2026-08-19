@@ -1,33 +1,54 @@
 # CPA Bounded Minds Laboratory
 
-Version **0.2.0**
+Version **0.3.1**
 
-This repository begins the successor experimental program to the completed CPA Cognitive Development Lab.
-
-The earlier lab asked what useful organization could develop **inside one bounded organism** under recurrence, consequence, scarcity, and explicit cost. This laboratory moves the research boundary outward:
+This repository is the successor experimental program to the completed CPA Cognitive Development Lab. The earlier lab studied development inside one bounded organism. This laboratory moves the boundary outward:
 
 > What develops among bounded minds when they can exchange selected public evidence without collapsing their independent interiors?
 
-The implementation is intentionally a new laboratory rather than a port of the previous .NET solution. The old `1.0.0` source was used as a final reference for experiment ergonomics, artifact discipline, run control, and visualization lessons. Protocol-local mechanisms from the old lab are not copied into the new cognitive architecture by default.
+The solution is intentionally a laboratory rather than a production CPA implementation. Protocol-local mechanisms remain experimental instruments until repeated pressure shows that they deserve architectural standing.
 
-## Current experiments
+## Current experimental record
 
 ### Protocol 01 - local/shared memory contamination
 
-`01-local-shared-memory-contamination` is now the frozen founding baseline. Across the accepted five-seed run (`101,211,307,401,503`), all five histories returned `Support` and all 30 preregistered component checks passed. The narrow result is that compact second-hand developmental traces can provide useful prior structure while remaining weak enough for direct local consequence to selectively retain or extinguish their influence.
+`01-local-shared-memory-contamination` is a frozen Supported baseline. The accepted five-seed matrix (`101,211,307,401,503`) returned Support in all five histories with all 30 component assertions passing.
 
-No Protocol 01 thresholds or mechanics are changed in v0.2.0.
+Narrow result: compact second-hand developmental traces can provide useful prior structure while remaining weak enough for direct receiver consequence to selectively retain or extinguish their influence.
 
 ### Protocol 02 - peer disagreement with preserved interiors
 
-`02-peer-disagreement-preserved-interiors` asks whether independent private histories have corrective value of their own. Two bounded peers first develop under complementary but conflicting local histories. They then encounter the same shared consequence under two conditions:
+`02-peer-disagreement-preserved-interiors` is also frozen Supported. The accepted five-seed matrix returned Support in all five histories with all 30 component assertions passing. Mean shared-phase RMSE was about `0.11147` with preserved interiors versus `0.14825` after synchronization, while later common consequence reduced preserved disagreement to about `0.03223`.
 
-- `preserved-interiors`: both minds retain their private hypotheses and exchange only a compact public prediction plus revisable standing;
-- `synchronized-control`: an explicitly invasive control collapses the two private states into the same consensus before shared consequence begins.
+Narrow result: in the deliberately complementary synthetic world, preserving distinct private error structure provided corrective value compared with prematurely collapsing the peers into one consensus.
 
-The assay asks whether useful disagreement lets later consequence distinguish among competing local models faster than a premature consensus can relearn what synchronization erased. Success also requires the peers to converge later, so preserved plurality cannot claim victory by remaining permanently fragmented.
+The result carries a methodological qualification. Those five seeds varied encounter order and noise much more than developmental circumstance. They were useful perturbation replications, but weaker tests of longitudinal individuality than CPA ultimately requires.
 
-See `docs/EXPERIMENTS.md` and `docs/FALSIFICATION.md` before interpreting Protocol 02 results.
+### Protocol 03 - developmental versus doctrinal transfer
+
+`03-developmental-versus-doctrinal-transfer` introduces the next methodological step as part of the experiment itself.
+
+A seed now generates a **lived developmental circumstance**, including:
+
+- which context cells receive stable-compatible, stable-divergent, unstable-transition, or sparse-ambiguous source histories;
+- source evidence depth;
+- target landscape;
+- source and receiver observation noise;
+- direction of unstable regime transition;
+- encounter order.
+
+The source then exposes two bounded transfer surfaces derived from the same private history:
+
+- `developmental-transfer`: a compact history packet that carries evidence depth and three selected consequence-history segment means, allowing the receiver to calibrate initial foreign standing;
+- `doctrinal-transfer`: only the final source rule for each context under one undifferentiated foreign standing.
+
+A `local-only` receiver remains as a reference path.
+
+The protocol asks whether developmental context can retain the head start from stable compatible histories, reduce contamination from source histories that were themselves unstable, remain no worse overall than doctrine, and still submit all foreign authority to direct receiver consequence.
+
+The canonical replication matrix remains `101,211,307,401,503`. In Protocol 03 these values now select materially different world histories rather than mostly shuffling one fixed curriculum.
+
+See `docs/EXPERIMENTS.md` and `docs/FALSIFICATION.md` before interpreting results.
 
 ## Solution
 
@@ -41,16 +62,15 @@ docs/
 scripts/
 ```
 
-The projects target .NET 10. The WPF desktop application targets `net10.0-windows`.
+Projects target .NET 10. The WPF Desktop Lab targets `net10.0-windows`.
 
 ## Quick start
 
 ```powershell
 dotnet build Cpa.BoundedMindsLab.sln -c Release
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --experiment 02-peer-disagreement-preserved-interiors --seed 101
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --experiment 02-peer-disagreement-preserved-interiors --replicate 101,211,307,401,503 --output _artifacts/protocol-02-five-seed
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --all --replicate 101,211,307,401,503 --output _artifacts/full-suite-0.2.0
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --experiment 03-developmental-versus-doctrinal-transfer --seed 101
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --experiment 03-developmental-versus-doctrinal-transfer --replicate 101,211,307,401,503 --output _artifacts/protocol-03-five-seed
 ```
 
 For live inspection on Windows 11:
@@ -59,22 +79,18 @@ For live inspection on Windows 11:
 dotnet run --project src/Cpa.BoundedMindsLab.Desktop
 ```
 
-## Visualization performance boundary
+The Desktop Lab now opens with `101, 211, 307, 401, 503` already entered in **Seeds** and selects the newest protocol by default.
 
-The desktop application is rebuilt around a stricter observer boundary than the previous workbench.
+## Visualization boundary
 
-Experiment execution runs on a dedicated below-normal-priority worker thread, rather than the WPF dispatcher or shared thread pool. Its display observer only enqueues frames into a bounded, non-blocking queue. A separate background projector converts those frames into a telemetry store. The WPF dispatcher never drains the experiment frame stream and never appends every observation directly into graph controls.
+Experiment execution remains isolated from WPF on a dedicated below-normal-priority worker. Display frames enter a bounded non-blocking queue, a background projector owns telemetry aggregation, and WPF samples already-projected state. Graph snapshots are resolution-bounded, hover works against rendered data, per-line legend visibility is presentation-only, and the maximized graph does not become a second experiment consumer.
 
-The UI samples projected telemetry at about 15 Hz, while graph rebuilds are independently capped and slow themselves further when projection backlog or render cost rises. Numeric series maintain multi-resolution min/max envelopes so graph snapshots scale primarily with available pixels rather than total historical point count. Fine-resolution live history is retired once it can no longer help a display; the complete history remains in the durable journal. Mouse hit testing searches only rendered points near the current x coordinate. Static graph geometry is cached and resize rebuilding is debounced.
+The live graph, selector state, UI backlog, dropped display frames, splitter positions, selected metric, and graph cadence are invisible to experiment cognition. The durable `frames.ndjson` journal remains authoritative even when display-only frames are dropped.
 
-The live workbench also provides previous/next controls beside the metric and focus-path selectors. Focus path is the primary graph selection, and the Metric selector is restricted to telemetry actually published by that path so sequential inspection does not walk through irrelevant empty graphs. The graph also provides full-name/details hover for legend keys, clickable per-line visibility, explicit markers for final-only one-point metrics such as `rmse`, a maximized live window, and a protocol progress strip that marks completed/current major steps and their receiver-path substeps. A Protocol results tab records completed per-seed judgments as Supported, Mixed, Refuted, or Inconclusive and exposes the underlying falsification checks directly from authoritative experiment results rather than display telemetry. The Desktop Lab accepts one or more seeds before a session begins and runs them sequentially on the same background worker. Live telemetry resets at each seed boundary so the graph remains a view of the current history rather than accidentally overlaying independent histories, while protocol judgments accumulate across the session. The output field points to the repository-level `_artifacts` root by default; each desktop session receives its own timestamped child directory with one `seed-N` subdirectory per history plus an aggregate replication report.
-
-If display projection falls behind, display-only frames may be dropped. The durable `frames.ndjson` journal remains complete and is written independently by the core runner. UI backlog, dropped display frames, projector cost, rendered point count, and graph rebuild time are visible in the status bar.
-
-This is an instrumentation rule, not a cognitive rule. Experiment state cannot read the graph, selected metric, splitter layout, frame backlog, render cadence, or dropped display count.
+The workbench also exposes protocol progress, per-seed judged results, active-seed identity, metric/path filtering, and a graph Seed selector that can revisit each retained seed history independently. These are observation surfaces, never evidence available to the experiment.
 
 ## Research stance
 
-Carry forward the laws that survived prior pressure, including bounded causal execution, persistent local history, private interiors with compact public surfaces, revisable standing, explicit cost, and provenance distinct from agreement.
+Carry forward only what survives pressure: bounded causal execution, persistent private history, compact public surfaces, revisable standing, explicit cost, and provenance distinct from agreement.
 
-Do not assume that a successful synthetic controller is a permanent CPA organ. The laboratory exists to make those distinctions earn their way into later Rust synthesis.
+The v0.3.0 methodological correction adds another rule: if history is part of the theory, replication should eventually vary **what was lived**, not merely the order in which nearly identical events were encountered.

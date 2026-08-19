@@ -18,6 +18,7 @@ public partial class MainWindow : Window
 {
     private const string Protocol01Name = "01-local-shared-memory-contamination";
     private const string Protocol02Name = "02-peer-disagreement-preserved-interiors";
+    private const string Protocol03Name = "03-developmental-versus-doctrinal-transfer";
     private static readonly int[] BoundaryDelays = [0, 2, 10];
     private static readonly char[] SeedSeparators = [',', ';', ' ', '\t', '\r', '\n'];
     private readonly DesktopRunCoordinator _coordinator = new();
@@ -33,6 +34,7 @@ public partial class MainWindow : Window
     private ulong? _displayedSeed;
     private MetricPlotWindow? _maximizedPlotWindow;
     private bool _updatingSelectors;
+    private bool _followActiveGraphSeed = true;
     private bool _closeAfterRun;
     private bool _allowClose;
     private string? _progressExperiment;
@@ -49,6 +51,7 @@ public partial class MainWindow : Window
         InitializeComponent();
         MetricPlot.SeriesVisibilityChanged += PlotSeriesVisibilityChanged;
         DataContext = this;
+        SeedTextBox.Text = string.Join(", ", ExperimentDefaults.ReplicationSeeds);
         OutputTextBox.Text = ResolveDefaultArtifactRoot();
         ResetProtocolProgress();
         UpdateSelectorNavigationButtons();
@@ -94,6 +97,7 @@ public partial class MainWindow : Window
         var runOutput = CreateRunOutputDirectory(Path.GetFullPath(artifactRoot));
         _lastRunOutputDirectory = runOutput;
         _displayedSeed = null;
+        _followActiveGraphSeed = true;
         ResetVisualization();
         ResetProtocolResultsView();
         SetRunningState(true);
@@ -204,6 +208,10 @@ public partial class MainWindow : Window
 
     private void NextSeriesClicked(object sender, RoutedEventArgs eventArgs) => StepSelection(SeriesComboBox, 1);
 
+    private void PreviousGraphSeedClicked(object sender, RoutedEventArgs eventArgs) => StepSelection(GraphSeedComboBox, -1);
+
+    private void NextGraphSeedClicked(object sender, RoutedEventArgs eventArgs) => StepSelection(GraphSeedComboBox, 1);
+
     private void MaximizeGraphClicked(object sender, RoutedEventArgs eventArgs)
     {
         if (_maximizedPlotWindow is not null)
@@ -227,7 +235,7 @@ public partial class MainWindow : Window
         window.UpdateSelection(MetricComboBox.SelectedItem as string, SeriesComboBox.SelectedItem as string);
         _maximizedPlotWindow = window;
         var session = _coordinator.GetSessionStatus();
-        window.UpdateSeed(session.ActiveSeed, session.ActiveSeedIndex, session.SeedCount);
+        UpdateMaximizedGraphSeed(window, session);
         _lastPlotStoreVersion = -1;
         _lastPlotWidth = 0;
         _nextGraphRefreshTimestamp = 0;
@@ -256,12 +264,26 @@ public partial class MainWindow : Window
         }
 
         var currentMetric = MetricComboBox.SelectedItem as string;
-        SetMetricOptions(_coordinator.Telemetry.Store, currentMetric);
+        SetMetricOptions(GetSelectedTelemetryStore(_coordinator.Telemetry), currentMetric);
         _detailVersion = -1;
         _lastPlotStoreVersion = -1;
         _nextGraphRefreshTimestamp = 0;
         UpdateSelectorNavigationButtons();
         UpdateMaximizedSelection();
+    }
+
+    private void GraphSeedSelectionChanged(object sender, SelectionChangedEventArgs eventArgs)
+    {
+        if (_updatingSelectors)
+        {
+            return;
+        }
+
+        _followActiveGraphSeed = false;
+        ResetSelectedSeedVisualization();
+        UpdateSelectorNavigationButtons();
+        UpdateMaximizedSelection();
+        UpdateMaximizedGraphSeed(_maximizedPlotWindow, _coordinator.GetSessionStatus());
     }
 
     private void ProtocolResultSelectionChanged(object sender, SelectionChangedEventArgs eventArgs)
@@ -276,30 +298,31 @@ public partial class MainWindow : Window
         var telemetry = _coordinator.Telemetry;
         var status = telemetry.GetStatus();
         var session = _coordinator.GetSessionStatus();
-        if (session.ActiveSeed is { } activeSeed && _displayedSeed != activeSeed)
+        if (session.ActiveSeed is { } activeSeed)
         {
             _displayedSeed = activeSeed;
-            ResetVisualization();
         }
 
+        RefreshGraphSeedOptions(telemetry, session);
+        var selectedStore = GetSelectedTelemetryStore(telemetry);
         UpdateSessionProgress(session);
         RefreshProtocolResults(_coordinator.GetProtocolResults());
         var activePlot = _maximizedPlotWindow?.Plot ?? MetricPlot;
         PerformanceText.Text =
             $"display pub {status.PublishedFrames:N0} | projected {status.ProjectedFrames:N0} | dropped {status.DroppedFrames:N0} | backlog {status.Backlog:N0} | projector {status.ProjectionMilliseconds:0.0} ms | plot {activePlot.DisplayPointCount:N0} pts / {activePlot.LastBuildMilliseconds:0.0} ms";
 
-        RefreshCatalog(telemetry.Store);
+        RefreshCatalog(selectedStore);
         var selectedSeries = SeriesComboBox.SelectedItem as string;
         if (!FreezeGraphCheckBox.IsChecked.GetValueOrDefault() && MetricComboBox.SelectedItem is string metric)
         {
             var width = Math.Max(64, (int)Math.Round(activePlot.ActualWidth));
             var now = Stopwatch.GetTimestamp();
             var graphDue = now >= _nextGraphRefreshTimestamp;
-            if (graphDue && (status.StoreVersion != _lastPlotStoreVersion || width != _lastPlotWidth))
+            if (graphDue && (selectedStore.Version != _lastPlotStoreVersion || width != _lastPlotWidth))
             {
-                var snapshot = telemetry.Store.GetPlotSnapshot(metric, selectedSeries, width);
+                var snapshot = selectedStore.GetPlotSnapshot(metric, selectedSeries, width);
                 activePlot.SetSnapshot(snapshot);
-                _lastPlotStoreVersion = status.StoreVersion;
+                _lastPlotStoreVersion = selectedStore.Version;
                 _lastPlotWidth = width;
                 var refreshMilliseconds = status.Backlog > 4_096 || activePlot.LastBuildMilliseconds >= 16.0
                     ? 250
@@ -310,7 +333,7 @@ public partial class MainWindow : Window
             }
         }
 
-        var details = telemetry.Store.GetDetailSnapshot(selectedSeries);
+        var details = selectedStore.GetDetailSnapshot(selectedSeries);
         if (details.Version != _detailVersion)
         {
             MindGrid.ItemsSource = details.Minds;
@@ -318,9 +341,9 @@ public partial class MainWindow : Window
             _detailVersion = details.Version;
         }
 
-        if (telemetry.Store.TimelineVersion != _timelineVersion)
+        if (selectedStore.TimelineVersion != _timelineVersion)
         {
-            var timeline = telemetry.Store.GetTimeline();
+            var timeline = selectedStore.GetTimeline();
             TimelineGrid.ItemsSource = timeline.Items;
             _timelineVersion = timeline.Version;
             UpdateProtocolProgress(timeline);
@@ -483,7 +506,11 @@ public partial class MainWindow : Window
         if (!string.Equals(_progressExperiment, experiment, StringComparison.Ordinal))
         {
             _progressExperiment = experiment;
-            if (string.Equals(experiment, Protocol02Name, StringComparison.Ordinal))
+            if (string.Equals(experiment, Protocol03Name, StringComparison.Ordinal))
+            {
+                SetProtocol03ProgressLabels();
+            }
+            else if (string.Equals(experiment, Protocol02Name, StringComparison.Ordinal))
             {
                 SetProtocol02ProgressLabels();
             }
@@ -493,6 +520,12 @@ public partial class MainWindow : Window
             }
 
             SetAllProgressPending();
+        }
+
+        if (string.Equals(experiment, Protocol03Name, StringComparison.Ordinal))
+        {
+            UpdateProtocol03Progress(timeline);
+            return;
         }
 
         if (string.Equals(experiment, Protocol02Name, StringComparison.Ordinal))
@@ -596,6 +629,50 @@ public partial class MainWindow : Window
             experimentComplete ? ProgressMark.Complete : syncComplete ? ProgressMark.Current : ProgressMark.Pending);
     }
 
+    private void UpdateProtocol03Progress(TelemetryTimelineSnapshot timeline)
+    {
+        var experimentStarted = HasTimelineEvent(timeline, Protocol03Name, ExperimentFrameKind.ExperimentStarted);
+        var scenarioGenerated = HasTimelineEvent(timeline, Protocol03Name, ExperimentFrameKind.DevelopmentalEvent, "scenario", "scenario-generated");
+        var sourceStarted = HasTimelineEvent(timeline, Protocol03Name, ExperimentFrameKind.PhaseChanged, "source", "source-development");
+        var transferPrepared = HasTimelineEvent(timeline, Protocol03Name, ExperimentFrameKind.DevelopmentalEvent, "source", "transfer-prepared");
+        var localStarted = HasTimelineEvent(timeline, Protocol03Name, ExperimentFrameKind.PhaseChanged, "local-only", "receiver-development");
+        var localComplete = HasTimelineEvent(timeline, Protocol03Name, ExperimentFrameKind.DevelopmentalEvent, "local-only", "path-complete");
+        var developmentalStarted = HasTimelineEvent(timeline, Protocol03Name, ExperimentFrameKind.PhaseChanged, "developmental-transfer", "receiver-development");
+        var developmentalComplete = HasTimelineEvent(timeline, Protocol03Name, ExperimentFrameKind.DevelopmentalEvent, "developmental-transfer", "path-complete");
+        var doctrinalStarted = HasTimelineEvent(timeline, Protocol03Name, ExperimentFrameKind.PhaseChanged, "doctrinal-transfer", "receiver-development");
+        var doctrinalComplete = HasTimelineEvent(timeline, Protocol03Name, ExperimentFrameKind.DevelopmentalEvent, "doctrinal-transfer", "path-complete");
+        var experimentComplete = HasTimelineEvent(timeline, Protocol03Name, ExperimentFrameKind.ExperimentCompleted);
+
+        SetProgressLine(SourceDirectProgressText,
+            sourceStarted || scenarioGenerated ? ProgressMark.Complete : experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(SourcePublishProgressText,
+            transferPrepared || localStarted ? ProgressMark.Complete : sourceStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(SourceStepText,
+            localStarted || experimentComplete ? ProgressMark.Complete : experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressCard(SourceProgressCard,
+            localStarted || experimentComplete ? ProgressMark.Complete : experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
+
+        SetProgressLine(ReceiverLocalProgressText,
+            localComplete || developmentalStarted ? ProgressMark.Complete : localStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(ReceiverProvisionalProgressText,
+            developmentalComplete || doctrinalStarted ? ProgressMark.Complete : developmentalStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(ReceiverLivedProgressText,
+            doctrinalComplete ? ProgressMark.Complete : doctrinalStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(ReceiverStepText,
+            doctrinalComplete || experimentComplete ? ProgressMark.Complete : localStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressCard(ReceiverProgressCard,
+            doctrinalComplete || experimentComplete ? ProgressMark.Complete : localStarted ? ProgressMark.Current : ProgressMark.Pending);
+
+        SetProgressLine(EvaluationAssertionsProgressText,
+            experimentComplete ? ProgressMark.Complete : doctrinalComplete ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(EvaluationVerdictProgressText,
+            experimentComplete ? ProgressMark.Complete : ProgressMark.Pending);
+        SetProgressLine(EvaluationStepText,
+            experimentComplete ? ProgressMark.Complete : doctrinalComplete ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressCard(EvaluationProgressCard,
+            experimentComplete ? ProgressMark.Complete : doctrinalComplete ? ProgressMark.Current : ProgressMark.Pending);
+    }
+
     private void SetProtocol01ProgressLabels()
     {
         SetProgressLabel(SourceStepText, "1. Source develops");
@@ -624,6 +701,20 @@ public partial class MainWindow : Window
         SetProgressLabel(EvaluationVerdictProgressText, "Protocol verdict");
     }
 
+    private void SetProtocol03ProgressLabels()
+    {
+        SetProgressLabel(SourceStepText, "1. Build lived source history");
+        SetProgressLabel(SourceDirectProgressText, "Seed-specific developmental circumstance");
+        SetProgressLabel(SourcePublishProgressText, "Source develops and packages transfer");
+        SetProgressLabel(ReceiverStepText, "2. Compare transfer forms");
+        SetProgressLabel(ReceiverLocalProgressText, "Local-only baseline");
+        SetProgressLabel(ReceiverProvisionalProgressText, "Developmental consequence-history transfer");
+        SetProgressLabel(ReceiverLivedProgressText, "Doctrinal final-rule transfer");
+        SetProgressLabel(EvaluationStepText, "3. Evaluate");
+        SetProgressLabel(EvaluationAssertionsProgressText, "Seven falsification checks");
+        SetProgressLabel(EvaluationVerdictProgressText, "Protocol verdict");
+    }
+
     private static void SetProgressLabel(TextBlock textBlock, string label)
     {
         textBlock.Tag = label;
@@ -631,6 +722,22 @@ public partial class MainWindow : Window
     }
 
     private void ResetVisualization()
+    {
+        _updatingSelectors = true;
+        try
+        {
+            GraphSeedComboBox.ItemsSource = null;
+            GraphSeedComboBox.SelectedIndex = -1;
+        }
+        finally
+        {
+            _updatingSelectors = false;
+        }
+
+        ResetSelectedSeedVisualization();
+    }
+
+    private void ResetSelectedSeedVisualization()
     {
         MetricPlot.Reset();
         _maximizedPlotWindow?.Plot.Reset();
@@ -662,7 +769,7 @@ public partial class MainWindow : Window
     private void ResetProtocolProgress()
     {
         _progressExperiment = null;
-        SetProtocol01ProgressLabels();
+        SetProtocol03ProgressLabels();
         SetAllProgressPending();
     }
 
@@ -709,6 +816,7 @@ public partial class MainWindow : Window
     {
         SetSelectorButtons(MetricComboBox, PreviousMetricButton, NextMetricButton);
         SetSelectorButtons(SeriesComboBox, PreviousSeriesButton, NextSeriesButton);
+        SetSelectorButtons(GraphSeedComboBox, PreviousGraphSeedButton, NextGraphSeedButton);
     }
 
     private void PlotSeriesVisibilityChanged(object? sender, EventArgs eventArgs)
@@ -786,7 +894,7 @@ public partial class MainWindow : Window
             SessionProgressText.Text = "Session: idle";
             SeedIndicatorText.Text = "SEED --";
             SeedIndicatorBorder.BorderBrush = (Brush)FindResource("BorderBrush");
-            _maximizedPlotWindow?.UpdateSeed(null, 0, 0);
+            UpdateMaximizedGraphSeed(_maximizedPlotWindow, session);
             return;
         }
 
@@ -795,7 +903,7 @@ public partial class MainWindow : Window
             SessionProgressText.Text = $"History {session.ActiveSeedIndex}/{session.SeedCount} | completed {session.CompletedSeedCount}";
             SeedIndicatorText.Text = $"SEED {activeSeed}  ({session.ActiveSeedIndex}/{session.SeedCount})";
             SeedIndicatorBorder.BorderBrush = (Brush)FindResource("AccentBrush");
-            _maximizedPlotWindow?.UpdateSeed(activeSeed, session.ActiveSeedIndex, session.SeedCount);
+            UpdateMaximizedGraphSeed(_maximizedPlotWindow, session);
             return;
         }
 
@@ -806,15 +914,104 @@ public partial class MainWindow : Window
         {
             var suffix = session.CompletedSeedCount == session.SeedCount ? " complete" : " partial";
             SeedIndicatorText.Text = $"SEED {displayedSeed} ({session.ActiveSeedIndex}/{session.SeedCount}){suffix}";
-            _maximizedPlotWindow?.UpdateSeed(displayedSeed, session.ActiveSeedIndex, session.SeedCount);
+            UpdateMaximizedGraphSeed(_maximizedPlotWindow, session);
         }
         else
         {
             SeedIndicatorText.Text = "SEED --";
-            _maximizedPlotWindow?.UpdateSeed(null, session.ActiveSeedIndex, session.SeedCount);
+            UpdateMaximizedGraphSeed(_maximizedPlotWindow, session);
         }
 
         SeedIndicatorBorder.BorderBrush = (Brush)FindResource("BorderBrush");
+    }
+
+    private void RefreshGraphSeedOptions(DisplayTelemetryPipeline telemetry, DesktopSessionStatus session)
+    {
+        var seeds = telemetry.GetAvailableSeeds();
+        var currentSeed = GraphSeedComboBox.SelectedItem is ulong selected ? selected : (ulong?)null;
+        var targetSeed = currentSeed;
+
+        if (_followActiveGraphSeed && session.ActiveSeed is { } activeSeed && telemetry.ContainsSeed(activeSeed))
+        {
+            targetSeed = activeSeed;
+        }
+        else if (targetSeed is not { } retained || !telemetry.ContainsSeed(retained))
+        {
+            targetSeed = session.ActiveSeed is { } liveSeed && telemetry.ContainsSeed(liveSeed)
+                ? liveSeed
+                : seeds.Length > 0 ? seeds[^1] : null;
+        }
+
+        var optionsChanged = !SeedOptionsMatch(seeds);
+        var selectionChanged = targetSeed != currentSeed;
+        if (!optionsChanged && !selectionChanged)
+        {
+            return;
+        }
+
+        _updatingSelectors = true;
+        try
+        {
+            if (optionsChanged)
+            {
+                GraphSeedComboBox.ItemsSource = seeds;
+            }
+
+            GraphSeedComboBox.SelectedItem = targetSeed;
+        }
+        finally
+        {
+            _updatingSelectors = false;
+        }
+
+        if (selectionChanged)
+        {
+            ResetSelectedSeedVisualization();
+        }
+
+        UpdateSelectorNavigationButtons();
+        UpdateMaximizedGraphSeed(_maximizedPlotWindow, session);
+    }
+
+    private bool SeedOptionsMatch(ulong[] seeds)
+    {
+        if (GraphSeedComboBox.Items.Count != seeds.Length)
+        {
+            return false;
+        }
+
+        for (var index = 0; index < seeds.Length; index++)
+        {
+            if (GraphSeedComboBox.Items[index] is not ulong seed || seed != seeds[index])
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private TelemetryStore GetSelectedTelemetryStore(DisplayTelemetryPipeline telemetry) =>
+        GraphSeedComboBox.SelectedItem is ulong seed && telemetry.ContainsSeed(seed)
+            ? telemetry.GetStore(seed)
+            : telemetry.Store;
+
+    private void UpdateMaximizedGraphSeed(MetricPlotWindow? window, DesktopSessionStatus session)
+    {
+        if (window is null)
+        {
+            return;
+        }
+
+        if (GraphSeedComboBox.SelectedItem is ulong seed)
+        {
+            var options = _coordinator.Telemetry.GetAvailableSeeds();
+            var seedIndex = Array.IndexOf(options, seed);
+            window.UpdateSeed(seed, seedIndex >= 0 ? seedIndex + 1 : 0, options.Length);
+            return;
+        }
+
+        window.UpdateSeed(session.ActiveSeed, session.ActiveSeedIndex, session.SeedCount);
     }
 
     private static bool TryParseSeeds(string text, out ulong[] seeds, out string error)

@@ -79,3 +79,52 @@ The public weighted reducer used to score the two postures is an experimental in
 3. run Protocol 02 across seeds `101,211,307,401,503` without changing thresholds;
 4. inspect both the early-error advantage and late convergence;
 5. after interpreting the targeted result, run the small two-protocol five-seed full suite as a checkpoint.
+
+---
+
+## 2026-08-19 - Protocol 02 accepted; replication must vary what was lived
+
+### Accepted result
+
+Protocol 02 returned Support for all five canonical seeds with all 30 component assertions passing. Mean shared-phase RMSE was `0.11147` with preserved interiors and `0.14825` in the synchronized control. Preserved disagreement began around `0.62` and fell to about `0.032` under later common consequence.
+
+The narrow result is accepted and frozen: in the constructed complementary-history world, distinct private error structures carried useful corrective information that premature synchronization destroyed.
+
+### Methodological pressure
+
+The run also exposed a weakness in the laboratory method. Across seeds, many headline values were nearly identical. Packet count and communication work were exactly identical. The seed mainly changed encounter ordering and small observation noise while leaving the developmental world substantially fixed.
+
+Those are valid perturbation replications, but CPA makes a stronger claim about history: different experience should be capable of making minds genuinely different.
+
+### Seed-policy correction
+
+Beginning with Protocol 03, the seed is allowed to choose a member of a preregistered **developmental-world family**. It can alter target landscape, evidence depth, history type, regime transition, noise, and encounter order. All treatment paths inside a seed still receive the same generated circumstance.
+
+This keeps determinism and controlled comparison while asking more from replication.
+
+The old protocols are not rewritten. Their accepted records retain the meaning they had when run.
+
+### Protocol 03
+
+The next handoff question compares developmental and doctrinal transfer.
+
+A source now develops through a heterogeneous world containing stable compatible histories, stable histories that are locally wrong for the receiver, unstable histories that change regime, and sparse ambiguous histories. The same private source development is compressed two ways:
+
+1. a developmental packet carries a final rule plus bounded evidence about how consequence behaved across the history;
+2. a doctrinal packet carries only the final rule under undifferentiated standing.
+
+The receiver then lives its own history.
+
+The important asymmetry is deliberate. Developmental context may identify instability inside the source history, but it receives no oracle telling it whether a stable source world matches the receiver. Stable-but-divergent foreign authority must still be defeated by direct receiver consequence.
+
+### Why this matters
+
+If developmental transfer succeeds, the result would suggest that culture-like inheritance may benefit from preserving some of the *path of warrant* rather than transmitting only settled conclusions. It would also show that this can remain bounded rather than becoming full autobiographical synchronization.
+
+### Next evidence
+
+1. rebuild under the pinned .NET 10 SDK;
+2. run the invariant suite, now including the Protocol 03 seed-diversity contract;
+3. run Protocol 03 across `101,211,307,401,503` without changing its seven thresholds;
+4. inspect world fingerprints and history layouts alongside verdicts;
+5. only after interpretation, run the three-protocol full-suite checkpoint.

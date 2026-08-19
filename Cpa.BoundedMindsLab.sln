@@ -8,6 +8,27 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cpa.BoundedMindsLab.Cli", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cpa.BoundedMindsLab.Desktop", "src\Cpa.BoundedMindsLab.Desktop\Cpa.BoundedMindsLab.Desktop.csproj", "{B8496E58-4ACB-4CE5-A267-8E0C1EC8D4F6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{C4CE662E-D174-4A2D-96D4-AF615AC1F6E5}"
+	ProjectSection(SolutionItems) = preProject
+		CHANGELOG.md = CHANGELOG.md
+		README.md = README.md
+		VERSION = VERSION
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{247F8523-12F2-4B3E-A91B-828A0C0FF32A}"
+	ProjectSection(SolutionItems) = preProject
+		docs\ARCHITECTURE.md = docs\ARCHITECTURE.md
+		docs\DESKTOP_LAB.md = docs\DESKTOP_LAB.md
+		docs\EXPERIMENTS.md = docs\EXPERIMENTS.md
+		docs\FALSIFICATION.md = docs\FALSIFICATION.md
+		docs\FOUNDING_HANDOFF.md = docs\FOUNDING_HANDOFF.md
+		docs\PLAN.md = docs\PLAN.md
+		docs\RESEARCH_LEDGER.md = docs\RESEARCH_LEDGER.md
+		docs\RUNBOOK.md = docs\RUNBOOK.md
+		docs\SOURCE_RECONCILIATION.md = docs\SOURCE_RECONCILIATION.md
+		docs\VALIDATION.md = docs\VALIDATION.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,5 +50,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AA9071E4-0DA4-473D-BEDF-6A262CAE0424}
 	EndGlobalSection
 EndGlobal

@@ -54,7 +54,7 @@ catch (Exception exception)
 
 static void PrintHelp()
 {
-    Console.WriteLine("CPA Bounded Minds Lab 0.2.0");
+    Console.WriteLine("CPA Bounded Minds Lab 0.3.1");
     Console.WriteLine();
     Console.WriteLine("  --list");
     Console.WriteLine("  --self-test");

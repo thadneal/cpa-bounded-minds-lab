@@ -61,7 +61,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" Grid.Column="0" Text="Seeds" VerticalAlignment="Top" Margin="2,7,8,5" />
-                        <TextBox x:Name="SeedTextBox" Grid.Row="0" Grid.Column="1" Text="101" MinHeight="44" TextWrapping="Wrap" AcceptsReturn="True" ToolTip="Enter one or more unsigned seeds separated by commas, spaces, semicolons, or new lines." />
+                        <TextBox x:Name="SeedTextBox" Grid.Row="0" Grid.Column="1" MinHeight="44" TextWrapping="Wrap" AcceptsReturn="True" ToolTip="Enter one or more unsigned seeds separated by commas, spaces, semicolons, or new lines." />
                         <TextBlock Grid.Row="1" Grid.Column="0" Text="Pace" VerticalAlignment="Center" Margin="2,5,8,5" />
                         <ComboBox x:Name="PaceComboBox" Grid.Row="1" Grid.Column="1" SelectedIndex="0">
                             <ComboBoxItem Content="Maximum" />
@@ -153,11 +153,15 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="220" />
+                                <ColumnDefinition Width="180" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="105" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
@@ -169,7 +173,11 @@
                             <Button x:Name="PreviousSeriesButton" Grid.Column="5" Content="&lt;" Click="PreviousSeriesClicked" Padding="5,2" MinWidth="28" ToolTip="Previous focus path" />
                             <ComboBox x:Name="SeriesComboBox" Grid.Column="6" SelectionChanged="SeriesSelectionChanged" ToolTip="Focus path" />
                             <Button x:Name="NextSeriesButton" Grid.Column="7" Content="&gt;" Click="NextSeriesClicked" Padding="5,2" MinWidth="28" ToolTip="Next focus path" />
-                            <Button Grid.Column="8" Content="Maximize graph" Click="MaximizeGraphClicked" Margin="10,2,2,2" ToolTip="Open the live graph in a maximized window" />
+                            <TextBlock Grid.Column="8" Text="Seed" VerticalAlignment="Center" Margin="12,0,7,0" />
+                            <Button x:Name="PreviousGraphSeedButton" Grid.Column="9" Content="&lt;" Click="PreviousGraphSeedClicked" Padding="5,2" MinWidth="28" ToolTip="Previous seed history" />
+                            <ComboBox x:Name="GraphSeedComboBox" Grid.Column="10" SelectionChanged="GraphSeedSelectionChanged" ToolTip="Seed history displayed by the graph, details, and timeline" />
+                            <Button x:Name="NextGraphSeedButton" Grid.Column="11" Content="&gt;" Click="NextGraphSeedClicked" Padding="5,2" MinWidth="28" ToolTip="Next seed history" />
+                            <Button Grid.Column="12" Content="Maximize graph" Click="MaximizeGraphClicked" Margin="10,2,2,2" ToolTip="Open the selected seed graph in a maximized window" />
                         </Grid>
                         <Border Grid.Row="1" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Background="{StaticResource InputBrush}">
                             <controls:FastMetricPlot x:Name="MetricPlot" />
@@ -265,8 +273,11 @@
                         <TextBlock Text="Local versus shared memory contamination - frozen Supported baseline" FontSize="14" Margin="0,2,0,6" />
                         <TextBlock Text="A source publishes compact developmental traces. The receiver tests whether foreign provenance can provide useful prior structure without inheriting the authority of lived consequence." TextWrapping="Wrap" />
                         <TextBlock Text="Protocol 02" FontSize="18" FontWeight="SemiBold" Margin="0,14,0,0" />
-                        <TextBlock Text="Peer disagreement with preserved interiors" FontSize="14" Margin="0,2,0,6" />
+                        <TextBlock Text="Peer disagreement with preserved interiors - frozen Supported baseline" FontSize="14" Margin="0,2,0,6" />
                         <TextBlock Text="Two peers develop complementary private histories. The preserved condition lets them expose only compact prediction-and-standing postures while remaining internally distinct. The control deliberately collapses both interiors into the same synchronized state before shared consequence. The assay asks whether independent error structure improves correction and still remains revisable." TextWrapping="Wrap" />
+                        <TextBlock Text="Protocol 03" FontSize="18" FontWeight="SemiBold" Margin="0,14,0,0" />
+                        <TextBlock Text="Developmental versus doctrinal transfer" FontSize="14" Margin="0,2,0,6" />
+                        <TextBlock Text="Each seed now generates a materially different lived-history circumstance. A source transfers either a compact developmental consequence-history packet or only its final rule. The receiver must decide how much second-hand structure deserves initial standing, then remain answerable to direct local consequence." TextWrapping="Wrap" />
                         <TextBlock Text="The graph and tables are observational only. Experiments never read UI state, render timing, selected metric, splitter geometry, display telemetry backlog, or line visibility." Foreground="{StaticResource MutedBrush}" TextWrapping="Wrap" Margin="0,10,0,0" />
                     </StackPanel>
                 </ScrollViewer>

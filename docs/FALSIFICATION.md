@@ -1,108 +1,87 @@
 # Falsification Boundaries
 
-Protocol 01 is evaluated component by component. A visually pleasing graph is not evidence. Its accepted five-seed result is now frozen; the boundaries below remain unchanged as the baseline moves forward.
+A pleasing visualization is not evidence. Thresholds are fixed before the targeted result set is interpreted.
 
 ## 01 local/shared memory contamination
 
-### A. Compatible transfer benefit
+Protocol 01 is frozen. Support required all six checks: compatible early transfer benefit, bounded divergent contamination, late local revision, provenance-selective standing, overall usefulness, and communication work at or below `4.0`.
 
-The provisional path's early compatible RMSE must be no more than 25% of the local-only early compatible RMSE.
-
-Failure means the inherited public trace is not providing meaningful usable prior structure.
-
-### B. Bounded contamination
-
-The provisional path's early divergent RMSE must be no more than 60% of the lived-equivalent control's early divergent RMSE.
-
-Failure means preserving foreign provenance did not sufficiently reduce the initial cost of a bad inheritance.
-
-### C. Late local revision
-
-The provisional path's late divergent RMSE must be no more than 20% of the lived-equivalent control's late divergent RMSE.
-
-Failure means direct local consequence did not regain authority quickly enough.
-
-### D. Provenance selectivity
-
-At the end of the receiver history:
-
-- compatible foreign standing must be at least `0.75`;
-- divergent foreign standing must be at most `0.10`.
-
-Failure means standing is behaving like generic decay or generic trust rather than local consequence-sensitive permission.
-
-### E. Overall usefulness
-
-Provisional lifetime RMSE must remain within 5% of local-only lifetime RMSE or better.
-
-This prevents a mechanism from claiming victory by helping shared contexts while causing more total damage elsewhere.
-
-### F. Bounded communication
-
-The receiver may receive only the exported compact packets, and communication work must remain at or below `4.0` in this assay.
-
-This prevents hidden full-state transfer from masquerading as public memory exchange.
-
-## Verdict rule
-
-- `Support`: all six components pass.
-- `Mixed`: at least four components pass.
-- `Disconfirm`: fewer than four pass.
-
-The boundary is intentionally strict for the founding protocol. If a result fails narrowly, change the interpretation before changing the threshold.
-
----
+Accepted result: 5/5 Support, 30/30 checks.
 
 ## 02 peer disagreement with preserved interiors
 
-Protocol 02 also uses six preregistered component checks.
+Protocol 02 is frozen. Support required all six checks: complementary private hypotheses, retained disagreement versus synchronized collapse, early correction benefit, whole-history benefit, later convergence, and bounded two-posture public exchange.
 
-### A. Complementary private histories
+Accepted result: 5/5 Support, 30/30 checks.
 
-Before shared consequence begins, the RMSE of the better peer prediction for each context must be at most `0.08`.
+---
 
-Failure means the synthetic history did not actually create useful alternative local hypotheses, so the disagreement assay is underpowered or malformed.
+## 03 developmental versus doctrinal transfer
 
-### B. Preserved disagreement
+Protocol 03 uses **seven** preregistered component checks.
 
-At the start of shared consequence:
+### A. Seed generates a lived circumstance
 
-- preserved-interiors mean disagreement over the first 32 observations must be at least `0.45`;
-- synchronized-control disagreement over the same window must be at most `0.02`.
+The generated world must contain at least:
 
-Failure means the two conditions did not produce the intended contrast between retained and collapsed private structure.
+- 3 stable-compatible contexts;
+- 2 stable-divergent contexts;
+- 3 unstable-transition contexts;
+- 1 sparse-ambiguous context;
+- an evidence-depth span of at least `20` source observations between the least and most experienced contexts.
 
-### C. Early correction benefit
+Failure means the seed did not create the intended heterogeneous developmental circumstance, so treatment comparisons are not interpreted as evidence for the protocol claim.
 
-Preserved-interiors early RMSE over the first 64 shared observations must be no more than 82% of synchronized-control early RMSE.
+### B. Developmental history calibrates standing
 
-Failure means keeping independent error structure did not materially improve early correction.
+Mean initial developmental-transfer standing on stable-compatible source histories must exceed mean standing on unstable-transition histories by at least `0.35`.
 
-### D. Whole-history benefit
+Failure means the bounded history packet is not preserving enough information about how the rule was earned to alter receiver permission.
 
-Preserved-interiors lifetime shared-phase RMSE must be no more than 82% of synchronized-control lifetime RMSE.
+### C. Stable-history head start
 
-Failure prevents a transient early advantage from being mistaken for a net developmental benefit.
+During the first 80 receiver observations, developmental-transfer RMSE on stable-compatible contexts must be no more than **55%** of local-only RMSE on those same contexts.
 
-### E. Plurality remains correctable
+Failure means developmental caution has destroyed the useful inheritance we are trying to preserve.
 
-For preserved interiors:
+### D. Unstable-history contamination reduced
 
-- late RMSE from tick 128 onward must be at most `0.06`;
-- mean disagreement over the final 32 observations must be at most `0.08`.
+During the first 80 receiver observations, developmental-transfer RMSE on unstable-transition contexts must be no more than **95%** of doctrinal-transfer RMSE on those contexts.
 
-Failure means disagreement remained too inertial or too costly under common consequence.
+Failure means carrying consequence history did not materially protect the receiver from conclusions whose own developmental record was unstable.
 
-### F. Bounded public exchange
+### E. Whole-history noninferiority to doctrine
 
-The preserved path must publish exactly two compact public postures per shared observation, and total communication work must remain at or below `4.0`.
+Developmental-transfer lifetime receiver RMSE must be no greater than doctrinal-transfer lifetime RMSE.
 
-The invasive synchronization operation in the control is not counted as legitimate public communication. It exists only to create the collapse condition and must never be promoted into the architecture.
+The developmental packet is more expensive. It cannot claim calibration value while producing greater total error than the cheaper compression control.
 
-## Protocol 02 verdict rule
+### F. Direct consequence remains sovereign
 
-- `Support`: all six components pass.
-- `Mixed`: at least four components pass.
-- `Disconfirm`: fewer than four pass.
+At the end of receiver development, all of the following must hold:
 
-As with Protocol 01, interpretation changes before thresholds do if a result lands narrowly near a preregistered boundary.
+- developmental late RMSE <= `0.12`;
+- mean foreign standing on stable-compatible histories >= `0.75`;
+- mean foreign standing on stable-divergent histories <= `0.02`.
+
+This is intentionally demanding. Developmental history may correctly regard a stable-divergent source rule as well earned **in the source's world**. Only receiver consequence can reveal that it is wrong here. A successful system must still revoke that authority decisively.
+
+### G. Bounded developmental transfer
+
+Both transfer paths must publish exactly one packet per ten context cells. Developmental communication work must remain <= `2.5`, and doctrinal transfer must remain cheaper than developmental transfer.
+
+This prevents the developmental path from winning through an unbounded history dump.
+
+## Protocol 03 verdict rule
+
+- `Support`: all seven checks pass.
+- `Mixed`: at least five checks pass.
+- `Disconfirm`: fewer than five checks pass.
+
+If a result lands near a boundary, interpretation changes before thresholds do.
+
+## Replication interpretation
+
+The five-seed matrix is evaluated both for verdict consistency and for **world diversity**. Different metric values are expected because Protocol 03 deliberately makes the seed shape lived circumstance. A 5/5 result is stronger when the scenario fingerprints, history layouts, evidence depths, and target landscapes materially differ.
+
+Conversely, more variable outcomes are not automatically a defect. They may finally indicate that histories have enough individuality to stress the principle rather than merely perturb one trajectory.

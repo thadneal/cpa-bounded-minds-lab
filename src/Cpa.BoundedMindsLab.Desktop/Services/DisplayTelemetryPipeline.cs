@@ -1,7 +1,7 @@
 using System.Collections.Concurrent;
 using System.Diagnostics;
-using Cpa.BoundedMindsLab.Experiments;
 using Cpa.BoundedMindsLab.Desktop.ViewModels;
+using Cpa.BoundedMindsLab.Experiments;
 
 namespace Cpa.BoundedMindsLab.Desktop.Services;
 
@@ -12,7 +12,10 @@ public sealed class DisplayTelemetryPipeline : IExperimentFrameObserver, IDispos
     private readonly ConcurrentQueue<QueuedFrame> _queue = new();
     private readonly object _projectionSync = new();
     private readonly CancellationTokenSource _stop = new();
-    private readonly TelemetryStore _store = new();
+    private readonly Dictionary<ulong, TelemetryStore> _seedStores = [];
+    private readonly List<ExperimentFrame> _projectionBatch = new(ProjectionBatchSize);
+    private readonly List<ulong> _seedOrder = [];
+    private TelemetryStore _store = new();
     private readonly Task _projector;
     private long _published;
     private long _dropped;
@@ -20,6 +23,7 @@ public sealed class DisplayTelemetryPipeline : IExperimentFrameObserver, IDispos
     private int _backlog;
     private double _projectionMilliseconds;
     private long _generation;
+    private ulong? _activeSeed;
     private bool _disposed;
 
     public DisplayTelemetryPipeline()
@@ -27,7 +31,16 @@ public sealed class DisplayTelemetryPipeline : IExperimentFrameObserver, IDispos
         _projector = Task.Run(ProjectLoopAsync);
     }
 
-    public TelemetryStore Store => _store;
+    public TelemetryStore Store
+    {
+        get
+        {
+            lock (_projectionSync)
+            {
+                return _store;
+            }
+        }
+    }
 
     public void Observe(ExperimentFrame frame)
     {
@@ -52,23 +65,100 @@ public sealed class DisplayTelemetryPipeline : IExperimentFrameObserver, IDispos
         Interlocked.Read(ref _projected),
         Volatile.Read(ref _backlog),
         Volatile.Read(ref _projectionMilliseconds),
-        _store.Version);
+        Store.Version);
+
+    public ulong[] GetAvailableSeeds()
+    {
+        lock (_projectionSync)
+        {
+            return _seedOrder.ToArray();
+        }
+    }
+
+    public TelemetryStore GetStore(ulong seed)
+    {
+        lock (_projectionSync)
+        {
+            if (_activeSeed == seed)
+            {
+                return _store;
+            }
+
+            return _seedStores.TryGetValue(seed, out var store)
+                ? store
+                : _store;
+        }
+    }
+
+    public bool ContainsSeed(ulong seed)
+    {
+        lock (_projectionSync)
+        {
+            return _activeSeed == seed || _seedStores.ContainsKey(seed);
+        }
+    }
+
+    public void Flush()
+    {
+        lock (_projectionSync)
+        {
+            while (ProjectQueuedFramesLocked() > 0)
+            {
+            }
+        }
+    }
 
     public void Reset()
     {
         lock (_projectionSync)
         {
-            Interlocked.Increment(ref _generation);
-            while (_queue.TryDequeue(out _))
+            AdvanceGenerationAndDrainQueue();
+            foreach (var store in _seedStores.Values)
+            {
+                store.Dispose();
+            }
+
+            _seedStores.Clear();
+            _seedOrder.Clear();
+            _activeSeed = null;
+            _store.Dispose();
+            _store = new TelemetryStore();
+            ResetCounters();
+        }
+    }
+
+    public void BeginSeed(ulong seed)
+    {
+        lock (_projectionSync)
+        {
+            while (ProjectQueuedFramesLocked() > 0)
             {
             }
 
-            Interlocked.Exchange(ref _backlog, 0);
-            Interlocked.Exchange(ref _published, 0);
-            Interlocked.Exchange(ref _dropped, 0);
-            Interlocked.Exchange(ref _projected, 0);
-            Volatile.Write(ref _projectionMilliseconds, 0.0);
-            _store.Reset();
+            Interlocked.Increment(ref _generation);
+
+            if (_activeSeed is { } previousSeed)
+            {
+                _seedStores[previousSeed] = _store;
+            }
+            else
+            {
+                _store.Dispose();
+            }
+
+            if (!_seedOrder.Contains(seed))
+            {
+                _seedOrder.Add(seed);
+            }
+
+            if (_seedStores.Remove(seed, out var replaced))
+            {
+                replaced.Dispose();
+            }
+
+            _store = new TelemetryStore();
+            _activeSeed = seed;
+            ResetCounters();
         }
     }
 
@@ -90,54 +180,84 @@ public sealed class DisplayTelemetryPipeline : IExperimentFrameObserver, IDispos
             // Teardown must not turn an already completed experiment into a UI fault.
         }
 
+        lock (_projectionSync)
+        {
+            foreach (var store in _seedStores.Values)
+            {
+                store.Dispose();
+            }
+
+            _seedStores.Clear();
+            _seedOrder.Clear();
+            _store.Dispose();
+        }
+
         _stop.Dispose();
-        _store.Dispose();
     }
 
     private async Task ProjectLoopAsync()
     {
-        var batch = new List<QueuedFrame>(ProjectionBatchSize);
-        var projectedFrames = new List<ExperimentFrame>(ProjectionBatchSize);
         while (!_stop.IsCancellationRequested)
         {
             var stopwatch = Stopwatch.StartNew();
-            var appliedCount = 0;
+            var batchCount = 0;
             lock (_projectionSync)
             {
-                batch.Clear();
-                while (batch.Count < ProjectionBatchSize && _queue.TryDequeue(out var frame))
-                {
-                    Interlocked.Decrement(ref _backlog);
-                    batch.Add(frame);
-                }
-
-                var generation = Volatile.Read(ref _generation);
-                projectedFrames.Clear();
-                foreach (var item in batch)
-                {
-                    if (item.Generation == generation)
-                    {
-                        projectedFrames.Add(item.Frame);
-                    }
-                }
-
-                if (projectedFrames.Count > 0)
-                {
-                    _store.ApplyBatch(projectedFrames);
-                    appliedCount = projectedFrames.Count;
-                }
+                batchCount = ProjectQueuedFramesLocked();
             }
 
             stopwatch.Stop();
-            if (batch.Count == 0)
+            if (batchCount == 0)
             {
                 await Task.Delay(4, _stop.Token).ConfigureAwait(false);
                 continue;
             }
 
-            Interlocked.Add(ref _projected, appliedCount);
             Volatile.Write(ref _projectionMilliseconds, stopwatch.Elapsed.TotalMilliseconds);
         }
+    }
+
+    private int ProjectQueuedFramesLocked()
+    {
+        var generation = Volatile.Read(ref _generation);
+        _projectionBatch.Clear();
+        var dequeued = 0;
+        while (dequeued < ProjectionBatchSize && _queue.TryDequeue(out var item))
+        {
+            Interlocked.Decrement(ref _backlog);
+            dequeued++;
+            if (item.Generation == generation)
+            {
+                _projectionBatch.Add(item.Frame);
+            }
+        }
+
+        if (_projectionBatch.Count > 0)
+        {
+            _store.ApplyBatch(_projectionBatch);
+            Interlocked.Add(ref _projected, _projectionBatch.Count);
+        }
+
+        return dequeued;
+    }
+
+    private void AdvanceGenerationAndDrainQueue()
+    {
+        Interlocked.Increment(ref _generation);
+        while (_queue.TryDequeue(out _))
+        {
+        }
+
+        Interlocked.Exchange(ref _backlog, 0);
+    }
+
+    private void ResetCounters()
+    {
+        Interlocked.Exchange(ref _published, 0);
+        Interlocked.Exchange(ref _dropped, 0);
+        Interlocked.Exchange(ref _projected, 0);
+        Interlocked.Exchange(ref _backlog, 0);
+        Volatile.Write(ref _projectionMilliseconds, 0.0);
     }
 
     private readonly record struct QueuedFrame(long Generation, ExperimentFrame Frame);

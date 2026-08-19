@@ -6,6 +6,7 @@ public static class ExperimentCatalog
     [
         new LocalSharedMemoryContaminationExperiment(),
         new PeerDisagreementPreservedInteriorsExperiment(),
+        new DevelopmentalVersusDoctrinalTransferExperiment(),
     ];
 
     public static IReadOnlyList<IExperiment> All => Experiments;

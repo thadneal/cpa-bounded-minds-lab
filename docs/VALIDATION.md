@@ -1,6 +1,13 @@
 # Validation
 
-## Invariant suite
+## Automated invariants
+
+Version 0.3.1 defines **12 self-tests**. In addition to the existing deterministic-random, communication-cost, provenance/standing, Protocol 01, Protocol 02, and frame-sequence checks, the Protocol 03 baseline adds:
+
+- `protocol-03-default-seeds-create-distinct-lived-histories` - all five canonical seeds must produce unique developmental-world fingerprints, with at least four distinct context-history layouts;
+- `protocol-03-supports-seed-101` - implementation-drift fixture for the preregistered Protocol 03 mechanism.
+
+The seed-101 protocol fixtures are invariant checks, not experimental evidence.
 
 Run:
 
@@ -8,56 +15,39 @@ Run:
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
 ```
 
-Version 0.2.0 defines ten self-tests:
-
-1. deterministic random shuffles repeat under equal seeds;
-2. shared trace communication cost is explicit and additive;
-3. provisional import remains foreign and capped;
-4. lived-equivalent control imports local authority;
-5. contradictory local consequence withdraws foreign standing;
-6. confirming local consequence renews foreign standing;
-7. public export requires earned source standing;
-8. Protocol 01 supports its seed-101 synthetic fixture;
-9. Protocol 02 supports its seed-101 synthetic fixture;
-10. public frame sequence is contiguous.
-
-The seed-101 protocol fixtures are invariant checks on implementation drift. They are not experimental results. Protocol 01 has already completed its accepted five-seed baseline; Protocol 02 still requires the preregistered five-seed result set.
-
-## Protocol 02 result set
+## Protocol 03 result set
 
 ```powershell
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- \
-  --experiment 02-peer-disagreement-preserved-interiors \
-  --replicate 101,211,307,401,503 \
-  --output _artifacts/protocol-02-five-seed
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- `
+  --experiment 03-developmental-versus-doctrinal-transfer `
+  --replicate 101,211,307,401,503 `
+  --output _artifacts/protocol-03-five-seed
 ```
 
-Review `replication-report.json` and each seed's `manifest.json` before changing any thresholds. After interpreting the targeted Protocol 02 result, run the two-protocol five-seed full suite as the v0.2.0 checkpoint.
+Before interpreting treatment outcomes, verify that the per-seed `scenario-generated` events differ in history-kind layout, evidence depth, and generated targets/noise. Do not change the seven falsification boundaries after viewing results.
 
 ## Desktop validation
 
-On Windows 11, run a maximum-pace history and verify:
+On Windows 11 verify:
 
-- controls remain interactive while observations are arriving;
-- pause stops at an observation boundary;
-- step releases one boundary;
-- resume continues the same history;
-- cancel ends cleanly without an unhandled UI exception;
-- freezing the graph does not pause experiment execution;
-- changing metric/path affects only presentation;
-- Focus path lists only histories with numeric telemetry, and Metric lists only metrics actually published by the selected focus path, including while new paths and metrics appear during a run;
-- display frame drops, if any, do not create gaps in `frames.ndjson`;
-- graph point count remains bounded by display resolution rather than raw history size;
-- hover stays responsive on the longest available metric series;
-- clicking a legend key hides only that line, marks the key as hidden, rescales axes from the remaining visible lines, and clicking it again restores the line;
-- legend visibility remains synchronized between embedded and maximized views, while metric-specific hidden state does not leak into a different metric;
-- legend height grows as key count/available width changes, with no key rows overlapping the graph surface;
-- selecting a final-only metric such as `rmse` after the run displays visible point markers rather than an apparently empty graph;
-- Protocol results accumulates one judged row per completed seed/protocol, maps core `Disconfirm` to the UI label `Refuted`, and exposes the experiment's falsification assertions without depending on display telemetry;
-- the seed indicator above Protocol progress clearly shows the active seed value and `current/total` position while a session is running;
-- Protocol progress switches from the Protocol 01 source/receiver steps to the Protocol 02 peer-development/preserved-versus-synchronized steps when the active experiment changes;
-- a multi-seed desktop session runs seeds in the requested order, resets live visualization at each seed boundary, retains earlier seed judgments in Protocol results, writes one `seed-N` directory per history, and produces `replication-report.json` only after the complete session succeeds.
+- the Seeds field opens with `101, 211, 307, 401, 503`;
+- multiple seeds execute sequentially and the active-seed badge changes correctly;
+- the Live metrics Seed selector accumulates each started seed and can move backward/forward through retained histories;
+- selecting an earlier seed switches its graph, Focus path/Metric catalogs, detail tables, Timeline, and Protocol Progress without changing the active experiment;
+- the maximized graph reports the graph-selected seed, even when a different seed is currently executing;
+- Protocol progress switches correctly among Protocols 01, 02, and 03;
+- Protocol 03 progress exposes its source-history and three receiver-path substeps;
+- controls remain interactive during maximum-pace execution;
+- pause/step/resume/cancel stop or release experiment observation boundaries rather than UI frames;
+- graph freeze/maximize/metric selection/line hiding change presentation only;
+- Focus path restricts Metric choices to telemetry actually published by that path;
+- final-only one-point metrics such as `rmse` remain visible;
+- dynamic legend height prevents overlap as key count changes;
+- protocol judgments accumulate across seeds independently of display telemetry drops;
+- seed visualization stores remain isolated rather than overlaying independent developmental histories;
+- advancing to a new seed retains the completed seed for inspection and does not clip its final projected display frames;
+- `frames.ndjson` remains complete even if the status bar reports dropped display-only frames.
 
 ## Environment note
 
-The source-generation environment used for v0.2.0 does not provide the .NET SDK, so build/self-test claims are intentionally deferred to the Windows development environment.
+The source-generation environment used for v0.3.1 does not provide the .NET SDK. Build and self-test claims are intentionally deferred to the Windows development environment.

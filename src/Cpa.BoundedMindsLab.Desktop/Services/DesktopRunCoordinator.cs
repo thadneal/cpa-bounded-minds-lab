@@ -211,7 +211,7 @@ public sealed class DesktopRunCoordinator : IDisposable
             for (var index = 0; index < seeds.Length; index++)
             {
                 var seed = seeds[index];
-                _telemetry.Reset();
+                _telemetry.BeginSeed(seed);
                 SetActiveSeed(index + 1, seeds.Length, completedRuns.Count, seed);
                 ArtifactWriter.WriteSessionManifest(
                     outputDirectory,
@@ -228,6 +228,7 @@ public sealed class DesktopRunCoordinator : IDisposable
                     quiet: true,
                     _telemetry,
                     control);
+                _telemetry.Flush();
                 completedRuns.Add(run);
                 RecordProtocolResults(run);
                 SetActiveSeed(index + 1, seeds.Length, completedRuns.Count, seed);
@@ -251,6 +252,7 @@ public sealed class DesktopRunCoordinator : IDisposable
         }
         catch (OperationCanceledException) when (control.IsCancellationRequested)
         {
+            _telemetry.Flush();
             var interruptedSeed = GetActiveSeed();
             ArtifactWriter.WriteSessionManifest(
                 outputDirectory,
@@ -268,6 +270,7 @@ public sealed class DesktopRunCoordinator : IDisposable
         }
         catch (Exception exception)
         {
+            _telemetry.Flush();
             var faultedSeed = GetActiveSeed();
             ArtifactWriter.WriteSessionManifest(
                 outputDirectory,

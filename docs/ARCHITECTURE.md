@@ -96,3 +96,52 @@ The negotiation readout can see only the two current public postures. It cannot 
 The `synchronized-control` is intentionally invasive. It averages both private states before the shared phase and creates two identical copies. This is a falsification contrast for premature consensus. It does not cross `SharedTraceChannel`, it is not counted as legitimate inter-mind communication, and it must not be mistaken for a proposed CPA mechanism.
 
 `PeerDisagreementWorld` remains semantically anonymous. One peer has the more useful private history for four context cells and the other peer for the complementary four. Small deterministic noise prevents the histories from becoming literal duplicate constants while keeping the first disagreement assay interpretable.
+
+## Protocol 03 developmental-transfer boundary
+
+Protocol 03 does not add a general teaching subsystem. Its `SourceMind`, `ReceiverMind`, and transfer records remain protocol-local assay machinery.
+
+The ordinary boundary is:
+
+```text
+source private consequence history
+            |
+            | bounded public compression
+            +-------------------------------+
+            |                               |
+            v                               v
+developmental packet                  doctrinal packet
+rule estimate                         rule estimate
+source evidence depth                 no history detail
+3 consequence segment means           uniform standing
+history variability
+            |                               |
+            +---------------+---------------+
+                            v
+                   receiver private state
+                            |
+                            | direct local consequence
+                            v
+                 revised foreign permission
+```
+
+The developmental packet is not the source's private history object. It carries one fixed-size summary per anonymous context. Communication cost is explicitly larger than doctrinal transfer and remains bounded.
+
+The receiver uses source evidence depth and consistency only to set **initial foreign standing**. It does not receive evaluator labels such as `StableCompatible`, `StableDivergent`, `UnstableTransition`, or `SparseAmbiguous`. Those labels exist in the synthetic environment and public experiment telemetry only so the assay can score the intended pressure.
+
+This distinction is especially important for stable-divergent histories. Their internal source history is coherent, so developmental calibration may initially trust them. The receiver is not permitted to infer local mismatch from an evaluator category. Only direct receiver consequence can drive their foreign standing toward zero.
+
+## Seed-generated developmental worlds
+
+`DevelopmentalTransferWorld` is the first environment in this repository where a seed changes more than schedule/noise. A seed deterministically generates:
+
+- assignment of developmental history kinds to context cells;
+- receiver target values;
+- source evidence counts;
+- source and receiver noise amplitudes;
+- source regime-transition direction and values;
+- observation schedules.
+
+The generated family remains bounded and preregistered. Determinism is preserved, while replication now probes materially different biographies.
+
+This is a laboratory-method change, not a cognitive mechanism. Neither source nor receiver can inspect the seed, scenario fingerprint, history-kind label, or future generated parameters.

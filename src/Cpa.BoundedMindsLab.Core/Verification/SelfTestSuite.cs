@@ -21,6 +21,8 @@ public static class SelfTestSuite
         Run("public-export-requires-earned-standing", TestExportStanding, passed);
         Run("protocol-01-supports-seed-101", TestProtocolOne, passed);
         Run("protocol-02-supports-seed-101", TestProtocolTwo, passed);
+        Run("protocol-03-default-seeds-create-distinct-lived-histories", TestProtocolThreeSeedSemantics, passed);
+        Run("protocol-03-supports-seed-101", TestProtocolThree, passed);
         Run("frame-sequence-is-contiguous", TestFrameSequence, passed);
         return passed;
     }
@@ -121,6 +123,38 @@ public static class SelfTestSuite
         {
             var run = ExperimentRunner.Run([ExperimentCatalog.Get("02-peer-disagreement-preserved-interiors")], 101, output, quiet: true);
             Assert(run.Experiments.Single().Verdict == ExperimentVerdict.Support, "Protocol 02 should meet its preregistered synthetic boundaries for seed 101.");
+        }
+        finally
+        {
+            Directory.Delete(output, recursive: true);
+        }
+    }
+
+
+    private static void TestProtocolThreeSeedSemantics()
+    {
+        var fingerprints = new HashSet<ulong>();
+        var categoryLayouts = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var seed in ExperimentDefaults.ReplicationSeeds)
+        {
+            var scenario = DevelopmentalTransferWorld.CreateScenario(seed);
+            Assert(fingerprints.Add(scenario.Fingerprint), $"Default seed {seed} should produce a distinct developmental-world fingerprint.");
+            var layout = string.Join(",", scenario.Cells.Select(cell => (int)cell.HistoryKind));
+            categoryLayouts.Add(layout);
+        }
+
+        Assert(
+            categoryLayouts.Count >= 4,
+            "The canonical five-seed matrix should vary which contexts receive stable, divergent, unstable, and sparse histories, not merely shuffle observation order.");
+    }
+
+    private static void TestProtocolThree()
+    {
+        var output = CreateTemporaryDirectory();
+        try
+        {
+            var run = ExperimentRunner.Run([ExperimentCatalog.Get("03-developmental-versus-doctrinal-transfer")], 101, output, quiet: true);
+            Assert(run.Experiments.Single().Verdict == ExperimentVerdict.Support, "Protocol 03 should meet its preregistered synthetic boundaries for seed 101.");
         }
         finally
         {
