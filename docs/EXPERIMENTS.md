@@ -44,7 +44,7 @@ Qualification: seeds mostly perturbed encounter ordering/noise. They did not cre
 
 Name: `03-developmental-versus-doctrinal-transfer`
 
-Status: **result pending**.
+Status: **frozen Supported**, 5/5 Support and 35/35 component checks.
 
 ### Question
 
@@ -134,10 +134,95 @@ Doctrinal transfer costs `0.08` work units per context packet. Developmental tra
 
 The extra cost is visible and must remain within the preregistered developmental budget.
 
+### Accepted narrow result
+
+The five-seed result supports this limited claim:
+
+> Some of the developmental path by which a foreign conclusion was earned can be useful public evidence in its own right. A receiver can use bounded consequence history to calibrate permission without confusing that history with direct local experience.
+
+Mean lifetime RMSE was approximately `0.17585` for developmental transfer, `0.18078` for doctrine, and `0.17667` for local-only. The result does not establish a general teaching protocol, cultural transmission mechanism, language, pedagogy, or final CPA memory format.
+
+
+---
+
+## Protocol 04: bounded communication before language
+
+Name: `04-bounded-communication-before-language`
+
+Status: **result pending**.
+
+### Question
+
+Can low-dimensional typed public signals preserve useful disagreement better than early semantic negotiation that smooths peers toward a common statement before external consequence?
+
+### Why this follows Protocol 03
+
+Protocol 03 showed that *what* crosses a mind boundary matters: bounded developmental context can calibrate a foreign conclusion better than a naked final rule. Protocol 04 changes the question from transfer content to communication form.
+
+CPA places language after cognition because rich expression can smooth distinctions that were still computationally useful. This assay does not implement language. It constructs a narrower control where public statements assimilate toward one another before the world supplies consequence.
+
+### Seed-generated social world
+
+Three peers develop separately across twelve anonymous context cells. Each seed changes history-class placement and prevalence, shared targets, which peer is locally salient, evidence depth, private-history bias, private noise, shared noise, and encounter order.
+
+Every world contains at least two cells in each evaluator-only class:
+
+- `InformativeDissent`: one deeper/stabler minority history is locally right while two peers share a weaker bias;
+- `MisleadingDissent`: one sparse noisy dissenter is wrong while two stronger histories are compatible;
+- `Complementary`: different private histories contain uneven but nontrivial partial value;
+- `Convergent`: peers develop broadly compatible local estimates.
+
+Peers never receive these class labels. They exist only in scenario construction, telemetry, and falsification scoring.
+
+### Typed-signal condition
+
+For the current context, each peer exposes a compact posture:
+
+```text
+source mind id
+context id
+estimate
+standing
+uncertainty
+evidence count
+```
+
+The decision surface combines the three estimates using source-specific standing and uncertainty. No peer changes its private state because another peer spoke. Public disagreement remains visible until external consequence arrives.
+
+### Early-semantic-smoothing control
+
+The control starts from the exact same three postures. Before commitment, each public statement is pulled toward the standing-weighted center of the other two statements for two rounds. The peer's private model is untouched. The resulting public statements are then combined using the same source-specific decision weights.
+
+This deliberately isolates **premature public convergence** from the Protocol 02 manipulation, which synchronized private interiors. It also keeps the claim narrower than "language is bad." A future language interface could preserve typed source/warrant distinctions instead of smoothing them.
+
+### Shared consequence
+
+Both conditions receive the exact same 336 shared observations for a seed. Every peer updates only its own private estimate from that direct consequence. Communication never substitutes for the external verdict.
+
+### Metrics
+
+Private development publishes prediction, target, rolling RMSE, local standing, uncertainty, evidence count, and evaluator-only history kind.
+
+Shared paths publish:
+
+- prediction, target, absolute error, and rolling RMSE;
+- raw peer disagreement before communication;
+- public disagreement after the selected communication surface;
+- mean standing and uncertainty;
+- cumulative communication work;
+- final `rmse`, `early_rmse`, `late_rmse`;
+- informative- and misleading-dissent early RMSE;
+- initial/final/mean public disagreement;
+- packet count and communication work.
+
+### Communication cost
+
+A compact public emission costs `0.004` work units. Typed communication emits three postures per observation. The smoothing control emits the same three initial postures and then pays for two additional three-message rounds. With 336 observations the declared costs are `4.032` versus `12.096`.
+
 ### What success would mean
 
 A successful result would support a narrow claim:
 
-> Some of the developmental path by which a foreign conclusion was earned can be useful public evidence in its own right. A receiver can use bounded consequence history to calibrate permission without confusing that history with direct local experience.
+> Public disagreement can carry useful information when source-specific warrant remains attached to distinct signals long enough for external consequence to adjudicate it. Early mutual smoothing can destroy some of that value even when private interiors remain intact.
 
-It would not establish a general teaching protocol, cultural transmission mechanism, language, pedagogy, or final CPA memory format.
+It would not establish that natural language is intrinsically harmful, that all consensus is premature, or that this small weighted decision rule belongs in final CPA anatomy.

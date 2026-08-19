@@ -19,6 +19,7 @@ public partial class MainWindow : Window
     private const string Protocol01Name = "01-local-shared-memory-contamination";
     private const string Protocol02Name = "02-peer-disagreement-preserved-interiors";
     private const string Protocol03Name = "03-developmental-versus-doctrinal-transfer";
+    private const string Protocol04Name = "04-bounded-communication-before-language";
     private static readonly int[] BoundaryDelays = [0, 2, 10];
     private static readonly char[] SeedSeparators = [',', ';', ' ', '\t', '\r', '\n'];
     private readonly DesktopRunCoordinator _coordinator = new();
@@ -506,7 +507,11 @@ public partial class MainWindow : Window
         if (!string.Equals(_progressExperiment, experiment, StringComparison.Ordinal))
         {
             _progressExperiment = experiment;
-            if (string.Equals(experiment, Protocol03Name, StringComparison.Ordinal))
+            if (string.Equals(experiment, Protocol04Name, StringComparison.Ordinal))
+            {
+                SetProtocol04ProgressLabels();
+            }
+            else if (string.Equals(experiment, Protocol03Name, StringComparison.Ordinal))
             {
                 SetProtocol03ProgressLabels();
             }
@@ -520,6 +525,12 @@ public partial class MainWindow : Window
             }
 
             SetAllProgressPending();
+        }
+
+        if (string.Equals(experiment, Protocol04Name, StringComparison.Ordinal))
+        {
+            UpdateProtocol04Progress(timeline);
+            return;
         }
 
         if (string.Equals(experiment, Protocol03Name, StringComparison.Ordinal))
@@ -629,6 +640,49 @@ public partial class MainWindow : Window
             experimentComplete ? ProgressMark.Complete : syncComplete ? ProgressMark.Current : ProgressMark.Pending);
     }
 
+
+    private void UpdateProtocol04Progress(TelemetryTimelineSnapshot timeline)
+    {
+        var experimentStarted = HasTimelineEvent(timeline, Protocol04Name, ExperimentFrameKind.ExperimentStarted);
+        var scenarioGenerated = HasTimelineEvent(timeline, Protocol04Name, ExperimentFrameKind.DevelopmentalEvent, "scenario", "scenario-generated");
+        var peerDevelopmentStarted = HasTimelineEvent(timeline, Protocol04Name, ExperimentFrameKind.PhaseChanged, phase: "peer-private-development");
+        var privateHistoriesComplete = HasTimelineEvent(timeline, Protocol04Name, ExperimentFrameKind.DevelopmentalEvent, "peers", "private-histories-complete");
+        var typedStarted = HasTimelineEvent(timeline, Protocol04Name, ExperimentFrameKind.PhaseChanged, "typed-signals", "typed-communication");
+        var typedComplete = HasTimelineEvent(timeline, Protocol04Name, ExperimentFrameKind.DevelopmentalEvent, "typed-signals", "path-complete");
+        var smoothedStarted = HasTimelineEvent(timeline, Protocol04Name, ExperimentFrameKind.PhaseChanged, "early-semantic-smoothing", "early-semantic-smoothing");
+        var smoothedComplete = HasTimelineEvent(timeline, Protocol04Name, ExperimentFrameKind.DevelopmentalEvent, "early-semantic-smoothing", "path-complete");
+        var experimentComplete = HasTimelineEvent(timeline, Protocol04Name, ExperimentFrameKind.ExperimentCompleted);
+
+        SetProgressLine(SourceDirectProgressText,
+            peerDevelopmentStarted || scenarioGenerated ? ProgressMark.Complete : experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(SourcePublishProgressText,
+            privateHistoriesComplete || typedStarted ? ProgressMark.Complete : peerDevelopmentStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(SourceStepText,
+            typedStarted || experimentComplete ? ProgressMark.Complete : experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressCard(SourceProgressCard,
+            typedStarted || experimentComplete ? ProgressMark.Complete : experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
+
+        SetProgressLine(ReceiverLocalProgressText,
+            typedComplete || smoothedStarted ? ProgressMark.Complete : typedStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(ReceiverProvisionalProgressText,
+            smoothedComplete ? ProgressMark.Complete : smoothedStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(ReceiverLivedProgressText,
+            smoothedComplete ? ProgressMark.Complete : typedStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(ReceiverStepText,
+            smoothedComplete || experimentComplete ? ProgressMark.Complete : typedStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressCard(ReceiverProgressCard,
+            smoothedComplete || experimentComplete ? ProgressMark.Complete : typedStarted ? ProgressMark.Current : ProgressMark.Pending);
+
+        SetProgressLine(EvaluationAssertionsProgressText,
+            experimentComplete ? ProgressMark.Complete : smoothedComplete ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(EvaluationVerdictProgressText,
+            experimentComplete ? ProgressMark.Complete : ProgressMark.Pending);
+        SetProgressLine(EvaluationStepText,
+            experimentComplete ? ProgressMark.Complete : smoothedComplete ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressCard(EvaluationProgressCard,
+            experimentComplete ? ProgressMark.Complete : smoothedComplete ? ProgressMark.Current : ProgressMark.Pending);
+    }
+
     private void UpdateProtocol03Progress(TelemetryTimelineSnapshot timeline)
     {
         var experimentStarted = HasTimelineEvent(timeline, Protocol03Name, ExperimentFrameKind.ExperimentStarted);
@@ -715,6 +769,21 @@ public partial class MainWindow : Window
         SetProgressLabel(EvaluationVerdictProgressText, "Protocol verdict");
     }
 
+
+    private void SetProtocol04ProgressLabels()
+    {
+        SetProgressLabel(SourceStepText, "1. Build private plurality");
+        SetProgressLabel(SourceDirectProgressText, "Seed-specific social circumstance");
+        SetProgressLabel(SourcePublishProgressText, "Three peers develop private histories");
+        SetProgressLabel(ReceiverStepText, "2. Compare communication forms");
+        SetProgressLabel(ReceiverLocalProgressText, "Low-dimensional typed signals");
+        SetProgressLabel(ReceiverProvisionalProgressText, "Early semantic-smoothing control");
+        SetProgressLabel(ReceiverLivedProgressText, "Same shared consequence remains sovereign");
+        SetProgressLabel(EvaluationStepText, "3. Evaluate");
+        SetProgressLabel(EvaluationAssertionsProgressText, "Seven falsification checks");
+        SetProgressLabel(EvaluationVerdictProgressText, "Protocol verdict");
+    }
+
     private static void SetProgressLabel(TextBlock textBlock, string label)
     {
         textBlock.Tag = label;
@@ -769,7 +838,7 @@ public partial class MainWindow : Window
     private void ResetProtocolProgress()
     {
         _progressExperiment = null;
-        SetProtocol03ProgressLabels();
+        SetProtocol04ProgressLabels();
         SetAllProgressPending();
     }
 

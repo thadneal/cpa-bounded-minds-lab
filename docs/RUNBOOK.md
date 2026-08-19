@@ -16,40 +16,40 @@ dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
 
 Treat analyzer failures as build failures. Warnings are errors.
 
-## Targeted Protocol 03 check
+## Targeted Protocol 04 check
 
 After invariants pass, a single deterministic smoke history is useful:
 
 ```powershell
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- `
-  --experiment 03-developmental-versus-doctrinal-transfer `
+  --experiment 04-bounded-communication-before-language `
   --seed 101 `
-  --output _artifacts/protocol-03-seed-101
+  --output _artifacts/protocol-04-seed-101
 ```
 
 Do not interpret the protocol from the smoke history alone. Run the canonical five-world matrix without changing thresholds:
 
 ```powershell
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- `
-  --experiment 03-developmental-versus-doctrinal-transfer `
+  --experiment 04-bounded-communication-before-language `
   --replicate 101,211,307,401,503 `
-  --output _artifacts/protocol-03-five-seed
+  --output _artifacts/protocol-04-five-seed
 ```
 
-Unlike Protocols 01 and 02, these seeds intentionally generate different developmental circumstances. Review scenario metrics and `scenario-generated` events in `frames.ndjson` alongside the final replication report.
+Review each seed's `scenario-generated` event alongside treatment outcomes. Protocol 04 seeds vary social-history composition and evidence, not just observation ordering.
 
 ## Full-suite checkpoint
 
-After Protocol 03 is interpreted:
+After Protocol 04 is interpreted:
 
 ```powershell
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- `
   --all `
   --replicate 101,211,307,401,503 `
-  --output _artifacts/full-suite-0.3.1
+  --output _artifacts/full-suite-0.4.0
 ```
 
-This runs 15 protocol histories under one replication report.
+This runs 20 protocol histories under one replication report.
 
 ## Desktop inspection
 
@@ -65,16 +65,16 @@ The Seeds field defaults to:
 
 The newest protocol is selected by default. Seeds run in succession. Each started seed retains its own bounded visualization store for the session, and the Live metrics Seed selector can step among them without overlaying histories. Prior judged results remain in the Protocol results tab, while the accent seed badge identifies the actively executing seed and its `current/total` position.
 
-Protocol 03 progress should move through:
+Protocol 04 progress should move through:
 
 ```text
-Build lived source history
-  seed-specific developmental circumstance
-  source develops and packages transfer
-Compare transfer forms
-  local-only baseline
-  developmental consequence-history transfer
-  doctrinal final-rule transfer
+Build private plurality
+  seed-specific social circumstance
+  three peers develop private histories
+Compare communication forms
+  low-dimensional typed signals
+  early semantic-smoothing control
+  same shared consequence remains sovereign
 Evaluate
   seven falsification checks
   protocol verdict

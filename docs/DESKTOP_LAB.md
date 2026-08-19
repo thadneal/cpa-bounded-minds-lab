@@ -189,7 +189,7 @@ When several experiments run within one seed, the progress surface changes as th
 
 ## Default experiment selection
 
-The newest protocol is selected by default when the Desktop Lab opens, while frozen earlier protocols remain available but unselected. In v0.3.0 this means Protocol 03 is the ordinary targeted run. `Select all` remains available for the full-suite checkpoint.
+The newest protocol is selected by default when the Desktop Lab opens, while frozen earlier protocols remain available but unselected. In v0.4.0 this means Protocol 04 is the ordinary targeted run. `Select all` remains available for the full-suite checkpoint.
 
 ## v0.3.0 seed and Protocol 03 updates
 
@@ -212,3 +212,23 @@ The Live metrics toolbar now includes a third selector, `Seed`, with previous/ne
 During a new session the graph follows the active seed automatically. The first manual seed selection disables auto-follow for the rest of that run, allowing an earlier seed to remain under inspection while later histories continue executing. Selecting a retained seed never changes experiment state or scheduling.
 
 At seed completion the display projector drains the remaining queued frames before the history is considered ready for inspection. A following seed then archives that bounded store and opens a fresh one. This prevents a visualization-only rotation from clipping the tail of a history. Retention remains intentionally display-bounded; the durable per-seed NDJSON journal is still the only complete scientific record.
+
+
+## v0.4.0 Protocol 04 progress
+
+The Desktop Lab recognizes `04-bounded-communication-before-language` as the newest protocol and selects it by default. Protocol Progress follows the assay rather than reusing Protocol 03 labels:
+
+```text
+Build private plurality
+  seed-specific social circumstance
+  three peers develop private histories
+Compare communication forms
+  low-dimensional typed signals
+  early semantic-smoothing control
+  same shared consequence remains sovereign
+Evaluate
+  seven falsification checks
+  protocol verdict
+```
+
+Protocol 03 is now displayed in Run notes as a frozen Supported baseline. The existing Seed selector, active-seed badge, per-seed telemetry stores, metric/path filtering, line visibility, maximized graph, Timeline, and judged Protocol results require no protocol-specific changes for the new telemetry.

@@ -66,3 +66,14 @@ The comparison preserves the CPA/WHUP distinction between a conclusion and the p
 The receiver still treats both as foreign. History metadata changes permission, not provenance.
 
 The seed-policy correction also follows the larger project trajectory. The architecture claims that history changes future cognition. Replication that only reorders nearly identical histories tests numerical stability more than development. From Protocol 03 onward, deterministic seeds can generate different members of a declared world family so long as all treatment paths within a seed share the same circumstance and evaluator-only world labels remain inaccessible to cognition.
+
+
+## Protocol 04 reconciliation: language after cognition
+
+The CPA book argues that language should report a negotiated cognitive condition rather than become the hidden place where unresolved pressure is erased. It also gives typed messages a distinct role because warning, recruitment, inhibition, and evidence should not collapse into generic activation.
+
+Protocol 04 translates only the experimental core of that claim. It does **not** attempt language generation, semantic parsing, or a prescribed CPA message taxonomy. Instead it asks whether a low-dimensional source-specific posture can retain useful disagreement longer than a control that makes public statements mutually assimilate before consequence.
+
+This is intentionally conservative. Rich language can preserve disagreement, provenance, modality, and uncertainty when designed to do so. The control represents one failure mode of early semantic smoothing, not language as a category. If the typed condition wins, the justified conclusion is about preserving epistemic shape before commitment, not about forbidding linguistic negotiation.
+
+The seed-generated social worlds also continue the Protocol 03 correction. Different seeds now alter who has strong evidence, where useful dissent appears, where dissent is misleading, and how noisy each local history is. If inter-mind cognition is meant to develop from lived circumstance, the assay must allow those circumstances to matter.

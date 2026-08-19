@@ -23,6 +23,8 @@ public static class SelfTestSuite
         Run("protocol-02-supports-seed-101", TestProtocolTwo, passed);
         Run("protocol-03-default-seeds-create-distinct-lived-histories", TestProtocolThreeSeedSemantics, passed);
         Run("protocol-03-supports-seed-101", TestProtocolThree, passed);
+        Run("protocol-04-default-seeds-create-distinct-social-histories", TestProtocolFourSeedSemantics, passed);
+        Run("protocol-04-supports-seed-101", TestProtocolFour, passed);
         Run("frame-sequence-is-contiguous", TestFrameSequence, passed);
         return passed;
     }
@@ -155,6 +157,40 @@ public static class SelfTestSuite
         {
             var run = ExperimentRunner.Run([ExperimentCatalog.Get("03-developmental-versus-doctrinal-transfer")], 101, output, quiet: true);
             Assert(run.Experiments.Single().Verdict == ExperimentVerdict.Support, "Protocol 03 should meet its preregistered synthetic boundaries for seed 101.");
+        }
+        finally
+        {
+            Directory.Delete(output, recursive: true);
+        }
+    }
+
+
+    private static void TestProtocolFourSeedSemantics()
+    {
+        var fingerprints = new HashSet<ulong>();
+        var categoryLayouts = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var seed in ExperimentDefaults.ReplicationSeeds)
+        {
+            var scenario = CommunicationBeforeLanguageWorld.CreateScenario(seed);
+            Assert(fingerprints.Add(scenario.Fingerprint), $"Default seed {seed} should produce a distinct social-history fingerprint.");
+            var layout = string.Join(",", scenario.Cells.Select(cell => (int)cell.HistoryKind));
+            categoryLayouts.Add(layout);
+            Assert(CommunicationBeforeLanguageWorld.CountKind(scenario, CommunicationHistoryKind.InformativeDissent) >= 2, "Each Protocol 04 world should contain informative dissent.");
+            Assert(CommunicationBeforeLanguageWorld.CountKind(scenario, CommunicationHistoryKind.MisleadingDissent) >= 2, "Each Protocol 04 world should contain misleading dissent.");
+        }
+
+        Assert(
+            categoryLayouts.Count >= 4,
+            "The canonical five-seed matrix should vary the placement and prevalence of social-history conditions, not merely shuffle one fixed communication sequence.");
+    }
+
+    private static void TestProtocolFour()
+    {
+        var output = CreateTemporaryDirectory();
+        try
+        {
+            var run = ExperimentRunner.Run([ExperimentCatalog.Get("04-bounded-communication-before-language")], 101, output, quiet: true);
+            Assert(run.Experiments.Single().Verdict == ExperimentVerdict.Support, "Protocol 04 should meet its preregistered synthetic boundaries for seed 101.");
         }
         finally
         {

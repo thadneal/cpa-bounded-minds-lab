@@ -33,7 +33,7 @@ The canonical matrix remains:
 101, 211, 307, 401, 503
 ```
 
-`SelfTestSuite` now verifies that these five values produce distinct Protocol 03 world fingerprints and substantially different context-history layouts.
+`SelfTestSuite` verifies that these five values produce distinct Protocol 03 developmental-world fingerprints and distinct Protocol 04 social-history fingerprints/layouts.
 
 ## Experimental arc
 
@@ -57,21 +57,38 @@ Qualification: seed variation was mostly perturbative rather than meaningfully d
 
 ### Protocol 03: developmental versus doctrinal transfer
 
-Status: **implemented in v0.3.0, result pending**.
+Status: **frozen Supported**.
 
-Compare a bounded transfer of selected consequence history with transfer of only the final rule. Protocol 03 is also the first assay where canonical seeds generate materially different lived histories.
+Accepted result: 5/5 Support, 35/35 checks. The seed-policy correction worked: the five runs varied context-history composition, evidence depth, target landscape, and outcome magnitude. Developmental transfer was consistently better calibrated than doctrinal transfer, especially on internally unstable source histories, while remaining roughly comparable to local-only learning overall.
 
-The source history includes stable-compatible, stable-divergent, unstable-transition, and sparse-ambiguous regions with seed-specific evidence depths and target/noise parameters. The receiver compares:
+Narrow result: some of the developmental path by which a conclusion was earned can be useful public evidence without becoming lived authority in the receiver.
 
-- local-only development;
-- developmental transfer with history-calibrated foreign standing;
-- doctrinal transfer of the final rule under undifferentiated standing.
+### Protocol 04: bounded communication before language
 
-The assay deliberately does **not** expect developmental context to magically detect a stable source rule that happens to be wrong in the receiver's world. Such a rule may initially look well earned. Direct receiver consequence must still revoke it. The expected benefit of developmental transfer is narrower: source histories that were internally unstable or weakly evidenced should arrive with less permission than equally confident final doctrines.
+Status: **implemented in v0.4.0, result pending**.
 
-### Protocol 04 candidate: bounded communication before language
+Test whether low-dimensional typed public signals preserve useful disagreement better than early semantic negotiation that smooths peers toward a common statement before external consequence.
 
-Permit low-dimensional typed signals before linguistic negotiation. Test whether meaningful disagreement survives without premature linguistic smoothing.
+Each seed generates a twelve-context, three-peer social circumstance containing at least two examples of each evaluator-only pressure:
+
+- `InformativeDissent`: a deeper, more stable minority history is locally right while two peers share a weaker bias;
+- `MisleadingDissent`: one sparse/noisy dissenter is locally wrong while two peers have stronger compatible histories;
+- `Complementary`: peer histories differ in quality and bias without a simple majority/minority interpretation;
+- `Convergent`: all three private histories are broadly compatible.
+
+The typed condition publishes one bounded posture per peer and observation:
+
+```text
+source identity
+estimate
+standing
+uncertainty
+evidence count
+```
+
+Only estimate, standing, and uncertainty participate in the public decision. Source identity/evidence remain visible for audit and cost accounting. The richer control begins from the same postures but performs two peer-to-peer public smoothing rounds before commitment. Private peer state is unchanged by either communication surface; both conditions then receive the same direct shared consequence.
+
+The control should be read narrowly. It represents premature semantic smoothing, not language itself. A future language layer could preserve typed distinctions perfectly well. The experiment asks whether *timing and form of public convergence* matter before external contact has adjudicated disagreement.
 
 ### Protocol 05 candidate: emergent convention
 
@@ -83,10 +100,10 @@ Ask whether common origin can be inferred when provenance is missing, partial, c
 
 ## Result cadence
 
-For the Protocol 03 baseline introduced in v0.3.0 (unchanged experimentally in v0.3.1):
+For the Protocol 04 baseline introduced in v0.4.0:
 
-1. build and run the full invariant suite;
-2. run Protocol 03 across `101,211,307,401,503` without changing thresholds;
-3. inspect both treatment performance and the generated scenario differences;
-4. interpret before modifying any mechanism;
-5. run the three-protocol five-seed full suite only after Protocol 03 is understood, since v0.3.0 changed the shared catalog, visualization progress, and seed methodology.
+1. build and run the full invariant suite, now 14 checks;
+2. run Protocol 04 across `101,211,307,401,503` without changing its seven thresholds;
+3. inspect both verdict consistency and seed-generated social-world differences;
+4. interpret informative dissent, misleading dissent, whole-history error, disagreement retention, convergence, and communication cost before changing any mechanism;
+5. after Protocol 04 is understood, run the four-protocol five-seed full-suite checkpoint because v0.4.0 changes the experiment catalog and protocol-progress visualization.

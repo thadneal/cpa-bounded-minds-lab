@@ -1,6 +1,6 @@
 # CPA Bounded Minds Laboratory
 
-Version **0.3.1**
+Version **0.4.0**
 
 This repository is the successor experimental program to the completed CPA Cognitive Development Lab. The earlier lab studied development inside one bounded organism. This laboratory moves the boundary outward:
 
@@ -26,29 +26,34 @@ The result carries a methodological qualification. Those five seeds varied encou
 
 ### Protocol 03 - developmental versus doctrinal transfer
 
-`03-developmental-versus-doctrinal-transfer` introduces the next methodological step as part of the experiment itself.
+`03-developmental-versus-doctrinal-transfer` is frozen Supported. The five canonical seeds all returned Support with all 35 preregistered checks passing, and the seed-policy correction produced materially different lived histories.
 
-A seed now generates a **lived developmental circumstance**, including:
+Accepted mean results:
 
-- which context cells receive stable-compatible, stable-divergent, unstable-transition, or sparse-ambiguous source histories;
-- source evidence depth;
-- target landscape;
-- source and receiver observation noise;
-- direction of unstable regime transition;
-- encounter order.
+```text
+developmental total RMSE   0.17585
+doctrinal total RMSE       0.18078
+local-only total RMSE      0.17667
+developmental unstable early RMSE 0.28124
+doctrinal unstable early RMSE     0.31044
+```
 
-The source then exposes two bounded transfer surfaces derived from the same private history:
+Narrow result: bounded evidence about how a foreign conclusion was earned improved calibration relative to transferring only the final rule. The advantage was moderate rather than universal, and direct receiver consequence remained able to revoke stable foreign structure that was locally wrong.
 
-- `developmental-transfer`: a compact history packet that carries evidence depth and three selected consequence-history segment means, allowing the receiver to calibrate initial foreign standing;
-- `doctrinal-transfer`: only the final source rule for each context under one undifferentiated foreign standing.
+### Protocol 04 - bounded communication before language
 
-A `local-only` receiver remains as a reference path.
+`04-bounded-communication-before-language` is the current targeted protocol. Three peers develop different private histories in a seed-generated social world. The experiment then compares two public communication surfaces while keeping private interiors intact in both conditions:
 
-The protocol asks whether developmental context can retain the head start from stable compatible histories, reduce contamination from source histories that were themselves unstable, remain no worse overall than doctrine, and still submit all foreign authority to direct receiver consequence.
+- `typed-signals`: one bounded source-specific posture per peer and observation containing estimate, standing, and uncertainty;
+- `early-semantic-smoothing`: the same initial public postures undergo two peer-to-peer smoothing rounds before commitment and before external consequence.
 
-The canonical replication matrix remains `101,211,307,401,503`. In Protocol 03 these values now select materially different world histories rather than mostly shuffling one fixed curriculum.
+The control is a model of **premature semantic convergence**, not a claim that natural language necessarily destroys disagreement. It deliberately asks what can be lost when public statements become mutually assimilated before the world has supplied a verdict.
 
-See `docs/EXPERIMENTS.md` and `docs/FALSIFICATION.md` before interpreting results.
+Seeds now generate different mixtures of informative dissent, misleading dissent, complementary expertise, convergent histories, evidence depths, target landscapes, and noise. All treatments within one seed receive the same generated circumstance.
+
+Protocol 04 asks whether typed communication can preserve useful dissent, avoid spreading low-quality dissent, reduce whole-history error, remain bounded in communication work, and still converge when peers later share direct external consequence.
+
+The canonical matrix remains `101,211,307,401,503`. See `docs/EXPERIMENTS.md` and `docs/FALSIFICATION.md` before interpreting results.
 
 ## Solution
 
@@ -69,8 +74,8 @@ Projects target .NET 10. The WPF Desktop Lab targets `net10.0-windows`.
 ```powershell
 dotnet build Cpa.BoundedMindsLab.sln -c Release
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --experiment 03-developmental-versus-doctrinal-transfer --seed 101
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --experiment 03-developmental-versus-doctrinal-transfer --replicate 101,211,307,401,503 --output _artifacts/protocol-03-five-seed
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --experiment 04-bounded-communication-before-language --seed 101
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --experiment 04-bounded-communication-before-language --replicate 101,211,307,401,503 --output _artifacts/protocol-04-five-seed
 ```
 
 For live inspection on Windows 11:
@@ -93,4 +98,4 @@ The workbench also exposes protocol progress, per-seed judged results, active-se
 
 Carry forward only what survives pressure: bounded causal execution, persistent private history, compact public surfaces, revisable standing, explicit cost, and provenance distinct from agreement.
 
-The v0.3.0 methodological correction adds another rule: if history is part of the theory, replication should eventually vary **what was lived**, not merely the order in which nearly identical events were encountered.
+The v0.3.0 methodological correction remains active: if history is part of the theory, replication should eventually vary **what was lived**, not merely the order in which nearly identical events were encountered.

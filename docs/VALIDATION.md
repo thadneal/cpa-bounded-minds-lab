@@ -2,10 +2,12 @@
 
 ## Automated invariants
 
-Version 0.3.1 defines **12 self-tests**. In addition to the existing deterministic-random, communication-cost, provenance/standing, Protocol 01, Protocol 02, and frame-sequence checks, the Protocol 03 baseline adds:
+Version 0.4.0 defines **14 self-tests**. In addition to the deterministic-random, communication-cost, provenance/standing, Protocol 01, Protocol 02, and frame-sequence checks, the current experiment-specific invariants include:
 
 - `protocol-03-default-seeds-create-distinct-lived-histories` - all five canonical seeds must produce unique developmental-world fingerprints, with at least four distinct context-history layouts;
-- `protocol-03-supports-seed-101` - implementation-drift fixture for the preregistered Protocol 03 mechanism.
+- `protocol-03-supports-seed-101` - frozen implementation-drift fixture for Protocol 03;
+- `protocol-04-default-seeds-create-distinct-social-histories` - all five canonical seeds must produce unique social-world fingerprints, at least four distinct class layouts, and both informative and misleading dissent in every world;
+- `protocol-04-supports-seed-101` - implementation-drift fixture for the preregistered Protocol 04 mechanism.
 
 The seed-101 protocol fixtures are invariant checks, not experimental evidence.
 
@@ -15,16 +17,16 @@ Run:
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
 ```
 
-## Protocol 03 result set
+## Protocol 04 result set
 
 ```powershell
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- `
-  --experiment 03-developmental-versus-doctrinal-transfer `
+  --experiment 04-bounded-communication-before-language `
   --replicate 101,211,307,401,503 `
-  --output _artifacts/protocol-03-five-seed
+  --output _artifacts/protocol-04-five-seed
 ```
 
-Before interpreting treatment outcomes, verify that the per-seed `scenario-generated` events differ in history-kind layout, evidence depth, and generated targets/noise. Do not change the seven falsification boundaries after viewing results.
+Before interpreting treatment outcomes, verify that `scenario-generated` events differ in history-class layout/prevalence, salient peer assignment, evidence depth, target landscape, and noise. Do not change the seven Protocol 04 falsification boundaries after viewing results.
 
 ## Desktop validation
 
@@ -35,8 +37,8 @@ On Windows 11 verify:
 - the Live metrics Seed selector accumulates each started seed and can move backward/forward through retained histories;
 - selecting an earlier seed switches its graph, Focus path/Metric catalogs, detail tables, Timeline, and Protocol Progress without changing the active experiment;
 - the maximized graph reports the graph-selected seed, even when a different seed is currently executing;
-- Protocol progress switches correctly among Protocols 01, 02, and 03;
-- Protocol 03 progress exposes its source-history and three receiver-path substeps;
+- Protocol progress switches correctly among Protocols 01, 02, 03, and 04;
+- Protocol 04 progress exposes seed-specific social circumstance, private peer development, typed communication, early semantic smoothing, shared-consequence convergence, and evaluation;
 - controls remain interactive during maximum-pace execution;
 - pause/step/resume/cancel stop or release experiment observation boundaries rather than UI frames;
 - graph freeze/maximize/metric selection/line hiding change presentation only;
@@ -50,4 +52,4 @@ On Windows 11 verify:
 
 ## Environment note
 
-The source-generation environment used for v0.3.1 does not provide the .NET SDK. Build and self-test claims are intentionally deferred to the Windows development environment.
+The source-generation environment used for v0.4.0 does not provide the .NET SDK. Build and self-test claims are intentionally deferred to the Windows development environment.

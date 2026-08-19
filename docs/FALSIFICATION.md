@@ -18,6 +18,8 @@ Accepted result: 5/5 Support, 30/30 checks.
 
 ## 03 developmental versus doctrinal transfer
 
+Protocol 03 is frozen Supported: 5/5 Support, 35/35 checks. The boundaries below remain the accepted preregistration.
+
 Protocol 03 uses **seven** preregistered component checks.
 
 ### A. Seed generates a lived circumstance
@@ -85,3 +87,75 @@ If a result lands near a boundary, interpretation changes before thresholds do.
 The five-seed matrix is evaluated both for verdict consistency and for **world diversity**. Different metric values are expected because Protocol 03 deliberately makes the seed shape lived circumstance. A 5/5 result is stronger when the scenario fingerprints, history layouts, evidence depths, and target landscapes materially differ.
 
 Conversely, more variable outcomes are not automatically a defect. They may finally indicate that histories have enough individuality to stress the principle rather than merely perturb one trajectory.
+
+
+---
+
+## 04 bounded communication before language
+
+Protocol 04 uses **seven** preregistered component checks. Its control is early public semantic smoothing, not language in general. Thresholds are fixed before the five-seed result set is interpreted.
+
+### A. Seed generates a social circumstance
+
+Each generated world must contain at least two contexts from each evaluator-only history class: informative dissent, misleading dissent, complementary histories, and convergent histories. The span between the least and most experienced private peer/context histories must be at least `30` observations.
+
+Failure means the seed did not create enough social-history heterogeneity to interpret treatment differences.
+
+### B. Typed surface preserves public disagreement
+
+Across the first 48 shared observations:
+
+- typed public disagreement must be at least `0.18`;
+- early-semantic-smoothing disagreement must be no more than **20%** of typed disagreement.
+
+This is a manipulation check with teeth: there must be meaningful public difference available to preserve, and the control must actually smooth it before external consequence.
+
+### C. Informative dissent survives
+
+During the first 96 shared observations, typed-signal RMSE on `InformativeDissent` contexts must be no more than **97%** of early-semantic-smoothing RMSE on the same contexts.
+
+Failure means preserving separate postures did not materially protect the better-supported minority signal.
+
+### D. Misleading dissent remains disciplined
+
+During the first 96 shared observations, typed-signal RMSE on `MisleadingDissent` contexts must be no more than **105%** of the smoothing control.
+
+This prevents the experiment from equating dissent with truth. A sparse/noisy minority should remain bounded by its own standing and uncertainty rather than gaining influence merely because it differs.
+
+### E. Whole-history benefit
+
+Typed-signal lifetime RMSE must be no more than **97%** of early-semantic-smoothing lifetime RMSE.
+
+The protocol cannot claim a communication advantage that exists only inside a specially scored minority subset.
+
+### F. Shared consequence converges
+
+At the end of the shared phase:
+
+- typed late RMSE <= `0.06`;
+- smoothing-control late RMSE <= `0.06`;
+- typed final public disagreement <= `0.05`.
+
+Preserved difference must remain educable. Once all peers live through the same external consequence, both treatments should become accurate and typed disagreement should settle substantially.
+
+### G. Typed communication remains bounded
+
+For each shared observation, typed communication may publish exactly one compact posture per peer. The smoothing control pays for the same initial three postures plus two additional public smoothing rounds. Across the standard 336-observation shared phase:
+
+- typed communication work <= `4.10`;
+- smoothing-control communication work must exceed typed work;
+- packet counts must match the declared `3` versus `9` public emissions per observation.
+
+No hidden or free communication is allowed.
+
+## Protocol 04 verdict rule
+
+- `Support`: all seven checks pass.
+- `Mixed`: at least five checks pass.
+- `Disconfirm`: fewer than five checks pass.
+
+If a result lands near a boundary, interpretation changes before thresholds do.
+
+## Protocol 04 replication interpretation
+
+The canonical five seeds should produce unique social-world fingerprints and materially different placements/prevalence of the four history classes. Variation in RMSE is expected. A five-seed sweep is evidence about one declared world family, not five claims that natural-language interaction is harmful.

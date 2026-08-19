@@ -145,3 +145,57 @@ This distinction is especially important for stable-divergent histories. Their i
 The generated family remains bounded and preregistered. Determinism is preserved, while replication now probes materially different biographies.
 
 This is a laboratory-method change, not a cognitive mechanism. Neither source nor receiver can inspect the seed, scenario fingerprint, history-kind label, or future generated parameters.
+
+
+## Protocol 04 communication boundary
+
+Protocol 04 keeps private interiors intact in **both** treatments. This matters because Protocol 02 already tested private-state synchronization. The new variable is public communication before consequence.
+
+```text
+peer 1 private history ----> compact posture --+
+peer 2 private history ----> compact posture --+--> commitment --> shared consequence
+peer 3 private history ----> compact posture --+                    |
+       ^                                                           |
+       +---------------- direct local update ----------------------+
+```
+
+The typed posture is fixed-size and source-specific:
+
+```text
+estimate
+standing
+uncertainty
+source id / context id
+evidence count (audit surface)
+```
+
+The experiment-local decision readout uses only estimate, standing, and uncertainty to form the current prediction. Source identity and evidence count remain available for observation/accounting but do not create a semantic peer role.
+
+The `early-semantic-smoothing` control inserts two public assimilation rounds between posture publication and commitment:
+
+```text
+private interiors unchanged
+        |
+        v
+three public postures
+        |
+        v
+public smoothing round 1
+        |
+        v
+public smoothing round 2
+        |
+        v
+commitment
+        |
+        v
+external consequence
+```
+
+The smoothing operation changes only what peers publicly say for the current observation. It never writes those socially adjusted statements back into private memory. This makes the control distinct from Protocol 02's invasive synchronized-interior condition.
+
+Communication cost is explicit. Typed communication emits three compact postures per shared observation. The smoothing control pays for the initial postures plus two additional three-message rounds. No hidden negotiation work is free.
+
+`CommunicationBeforeLanguageWorld` follows the Protocol 03 seed policy. A seed changes the social-history circumstance itself, including the prevalence/placement of informative dissent, misleading dissent, complementary expertise, convergence, evidence depth, target values, and noise. Evaluator labels and future target parameters are never visible to the peers.
+
+Nothing in Protocol 04 establishes a permanent CPA language architecture. The readout and smoothing equations are assay instruments. The architectural candidate being tested is narrower: keep public epistemic shape distinct long enough for consequence to act on it.

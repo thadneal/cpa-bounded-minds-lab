@@ -7,6 +7,7 @@ public static class ExperimentCatalog
         new LocalSharedMemoryContaminationExperiment(),
         new PeerDisagreementPreservedInteriorsExperiment(),
         new DevelopmentalVersusDoctrinalTransferExperiment(),
+        new BoundedCommunicationBeforeLanguageExperiment(),
     ];
 
     public static IReadOnlyList<IExperiment> All => Experiments;

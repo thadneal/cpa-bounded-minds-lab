@@ -119,12 +119,33 @@ The important asymmetry is deliberate. Developmental context may identify instab
 
 ### Why this matters
 
-If developmental transfer succeeds, the result would suggest that culture-like inheritance may benefit from preserving some of the *path of warrant* rather than transmitting only settled conclusions. It would also show that this can remain bounded rather than becoming full autobiographical synchronization.
+The accepted result suggests that culture-like inheritance may benefit from preserving some of the *path of warrant* rather than transmitting only settled conclusions, while remaining bounded rather than becoming full autobiographical synchronization.
+
+### Protocol 03 accepted result
+
+The canonical `101,211,307,401,503` matrix returned **5/5 Support with 35/35 preregistered checks passing**. The methodological seed change also behaved as intended: context-history composition, evidence depth, target landscape, and treatment outcomes differed materially across seeds.
+
+Mean lifetime RMSE was approximately `0.17585` for developmental transfer, `0.18078` for doctrinal transfer, and `0.17667` for local-only development. The more diagnostic unstable-history early RMSE was approximately `0.28124` for developmental transfer versus `0.31044` for doctrine. The effect was consistent but moderate. Some individual seeds favored local-only total error, which prevents the result from collapsing into a claim that inheritance is always beneficial.
+
+Protocol 03 is frozen. Its narrow accepted result is that bounded information about the path of warrant can improve second-hand calibration relative to a naked final rule while leaving direct receiver consequence sovereign.
+
+### Protocol 04
+
+The next pressure changes the **form and timing of inter-mind communication**. Three peers develop independent private histories in seed-generated social worlds. Their private state remains separate in both treatments.
+
+`typed-signals` exposes one low-dimensional posture per peer: estimate, standing, uncertainty, source identity, and evidence count. The decision surface keeps those postures distinct until commitment.
+
+`early-semantic-smoothing` starts from the same public postures but performs two mutual assimilation rounds before commitment. This is an intentionally narrow model of premature semantic convergence. It is not a simulation of natural language and does not claim that linguistic communication must behave this way.
+
+The world includes both informative and misleading dissent. This is essential. A communication system should not win merely by rewarding whatever disagrees with the majority. Source-specific warrant has to preserve a well-supported minority while keeping sparse noisy dissent bounded.
+
+All peers in both treatments later receive the same external consequence. If typed disagreement remains permanently high, the protocol fails. Plurality earns standing only if it remains correctable.
 
 ### Next evidence
 
 1. rebuild under the pinned .NET 10 SDK;
-2. run the invariant suite, now including the Protocol 03 seed-diversity contract;
-3. run Protocol 03 across `101,211,307,401,503` without changing its seven thresholds;
-4. inspect world fingerprints and history layouts alongside verdicts;
-5. only after interpretation, run the three-protocol full-suite checkpoint.
+2. run the 14 invariant tests;
+3. run Protocol 04 across `101,211,307,401,503` without changing its seven thresholds;
+4. inspect scenario diversity, informative/misleading dissent, whole-history error, disagreement retention, convergence, and communication work together;
+5. interpret before changing any mechanism;
+6. then run the four-protocol five-seed full-suite checkpoint.

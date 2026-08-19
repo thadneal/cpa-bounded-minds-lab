@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.4.0 - 2026-08-19
+
+- Froze Protocol 03 as Supported after the canonical five-seed run returned 5/5 Support and 35/35 preregistered checks. The accepted record notes that developmental transfer consistently improved calibration over doctrinal transfer while remaining only modestly different from local-only learning overall.
+- Added Protocol 04, `04-bounded-communication-before-language`, testing low-dimensional typed public signals against an early semantic-smoothing control while preserving private interiors in both conditions.
+- Added `CommunicationBeforeLanguageWorld`, a seed-generated twelve-context/three-peer world with varied informative dissent, misleading dissent, complementary histories, convergent histories, evidence depth, target landscape, noise, salient peer assignment, and encounter order.
+- Added explicit Protocol 04 communication cost: three typed public postures per shared observation versus the same initial postures plus two paid three-message smoothing rounds in the control.
+- Added seven preregistered Protocol 04 checks covering social-world heterogeneity, retained public disagreement, informative dissent, misleading dissent, whole-history error, convergence under shared consequence, and bounded communication.
+- Added two Protocol 04 self-tests, bringing the invariant suite to 14 checks, including canonical-seed social-world diversity and a seed-101 implementation-drift fixture.
+- Updated Desktop Protocol Progress and Run notes for Protocol 04. The existing per-seed graph selector, judged results, timeline, metric filtering, and visualization isolation remain unchanged.
+- Updated plan, experiment, falsification, architecture, source-reconciliation, runbook, validation, README, artifact, CLI, and assembly versioning for v0.4.0.
+
 ## 0.3.1 - 2026-08-19
 
 - Added a graph Seed selector with previous/next navigation beside Metric and Focus path so completed multi-seed histories can be inspected independently.
