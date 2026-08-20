@@ -20,7 +20,7 @@ public static class ArtifactWriter
         var manifest = new
         {
             schema = "cpa-bounded-minds-run-v1",
-            version = "0.11.0",
+            version = "0.12.0",
             status,
             seed = run.Seed,
             experimentCount = run.Experiments.Count,
@@ -68,7 +68,7 @@ public static class ArtifactWriter
         var manifest = new
         {
             schema = "cpa-bounded-minds-session-v1",
-            version = "0.11.0",
+            version = "0.12.0",
             status,
             plannedSeeds,
             completedSeeds,
@@ -113,7 +113,7 @@ public static class ArtifactWriter
         builder.AppendLine($"- Version: {report.Version}");
         builder.AppendLine($"- Seed set: {report.SeedSet}");
         builder.AppendLine($"- Seeds: {string.Join(", ", report.Seeds)}");
-        builder.AppendLine($"- Full frozen Protocol 01-07 set: {report.FullFrozenProtocolSet}");
+        builder.AppendLine($"- Full legacy frozen Protocol 01-07 set: {report.FullFrozenProtocolSet}");
         builder.AppendLine();
         builder.AppendLine("## Protocol outcomes");
         builder.AppendLine();

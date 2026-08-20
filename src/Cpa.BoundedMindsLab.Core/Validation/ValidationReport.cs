@@ -127,6 +127,10 @@ public static class ValidationReportBuilder
         {
             diagnostics.Add("This session uses the frozen holdout-v1 seed set, which was consumed on 2026-08-20. Reruns are reproducibility checks only; do not treat them as fresh validation or retune protocol mechanics from these outcomes.");
         }
+        else if (seedSet == ValidationPlan.StrategicInfluenceHoldoutSetName)
+        {
+            diagnostics.Add("This session uses the preregistered Protocol 08 p08-holdout-v1 seed set. On its first execution it is fresh validation evidence; after that first execution it is consumed and reruns are reproducibility checks only.");
+        }
         else
         {
             diagnostics.Add("Custom seeds are useful for exploration but are not the registered development-v1 or holdout-v1 set.");
@@ -134,7 +138,14 @@ public static class ValidationReportBuilder
 
         if (!fullProtocolSet)
         {
-            diagnostics.Add("This session does not contain the complete frozen Protocol 01-07 catalog, so it is a partial validation run.");
+            if (seedSet == ValidationPlan.StrategicInfluenceHoldoutSetName && experimentNames.Length == 1 && string.Equals(experimentNames[0], "08-strategic-public-influence", StringComparison.Ordinal))
+            {
+                diagnostics.Add("This is the registered Protocol 08-only holdout, not a partial rerun of the legacy Protocol 01-07 holdout.");
+            }
+            else
+            {
+                diagnostics.Add("This session does not contain the complete frozen Protocol 01-07 catalog, so it is a partial validation run.");
+            }
         }
 
         if (experimentNames.Contains("01-local-shared-memory-contamination", StringComparer.Ordinal)
@@ -144,7 +155,7 @@ public static class ValidationReportBuilder
         }
         if (protocolSummaries.Length > 0 && protocolSummaries.All(summary => summary.Support == summary.Runs))
         {
-            diagnostics.Add("Every protocol run in this session returned Support. Treat this as an assay-sensitivity warning, not as extra evidence by itself; inspect challenge slices and category-level failures before drawing implementation conclusions.");
+            diagnostics.Add("Every protocol run in this session returned Support. Treat this as an assay-sensitivity warning, not as extra evidence by itself; inspect category-level results and the separately preregistered operating-envelope probes before drawing implementation conclusions.");
         }
 
         var totalAssertions = protocolSummaries.Sum(summary => summary.Assertions);
@@ -160,7 +171,7 @@ public static class ValidationReportBuilder
 
         return new ValidationReport(
             "cpa-bounded-minds-validation-v1",
-            "0.11.0",
+            "0.12.0",
             seedSet,
             seeds,
             fullProtocolSet,

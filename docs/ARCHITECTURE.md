@@ -390,3 +390,15 @@ Self-reported confidence is therefore not standing. It may modulate immediate op
 The experiment also preserves a no-peer baseline. This matters architecturally because resisting manipulation by silencing all public influence would be a trivial but unacceptable solution. A useful bounded ecology should remain permeable to peers that continue to earn influence while becoming resistant to strategically advantageous presentation that repeatedly fails consequence.
 
 No new shared inspector is introduced. The protocol evaluator knows the sender's synthetic private objective so it can score alignment and betrayal, but receiver cognition does not receive that label or objective as evidence.
+
+## v0.12 strategic-influence evidence boundary
+
+Protocol 08 is now frozen at the exact v0.11 development implementation. The laboratory therefore separates three layers that must not be conflated:
+
+1. **frozen protocol behavior** - `StrategicPublicInfluenceExperiment` and `StrategicInfluenceWorld`, protected by SHA-256;
+2. **fresh validation** - `p08-holdout-v1`, which runs the frozen protocol unchanged across twenty preregistered unused seeds;
+3. **controlled falsification** - `strategic-influence-falsification-v1`, which copies the frozen accountable receiver equations into micro-assays where consequence timing and adversary capability can be intervened on directly.
+
+The falsification probes deliberately do not become new runtime architecture. Their purpose is to reveal where the Protocol 08 mechanism stops being useful. In particular, the aligned-noise surface supplies a null-harm condition: if every sender is genuinely aligned, reduced social influence is not a defensive success.
+
+This keeps a core CPA distinction visible: **private strategy may remain inaccessible, but public influence must still be governable by local consequence**. The lab is testing the boundary of that pressure, not installing the current standing equation as durable CPA machinery.

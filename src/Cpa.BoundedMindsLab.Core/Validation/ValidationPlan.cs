@@ -6,6 +6,7 @@ public static class ValidationPlan
 {
     public const string DevelopmentSetName = "development-v1";
     public const string HoldoutSetName = "holdout-v1";
+    public const string StrategicInfluenceHoldoutSetName = "p08-holdout-v1";
     public const string CustomSetName = "custom";
 
     public static IReadOnlyList<string> FrozenProtocolNames { get; } =
@@ -23,6 +24,8 @@ public static class ValidationPlan
 
     public static IReadOnlyList<ulong> HoldoutSeeds => ExperimentDefaults.HoldoutSeeds;
 
+    public static IReadOnlyList<ulong> StrategicInfluenceHoldoutSeeds => ExperimentDefaults.StrategicInfluenceHoldoutSeeds;
+
     public static string ClassifySeedSet(IReadOnlyList<ulong> seeds)
     {
         ArgumentNullException.ThrowIfNull(seeds);
@@ -30,7 +33,9 @@ public static class ValidationPlan
             ? DevelopmentSetName
             : SameSet(seeds, HoldoutSeeds)
                 ? HoldoutSetName
-                : CustomSetName;
+                : SameSet(seeds, StrategicInfluenceHoldoutSeeds)
+                    ? StrategicInfluenceHoldoutSetName
+                    : CustomSetName;
     }
 
     public static bool IsFullFrozenProtocolSet(IReadOnlyList<string> experimentNames)

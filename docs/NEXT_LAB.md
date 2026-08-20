@@ -46,7 +46,7 @@ P06 studies evidential ancestry and P07 studies transferred standing one relatio
 
 A useful final social protocol would test whether local standing remains grounded when recommendations form loops, factions, bridge nodes, or prestige cascades.
 
-Protocol 08 is now active development work. Protocol 09 should be judged after its results. If strategic influence plus the existing ancestry/standing findings already explain circular authority well enough, the lab should close rather than manufacture extra protocols. If permission can still become self-supporting through a network in a way P06-P08 do not capture, Protocol 09 remains justified.
+Protocol 08 development-v1 is complete and frozen. Version 0.12 now subjects it to a fresh holdout and controlled falsification. Protocol 09 should be judged only after those results. If strategic influence plus the existing ancestry/standing findings already explain circular authority well enough, the lab should close rather than manufacture extra protocols. If permission can still become self-supporting through a network in a way P06-P08 do not capture, Protocol 09 remains justified.
 
 ## Candidate next lab: Trace and Interface Laboratory
 
@@ -135,3 +135,12 @@ later synthesis
 ```
 
 The successor should inherit behavioral pressures, failure surfaces, and experimental discipline. It should not inherit the current laboratory's constants as architecture.
+
+## v0.12 transition checkpoint
+
+The Bounded Minds Laboratory is now close enough to its natural boundary that no new social protocol should be added by momentum alone. Protocol 08 is frozen and under fresh validation plus controlled falsification. The next decision is explicit:
+
+- if circular recommendation/standing can create a failure not already explained by evidence ancestry, provisional standing, and strategic public influence, run Protocol 09 as the likely final bounded-minds protocol;
+- otherwise close the lab with a synthesis/handoff rather than expanding the protocol count.
+
+The candidate Trace and Interface Laboratory remains the natural successor because it changes the starting assumption. Bounded Minds begins with another mind already represented as a peer. Trace and Interface begins with only structured causal residue at an observer boundary and asks whether another source process can be inferred at all.

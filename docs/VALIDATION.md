@@ -1,6 +1,6 @@
 # Validation and Operating-Envelope Method
 
-Version 0.11.0 keeps Protocols 01-07 frozen, records parameterized-falsification-v1 as consumed exploratory evidence, and returns to targeted mechanism discovery for Protocol 08 strategic public influence.
+Version 0.12.0 keeps Protocols 01-07 frozen, records parameterized-falsification-v1 as consumed exploratory evidence, and returns to targeted mechanism discovery for Protocol 08 strategic public influence.
 
 The distinction matters:
 
@@ -21,7 +21,7 @@ That holdout was consumed on 2026-08-20.
 
 `docs/FROZEN_PROTOCOL_SHA256.txt` contains SHA-256 hashes for all seven experiment files and their seven world generators. `scripts/verify.ps1` and `scripts/verify.sh` check those hashes before build/self-test.
 
-Version 0.11.0 leaves those files byte-for-byte unchanged. Challenge and parameterized-falsification tooling remain beside the frozen assays. Protocol 08 is new development work and is deliberately outside the Protocol 01-07 frozen source boundary.
+Version 0.12.0 leaves those files byte-for-byte unchanged. Challenge and parameterized-falsification tooling remain beside the frozen assays. Protocol 08 is new development work and is deliberately outside the Protocol 01-07 frozen source boundary.
 
 ## Seed sets
 
@@ -168,7 +168,7 @@ Consumed `challenge-v1` and `holdout-v1` keep their historical artifacts for rep
 
 ## Invariant suite
 
-Version 0.11.0 defines **32 self-tests**. In addition to the existing protocol, telemetry, validation, and challenge checks, parameterized-falsification tests verify that:
+Version 0.12.0 defines **35 self-tests**. In addition to the existing protocol, telemetry, validation, and challenge checks, parameterized-falsification tests verify that:
 
 - challenge-v1 selection is deterministic;
 - development-v1 and consumed holdout-v1 seeds are excluded;
@@ -185,16 +185,17 @@ The parameterized items are assay-integrity checks and do not assert that any co
 
 ## Authoritative Windows sequence
 
-Protocol 08 is new development evidence. The current authoritative research run is its five-seed development matrix after verification:
+Protocol 08 development-v1 is complete. The current fresh evidence run is `p08-holdout-v1`:
 
 ```powershell
 ./scripts/verify.ps1
 
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
-  --experiment 08-strategic-public-influence `
-  --replicate 101,211,307,401,503 `
-  --output _artifacts/protocol-08-development-v1
+  --p08-validation `
+  --output _artifacts/p08-holdout-v1
 ```
+
+Preserve and interpret that first-run artifact before running `--p08-falsify`.
 
 To reproduce parameterized-falsification-v1 without making a new confirmation claim:
 
@@ -215,3 +216,26 @@ dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
 ## Interpretation rule
 
 Do not tune a frozen mechanism from challenge-v1 or parameterized-falsification-v1 and then describe the same evidence as validation. Both are developmental pressure. If a mechanism is revised and later deserves confirmation, register a new future holdout before seeing its outcomes.
+
+
+---
+
+## v0.12 Protocol 08 fresh validation
+
+Protocol 08 development-v1 completed **5/5 Support with 50/50 preregistered checks passing**. That matrix remains development evidence. Version 0.12 freezes the exact Protocol 08 experiment and world-generator sources and registers a separate twenty-seed `p08-holdout-v1`.
+
+`p08-holdout-v1` is intentionally Protocol 08-only. It is not an extension of the already-consumed Protocol 01-07 `holdout-v1` and does not alter that historical validation report.
+
+Run it once with:
+
+```powershell
+./scripts/verify.ps1
+
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
+  --p08-validation `
+  --output _artifacts/p08-holdout-v1
+```
+
+The first execution consumes the set. The ordinary ten Protocol 08 assertions and verdict thresholds remain frozen. Validation reporting continues to separate manipulation, mechanism-outcome, safety-boundary, and accounting evidence.
+
+After the holdout has been preserved and interpreted, `--p08-falsify` locates controlled failure surfaces. Those surfaces are exploratory falsification and must not be described as a second holdout. See `STRATEGIC_INFLUENCE_VALIDATION.md`.

@@ -636,3 +636,31 @@ Both peer paths exchange exactly one compact public posture per interaction at i
 All ten checks are required for Support. Eight or nine passing checks produce Mixed. Fewer than eight produce Disconfirm.
 
 A Support verdict should be read narrowly. It would not validate the exact standing/calibration equations or claim general resistance to deception. It would support the architectural pressure that **public self-presentation must remain answerable to receiver-owned consequence without requiring interior inspection**.
+
+---
+
+## Protocol 08 strategic-influence falsification (v0.12)
+
+Protocol 08 development-v1 is complete. Its exact experiment and world-generator sources are now frozen. The first next step is a fresh twenty-seed `p08-holdout-v1`; only after that artifact is preserved should the controlled falsification surfaces be interpreted.
+
+`strategic-influence-falsification-v1` uses five 7 x 7 surfaces with seven deterministic replicates per cell:
+
+1. consequence delay x sender adaptation speed;
+2. betrayal timing x betrayal severity;
+3. divergence prevalence x consequence delay;
+4. public feedback observability x sender adaptation speed;
+5. aligned observation noise x consequence delay.
+
+The fifth surface is deliberately a null-harm test. Every sender is aligned, so failure cannot be explained as successful resistance to strategic divergence. A negative margin there indicates over-deterrence or poor calibration of useful influence.
+
+The accountable receiver copies the frozen Protocol 08 prediction, standing, calibration, and direct-observation equations. Sender speed and consequence schedule may extend beyond the original protocol generator to test a stronger adversary/environment. This is exploratory failure-surface evidence, not a new Protocol 08 verdict and not a second holdout.
+
+Run with:
+
+```powershell
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
+  --p08-falsify `
+  --output _artifacts/strategic-influence-falsification-v1
+```
+
+Negative primary margins are useful. Do not tune the receiver from these surfaces and then describe the same surface as confirmation.

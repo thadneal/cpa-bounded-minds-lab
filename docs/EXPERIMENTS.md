@@ -630,7 +630,7 @@ The most important revisions are:
 
 ## Protocol 08: strategic public influence
 
-Status: **implemented in v0.11.0; development result pending**.
+Status: **development-v1 Supported 5/5; exact implementation frozen for p08-holdout-v1 and controlled falsification**.
 
 Name: `08-strategic-public-influence`
 
@@ -700,3 +700,18 @@ A positive result would **not** show that manipulation has been solved generally
 > Receiver-owned standing and calibration can make an adaptive public influence channel answerable to consequence without requiring private-state inspection, while still preserving useful influence where objectives remain aligned.
 
 The exact confidence values, learning rates, standing update, and penalty constants remain protocol instruments. The candidate architectural pressure is that self-presented confidence should not be allowed to become its own authority.
+
+### Accepted development result and v0.12 evidence status
+
+The canonical development-v1 run returned **5/5 Support with 50/50 checks passing**. Mean total RMSE was `0.17793` for accountable consequence, `0.34698` for self-report naive, and `0.17824` for local-only. Accountable early aligned RMSE was `0.23370` versus `0.40223` local-only, while late divergent RMSE was `0.02922` versus `0.40325` naive and late betrayal RMSE was `0.02631` versus `0.34351` naive.
+
+The sender's mean late divergent assertive rate fell from `0.60788` under naive self-report authority to `0.33667` under accountable consequence. Mean final accountable aligned standing remained `0.90109`; divergent and betrayal standing fell to `0.02588` and `0.03158` respectively.
+
+The result is intentionally not read as cost-free dominance. Accountable total RMSE was worse than local-only in seeds 101 and 503, and naive self-report extracted more early benefit when the sender really was aligned. Seed 503 also motivates an over-deterrence question because accountable aligned assertiveness fell almost to zero while useful aligned influence still survived.
+
+Version 0.12 freezes the exact Protocol 08 experiment/world sources and registers two new evidence paths:
+
+- `p08-holdout-v1`: twenty previously unused seeds for fresh frozen validation;
+- `strategic-influence-falsification-v1`: controlled surfaces over consequence delay, sender adaptation, betrayal timing/severity, divergence prevalence, feedback observability, and aligned-noise over-deterrence.
+
+See `PROTOCOL_08_DEVELOPMENT_RESULTS.md` and `STRATEGIC_INFLUENCE_VALIDATION.md`.

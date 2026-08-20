@@ -1,6 +1,6 @@
 # CPA Bounded Minds Laboratory
 
-Version **0.11.0**
+Version **0.12.0**
 
 This repository is the successor experimental program to the completed CPA Cognitive Development Lab. The earlier lab studied development inside one bounded organism. This laboratory moves the boundary outward:
 
@@ -130,28 +130,65 @@ The durable conclusions are narrower than the frozen mechanisms:
 
 These surfaces should not be reused as confirmation after mechanism tuning. The original Protocol 01-07 experiment/world sources remain frozen.
 
-## v0.11 Protocol 08 - strategic public influence
+## v0.11 Protocol 08 development result
 
-`08-strategic-public-influence` begins a new development cycle inside the same Bounded Minds Laboratory. It addresses a remaining assumption in Protocols 01-07: public evidence may be wrong, incomplete, correlated, or locally mismatched, but the peer has not yet **learned how to shape its public posture in order to gain influence**.
+Protocol 08 completed its canonical development matrix with **5/5 Support and 50/50 preregistered checks passing**. This is development evidence, not independent validation.
 
-The synthetic peer has a private objective and can observe C's resulting public prediction. It cannot read C's private state, source standing, calibration values, local counterfactual, or implementation. From the fit between that public response and its own objective it adaptively chooses among calibrated, assertive, and hedged confidence presentations. Seed-generated worlds contain:
+Mean development results:
 
-- genuinely aligned peer contexts;
-- persistently divergent objectives;
-- two betrayal contexts where the peer is initially aligned, can earn influence, and later becomes divergent;
-- optional partial-alignment contexts.
+```text
+accountable total RMSE      0.17793
+naive total RMSE            0.34698
+local-only total RMSE       0.17824
+accountable early aligned   0.23370
+naive early aligned         0.17892
+local early aligned         0.40223
+accountable late divergent  0.02922
+naive late divergent        0.40325
+accountable late betrayal   0.02631
+naive late betrayal         0.34351
+```
 
-The three registered conditions are:
+The accountable path reduced the strategic peer's late divergent assertive rate from about `0.608` under naive self-report authority to about `0.337`, while retaining mean final aligned standing near `0.901`. The result also exposed a real tradeoff: naive self-report extracted more benefit when the peer truly aligned, while accountable influence stayed almost exactly even with local-only learning across the mixed world and was worse than local-only in two of five seeds. Seed 503 additionally showed possible over-deterrence: accountable aligned assertiveness fell to about `0.033` while useful aligned standing and benefit still survived.
 
-1. **accountable-consequence** - source standing and confidence calibration are receiver-owned and revised by C's direct consequence;
-2. **self-report-naive** - self-reported confidence receives direct leverage and standing changes only weakly;
-3. **local-only** - C refuses peer influence and learns only from direct consequence.
+Narrow development conclusion: receiver-owned standing and consequence can make a strategically adaptive public surface substantially less exploitable without inspecting the sender's private objective, but social openness is not free and defensive calibration may sometimes suppress useful assertiveness. See `docs/PROTOCOL_08_DEVELOPMENT_RESULTS.md`.
 
-Ten preregistered checks ask whether the strategic sender really discovers leverage in the naive control, useful aligned peer help survives, strategic capture and betrayal remain correctable, self-reported confidence does not become authority, total opportunity cost stays near the local-only baseline, and public communication remains explicitly bounded.
+## v0.12 Protocol 08 validation and falsification phase
 
-The sender's private objective is available to the **synthetic world/evaluator**, not to receiver cognition. This protocol tests whether consequence can make public influence answerable while the other mind's interior remains inaccessible.
+Version 0.12 freezes the exact Protocol 08 experiment and world-generator sources used for the development result. Their SHA-256 hashes are now part of `docs/FROZEN_PROTOCOL_SHA256.txt`. No Protocol 09 mechanism is added in this release.
 
-Protocol 09, authority/standing cascades, remains a candidate rather than an assumed next step. It should be decided after Protocol 08 results. The candidate Trace and Interface Laboratory remains documented in `docs/NEXT_LAB.md`.
+Two distinct evidence paths are registered:
+
+1. **`p08-holdout-v1`** - twenty previously unused seeds for the frozen Protocol 08 implementation. They were selected without running or inspecting Protocol 08 outcomes. The first execution consumes this holdout; later executions are reproducibility only.
+2. **`strategic-influence-falsification-v1`** - five controlled 7x7 failure surfaces with seven deterministic replicates per cell. These are exploratory operating-envelope probes, not confirmation.
+
+The falsification surfaces independently stress:
+
+- consequence delay x sender adaptation speed;
+- betrayal timing x betrayal severity;
+- divergent-context prevalence x consequence delay;
+- public feedback observability x sender adaptation speed;
+- aligned observation noise x consequence delay, explicitly testing over-deterrence when there is no hidden strategic divergence.
+
+The accountable receiver equations remain frozen in these probes. Some sender capabilities and consequence schedules deliberately extend beyond the original Protocol 08 world family so the experiment can fail for intelligible reasons. A negative boundary margin is useful evidence.
+
+Run the fresh holdout **before interpreting the falsification surfaces**:
+
+```powershell
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
+  --p08-validation `
+  --output _artifacts/p08-holdout-v1
+```
+
+After that holdout result has been preserved, run the controlled failure surfaces:
+
+```powershell
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
+  --p08-falsify `
+  --output _artifacts/strategic-influence-falsification-v1
+```
+
+This phase is intended to decide whether strategic public influence has a sensible operating envelope and whether **Protocol 09: authority/standing cascades** remains a genuinely separate social problem. The likely successor Trace and Interface Laboratory remains documented in `docs/NEXT_LAB.md`.
 
 ## Solution
 
@@ -172,7 +209,8 @@ Projects target .NET 10. The WPF Desktop Lab targets `net10.0-windows`.
 ```powershell
 dotnet build Cpa.BoundedMindsLab.sln -c Release
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --experiment 08-strategic-public-influence --replicate 101,211,307,401,503 --output _artifacts/protocol-08-development-v1
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --p08-validation --output _artifacts/p08-holdout-v1
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --p08-falsify --output _artifacts/strategic-influence-falsification-v1
 # Reproduce consumed parameterized-falsification-v1 only when needed:
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --falsify --output _artifacts/parameterized-falsification-v1-repro
 # Reproduce consumed challenge-v1 only when needed:
@@ -189,7 +227,7 @@ For live inspection on Windows 11:
 dotnet run --project src/Cpa.BoundedMindsLab.Desktop
 ```
 
-The Desktop Lab opens with **Development v1 (5, regression only)** selected to avoid accidentally treating consumed holdout-v1 as fresh evidence. Holdout v1 remains available as a reproducibility preset. `parameterized-falsification-v1` and `challenge-v1` are consumed CLI-only reproducibility runners; they do not use the ordinary Desktop seed selector. Protocol 08 uses the ordinary Desktop/CLI experiment path. The application version remains visible in the main and maximized-graph window titles. Graphs explain axis meaning and preferred metric direction/context, provide show-all/hide-all series controls, and update incrementally from bounded background telemetry at an adaptive display cadence.
+The Desktop Lab opens with **Development v1 (5, regression only)** selected to avoid accidentally treating consumed holdout-v1 as fresh evidence. Holdout v1 remains available as a reproducibility preset. `parameterized-falsification-v1` and `challenge-v1` are consumed CLI-only reproducibility runners; they do not use the ordinary Desktop seed selector. Protocol 08 development uses the ordinary Desktop/CLI experiment path. The registered p08-holdout-v1 and strategic falsification runners are CLI modes so their evidence status remains explicit. The application version remains visible in the main and maximized-graph window titles. Graphs explain axis meaning and preferred metric direction/context, provide show-all/hide-all series controls, and update incrementally from bounded background telemetry at an adaptive display cadence.
 
 ## Visualization boundary
 
@@ -203,4 +241,4 @@ The workbench also exposes protocol progress, per-seed judged results, active-se
 
 Carry forward only what survives pressure: bounded causal execution, persistent private history, compact public surfaces, revisable standing, explicit cost, and provenance distinct from agreement.
 
-The v0.3.0 methodological correction remains active: if history is part of the theory, replication must vary **what was lived**, not merely the order in which nearly identical events were encountered. Version 0.8 separated development from a frozen holdout; version 0.9 searched the frozen generator families adversarially; version 0.10 mapped controlled failure surfaces; version 0.11 returns to mechanism discovery only for the still-open question of strategic public influence.
+The v0.3.0 methodological correction remains active: if history is part of the theory, replication must vary **what was lived**, not merely the order in which nearly identical events were encountered. Version 0.8 separated development from a frozen holdout; version 0.9 searched the frozen generator families adversarially; version 0.10 mapped controlled failure surfaces; version 0.11 returned to mechanism discovery for strategic public influence; version 0.12 freezes that mechanism and subjects it to a fresh holdout plus controlled failure-surface testing before any decision on Protocol 09.

@@ -409,3 +409,29 @@ The sender adaptively chooses calibrated, assertive, or hedged confidence. Seede
 4. do not treat another development 5/5 as confirmation;
 5. decide after results whether authority/standing cascades remain a distinct Protocol 09 question;
 6. close the Bounded Minds Laboratory only after that decision, then hand off to the candidate Trace and Interface Laboratory.
+
+## 2026-08-20 - Protocol 08 development accepted; fresh validation and strategic falsification begin
+
+### Development result
+
+Protocol 08 returned **5/5 Support with 50/50 preregistered checks passing** on development-v1. Mean accountable total RMSE was `0.17793`, compared with `0.34698` for self-report naive and `0.17824` for local-only. The accountable path preserved strong early benefit in aligned contexts, sharply reduced late divergent and betrayal error, and drove inappropriate standing toward the floor.
+
+The sender also changed behavior without private-state access. Mean late divergent assertive presentation fell from `0.60788` against the naive receiver to `0.33667` against the accountable receiver. This supports the idea that consequence can alter the ecology of reward around public influence rather than requiring a central deception detector.
+
+### Qualification
+
+The defense is not free. Accountable treatment was worse than local-only in two of five development seeds, and naive self-report was better in the genuinely aligned early phase because it granted more immediate leverage. Seed 503 produced very low aligned assertiveness under accountability while useful aligned performance still survived, raising a distinct over-deterrence question.
+
+The accepted development conclusion is therefore narrow: public influence can remain answerable to receiver-owned consequence even when the peer strategically adapts its public confidence, but social openness has opportunity cost and defensive calibration may suppress useful assertiveness.
+
+### v0.12 evidence plan
+
+The exact Protocol 08 experiment and world-generator files are now frozen by SHA-256. A new twenty-seed `p08-holdout-v1` was registered without running or inspecting Protocol 08 outcomes. Its first execution is fresh validation and consumes the set.
+
+After that artifact is preserved, `strategic-influence-falsification-v1` maps five controlled surfaces: consequence delay x sender adaptation, betrayal timing x severity, divergence prevalence x consequence delay, feedback observability x sender adaptation, and aligned noise x consequence delay.
+
+The aligned surface is especially important because it contains no hidden conflict. If accountability fails there, the mechanism has become over-defensive rather than successfully resisting manipulation.
+
+### Laboratory boundary
+
+Do not add Protocol 09 until these results are interpreted. Authority/standing cascades remain a plausible final bounded-minds problem, but only if circular permission is still distinct from strategic public influence plus the existing ancestry/standing findings. If it is not distinct, the lab should move to synthesis and closeout, then hand off to the Trace and Interface Laboratory.

@@ -14,7 +14,7 @@ dotnet build Cpa.BoundedMindsLab.sln -c Release
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
 ```
 
-Treat analyzer failures as build failures. Warnings are errors. Version 0.11.0 defines **32 invariant/regression tests**. `scripts/verify.ps1` and `scripts/verify.sh` first verify the frozen Protocol 01-07 source hashes before building.
+Treat analyzer failures as build failures. Warnings are errors. Version 0.12.0 defines **35 invariant/regression tests**. `scripts/verify.ps1` and `scripts/verify.sh` first verify the frozen Protocol 01-08 source hashes before building.
 
 ## Development regression
 
@@ -28,18 +28,31 @@ dotnet run --project src/Cpa.BoundedMindsLab.Cli -- `
 
 Use this only to detect regressions against the frozen mechanism-discovery record. Do not treat another 5/5 result as fresh evidence.
 
-## Protocol 08 development run (current research run)
+## Protocol 08 fresh holdout (current research run)
 
-After build/self-test and frozen-hash verification:
+Protocol 08 development-v1 is complete and its exact experiment/world sources are frozen. The next authoritative evidence is the preregistered twenty-seed `p08-holdout-v1` set:
+
+```powershell
+./scripts/verify.ps1
+
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
+  --p08-validation `
+  --output _artifacts/p08-holdout-v1
+```
+
+The **first execution consumes this holdout**. Preserve the artifact before changing Protocol 08 or inspecting controlled falsification results. A later rerun is reproducibility only.
+
+## Protocol 08 controlled falsification
+
+After the fresh holdout is preserved and interpreted, map the operating envelope:
 
 ```powershell
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
-  --experiment 08-strategic-public-influence `
-  --replicate 101,211,307,401,503 `
-  --output _artifacts/protocol-08-development-v1
+  --p08-falsify `
+  --output _artifacts/strategic-influence-falsification-v1
 ```
 
-This is development evidence. Protocol 08 is new work and has not yet earned a frozen holdout. The canonical seeds are used to test whether the mechanism behaves coherently across meaningfully different strategic social worlds; they must not later be relabeled as fresh confirmation.
+This runs five 7 x 7 surfaces with seven replicates per cell. Negative margins are expected boundary evidence. Do not tune the receiver and then reuse these surfaces as confirmation.
 
 ## Consumed parameterized-falsification-v1 reproducibility
 

@@ -170,7 +170,7 @@ The surfaces are now consumed exploratory evidence. Any mechanism revised from t
 
 ### Protocol 08: strategic public influence
 
-Status: **implemented in v0.11.0; development results pending**.
+Status: **development-v1 Supported 5/5; exact v0.11 implementation frozen in v0.12 for fresh holdout and operating-envelope falsification**.
 
 Question:
 
@@ -192,7 +192,7 @@ Ten preregistered checks cover world composition, learned strategic leverage, us
 
 ### Current-lab closure question
 
-The Bounded Minds Laboratory is **not closed by v0.11**. Protocol 08 tests one remaining assumption that the parameterized phase made more important rather than less important.
+The Bounded Minds Laboratory is **not closed by v0.12**. Protocol 08 has earned fresh validation and controlled falsification before the lab decides whether authority cascades remain a distinct final social problem.
 
 After Protocol 08, decide whether **Protocol 09 - coalition / authority cascade** remains distinct. The question is whether permission itself can circulate through recommendation loops, factions, prestige, or bridge nodes and acquire apparently independent support without enough fresh consequence. This is different from P06 evidence ancestry and from P07 one-hop standing transfer.
 
@@ -202,13 +202,13 @@ The candidate successor **Trace and Interface Laboratory** remains documented in
 
 ## Result cadence
 
-For v0.11 Protocol 08:
+For v0.12 Protocol 08:
 
-1. rebuild under the pinned .NET 10 SDK and run the **32** invariant/regression checks;
-2. verify `docs/FROZEN_PROTOCOL_SHA256.txt` so Protocols 01-07 and their world generators remain unchanged;
-3. run Protocol 08 across development-v1 (`101,211,307,401,503`) without changing its ten registered boundaries;
-4. inspect sender tactic rates, aligned benefit, divergent/betrayal repair, residual standing, total RMSE, and communication cost together;
-5. treat development-v1 as assay development, not fresh validation;
-6. do not reuse holdout-v1, challenge-v1, or parameterized-falsification-v1 as confirmation for a changed mechanism;
-7. after Protocol 08 review, decide whether Protocol 09 remains necessary;
-8. only then decide whether the current lab has earned closeout and handoff to the Trace and Interface Laboratory.
+1. rebuild under the pinned .NET 10 SDK and run the **35** invariant/regression checks;
+2. verify `docs/FROZEN_PROTOCOL_SHA256.txt` so the exact Protocol 01-08 frozen sources remain unchanged;
+3. run `p08-holdout-v1` exactly once with `--p08-validation` before changing Protocol 08 or inspecting controlled failure surfaces;
+4. preserve and interpret holdout category failures rather than reducing the result to another Support count;
+5. then run `strategic-influence-falsification-v1` with `--p08-falsify`;
+6. inspect consequence delay, betrayal timing/severity, divergence prevalence, sender adaptation/feedback, and aligned over-deterrence separately;
+7. decide from those results whether Protocol 09 remains a genuinely distinct authority-cascade problem;
+8. only after that decision consider Bounded Minds closeout and handoff to the Trace and Interface Laboratory.

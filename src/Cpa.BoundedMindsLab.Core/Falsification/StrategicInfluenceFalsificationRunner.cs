@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace Cpa.BoundedMindsLab.Falsification;
 
-public static class ParameterizedFalsificationRunner
+public static class StrategicInfluenceFalsificationRunner
 {
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
@@ -13,15 +13,12 @@ public static class ParameterizedFalsificationRunner
 
     public static FalsificationReport RunV1(string outputDirectory)
     {
-        if (string.IsNullOrWhiteSpace(outputDirectory))
-        {
-            throw new ArgumentException("Output directory is required.", nameof(outputDirectory));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(outputDirectory);
         Directory.CreateDirectory(outputDirectory);
-        var profileReports = new List<FalsificationProfileReport>(ParameterizedFalsificationPlan.Profiles.Count);
-        foreach (var profile in ParameterizedFalsificationPlan.Profiles)
+        var profileReports = new List<FalsificationProfileReport>(StrategicInfluenceFalsificationPlan.Profiles.Count);
+        foreach (var profile in StrategicInfluenceFalsificationPlan.Profiles)
         {
-            Console.WriteLine($"Falsification profile: {profile.Name}");
+            Console.WriteLine($"Strategic falsification profile: {profile.Name}");
             var cells = RunProfile(profile);
             var report = BuildProfileReport(profile, cells);
             profileReports.Add(report);
@@ -32,23 +29,23 @@ public static class ParameterizedFalsificationRunner
         var allCells = profileReports.Sum(profile => profile.Cells.Count);
         var replicateRuns = profileReports.Sum(profile => profile.Cells.Sum(cell => cell.Replicates));
         var result = new FalsificationReport(
-            "cpa-bounded-minds-parameterized-falsification-v1",
+            "cpa-bounded-minds-strategic-influence-falsification-v1",
             "0.12.0",
-            ParameterizedFalsificationPlan.Name,
+            StrategicInfluenceFalsificationPlan.Name,
             profileReports.Count,
             allCells,
             replicateRuns,
             profileReports,
             [
-                "parameterized-falsification-v1 is exploratory falsification, not a fresh holdout and not a new Protocol 08.",
-                "Frozen Protocol 01-07 experiment and world-generator files remain unchanged; these micro-assays copy selected frozen local equations into controlled intervention probes so causal axes can be separated.",
-                "challenge-v1 is consumed developmental evidence. Its composite stress rankings should not be treated as monotonic causal variables.",
-                "A negative margin is desired boundary information. Do not tune a mechanism and then reinterpret the same surface as confirmation.",
-                "Protocol 04 receives a stronger same-information comparator in this phase. The comparator is an assay control, not proposed CPA machinery.",
+                "strategic-influence-falsification-v1 is exploratory operating-envelope evidence, not a replacement for p08-holdout-v1.",
+                "The frozen Protocol 08 experiment and world-generator files are not changed by these probes.",
+                "The accountable receiver equations are copied from frozen Protocol 08. Some sender capabilities and consequence schedules deliberately extend beyond the original development world family.",
+                "A negative margin is desired boundary information. Do not tune the receiver and then reinterpret the same surface as confirmation.",
+                "The aligned-noise surface is a null-harm/over-deterrence assay: there is no hidden sender divergence there.",
             ]);
-        File.WriteAllText(Path.Combine(outputDirectory, "parameterized-report.json"), JsonSerializer.Serialize(result, JsonOptions));
-        File.WriteAllText(Path.Combine(outputDirectory, "parameterized-plan.json"), JsonSerializer.Serialize(BuildPlanDocument(), JsonOptions));
-        File.WriteAllText(Path.Combine(outputDirectory, "parameterized-summary.md"), BuildSummary(result));
+        File.WriteAllText(Path.Combine(outputDirectory, "strategic-falsification-report.json"), JsonSerializer.Serialize(result, JsonOptions));
+        File.WriteAllText(Path.Combine(outputDirectory, "strategic-falsification-plan.json"), JsonSerializer.Serialize(BuildPlanDocument(), JsonOptions));
+        File.WriteAllText(Path.Combine(outputDirectory, "strategic-falsification-summary.md"), BuildSummary(result));
         return result;
     }
 
@@ -80,17 +77,12 @@ public static class ParameterizedFalsificationRunner
         double y,
         Dictionary<string, double>[] runs)
     {
-        if (runs.Length == 0)
-        {
-            throw new InvalidOperationException($"Falsification profile {profile.Id} produced no replicates.");
-        }
-
         var metricNames = runs.SelectMany(metrics => metrics.Keys).Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal).ToArray();
         var means = new Dictionary<string, double>(StringComparer.Ordinal);
         for (var metricIndex = 0; metricIndex < metricNames.Length; metricIndex++)
         {
             var metricName = metricNames[metricIndex];
-            means[metricName] = runs.Average(metrics => metrics.TryGetValue(metricName, out var value) ? value : 0.0);
+            means[metricName] = runs.Average(metrics => metrics[metricName]);
         }
 
         var margins = runs.Select(metrics => metrics[profile.PrimaryMarginMetric]).ToArray();
@@ -128,11 +120,11 @@ public static class ParameterizedFalsificationRunner
 
     private static object BuildPlanDocument() => new
     {
-        schema = "cpa-bounded-minds-parameterized-falsification-plan-v1",
+        schema = "cpa-bounded-minds-strategic-influence-falsification-plan-v1",
         version = "0.12.0",
-        name = ParameterizedFalsificationPlan.Name,
-        purpose = "Controlled causal intervention beyond the support of the frozen P03-P07 world generators. This is exploratory falsification, not confirmation.",
-        profiles = ParameterizedFalsificationPlan.Profiles.Select(profile => new
+        name = StrategicInfluenceFalsificationPlan.Name,
+        purpose = "Controlled falsification of frozen Protocol 08 receiver behavior across delayed consequence, stronger sender adaptation, betrayal, divergence prevalence, feedback observability, and aligned-noise over-deterrence conditions.",
+        profiles = StrategicInfluenceFalsificationPlan.Profiles.Select(profile => new
         {
             profile.Id,
             profile.Name,
@@ -184,7 +176,7 @@ public static class ParameterizedFalsificationRunner
     private static string BuildSummary(FalsificationReport report)
     {
         var builder = new StringBuilder();
-        builder.AppendLine("# CPA Bounded Minds parameterized falsification summary");
+        builder.AppendLine("# CPA Bounded Minds Protocol 08 strategic-influence falsification summary");
         builder.AppendLine();
         builder.AppendLine($"- Version: {report.Version}");
         builder.AppendLine($"- Phase: {report.Name}");
@@ -192,7 +184,7 @@ public static class ParameterizedFalsificationRunner
         builder.AppendLine($"- Grid cells: {report.Cells}");
         builder.AppendLine($"- Deterministic replicate runs: {report.ReplicateRuns}");
         builder.AppendLine();
-        builder.AppendLine("This phase is not a new protocol sequence and not a fresh validation set. It deliberately intervenes on causal variables outside the original frozen generator support in order to locate failure surfaces.");
+        builder.AppendLine("These are controlled failure-surface probes. Negative margins are informative and are not automatically defects in the laboratory.");
         foreach (var profile in report.Results)
         {
             builder.AppendLine();
@@ -210,25 +202,7 @@ public static class ParameterizedFalsificationRunner
             builder.AppendLine();
             builder.AppendLine($"Cells with negative mean margin: **{profile.CellsWithNegativeMeanMargin}/{profile.Cells.Count}**. Cells with at least one negative replicate: **{profile.CellsWithAnyNegativeReplicate}/{profile.Cells.Count}**.");
             builder.AppendLine();
-            builder.AppendLine($"Observed replicate margin range: `{Format(profile.MinimumObservedMargin)}` to `{Format(profile.MaximumObservedMargin)}`.");
-            builder.AppendLine();
-            builder.AppendLine("| X | Y | Mean margin | Negative reps |");
-            builder.AppendLine("| ---: | ---: | ---: | ---: |");
-            foreach (var cell in profile.Cells)
-            {
-                builder.AppendLine($"| {Format(cell.X)} | {Format(cell.Y)} | {Format(cell.MeanPrimaryMargin)} | {cell.NegativeMargins}/{cell.Replicates} |");
-            }
-
-            builder.AppendLine();
-            builder.AppendLine($"Interpretation limit: {profile.InterpretationLimit}");
-        }
-
-        builder.AppendLine();
-        builder.AppendLine("## Diagnostics");
-        builder.AppendLine();
-        foreach (var diagnostic in report.Diagnostics)
-        {
-            builder.AppendLine($"- {diagnostic}");
+            builder.AppendLine(profile.InterpretationLimit);
         }
 
         return builder.ToString();
@@ -239,20 +213,17 @@ public static class ParameterizedFalsificationRunner
         const ulong offset = 14695981039346656037UL;
         const ulong prime = 1099511628211UL;
         var hash = offset;
-        for (var index = 0; index < profileId.Length; index++)
+        foreach (var character in profileId)
         {
-            hash ^= profileId[index];
+            hash ^= character;
             hash *= prime;
         }
 
-        hash ^= (ulong)(xIndex + 1);
-        hash *= prime;
-        hash ^= (ulong)(yIndex + 1);
-        hash *= prime;
-        hash ^= (ulong)(replicate + 1);
-        hash *= prime;
+        hash ^= unchecked((ulong)(xIndex + 1) * 0x9E3779B97F4A7C15UL);
+        hash ^= unchecked((ulong)(yIndex + 1) * 0xBF58476D1CE4E5B9UL);
+        hash ^= unchecked((ulong)(replicate + 1) * 0x94D049BB133111EBUL);
         return hash;
     }
 
-    private static string Format(double value) => value.ToString("0.000000", CultureInfo.InvariantCulture);
+    private static string Format(double value) => value.ToString("R", CultureInfo.InvariantCulture);
 }

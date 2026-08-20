@@ -158,3 +158,19 @@ The v0.10 parameterized result is reconciled as a warning against promoting expe
 Protocol 08 remains consistent with the source-level distinction between representation and permission. A peer may publicly report confidence, but confidence about its own claim is not the same thing as receiver-owned authority to shape future cognition. The new assay therefore treats public confidence as a signal whose value must remain answerable to direct consequence.
 
 This protocol also stays within the Bounded Minds Laboratory rather than the candidate Trace and Interface Laboratory. Peer B is already perceptible and has an explicit public channel. The unresolved question is governance of influence, not detection of a hidden causal source through a restricted interface.
+
+## v0.12 Protocol 08 freeze and evidence tooling
+
+The Protocol 08 development result is now treated as a completed mechanism-discovery artifact. The following two files are frozen byte-for-byte and have been added to `FROZEN_PROTOCOL_SHA256.txt`:
+
+- `Experiments/StrategicPublicInfluenceExperiment.cs`
+- `Environments/StrategicInfluenceWorld.cs`
+
+New v0.12 code lives outside that frozen boundary:
+
+- `Validation/StrategicInfluenceValidationRunner.cs` runs the twenty-seed `p08-holdout-v1` set without changing the experiment;
+- `Falsification/StrategicInfluenceFalsificationPlan.cs` declares five controlled response surfaces;
+- `Falsification/StrategicInfluenceFalsificationRunner.cs` writes the surface artifacts;
+- `Falsification/StrategicInfluenceProbes.cs` copies the frozen accountable-receiver equations into intervention micro-assays.
+
+The probe sender can be made faster than the frozen Protocol 08 sender, and consequence can be delayed beyond the original world schedule. Those changes are adversarial assay dimensions, not source changes to the frozen experiment and not proposed CPA components.

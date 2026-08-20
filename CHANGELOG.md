@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.12.0 - 2026-08-20
+
+- Froze the exact Protocol 08 development experiment and world-generator sources under `docs/FROZEN_PROTOCOL_SHA256.txt` after the canonical development matrix returned 5/5 Support with 50/50 preregistered checks passing.
+- Added `docs/PROTOCOL_08_DEVELOPMENT_RESULTS.md`, preserving the development result, the near parity with local-only total RMSE, the large naive-control failure under divergence/betrayal, and the seed-503 over-deterrence question.
+- Registered a fresh twenty-seed `p08-holdout-v1` set that is disjoint from development-v1, the consumed Protocol 01-07 holdout, and challenge-v1 selected seeds. The holdout seeds were registered without executing or inspecting Protocol 08 outcomes.
+- Added `--p08-validation`, which runs only frozen Protocol 08 across `p08-holdout-v1` and writes the ordinary replication plus validation reports. The first execution consumes this holdout; later runs are reproducibility only.
+- Added `strategic-influence-falsification-v1`: five controlled 7 x 7 surfaces with seven deterministic replicates per cell (245 cells / 1,715 controlled runs).
+- Added Protocol 08 operating-envelope profiles for consequence delay x sender adaptation, betrayal timing x severity, divergence prevalence x consequence delay, feedback observability x sender adaptation, and aligned observation noise x consequence delay.
+- Added an explicit null-harm/over-deterrence surface where every peer context is genuinely aligned; negative margins there mean the defense is suppressing useful social influence rather than resisting manipulation.
+- Kept the accountable Protocol 08 receiver equations frozen in the controlled probes. Sender adaptation speed and consequence schedules may extend beyond the original world family as adversarial capabilities rather than proposed CPA mechanisms.
+- Added `--p08-falsify` plus `strategic-falsification-plan.json`, `strategic-falsification-report.json`, `strategic-falsification-summary.md`, and per-surface CSV outputs.
+- Added `docs/STRATEGIC_INFLUENCE_VALIDATION.md` and updated README, plan, validation/falsification guidance, research ledger, experiment catalog documentation, runbook, architecture notes, source reconciliation, and next-lab boundary.
+- Added three invariants for the fresh P08 holdout and falsification apparatus, bringing the suite from 32 to **35 tests**.
+- Kept Protocol 09 as a decision after P08 validation/falsification rather than adding another social mechanism prematurely. The candidate Trace and Interface Laboratory remains the likely successor once the Bounded Minds social questions are genuinely exhausted.
+
 ## 0.11.0 - 2026-08-20
 
 - Recorded `parameterized-falsification-v1` as consumed exploratory evidence: 294 controlled cells / 2,058 deterministic runs, with 176/294 cells showing a negative mean primary boundary margin and 1,201/2,058 replicates crossing at least one registered boundary.

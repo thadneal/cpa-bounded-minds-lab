@@ -28,6 +28,33 @@ public static class ExperimentDefaults
         8089UL,
     ];
 
+
+    // Registered in v0.12.0 for Protocol 08 only. These seeds were not used during Protocol 08 development
+    // and must be treated as consumed after the first strategic-influence holdout run.
+    public static IReadOnlyList<ulong> StrategicInfluenceHoldoutSeeds { get; } =
+    [
+        41047UL,
+        42131UL,
+        43391UL,
+        44621UL,
+        45893UL,
+        47237UL,
+        48611UL,
+        49919UL,
+        51307UL,
+        52709UL,
+        54139UL,
+        55603UL,
+        57143UL,
+        58661UL,
+        60209UL,
+        61781UL,
+        63347UL,
+        64997UL,
+        66617UL,
+        68213UL,
+    ];
+
     // Compatibility alias for older tooling and documentation. In v0.8+ this set is explicitly developmental, not holdout validation.
     public static IReadOnlyList<ulong> ReplicationSeeds => DevelopmentSeeds;
 }

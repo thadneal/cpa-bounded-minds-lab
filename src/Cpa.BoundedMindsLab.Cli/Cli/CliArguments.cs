@@ -6,6 +6,8 @@ public sealed record CliArguments(
     bool Validation,
     bool Challenge,
     bool Falsify,
+    bool StrategicValidation,
+    bool StrategicFalsify,
     bool Help,
     bool All,
     IReadOnlyList<string> Experiments,
@@ -20,6 +22,8 @@ public sealed record CliArguments(
         var validation = false;
         var challenge = false;
         var falsify = false;
+        var strategicValidation = false;
+        var strategicFalsify = false;
         var help = false;
         var all = false;
         var experiments = new List<string>();
@@ -50,6 +54,12 @@ public sealed record CliArguments(
                 case "--falsify":
                     falsify = true;
                     break;
+                case "--p08-validation":
+                    strategicValidation = true;
+                    break;
+                case "--p08-falsify":
+                    strategicFalsify = true;
+                    break;
                 case "--experiment":
                     experiments.Add(RequireValue(args, ref index, argument));
                     break;
@@ -71,7 +81,7 @@ public sealed record CliArguments(
             }
         }
 
-        return new CliArguments(list, selfTest, validation, challenge, falsify, help, all, experiments, seed, replicationSeeds, output);
+        return new CliArguments(list, selfTest, validation, challenge, falsify, strategicValidation, strategicFalsify, help, all, experiments, seed, replicationSeeds, output);
     }
 
     private static string RequireValue(string[] args, ref int index, string argument)

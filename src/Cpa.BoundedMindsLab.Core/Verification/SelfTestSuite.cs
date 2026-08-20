@@ -46,6 +46,9 @@ public static class SelfTestSuite
         Run("parameterized-p04-comparator-has-equal-public-cost", TestParameterizedProtocolFourComparator, passed);
         Run("parameterized-p06-reaches-complete-provenance-blindness", TestParameterizedProtocolSixBlindness, passed);
         Run("parameterized-p07-separates-prevalence-from-severity", TestParameterizedProtocolSevenAxes, passed);
+        Run("p08-holdout-is-fresh-and-disjoint", TestStrategicInfluenceHoldoutSeeds, passed);
+        Run("p08-falsification-plan-is-complete", TestStrategicInfluenceFalsificationPlan, passed);
+        Run("p08-falsification-null-harm-surface-is-defined", TestStrategicInfluenceNullHarmProbe, passed);
         Run("frame-sequence-is-contiguous", TestFrameSequence, passed);
         return passed;
     }
@@ -472,6 +475,36 @@ public static class SelfTestSuite
         var severity = ParameterizedProbes.EvaluateProtocol07Severity(0.45, 0.80, 707UL);
         Assert(double.IsFinite(prevalence["boundary_margin"]) && double.IsFinite(severity["boundary_margin"]), "Both P07 controlled surfaces must produce finite margins.");
         Assert(Math.Abs(prevalence["mismatch_contexts"] - severity["mismatch_contexts"]) > 1e-12, "P07 prevalence and severity surfaces must not collapse into the same intervention. The prevalence surface varies how many contexts mismatch; the severity surface holds prevalence near one half.");
+    }
+
+
+    private static void TestStrategicInfluenceHoldoutSeeds()
+    {
+        var seeds = ExperimentDefaults.StrategicInfluenceHoldoutSeeds;
+        Assert(seeds.Count == 20, "p08-holdout-v1 must contain exactly twenty preregistered seeds.");
+        Assert(seeds.Distinct().Count() == seeds.Count, "p08-holdout-v1 seeds must be unique.");
+        var consumed = ExperimentDefaults.DevelopmentSeeds
+            .Concat(ExperimentDefaults.HoldoutSeeds)
+            .Concat(ChallengePlan.BuildSelections().Select(selection => selection.Seed))
+            .ToHashSet();
+        Assert(seeds.All(seed => !consumed.Contains(seed)), "p08-holdout-v1 must not reuse development-v1, consumed holdout-v1, or challenge-v1 seeds.");
+        Assert(ValidationPlan.ClassifySeedSet(seeds) == ValidationPlan.StrategicInfluenceHoldoutSetName, "The Protocol 08 holdout must classify as p08-holdout-v1.");
+    }
+
+    private static void TestStrategicInfluenceFalsificationPlan()
+    {
+        Assert(StrategicInfluenceFalsificationPlan.Profiles.Count == 5, "Protocol 08 falsification should register five distinct failure-surface profiles.");
+        Assert(StrategicInfluenceFalsificationPlan.Profiles.All(profile => profile.XAxis.Values.Length == 7 && profile.YAxis.Values.Length == 7), "Every Protocol 08 falsification profile should expose a 7x7 surface.");
+        Assert(StrategicInfluenceFalsificationPlan.Profiles.All(profile => profile.Replicates == StrategicInfluenceFalsificationPlan.ReplicatesPerCell), "Every Protocol 08 falsification profile should use the registered replicate count.");
+        Assert(StrategicInfluenceFalsificationPlan.Profiles.Select(profile => profile.Id).Distinct(StringComparer.Ordinal).Count() == StrategicInfluenceFalsificationPlan.Profiles.Count, "Protocol 08 falsification profile identifiers must be unique.");
+    }
+
+    private static void TestStrategicInfluenceNullHarmProbe()
+    {
+        var metrics = StrategicInfluenceProbes.EvaluateAlignedNoiseVersusDelay(0.10, 4.0, 808UL);
+        Assert(double.IsFinite(metrics["boundary_margin"]), "The Protocol 08 aligned null-harm probe must produce a finite boundary margin.");
+        Assert(metrics["accountable_final_aligned_standing"] is >= 0.0 and <= 1.0, "Protocol 08 aligned standing must remain bounded as a probability-like standing value.");
+        Assert(metrics["local_early_aligned_rmse"] >= 0.0 && metrics["accountable_early_aligned_rmse"] >= 0.0, "Protocol 08 aligned error metrics must remain nonnegative.");
     }
 
     private static void TestFrameSequence()
