@@ -1,6 +1,7 @@
 using Cpa.BoundedMindsLab.Cli.Cli;
 using Cpa.BoundedMindsLab.Experiments;
 using Cpa.BoundedMindsLab.Verification;
+using Cpa.BoundedMindsLab.Validation;
 
 try
 {
@@ -33,6 +34,12 @@ try
         return 0;
     }
 
+    if (parsed.Validation)
+    {
+        ValidationRunner.RunHoldout(parsed.OutputDirectory);
+        return 0;
+    }
+
     var experiments = parsed.All || parsed.Experiments.Count == 0
         ? ExperimentCatalog.All.ToArray()
         : parsed.Experiments.Select(ExperimentCatalog.Get).ToArray();
@@ -54,13 +61,14 @@ catch (Exception exception)
 
 static void PrintHelp()
 {
-    Console.WriteLine("CPA Bounded Minds Lab 0.6.0");
+    Console.WriteLine("CPA Bounded Minds Lab 0.8.0");
     Console.WriteLine();
     Console.WriteLine("  --list");
     Console.WriteLine("  --self-test");
     Console.WriteLine("  --all");
+    Console.WriteLine("  --validation          Run frozen Protocols 01-07 on the 20-seed holdout-v1 set");
     Console.WriteLine("  --experiment <name>   Repeat to select several experiments");
     Console.WriteLine("  --seed <ulong>        Single-history seed (default 101)");
-    Console.WriteLine("  --replicate <csv>     Example: 101,211,307,401,503");
+    Console.WriteLine("  --replicate <csv>     Explicit replication seeds; 101,211,307,401,503 is development-v1");
     Console.WriteLine("  --output <directory>");
 }

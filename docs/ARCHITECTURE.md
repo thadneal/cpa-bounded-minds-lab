@@ -257,3 +257,66 @@ The `naive-agreement` control assigns every report its own corroborative group. 
 All paths receive the same 98 reports and pay the same communication cost. The only treatment difference is how public corroboration is reduced locally. This prevents ancestry inference from hiding extra retrieval, consultation, or communication work.
 
 The signature distance and clustering rule are protocol instruments. A passing result would support the need to preserve ancestry uncertainty and discount probable echoes. It would not establish Euclidean signature clustering, a universal provenance packet, or a global ancestry service as CPA anatomy.
+
+## Protocol 07 provisional standing-transfer boundary
+
+Protocol 07 distinguishes **access to a source** from **permission for that source to influence judgment**.
+
+```text
+A's private history with B
+        |
+        v
+bounded recommendation packet
+        |
+        v
+C applies its own standing for A
+        |
+        +--> provisional standing for B (capped)
+        |
+        v
+B's ordinary public estimate + C's local estimate
+        |
+        v
+C prediction --> C's direct consequence
+                    |
+                    +--> renew/revoke B standing locally
+```
+
+The recommendation packet contains A's context-specific standing for B and A's evidence depth. C's credibility for A remains private to C. The provisional calculation therefore cannot be completed by the sender or by a shared social registry.
+
+All three treatment paths receive the same ordinary B prediction surface. `no-standing-transfer` changes only B's initial permission, not B's visibility. `inherited-authority` deliberately copies A's standing into C without the provisional cap and exists as a pathological control.
+
+The core distinction is:
+
+```text
+recommendation may buy attention / opportunity
+recommendation does not import lived authority
+local consequence can turn provisional standing into locally earned standing
+local consequence can also revoke it
+```
+
+The scalar standing equation, exploration floor, and cap are protocol instruments. A passing result would support the architectural principle that social standing should remain context-specific, receiver-relative, and revisable. It would not establish a global reputation system or transitive trust graph.
+
+
+## Validation layer is outside cognition
+
+Version 0.8 adds a validation/reporting layer around the frozen experiments. It is not part of the cognitive architecture.
+
+`ValidationPlan`, `ValidationReportBuilder`, and the Desktop/CLI seed presets can see protocol names, final metrics, assertions, and evaluator world descriptors after a run. They cannot inject validation categories, challenge labels, holdout identity, or diagnostics into a mind's prediction/update path.
+
+The separation is deliberate:
+
+```text
+frozen experiment + world
+        |
+        | ordinary public frames/results
+        v
+validation/reporting layer
+        |
+        +--> seed-set classification
+        +--> assertion taxonomy
+        +--> challenge-slice filtering
+        +--> assay-sensitivity diagnostics
+```
+
+The protocol/world SHA-256 manifest further protects this boundary by making unnoticed mechanism changes visible before validation.

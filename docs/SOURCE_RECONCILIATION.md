@@ -98,3 +98,26 @@ The CPA commitment being tested is narrower than perfect provenance. Surface agr
 The protocol's compact developmental signature is an experimental residue of history, not a prescribed memory identifier. Its purpose is to ask whether imperfect lineage cues can be useful when exact causal ancestry is unavailable. The hidden-root oracle remains evaluator-only and exists solely to show how much performance is lost because ancestry is incomplete.
 
 A passing result would support preserving and reasoning over ancestry uncertainty. It would not justify a global provenance graph, exact source tracing, or the particular signature-distance heuristic as final CPA machinery.
+
+## Protocol 07 reconciliation: standing as transferable opportunity
+
+The completed single-organism lab repeatedly suggested that standing is provisional permission to matter. Protocol 07 asks whether that idea survives a move across mind boundaries.
+
+The experiment does not treat A's trust in B as a fact that C should copy. Instead it preserves three histories: A's experience of B, C's prior experience of A, and C's later direct consequence with B. The provisional path combines the first two only to decide how much opportunity B receives before the third history exists.
+
+This follows the same project correction that separated representation from authority in memory metabolism. A recommendation can remain representable and socially useful without being granted the same force as lived consequence. It also extends Protocol 03's distinction between teaching and doctrine: standing itself can become doctrinal if copied without preserving whose consequence earned it.
+
+The experiment deliberately holds ordinary source access constant. It is not testing whether social networks should reveal or hide peers. It is testing whether another mind's earned permission can cross as a bounded prior while remaining answerable to the receiver's own world.
+
+A passing result would justify continued study of receiver-relative social standing. It would not establish the protocol's scalar formula, a universal reputation score, or transitive standing as CPA anatomy.
+
+
+## v0.8 validation reconciliation: pressure before architecture
+
+The seven-protocol development record is now strong enough that adding another successful synthetic mechanism would provide less information than attempting to break the existing ones. This is consistent with the project's broader architectural restraint: an experimental behavior should not become CPA anatomy merely because a world was constructed in which it works.
+
+Version 0.8 therefore freezes the Protocol 01-07 experiment/world sources and records their hashes. The five familiar seeds are explicitly development data. A separate holdout set is introduced without changing protocol code or preregistered thresholds. Reporting distinguishes world/control manipulation from mechanism outcomes, safety boundaries, and accounting constraints.
+
+The challenge slices are intentionally evaluator-side filters over already-generated world descriptors. They do not become new cognitive senses, pressure channels, or hidden labels. Their purpose is to ask where a mechanism stops working, not to tell the mechanism that it is being challenged.
+
+This validation phase is directly relevant to eventual CPA synthesis. What may survive into Rust is not a collection of fitted constants, but a smaller set of behavioral laws whose useful envelope remains visible under fresh histories.

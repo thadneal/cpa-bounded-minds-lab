@@ -198,3 +198,79 @@ The protocol fails if ancestry inference merely suppresses agreement in general.
 4. inspect echo-trap error, independent-convergence error, echo recall, false merges, and oracle proximity together;
 5. interpret before changing the ancestry heuristic;
 6. then run the six-protocol five-seed full-suite checkpoint.
+
+---
+
+## 2026-08-20 - Protocol 06 accepted; social standing transfer becomes the next pressure
+
+### Accepted Protocol 06 result
+
+Protocol 06 returned **5/5 Support with 40/40 preregistered checks passing**. Mean total RMSE was approximately `0.15245` under incomplete ancestry inference versus `0.19603` when every agreeing report was counted as independent. Shared-root pair recall averaged about `94.8%`; false merging of independent roots averaged about `3.1%`.
+
+Seed 211 remained useful because false merging rose close to the preregistered ceiling while the comparative benefit still survived. Seed 401 also clarified that the hidden-root oracle is a calibration reference rather than a mathematical RMSE lower bound: finite noisy inference can occasionally fit a generated history slightly better than perfect grouping.
+
+The accepted claim remains narrow. Perfect provenance is unnecessary for useful ancestry-sensitive corroboration in this synthetic family. Protocol 06 is frozen.
+
+### Why standing transfer follows ancestry
+
+Protocols 01, 03, and 06 now separate three things that ordinary trust systems often collapse:
+
+```text
+what another mind believes
+how that belief earned warrant
+how much permission that belief currently has to matter
+```
+
+The next pressure asks whether the third quantity can travel socially. If A has extensive successful experience with B, C should plausibly learn something from that relationship before spending equivalent local experience. Yet copying A's standing directly would erase the fact that C has not lived A's consequences.
+
+The desired middle condition is recommendation as **opportunity**, not authority.
+
+### Protocol 07
+
+Protocol 07 generates twelve-context worlds with three abstract social roles: recommender A, source B, and receiver C. Every seed includes strong A-to-B relationships that generalize to C, strong relationships that fail locally for C, and weakly supported recommendations. C also brings a seed-specific already-earned standing for A.
+
+All treatments see the same public B estimate and the same receiver consequence. Only the initial social permission differs:
+
+- `provisional-standing` discounts A's recommendation by C's standing for A and A's evidence depth, then caps it;
+- `no-standing-transfer` starts B at a small exploration floor;
+- `inherited-authority` copies A's standing for B as though it were already C's lived authority.
+
+Direct C consequence updates both C's local estimate and B's standing in every path. Context labels remain evaluator-only.
+
+The protocol is intentionally willing to accept a small total-error price relative to refusing all social recommendation. The claim being tested is not that recommendation is free. It is that bounded second-hand standing can buy useful early opportunity while remaining much safer than inherited authority.
+
+### Next evidence
+
+1. rebuild under the pinned .NET 10 SDK;
+2. run the 20 invariant tests;
+3. run Protocol 07 across `101,211,307,401,503` without changing its nine thresholds;
+4. inspect context composition, C-to-A credibility, early transferable and mismatch error, total error, late mismatch repair, final B standing, and communication cost together;
+5. interpret before changing any standing-transfer rule;
+6. then run the seven-protocol five-seed full-suite checkpoint.
+
+
+---
+
+## 2026-08-20 - Protocol 07 accepted; mechanism discovery pauses for validation
+
+### Accepted Protocol 07 result
+
+Protocol 07 returned **5/5 Support with 45/45 preregistered checks passing**. Provisional standing improved early access to sources that generalized, remained substantially safer than inherited authority when recommendations failed locally, and was selectively renewed or revoked by receiver consequence. It also carried a real cost relative to refusing recommendation transfer across the mixed world. That cost is preserved in the interpretation.
+
+### Methodological concern
+
+Protocols 01-07 all returned Support on the same canonical five-seed development matrix. The data do not appear duplicated or corrupted, and many near-overlapping plots are explained by paired treatments sharing the same environment and learner. However, the canonical seeds were repeatedly used during implementation sanity checks and therefore cannot provide independent confirmation. Several controls also intentionally expose a specific failure mode, while manipulation/accounting assertions were contributing to an overly green visual summary.
+
+### Validation pivot
+
+Version 0.8 adds no new cognitive mechanism. Protocols 01-07 and their world generators are frozen by SHA-256 manifest. The canonical five seeds become `development-v1`. A twenty-seed `holdout-v1` is registered without running its outcomes during implementation of the validation tooling.
+
+The validation report separates manipulation, mechanism outcome, safety boundary, and accounting evidence. It also preregisters stress slices for source instability, conflicting social evidence, regime shift, ancestry opacity, and recommender fragility. Protocols 01 and 02 retain a warning because their old seed semantics mostly perturb order/noise rather than lived circumstance.
+
+### Next evidence
+
+1. verify the frozen source hashes, build under .NET 10, and run the 23 regression/invariant tests;
+2. run all seven protocols once across holdout-v1 without changing any mechanism or threshold;
+3. inspect category-level failures and challenge-slice coverage before looking for a single headline pass rate;
+4. welcome coherent Mixed/Disconfirm outcomes as possible operating-envelope evidence;
+5. if holdout evidence motivates a change, retire holdout-v1 for confirmation and register a new future holdout.

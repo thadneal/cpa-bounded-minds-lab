@@ -3,6 +3,7 @@ namespace Cpa.BoundedMindsLab.Cli.Cli;
 public sealed record CliArguments(
     bool List,
     bool SelfTest,
+    bool Validation,
     bool Help,
     bool All,
     IReadOnlyList<string> Experiments,
@@ -14,6 +15,7 @@ public sealed record CliArguments(
     {
         var list = false;
         var selfTest = false;
+        var validation = false;
         var help = false;
         var all = false;
         var experiments = new List<string>();
@@ -34,6 +36,9 @@ public sealed record CliArguments(
                     break;
                 case "--all":
                     all = true;
+                    break;
+                case "--validation":
+                    validation = true;
                     break;
                 case "--experiment":
                     experiments.Add(RequireValue(args, ref index, argument));
@@ -56,7 +61,7 @@ public sealed record CliArguments(
             }
         }
 
-        return new CliArguments(list, selfTest, help, all, experiments, seed, replicationSeeds, output);
+        return new CliArguments(list, selfTest, validation, help, all, experiments, seed, replicationSeeds, output);
     }
 
     private static string RequireValue(string[] args, ref int index, string argument)

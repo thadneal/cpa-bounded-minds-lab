@@ -189,7 +189,7 @@ When several experiments run within one seed, the progress surface changes as th
 
 ## Default experiment selection
 
-The newest protocol is selected by default when the Desktop Lab opens, while frozen earlier protocols remain available but unselected. In v0.5.0 this means Protocol 05 is the ordinary targeted run. `Select all` remains available for the full-suite checkpoint.
+The default changed in v0.8.0 because the laboratory is now in validation rather than protocol-development mode. The Desktop Lab opens with all frozen Protocols 01-07 selected and **Holdout v1 (20, frozen)** as the seed preset. Development v1 remains available as a five-seed regression preset, and Custom allows exploratory seeds. Historical sections below describe the default behavior of earlier releases.
 
 ## v0.3.0 seed and Protocol 03 updates
 
@@ -291,3 +291,39 @@ Protocol 05 now appears in Run notes as a frozen Supported baseline.
 The v0.5.2 boundary-batched graph experiment is **reverted**. It did not produce a noticeable responsiveness improvement in use. Numeric telemetry remains projected off the dispatcher and display-bounded, but graph snapshots again include the latest accumulated points and may update incrementally at the existing adaptive graph cadence. Durable scientific telemetry remains unchanged.
 
 Data-grid text now wraps inside cells instead of silently clipping long words/phrases. The dark column-header template restores WPF's left/right resize grippers, so table columns can be resized interactively. Resizing a column changes only the internal allocation of the existing DataGrid surface; it does not resize the containing table, right pane, tab, or window. Rows may grow to show wrapped content and the existing table scroll surface absorbs the additional content.
+
+## v0.7.0 Protocol 07 progress
+
+Protocol 07 is now the newest protocol and is selected by default. Protocol Progress follows the social-standing assay:
+
+```text
+Receive a social recommendation
+  seed-specific transferable + nontransferable relationships
+  A publishes bounded standing for B
+Compare standing transfer rules
+  provisional standing transfer
+  no standing transfer baseline
+  inherited-authority control
+Judge social authority transfer
+  nine falsification checks
+  protocol verdict
+```
+
+Protocol 06 now appears in Run notes as a frozen Supported baseline. The graph remains incrementally updated, seed-scoped, display-bounded, and observer-only. No new protocol logic depends on graph state, selected seed, focus path, metric, legend visibility, table sizing, or render timing.
+
+
+## v0.8.0 validation workbench
+
+The Desktop Lab now treats seed-set identity as scientific metadata rather than a free-form convenience. The Run panel offers:
+
+```text
+Holdout v1 (20, frozen)
+Development v1 (5, regression only)
+Custom
+```
+
+Editing the seed text automatically reclassifies the selection unless it exactly matches a registered set. Holdout v1 is the default and all seven frozen protocols are selected so the ordinary v0.8 run is the validation matrix rather than another targeted mechanism-development run.
+
+Every completed Desktop session writes `validation-report.json` and `validation-summary.md` in addition to the existing replication/session artifacts. The Protocol results assertion table includes a Category column so manipulation, mechanism outcome, safety boundary, and accounting checks remain visibly distinct during review.
+
+No validation metadata is visible to experiment cognition. Seed-set labels, check categories, challenge-slice filters, diagnostic warnings, table layout, and graph state are evaluator/workbench concerns only.

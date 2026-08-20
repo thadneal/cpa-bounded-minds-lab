@@ -1,66 +1,132 @@
 # Validation
 
-Version 0.6.0 defines **18 self-tests**. Protocol-specific invariants include distinct seed-generated worlds and seed-101 implementation fixtures for Protocols 03, 04, 05, and 06.
+Version 0.8.0 begins a validation phase for the frozen Protocol 01-07 mechanism-discovery set. No Protocol 08 is added in this release.
 
-## Required build validation
+## Why the phase changed
 
-```powershell
-dotnet restore Cpa.BoundedMindsLab.sln
-dotnet build Cpa.BoundedMindsLab.sln -c Release
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
+The first seven protocols all returned Support on the canonical five-seed matrix. Those runs remain useful mechanism-discovery evidence, but the seeds were repeatedly used during design and implementation sanity checks. They are therefore development data rather than fresh holdout validation.
+
+Version 0.8.0 makes that distinction explicit and adds tooling that treats all-Support and all-pass outcomes as possible assay-sensitivity warnings rather than automatic confirmation.
+
+## Frozen source boundary
+
+Protocol 01-07 experiment and world source files are frozen at their v0.7.0 contents. Their SHA-256 values are recorded in:
+
+```text
+docs/FROZEN_PROTOCOL_SHA256.txt
 ```
 
-Expected result: all 18 self-tests pass with zero analyzer warnings/errors.
+Both `scripts/verify.ps1` and `scripts/verify.sh` check this manifest before building. A validation result is not comparable if a frozen protocol/world file changed unnoticed.
 
-The source-generation environment used for v0.6.0 does not provide the .NET SDK. Build and self-test claims are deferred to the Windows development environment.
+## Seed sets
 
-## Protocol 06 result set
+### development-v1
 
-```powershell
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- `
-  --experiment 06-incomplete-epistemic-ancestry `
-  --replicate 101,211,307,401,503 `
-  --output _artifacts/protocol-06-five-seed
+```text
+101, 211, 307, 401, 503
 ```
 
-Before interpretation confirm:
+Use this set for deterministic regression and historical comparison only. It is not fresh validation.
 
-- all five seed directories exist;
-- each seed contains result JSON, metrics CSV, manifest, and frame journal;
-- `replication-report.json` contains five completed histories;
-- each seed has a distinct Protocol 06 scenario fingerprint;
-- every world contains at least three echo-trap and three independent-convergence contexts;
-- missing-origin rate is >= 0.30;
-- immediate-sender hint rate is >= 0.20;
-- all paths consumed the same 98 report packets.
+### holdout-v1
 
-Then evaluate the eight preregistered checks without changing thresholds.
-
-## Desktop validation
-
-1. Launch the Desktop Lab and confirm the title reports `v0.6.0`.
-2. Confirm Seeds defaults to `101, 211, 307, 401, 503` and Protocol 06 is selected by default.
-3. Start a five-seed Protocol 06 session at Maximum pace.
-4. Confirm the active-seed badge changes as histories advance and the graph Seed selector retains completed seed histories.
-5. Confirm Protocol Progress exposes incomplete-ancestry generation, inferred/naive/oracle comparison, and eight-check evaluation.
-6. Select a Focus path and verify Metric contains only values published by that path.
-7. Confirm time-series metrics update incrementally during an active path rather than waiting for a phase/path boundary.
-8. Confirm final scalar metrics with several paths use categorical bars, while multi-point metrics remain line plots.
-9. Confirm axis guidance describes x/y meaning and whether higher/lower/context-dependent values are preferred.
-10. Toggle individual legend entries and Show all/Hide all. Hidden-series state must not affect experiment output.
-11. Maximize the graph and verify the selected seed, metric, focus path, visibility state, and axis guidance remain coherent.
-12. In Timeline, Protocol results, assertion detail, Public mind state, and Trace surface tables, resize several column headers. The table/pane/window dimensions must remain fixed while internal column widths change.
-13. Narrow a text-heavy table column and verify cell text wraps and rows grow/scroll rather than clipping the text or resizing the containing table.
-14. Confirm dropped display frames, graph freeze, selection changes, resizing, and maximized graph use never alter durable artifacts.
-
-## Full-suite checkpoint
-
-After Protocol 06 is interpreted:
-
-```powershell
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- `
-  --replicate 101,211,307,401,503 `
-  --output _artifacts/full-suite-0.6.0
+```text
+809, 977, 1201, 1429, 1693, 2017, 2371, 2741, 3163, 3581,
+4001, 4441, 4871, 5303, 5741, 6211, 6673, 7121, 7603, 8089
 ```
 
-This should reproduce the frozen Protocol 01-05 verdict families while adding Protocol 06 histories. Investigate any regression before proceeding.
+These twenty seeds were registered in source before their Protocol 01-07 outcomes were inspected. Do not tune protocol mechanics or preregistered thresholds from holdout-v1 and then reuse holdout-v1 as confirmation. If the holdout causes a mechanism change, a future validation claim requires a new holdout set.
+
+Protocols 01 and 02 predate the v0.3 seed-as-lived-circumstance correction. New seed values mostly perturb order/noise there, so their holdout evidence is weaker than Protocols 03-07. The validation report always carries this limitation.
+
+## Check taxonomy
+
+The protocol verdicts remain unchanged, but v0.8 reports assertion evidence in four categories:
+
+- `manipulation`: the world/control actually contains the intended experimental condition;
+- `mechanism-outcome`: the proposed behavior produces the functional effect under test;
+- `safety-boundary`: the behavior remains selective, revisable, bounded, or avoids the failure mode under pressure;
+- `accounting-constraint`: packet/work/resource accounting remains within the explicit budget.
+
+This classification is reporting metadata only. It does not alter any frozen protocol threshold or verdict rule.
+
+## Challenge slices
+
+The first holdout pass preregisters five stress slices over world descriptors already emitted by the frozen protocols:
+
+| Slice | Protocol | Rule |
+| --- | --- | --- |
+| High source instability | P03 | `unstable_transition_cells >= 4` OR `sparse_ambiguous_cells >= 2` |
+| Dense conflicting social evidence | P04 | dissent cells >= 7 OR `private_evidence_span >= 35` |
+| High regime shift | P05 | `shifted_contexts >= 6` |
+| Weak ancestry visibility | P06 | `missing_origin_rate >= 0.45` OR `immediate_sender_hint_rate >= 0.28` |
+| Fragile recommender transfer | P07 | `recommender_credibility <= 0.70` OR `strong_local_mismatch_contexts >= 4` |
+
+These are filters, not treatments. They identify stressful subsets of the holdout histories without changing the world, receiver, thresholds, or communication budget after outcomes are known. If fewer than three holdout runs match a slice, the report flags the coverage as too thin for a strong conclusion.
+
+## Automated outputs
+
+Every completed Desktop session now writes:
+
+```text
+replication-report.json
+validation-report.json
+validation-summary.md
+session-manifest.json
+seed-*/...
+```
+
+`validation-report.json` records the seed-set classification, per-protocol verdict counts, assertion-category totals, challenge-slice outcomes, and diagnostics. `validation-summary.md` is a compact human-readable rendering of the same validation metadata.
+
+The report emits explicit diagnostics when:
+
+- every protocol run returns Support;
+- every assertion passes;
+- the session is a development or custom seed set rather than holdout-v1;
+- only part of the frozen protocol catalog was run;
+- a challenge slice has insufficient matching histories.
+
+These diagnostics do not change protocol verdicts. They change how much confidence should be assigned to them.
+
+## Invariant suite
+
+Version 0.8.0 defines **23 self-tests**. The existing seed-101 protocol tests are retained as **development regression fixtures**, not evidence that a fresh validation seed should Support. New checks verify:
+
+1. development-v1 and holdout-v1 remain unique, frozen, and disjoint;
+2. representative assertions are separated into the intended evidence categories;
+3. a validation report correctly labels the canonical five-seed set as development data and tallies mechanism outcomes separately.
+
+## Authoritative Windows validation sequence
+
+The source-generation environment used to prepare this package does not provide the .NET 10 SDK, so the Windows environment remains authoritative for compilation and analyzers.
+
+```powershell
+./scripts/verify.ps1
+```
+
+This verifies frozen source hashes, builds Release, and runs all 23 self-tests.
+
+Then run the holdout exactly as registered:
+
+```powershell
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
+  --validation `
+  --output _artifacts/validation-holdout-v1
+```
+
+Alternatively, launch the Desktop Lab. It now defaults to **Holdout v1 (20, frozen)**, all seven frozen protocols selected, and Maximum pace.
+
+## Interpretation rules for this phase
+
+Do not require 20/20 Support as the definition of success. A Mixed or Disconfirm result can be useful if it identifies where an otherwise valuable mechanism stops working.
+
+Review in this order:
+
+1. confirm frozen hashes, seed set, completion, and world/manipulation checks;
+2. inspect mechanism-outcome and safety-boundary failures separately from accounting failures;
+3. inspect challenge-slice results and coverage;
+4. examine effect size and failure shape, not only the categorical verdict;
+5. treat 100% Support as a reason to examine assay sensitivity more closely;
+6. only then decide whether a mechanism looks robust enough to inform the eventual CPA substrate.
+
+The goal of v0.8 is an **operating envelope**, not another row of green verdicts.

@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.8.0 - 2026-08-20
+
+- Froze Protocol 07 as Supported after the canonical development matrix returned 5/5 Support with all 45 preregistered checks passing. Recorded the useful early transfer benefit, the measurable cost relative to refusing standing transfer, and the substantially safer behavior relative to inherited authority.
+- Paused protocol expansion and began a validation phase for the frozen Protocol 01-07 mechanism-discovery set. No Protocol 08 is added in this release.
+- Renamed the canonical `101,211,307,401,503` matrix `development-v1` and registered a separate twenty-seed `holdout-v1` set before inspecting its Protocol 01-07 outcomes.
+- Added `ValidationPlan`, `ValidationReportBuilder`, and `ValidationRunner`. Completed validation-capable sessions now produce `validation-report.json` and `validation-summary.md` alongside the existing replication artifacts.
+- Added assertion taxonomy separating manipulation, mechanism outcome, safety boundary, and accounting constraints without changing any frozen protocol verdict rule or threshold.
+- Added preregistered challenge slices over Protocol 03-07 holdout world descriptors: high source instability, dense conflicting social evidence, high regime shift, weak ancestry visibility, and fragile recommender transfer. Thin challenge coverage and all-Support/all-pass sessions are surfaced as diagnostics rather than silently treated as stronger evidence.
+- Added `--validation` to the CLI to run all seven frozen protocols across holdout-v1.
+- Changed the Desktop Lab validation default to all Protocols 01-07 selected with a Seed set selector for Holdout v1, Development v1, and Custom. Assertion detail now displays the validation category.
+- Added a SHA-256 manifest for every frozen Protocol 01-07 experiment/world source file. Both verification scripts check frozen-source integrity before build/self-test.
+- Added three validation invariants, bringing the suite to 23 tests. Existing seed-101 protocol tests are explicitly treated as development regression fixtures rather than fresh evidence.
+- Preserved incremental graph rendering, scalar/bar topology selection, metric guidance, line visibility controls, wrapped/resizable tables, and the observer-only visualization boundary unchanged.
+- Updated README, plan, experiments, falsification, research ledger, architecture, source reconciliation, Desktop Lab, runbook, validation documentation, artifact metadata, CLI, assembly versions, and window fallback titles for v0.8.0.
+
+## 0.7.0 - 2026-08-20
+
+- Froze Protocol 06 as Supported after the canonical five-seed result returned 5/5 Support with all 40 preregistered checks passing. Recorded the accepted incomplete-ancestry result and clarified that the hidden-root oracle is a calibration reference rather than a guaranteed RMSE lower bound.
+- Added Protocol 07, `07-provisional-standing-transfer`, asking whether standing earned by recommender A can buy peer B limited opportunity in receiver C without being copied as C's lived authority.
+- Added `StandingTransferWorld`, where seed now changes C-to-A credibility, strong/weak recommendation evidence, B-to-C transferability, target geometry, source estimates, noise, context placement, and encounter order while all treatments within a seed share the same world.
+- Added three Protocol 07 treatments: capped/discounted provisional standing, a no-standing-transfer exploration baseline, and an inherited-authority control that deliberately copies A's standing for B into C.
+- Added nine preregistered Protocol 07 falsification checks covering social-world diversity, quality-sensitive opportunity, early transferable benefit, protection from inherited doctrine, bounded aggregate opportunity cost, whole-history benefit versus inherited authority, local revocation, local renewal, and explicit communication cost.
+- Added two invariant tests for Protocol 07 seed semantics and the seed-101 implementation fixture, bringing the suite to 20 tests.
+- Updated Desktop Protocol Progress and Run Notes for Protocol 07. The newest protocol remains selected automatically from the experiment catalog; seed-scoped graph inspection and the existing incremental visualization path are unchanged.
+- Updated README, plan, experiments, falsification, research ledger, architecture, source reconciliation, runbook, validation, artifact metadata, CLI, assembly versions, and window fallback titles for v0.7.0.
+- Protocols 01 through 06 experiment mechanics remain frozen.
+
 ## 0.6.0 - 2026-08-19
 
 - Froze Protocol 05 as Supported after the canonical five-seed run returned 5/5 Support and 35/35 preregistered checks. Earned convention retained essentially all fresh-negotiation utility while reducing communication work by about 76%, revised changed contexts, retained stable contexts, and outperformed the frozen culture after the world changed.

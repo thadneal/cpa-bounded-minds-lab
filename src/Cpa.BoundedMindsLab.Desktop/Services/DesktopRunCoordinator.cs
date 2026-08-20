@@ -1,6 +1,7 @@
 using System.IO;
 using Cpa.BoundedMindsLab.Experiments;
 using Cpa.BoundedMindsLab.Observability;
+using Cpa.BoundedMindsLab.Validation;
 
 namespace Cpa.BoundedMindsLab.Desktop.Services;
 
@@ -22,6 +23,14 @@ public sealed record DesktopSessionStatus(
     int CompletedSeedCount,
     ulong? ActiveSeed);
 
+public sealed record DesktopAssertionResult(
+    string Category,
+    string Name,
+    bool Passed,
+    string Description,
+    double? Actual,
+    double? Boundary);
+
 public sealed record DesktopProtocolResult(
     ulong Seed,
     string Experiment,
@@ -31,7 +40,7 @@ public sealed record DesktopProtocolResult(
     string Interpretation,
     int PassedAssertions,
     int FailedAssertions,
-    IReadOnlyList<ExperimentAssertion> Assertions);
+    IReadOnlyList<DesktopAssertionResult> Assertions);
 
 public sealed record DesktopProtocolResultSummary(
     string Experiment,
@@ -235,7 +244,9 @@ public sealed class DesktopRunCoordinator : IDisposable
             }
 
             var report = ReplicationRunner.CreateReport(experiments, completedRuns);
+            var validation = ValidationReportBuilder.Create(completedRuns);
             ArtifactWriter.WriteReplication(report, outputDirectory);
+            ArtifactWriter.WriteValidation(validation, outputDirectory);
             ArtifactWriter.WriteSessionManifest(
                 outputDirectory,
                 seeds,
@@ -301,7 +312,13 @@ public sealed class DesktopRunCoordinator : IDisposable
                     result.Interpretation,
                     passed,
                     result.Assertions.Count - passed,
-                    result.Assertions.ToArray()));
+                    result.Assertions.Select(assertion => new DesktopAssertionResult(
+                        ValidationCheckTaxonomy.Classify(assertion.Name),
+                        assertion.Name,
+                        assertion.Passed,
+                        assertion.Description,
+                        assertion.Actual,
+                        assertion.Boundary)).ToArray()));
             }
 
             _protocolResultsVersion++;

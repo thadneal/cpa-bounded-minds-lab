@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:Cpa.BoundedMindsLab.Desktop.Controls"
-        Title="CPA Bounded Minds Laboratory v0.6.0"
+        Title="CPA Bounded Minds Laboratory v0.8.0"
         Width="1540"
         Height="930"
         MinWidth="1120"
@@ -25,7 +25,7 @@
         <ScrollViewer Grid.Row="0" Grid.Column="0" Background="{StaticResource WindowBrush}" VerticalScrollBarVisibility="Auto">
             <StackPanel>
                 <TextBlock Text="CPA Bounded Minds Laboratory" FontSize="21" FontWeight="SemiBold" Margin="6,4,6,0" />
-                <TextBlock Text="Development among bounded minds" Foreground="{StaticResource MutedBrush}" Margin="6,0,6,10" />
+                <TextBlock Text="Validation phase: frozen bounded-minds mechanisms" Foreground="{StaticResource MutedBrush}" Margin="6,0,6,10" />
 
                 <GroupBox Header="Experiments">
                     <StackPanel>
@@ -59,18 +59,25 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Seeds" VerticalAlignment="Top" Margin="2,7,8,5" />
-                        <TextBox x:Name="SeedTextBox" Grid.Row="0" Grid.Column="1" MinHeight="44" TextWrapping="Wrap" AcceptsReturn="True" ToolTip="Enter one or more unsigned seeds separated by commas, spaces, semicolons, or new lines." />
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Pace" VerticalAlignment="Center" Margin="2,5,8,5" />
-                        <ComboBox x:Name="PaceComboBox" Grid.Row="1" Grid.Column="1" SelectedIndex="0">
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Seed set" VerticalAlignment="Center" Margin="2,5,8,5" />
+                        <ComboBox x:Name="SeedPresetComboBox" Grid.Row="0" Grid.Column="1" SelectionChanged="SeedPresetSelectionChanged">
+                            <ComboBoxItem Content="Holdout v1 (20, frozen)" Tag="holdout" />
+                            <ComboBoxItem Content="Development v1 (5, regression only)" Tag="development" />
+                            <ComboBoxItem Content="Custom" Tag="custom" />
+                        </ComboBox>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Seeds" VerticalAlignment="Top" Margin="2,7,8,5" />
+                        <TextBox x:Name="SeedTextBox" Grid.Row="1" Grid.Column="1" MinHeight="54" TextWrapping="Wrap" AcceptsReturn="True" TextChanged="SeedTextChanged" ToolTip="Holdout v1 is intentionally frozen. Editing this box makes the run custom." />
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Pace" VerticalAlignment="Center" Margin="2,5,8,5" />
+                        <ComboBox x:Name="PaceComboBox" Grid.Row="2" Grid.Column="1" SelectedIndex="0">
                             <ComboBoxItem Content="Maximum" />
                             <ComboBoxItem Content="2 ms / observation" />
                             <ComboBoxItem Content="10 ms / observation" />
                         </ComboBox>
-                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Output" VerticalAlignment="Top" Margin="2,7,8,5" />
-                        <TextBox x:Name="OutputTextBox" Grid.Row="2" Grid.Column="1" MinHeight="54" TextWrapping="Wrap" AcceptsReturn="True" />
-                        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Margin="0,6,0,0">
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Output" VerticalAlignment="Top" Margin="2,7,8,5" />
+                        <TextBox x:Name="OutputTextBox" Grid.Row="3" Grid.Column="1" MinHeight="54" TextWrapping="Wrap" AcceptsReturn="True" />
+                        <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Margin="0,6,0,0">
                             <Button x:Name="RunButton" Content="Run session" Click="RunClicked" />
                             <UniformGrid Columns="2">
                                 <Button x:Name="PauseButton" Content="Pause" Click="PauseClicked" IsEnabled="False" />
@@ -224,6 +231,7 @@
                         <DataGrid x:Name="ResultAssertionsGrid" Grid.Row="3" AutoGenerateColumns="False" IsReadOnly="True">
                             <DataGrid.Columns>
                                 <DataGridCheckBoxColumn Header="Pass" Binding="{Binding Passed}" Width="48" />
+                                <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="120" ElementStyle="{StaticResource DataGridWrappingTextStyle}" />
                                 <DataGridTextColumn Header="Check" Binding="{Binding Name}" Width="180" ElementStyle="{StaticResource DataGridWrappingTextStyle}" />
                                 <DataGridTextColumn Header="Actual" Binding="{Binding Actual, StringFormat=0.######}" Width="75" ElementStyle="{StaticResource DataGridWrappingTextStyle}" />
                                 <DataGridTextColumn Header="Boundary" Binding="{Binding Boundary, StringFormat=0.######}" Width="75" ElementStyle="{StaticResource DataGridWrappingTextStyle}" />
@@ -289,8 +297,14 @@
                         <TextBlock Text="Emergent convention / artificial culture - frozen Supported baseline" FontSize="14" Margin="0,2,0,6" />
                         <TextBlock Text="Three peers repeatedly coordinate in seed-generated contexts. Successful use can make separate local convention memories converge and earn a cheap shorthand. A fresh-negotiation baseline never retains convention, while a frozen-culture control refuses revision after some contexts change. The accepted result supports distributed, revisable convention formation without a central culture owner." TextWrapping="Wrap" />
                         <TextBlock Text="Protocol 06" FontSize="18" FontWeight="SemiBold" Margin="0,14,0,0" />
-                        <TextBlock Text="Incomplete epistemic ancestry" FontSize="14" Margin="0,2,0,6" />
-                        <TextBlock Text="Seven peers publish reports whose upstream ancestry is only partially visible. Some reports are independent convergence; others are copied echoes of one source episode. The inferred path uses incomplete origin hints and compact developmental signatures to estimate ancestry, the naive control counts every report independently, and an oracle control supplies perfect hidden lineage only as a calibration ceiling." TextWrapping="Wrap" />
+                        <TextBlock Text="Incomplete epistemic ancestry - frozen Supported baseline" FontSize="14" Margin="0,2,0,6" />
+                        <TextBlock Text="Seven peers publish reports whose upstream ancestry is only partially visible. Some reports are independent convergence; others are copied echoes of one source episode. The accepted result supports inferring enough ancestry from partial public cues to discount echoed agreement while preserving genuinely independent convergence. The oracle control remains a calibration reference, not a theoretical lower bound or proposed global registry." TextWrapping="Wrap" />
+                        <TextBlock Text="Protocol 07" FontSize="18" FontWeight="SemiBold" Margin="0,14,0,0" />
+                        <TextBlock Text="Provisional standing transfer - frozen Supported baseline" FontSize="14" Margin="0,2,0,6" />
+                        <TextBlock Text="Mind A has directly earned context-specific standing for peer B and can recommend B to receiver C. The provisional path lets that second-hand standing buy limited opportunity after discounting it by C's own standing for A and A's evidence depth. A no-transfer baseline makes B earn influence from an exploration floor, while an inherited-authority control copies A's standing as though C had lived A's relationship. C's own consequence must remain the final authority in all cases." TextWrapping="Wrap" />
+                        <TextBlock Text="Validation phase" FontSize="18" FontWeight="SemiBold" Margin="0,14,0,0" />
+                        <TextBlock Text="Protocols 01-07 are frozen. development-v1 is regression data; holdout-v1 is the first registered 20-seed validation set and must not be tuned against then reused." FontSize="14" Margin="0,2,0,6" TextWrapping="Wrap" />
+                        <TextBlock Text="Completed sessions write validation-report.json and validation-summary.md. Checks are separated into manipulation, mechanism outcome, safety boundary, and accounting categories. Predeclared challenge slices identify stressful holdout worlds without changing the frozen protocol mechanics or thresholds. Protocols 01 and 02 predate seed-as-lived-circumstance semantics, so their holdout evidence remains weaker than Protocols 03-07." TextWrapping="Wrap" />
                         <TextBlock Text="The graph and tables are observational only. Experiments never read UI state, render timing, selected metric, splitter geometry, display telemetry backlog, or line visibility." Foreground="{StaticResource MutedBrush}" TextWrapping="Wrap" Margin="0,10,0,0" />
                     </StackPanel>
                 </ScrollViewer>

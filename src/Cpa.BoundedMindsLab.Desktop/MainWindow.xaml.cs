@@ -11,6 +11,7 @@ using Cpa.BoundedMindsLab.Desktop.Controls;
 using Cpa.BoundedMindsLab.Desktop.Services;
 using Cpa.BoundedMindsLab.Desktop.ViewModels;
 using Cpa.BoundedMindsLab.Experiments;
+using Cpa.BoundedMindsLab.Validation;
 
 namespace Cpa.BoundedMindsLab.Desktop;
 
@@ -22,6 +23,7 @@ public partial class MainWindow : Window
     private const string Protocol04Name = "04-bounded-communication-before-language";
     private const string Protocol05Name = "05-emergent-convention-artificial-culture";
     private const string Protocol06Name = "06-incomplete-epistemic-ancestry";
+    private const string Protocol07Name = "07-provisional-standing-transfer";
     private static readonly int[] BoundaryDelays = [0, 2, 10];
     private static readonly char[] SeedSeparators = [',', ';', ' ', '\t', '\r', '\n'];
     private readonly DesktopRunCoordinator _coordinator = new();
@@ -40,22 +42,22 @@ public partial class MainWindow : Window
     private bool _followActiveGraphSeed = true;
     private bool _closeAfterRun;
     private bool _allowClose;
+    private bool _updatingSeedPreset;
     private string? _progressExperiment;
 
     public MainWindow()
     {
         var catalog = ExperimentCatalog.All;
-        var latestExperiment = catalog[catalog.Count - 1].Name;
         Experiments = new ObservableCollection<ExperimentChoice>(
-            catalog.Select(experiment => new ExperimentChoice(
-                experiment.Name,
-                experiment.Question,
-                string.Equals(experiment.Name, latestExperiment, StringComparison.Ordinal))));
+            catalog.Select(experiment => new ExperimentChoice(experiment.Name, experiment.Question, isSelected: true)));
         InitializeComponent();
         Title = $"CPA Bounded Minds Laboratory v{ApplicationVersion.Current}";
         MetricPlot.SeriesVisibilityChanged += PlotSeriesVisibilityChanged;
         DataContext = this;
-        SeedTextBox.Text = string.Join(", ", ExperimentDefaults.ReplicationSeeds);
+        _updatingSeedPreset = true;
+        SeedPresetComboBox.SelectedIndex = 0;
+        SeedTextBox.Text = string.Join(", ", ExperimentDefaults.HoldoutSeeds);
+        _updatingSeedPreset = false;
         OutputTextBox.Text = ResolveDefaultArtifactRoot();
         ResetProtocolProgress();
         UpdateSelectorNavigationButtons();
@@ -105,7 +107,8 @@ public partial class MainWindow : Window
         ResetVisualization();
         ResetProtocolResultsView();
         SetRunningState(true);
-        StatusText.Text = $"Running {seeds.Length} seed(s) in succession -> {runOutput}";
+        var seedSet = ValidationPlan.ClassifySeedSet(seeds);
+        StatusText.Text = $"Running {seeds.Length} seed(s) [{seedSet}] in succession -> {runOutput}";
         try
         {
             var delay = PaceComboBox.SelectedIndex is >= 0 and < 3 ? BoundaryDelays[PaceComboBox.SelectedIndex] : 0;
@@ -187,6 +190,64 @@ public partial class MainWindow : Window
         {
             experiment.IsSelected = false;
         }
+    }
+
+    private void SeedPresetSelectionChanged(object sender, SelectionChangedEventArgs eventArgs)
+    {
+        if (_updatingSeedPreset || SeedPresetComboBox.SelectedItem is not ComboBoxItem item)
+        {
+            return;
+        }
+
+        var tag = item.Tag as string;
+        IReadOnlyList<ulong>? seeds = tag switch
+        {
+            "holdout" => ExperimentDefaults.HoldoutSeeds,
+            "development" => ExperimentDefaults.DevelopmentSeeds,
+            _ => null,
+        };
+        if (seeds is null)
+        {
+            return;
+        }
+
+        _updatingSeedPreset = true;
+        SeedTextBox.Text = string.Join(", ", seeds);
+        _updatingSeedPreset = false;
+    }
+
+    private void SeedTextChanged(object sender, TextChangedEventArgs eventArgs)
+    {
+        if (_updatingSeedPreset || SeedPresetComboBox is null)
+        {
+            return;
+        }
+
+        if (!TryParseSeeds(SeedTextBox.Text, out var seeds, out _))
+        {
+            SetSeedPresetIndex(2);
+            return;
+        }
+
+        var seedSet = ValidationPlan.ClassifySeedSet(seeds);
+        SetSeedPresetIndex(seedSet switch
+        {
+            ValidationPlan.HoldoutSetName => 0,
+            ValidationPlan.DevelopmentSetName => 1,
+            _ => 2,
+        });
+    }
+
+    private void SetSeedPresetIndex(int index)
+    {
+        if (SeedPresetComboBox.SelectedIndex == index)
+        {
+            return;
+        }
+
+        _updatingSeedPreset = true;
+        SeedPresetComboBox.SelectedIndex = index;
+        _updatingSeedPreset = false;
     }
 
     private void OpenOutputClicked(object sender, RoutedEventArgs eventArgs)
@@ -522,7 +583,11 @@ public partial class MainWindow : Window
         if (!string.Equals(_progressExperiment, experiment, StringComparison.Ordinal))
         {
             _progressExperiment = experiment;
-            if (string.Equals(experiment, Protocol06Name, StringComparison.Ordinal))
+            if (string.Equals(experiment, Protocol07Name, StringComparison.Ordinal))
+            {
+                SetProtocol07ProgressLabels();
+            }
+            else if (string.Equals(experiment, Protocol06Name, StringComparison.Ordinal))
             {
                 SetProtocol06ProgressLabels();
             }
@@ -548,6 +613,12 @@ public partial class MainWindow : Window
             }
 
             SetAllProgressPending();
+        }
+
+        if (string.Equals(experiment, Protocol07Name, StringComparison.Ordinal))
+        {
+            UpdateProtocol07Progress(timeline);
+            return;
         }
 
         if (string.Equals(experiment, Protocol06Name, StringComparison.Ordinal))
@@ -675,6 +746,49 @@ public partial class MainWindow : Window
             experimentComplete ? ProgressMark.Complete : syncComplete ? ProgressMark.Current : ProgressMark.Pending);
     }
 
+
+    private void UpdateProtocol07Progress(TelemetryTimelineSnapshot timeline)
+    {
+        var experimentStarted = HasTimelineEvent(timeline, Protocol07Name, ExperimentFrameKind.ExperimentStarted);
+        var scenarioGenerated = HasTimelineEvent(timeline, Protocol07Name, ExperimentFrameKind.DevelopmentalEvent, "scenario", "standing-world-generated");
+        var recommendationsPublished = HasTimelineEvent(timeline, Protocol07Name, ExperimentFrameKind.DevelopmentalEvent, "recommender-a", "recommendations-published");
+        var provisionalStarted = HasTimelineEvent(timeline, Protocol07Name, ExperimentFrameKind.PhaseChanged, "provisional-standing", "receiver-social-learning");
+        var provisionalComplete = HasTimelineEvent(timeline, Protocol07Name, ExperimentFrameKind.DevelopmentalEvent, "provisional-standing", "path-complete");
+        var noTransferStarted = HasTimelineEvent(timeline, Protocol07Name, ExperimentFrameKind.PhaseChanged, "no-standing-transfer", "receiver-social-learning");
+        var noTransferComplete = HasTimelineEvent(timeline, Protocol07Name, ExperimentFrameKind.DevelopmentalEvent, "no-standing-transfer", "path-complete");
+        var inheritedStarted = HasTimelineEvent(timeline, Protocol07Name, ExperimentFrameKind.PhaseChanged, "inherited-authority", "receiver-social-learning");
+        var inheritedComplete = HasTimelineEvent(timeline, Protocol07Name, ExperimentFrameKind.DevelopmentalEvent, "inherited-authority", "path-complete");
+        var experimentComplete = HasTimelineEvent(timeline, Protocol07Name, ExperimentFrameKind.ExperimentCompleted);
+
+        SetProgressLine(SourceDirectProgressText,
+            scenarioGenerated || recommendationsPublished ? ProgressMark.Complete : experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(SourcePublishProgressText,
+            provisionalStarted ? ProgressMark.Complete : recommendationsPublished ? ProgressMark.Complete : scenarioGenerated ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(SourceStepText,
+            provisionalStarted || experimentComplete ? ProgressMark.Complete : experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressCard(SourceProgressCard,
+            provisionalStarted || experimentComplete ? ProgressMark.Complete : experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
+
+        SetProgressLine(ReceiverLocalProgressText,
+            provisionalComplete || noTransferStarted ? ProgressMark.Complete : provisionalStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(ReceiverProvisionalProgressText,
+            noTransferComplete || inheritedStarted ? ProgressMark.Complete : noTransferStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(ReceiverLivedProgressText,
+            inheritedComplete ? ProgressMark.Complete : inheritedStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(ReceiverStepText,
+            inheritedComplete || experimentComplete ? ProgressMark.Complete : provisionalStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressCard(ReceiverProgressCard,
+            inheritedComplete || experimentComplete ? ProgressMark.Complete : provisionalStarted ? ProgressMark.Current : ProgressMark.Pending);
+
+        SetProgressLine(EvaluationAssertionsProgressText,
+            experimentComplete ? ProgressMark.Complete : inheritedComplete ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(EvaluationVerdictProgressText,
+            experimentComplete ? ProgressMark.Complete : ProgressMark.Pending);
+        SetProgressLine(EvaluationStepText,
+            experimentComplete ? ProgressMark.Complete : inheritedComplete ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressCard(EvaluationProgressCard,
+            experimentComplete ? ProgressMark.Complete : inheritedComplete ? ProgressMark.Current : ProgressMark.Pending);
+    }
 
     private void UpdateProtocol06Progress(TelemetryTimelineSnapshot timeline)
     {
@@ -891,6 +1005,20 @@ public partial class MainWindow : Window
     }
 
 
+    private void SetProtocol07ProgressLabels()
+    {
+        SetProgressLabel(SourceStepText, "1. Receive a social recommendation");
+        SetProgressLabel(SourceDirectProgressText, "Seed-specific transferable + nontransferable relationships");
+        SetProgressLabel(SourcePublishProgressText, "A publishes bounded standing for B");
+        SetProgressLabel(ReceiverStepText, "2. Compare standing transfer rules");
+        SetProgressLabel(ReceiverLocalProgressText, "Provisional standing transfer");
+        SetProgressLabel(ReceiverProvisionalProgressText, "No standing transfer baseline");
+        SetProgressLabel(ReceiverLivedProgressText, "Inherited-authority control");
+        SetProgressLabel(EvaluationStepText, "3. Judge social authority transfer");
+        SetProgressLabel(EvaluationAssertionsProgressText, "Nine falsification checks");
+        SetProgressLabel(EvaluationVerdictProgressText, "Protocol verdict");
+    }
+
     private void SetProtocol06ProgressLabels()
     {
         SetProgressLabel(SourceStepText, "1. Generate incomplete ancestry");
@@ -987,7 +1115,7 @@ public partial class MainWindow : Window
     private void ResetProtocolProgress()
     {
         _progressExperiment = null;
-        SetProtocol06ProgressLabels();
+        SetProtocol07ProgressLabels();
         SetAllProgressPending();
     }
 
@@ -1085,6 +1213,7 @@ public partial class MainWindow : Window
         StepButton.IsEnabled = false;
         ResumeButton.IsEnabled = false;
         CancelButton.IsEnabled = isRunning;
+        SeedPresetComboBox.IsEnabled = !isRunning;
         SeedTextBox.IsEnabled = !isRunning;
         PaceComboBox.IsEnabled = !isRunning;
         OutputTextBox.IsEnabled = !isRunning;

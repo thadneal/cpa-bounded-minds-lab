@@ -19,21 +19,24 @@ Unless a protocol explicitly challenges one of them:
 7. no ordinary path receives unrestricted access to all private interiors;
 8. artificial controls are labeled as controls rather than promoted into architecture.
 
-## Replication-seed policy from v0.3.0 onward
+## Seed policy and the v0.8 validation correction
 
-Protocols 01 and 02 are frozen records and keep their original seed semantics. Their five seeds mostly perturb schedule and observation noise.
+Protocols 01 and 02 are frozen records and keep their original seed semantics. Their seeds mainly perturb schedule and observation noise. Beginning with Protocol 03, a seed selects a member of a preregistered developmental-world family and can change what was lived: evidence depth, source reliability, local target relationships, regime transitions, overlap, and encounter order. Treatments within one seed still receive the same generated world.
 
-Beginning with Protocol 03, a replication seed should select a **member of a preregistered developmental-world family**. The seed may change developmental circumstances that a real local history could plausibly change, such as experience depth, source reliability pattern, local target relationships, regime transitions, overlap, and encounter order.
-
-The protocol must still define the family before results are seen. A seed is not a post-hoc difficulty knob. Each treatment inside one seed receives the same generated world so treatment comparisons remain controlled.
-
-The canonical matrix remains:
+Version 0.8 adds a second correction. The canonical five seeds were repeatedly used while building and sanity-checking mechanisms, so they are now named explicitly as development data:
 
 ```text
-101, 211, 307, 401, 503
+development-v1 = 101, 211, 307, 401, 503
 ```
 
-`SelfTestSuite` verifies that these five values produce distinct Protocol 03 developmental-world fingerprints, distinct Protocol 04 social-history fingerprints/layouts, distinct Protocol 05 coordination-world fingerprints, and distinct Protocol 06 incomplete-ancestry worlds.
+They remain useful for deterministic regression but are no longer fresh validation. A separate twenty-seed set is frozen before Protocol 01-07 validation outcomes are inspected:
+
+```text
+holdout-v1 = 809, 977, 1201, 1429, 1693, 2017, 2371, 2741, 3163, 3581,
+             4001, 4441, 4871, 5303, 5741, 6211, 6673, 7121, 7603, 8089
+```
+
+The holdout set must not become another tuning set. If a protocol is modified after seeing holdout-v1, that mechanism requires a new validation set rather than another claim on holdout-v1.
 
 ## Experimental arc
 
@@ -81,26 +84,53 @@ Narrow result: repeated bounded interaction can compress into a distributed, rev
 
 ### Protocol 06: incomplete epistemic ancestry
 
-Status: **implemented in v0.6.0, result pending**.
+Status: **frozen Supported**.
 
-Can a receiver distinguish independent convergence from echoed ancestry when explicit provenance is missing, partial, or stops at the immediate sender?
+Accepted result: 5/5 Support, 40/40 checks. Inferred ancestry reduced mean total RMSE from about `0.19603` under naive agreement counting to `0.15245`, while recovering about `94.8%` of true shared-root report pairs and falsely merging only about `3.1%` of independent-root pairs on average.
 
-Seven peers report into fourteen seed-generated contexts. Hidden evidence roots can be copied into several public reports. Other contexts contain several genuinely independent roots that happen to converge. The public surface carries an estimate, standing, evidence depth, an optional opaque origin hint, and a compact developmental signature. Copies preserve those signatures imperfectly, so they are useful ancestry cues rather than exact lineage IDs.
+Narrow result: useful ancestry-sensitive corroboration does not require a perfect global provenance registry. Partial public origin hints and compact developmental signatures can preserve enough of evidential origin to discount echoed agreement while leaving genuine independent convergence intact.
 
-Treatments:
+### Protocol 07: provisional standing transfer
 
-- `ancestry-inferred`: likely shared roots are clustered from exact public-hint matches or sufficiently similar developmental signatures, then one lineage contributes only one bounded unit of corroborative support;
-- `naive-agreement`: every peer report is counted as independent support;
-- `oracle-ancestry`: hidden true root IDs are used only as a calibration ceiling.
+Status: **frozen Supported**.
 
-The generated family contains echo traps, independent convergence, mixed lineages, and deliberately ambiguous lineages. Success requires lower echo and whole-world error than naive agreement, preservation of independent convergence, high true-echo recovery, bounded false merging, and performance close to the perfect-ancestry calibration control.
+Accepted result: 5/5 Support, 45/45 checks. Provisional standing bought a useful early head start where A's relationship with B generalized to C, but it was not free: provisional total RMSE (`~0.17440`) was slightly worse than refusing standing transfer (`~0.16906`) across the mixed world. The same provisional path was materially safer than inherited authority (`~0.20524` total RMSE), and direct C consequence selectively renewed strong transferable standing (`~0.9695`) while reducing strong mismatched standing (`~0.0712`).
+
+Narrow result: another mind's standing can purchase limited, context-specific opportunity without becoming the receiver's lived authority. The mechanism's cost on non-generalizing recommendations is part of the result, not something to hide.
+
+### Validation phase: frozen Protocols 01-07
+
+Status: **implemented in v0.8.0; holdout result pending**.
+
+Version 0.8 deliberately adds no Protocol 08. The next question is whether the mechanism-discovery set survives fresh pressure when protocol code and preregistered thresholds are frozen.
+
+The validation report separates four kinds of evidence:
+
+1. **manipulation**: did the generated world/control actually contain the intended condition?
+2. **mechanism outcome**: did the proposed behavior produce the predicted functional result?
+3. **safety boundary**: did the behavior remain revisable, selective, or otherwise avoid the failure mode under test?
+4. **accounting constraint**: did communication/compute stay within the explicit budget?
+
+These categories remain visible together, but passing an exact packet count no longer psychologically counts as the same kind of confirmation as lower RMSE under a difficult social circumstance.
+
+The first validation pass also defines preregistered challenge **slices** over holdout world descriptors for Protocols 03-07. They do not alter frozen mechanisms or thresholds:
+
+- high source instability (P03);
+- dense conflicting social evidence (P04);
+- high regime shift (P05);
+- weak ancestry visibility (P06);
+- fragile recommender transfer (P07).
+
+A validation report should explicitly warn about 100% Support or 100% assertion pass rates. Mixed or Disconfirm outcomes can be valuable because they begin to identify an operating envelope. Protocols 01 and 02 retain a special limitation: their older seed semantics do not produce the same degree of lived-world variation, so fresh seed numbers provide weaker validation there.
 
 ## Result cadence
 
-For Protocol 06 in v0.6.0:
+For the v0.8 validation phase:
 
-1. build and run the full invariant suite, now 18 checks;
-2. run Protocol 06 across `101,211,307,401,503` without changing its eight thresholds;
-3. inspect world diversity, missing-origin rate, immediate-sender alias rate, echo-trap RMSE, independent-convergence RMSE, echo-pair recall, false-merge rate, and oracle proximity together;
-4. interpret before changing any mechanism;
-5. after Protocol 06 is understood, run the six-protocol five-seed full-suite checkpoint because v0.6.0 changes the experiment catalog and visualization progress model.
+1. rebuild under the pinned .NET 10 SDK and run the 23 invariant/regression checks;
+2. verify `docs/FROZEN_PROTOCOL_SHA256.txt` before running validation;
+3. run all seven frozen protocols across `holdout-v1` exactly once without mechanism or threshold changes;
+4. inspect protocol verdict rates, mechanism/safety categories, and challenge-slice coverage together;
+5. treat all-Support or all-pass outcomes as an assay-sensitivity warning rather than automatic confirmation;
+6. record any Mixed/Disconfirm results as candidate operating-envelope evidence before deciding whether a mechanism should be revised;
+7. if code is changed from holdout evidence, retire `holdout-v1` for confirmation and register a new holdout set before making a new validation claim.

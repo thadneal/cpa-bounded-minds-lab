@@ -4,6 +4,7 @@ using Cpa.BoundedMindsLab.Development;
 using Cpa.BoundedMindsLab.Domain;
 using Cpa.BoundedMindsLab.Environments;
 using Cpa.BoundedMindsLab.Experiments;
+using Cpa.BoundedMindsLab.Validation;
 
 namespace Cpa.BoundedMindsLab.Verification;
 
@@ -19,16 +20,21 @@ public static class SelfTestSuite
         Run("foreign-standing-falls-under-local-contradiction", TestForeignStandingFalls, passed);
         Run("foreign-standing-rises-under-local-confirmation", TestForeignStandingRises, passed);
         Run("public-export-requires-earned-standing", TestExportStanding, passed);
-        Run("protocol-01-supports-seed-101", TestProtocolOne, passed);
-        Run("protocol-02-supports-seed-101", TestProtocolTwo, passed);
+        Run("protocol-01-development-fixture-seed-101", TestProtocolOne, passed);
+        Run("protocol-02-development-fixture-seed-101", TestProtocolTwo, passed);
         Run("protocol-03-default-seeds-create-distinct-lived-histories", TestProtocolThreeSeedSemantics, passed);
-        Run("protocol-03-supports-seed-101", TestProtocolThree, passed);
+        Run("protocol-03-development-fixture-seed-101", TestProtocolThree, passed);
         Run("protocol-04-default-seeds-create-distinct-social-histories", TestProtocolFourSeedSemantics, passed);
-        Run("protocol-04-supports-seed-101", TestProtocolFour, passed);
+        Run("protocol-04-development-fixture-seed-101", TestProtocolFour, passed);
         Run("protocol-05-default-seeds-create-distinct-coordination-worlds", TestProtocolFiveSeedSemantics, passed);
-        Run("protocol-05-supports-seed-101", TestProtocolFive, passed);
+        Run("protocol-05-development-fixture-seed-101", TestProtocolFive, passed);
         Run("protocol-06-default-seeds-create-distinct-incomplete-ancestry-worlds", TestProtocolSixSeedSemantics, passed);
-        Run("protocol-06-supports-seed-101", TestProtocolSix, passed);
+        Run("protocol-06-development-fixture-seed-101", TestProtocolSix, passed);
+        Run("protocol-07-default-seeds-create-distinct-standing-transfer-worlds", TestProtocolSevenSeedSemantics, passed);
+        Run("protocol-07-development-fixture-seed-101", TestProtocolSeven, passed);
+        Run("validation-seed-sets-are-frozen-and-disjoint", TestValidationSeedSets, passed);
+        Run("validation-check-taxonomy-separates-evidence-types", TestValidationTaxonomy, passed);
+        Run("validation-report-identifies-development-regression", TestValidationReport, passed);
         Run("frame-sequence-is-contiguous", TestFrameSequence, passed);
         return passed;
     }
@@ -141,7 +147,7 @@ public static class SelfTestSuite
     {
         var fingerprints = new HashSet<ulong>();
         var categoryLayouts = new HashSet<string>(StringComparer.Ordinal);
-        foreach (var seed in ExperimentDefaults.ReplicationSeeds)
+        foreach (var seed in ExperimentDefaults.DevelopmentSeeds)
         {
             var scenario = DevelopmentalTransferWorld.CreateScenario(seed);
             Assert(fingerprints.Add(scenario.Fingerprint), $"Default seed {seed} should produce a distinct developmental-world fingerprint.");
@@ -173,7 +179,7 @@ public static class SelfTestSuite
     {
         var fingerprints = new HashSet<ulong>();
         var categoryLayouts = new HashSet<string>(StringComparer.Ordinal);
-        foreach (var seed in ExperimentDefaults.ReplicationSeeds)
+        foreach (var seed in ExperimentDefaults.DevelopmentSeeds)
         {
             var scenario = CommunicationBeforeLanguageWorld.CreateScenario(seed);
             Assert(fingerprints.Add(scenario.Fingerprint), $"Default seed {seed} should produce a distinct social-history fingerprint.");
@@ -206,7 +212,7 @@ public static class SelfTestSuite
     {
         var fingerprints = new HashSet<ulong>();
         var shiftedLayouts = new HashSet<string>(StringComparer.Ordinal);
-        foreach (var seed in ExperimentDefaults.ReplicationSeeds)
+        foreach (var seed in ExperimentDefaults.DevelopmentSeeds)
         {
             var scenario = EmergentConventionWorld.CreateScenario(seed);
             Assert(fingerprints.Add(scenario.Fingerprint), $"Default seed {seed} should produce a distinct coordination-world fingerprint.");
@@ -240,7 +246,7 @@ public static class SelfTestSuite
     {
         var fingerprints = new HashSet<ulong>();
         var layouts = new HashSet<string>(StringComparer.Ordinal);
-        foreach (var seed in ExperimentDefaults.ReplicationSeeds)
+        foreach (var seed in ExperimentDefaults.DevelopmentSeeds)
         {
             var scenario = EpistemicAncestryWorld.CreateScenario(seed);
             Assert(fingerprints.Add(scenario.Fingerprint), $"Default seed {seed} should produce a distinct incomplete-ancestry fingerprint.");
@@ -268,6 +274,78 @@ public static class SelfTestSuite
         {
             Directory.Delete(output, recursive: true);
         }
+    }
+
+    private static void TestProtocolSevenSeedSemantics()
+    {
+        var fingerprints = new HashSet<ulong>();
+        var layouts = new HashSet<string>(StringComparer.Ordinal);
+        var recommenderCredibilities = new HashSet<int>();
+        foreach (var seed in ExperimentDefaults.DevelopmentSeeds)
+        {
+            var scenario = StandingTransferWorld.CreateScenario(seed);
+            Assert(fingerprints.Add(scenario.Fingerprint), $"Default seed {seed} should produce a distinct standing-transfer fingerprint.");
+            layouts.Add(string.Join(",", scenario.Cells.Select(cell => (int)cell.ContextKind)));
+            recommenderCredibilities.Add((int)Math.Round(scenario.RecommenderCredibility * 1000.0));
+            Assert(StandingTransferWorld.CountKind(scenario, StandingTransferContextKind.StrongTransferable) >= 3, "Each Protocol 07 world should contain strongly recommended transferable contexts.");
+            Assert(StandingTransferWorld.CountKind(scenario, StandingTransferContextKind.StrongLocalMismatch) >= 3, "Each Protocol 07 world should contain strongly recommended relationships that fail to generalize locally.");
+        }
+
+        Assert(layouts.Count >= 4, "The canonical Protocol 07 seeds should vary which contexts inherit useful versus misleading recommendations.");
+        Assert(recommenderCredibilities.Count >= 3, "The canonical Protocol 07 seeds should vary C's already-earned standing for recommender A.");
+    }
+
+    private static void TestProtocolSeven()
+    {
+        var output = CreateTemporaryDirectory();
+        try
+        {
+            var run = ExperimentRunner.Run([ExperimentCatalog.Get("07-provisional-standing-transfer")], 101, output, quiet: true);
+            Assert(run.Experiments.Single().Verdict == ExperimentVerdict.Support, "Protocol 07 should meet its preregistered synthetic boundaries for seed 101.");
+        }
+        finally
+        {
+            Directory.Delete(output, recursive: true);
+        }
+    }
+
+
+    private static void TestValidationSeedSets()
+    {
+        Assert(ExperimentDefaults.DevelopmentSeeds.Count == 5, "development-v1 must remain the frozen five-seed regression set.");
+        Assert(ExperimentDefaults.HoldoutSeeds.Count == 20, "holdout-v1 must contain exactly twenty preregistered seeds.");
+        Assert(ExperimentDefaults.DevelopmentSeeds.Distinct().Count() == ExperimentDefaults.DevelopmentSeeds.Count, "Development seeds must be unique.");
+        Assert(ExperimentDefaults.HoldoutSeeds.Distinct().Count() == ExperimentDefaults.HoldoutSeeds.Count, "Holdout seeds must be unique.");
+        Assert(!ExperimentDefaults.DevelopmentSeeds.Intersect(ExperimentDefaults.HoldoutSeeds).Any(), "Development and holdout seeds must remain disjoint.");
+        Assert(ValidationPlan.ClassifySeedSet(ExperimentDefaults.DevelopmentSeeds) == ValidationPlan.DevelopmentSetName, "Development seeds must classify as development-v1.");
+        Assert(ValidationPlan.ClassifySeedSet(ExperimentDefaults.HoldoutSeeds) == ValidationPlan.HoldoutSetName, "Holdout seeds must classify as holdout-v1.");
+    }
+
+    private static void TestValidationTaxonomy()
+    {
+        Assert(ValidationCheckTaxonomy.Classify("seed-generates-lived-circumstance") == ValidationCheckTaxonomy.Manipulation, "Seed-generation checks should be manipulation checks.");
+        Assert(ValidationCheckTaxonomy.Classify("whole-history-benefit") == ValidationCheckTaxonomy.MechanismOutcome, "Whole-history outcome checks should remain mechanism evidence.");
+        Assert(ValidationCheckTaxonomy.Classify("independent-roots-are-not-overmerged") == ValidationCheckTaxonomy.SafetyBoundary, "Overmerge protection should be a safety-boundary check.");
+        Assert(ValidationCheckTaxonomy.Classify("bounded-developmental-transfer") == ValidationCheckTaxonomy.AccountingConstraint, "Communication accounting should not be counted as mechanism evidence.");
+    }
+
+    private static void TestValidationReport()
+    {
+        var assertion = new ExperimentAssertion("whole-history-benefit", true, "synthetic validation-report fixture");
+        var result = new ExperimentResult(
+            "synthetic-protocol",
+            "fixture",
+            ExperimentVerdict.Support,
+            "fixture",
+            new Dictionary<string, double>(StringComparer.Ordinal),
+            [assertion]);
+        var runs = ExperimentDefaults.DevelopmentSeeds
+            .Select(seed => new RunResult(seed, string.Empty, [result]))
+            .ToArray();
+        var report = ValidationReportBuilder.Create(runs);
+        Assert(report.SeedSet == ValidationPlan.DevelopmentSetName, "The canonical five seeds must be labeled development data in validation reports.");
+        Assert(report.Diagnostics.Any(message => message.Contains("development set", StringComparison.OrdinalIgnoreCase)), "Development-set validation reports must warn against fresh-validation interpretation.");
+        Assert(report.Categories.Single(category => category.Category == ValidationCheckTaxonomy.MechanismOutcome).Checks == ExperimentDefaults.DevelopmentSeeds.Count, "Mechanism checks must be tallied separately from accounting and manipulation checks.");
     }
 
     private static void TestFrameSequence()

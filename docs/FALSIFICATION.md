@@ -260,3 +260,102 @@ The oracle path is a calibration ceiling only. Passing Protocol 06 would support
 ## Protocol 06 replication interpretation
 
 The canonical five seeds should produce unique ancestry-world fingerprints and materially different placements/prevalence of echo traps, independent convergence, mixed lineage, and ambiguous lineage. Report ancestry itself varies through missing origin hints, immediate-sender aliases, evidence depth, source quality, and signature distortion. A seed should change the social evidence circumstance, not only report order.
+
+### Accepted Protocol 06 result
+
+The canonical `101,211,307,401,503` run returned **5/5 Support with 40/40 checks passing**. The eight boundaries above are frozen. Mean total RMSE improved from about `0.19603` under naive agreement to `0.15245` with inferred ancestry, while true shared-root recall averaged about `94.8%` and false merging averaged about `3.1%`.
+
+---
+
+## 07 provisional standing transfer
+
+Protocol 07 uses **nine** preregistered component checks. Thresholds are fixed before the five-seed result set is interpreted.
+
+### A. Seed generates transferable and nontransferable social history
+
+Every seed must contain:
+
+- at least `3` strongly recommended contexts where B generalizes to C;
+- at least `3` strongly recommended contexts where A's relationship with B does not generalize to C;
+- at least `4` weak recommendation contexts across transferable and mismatched cases.
+
+The five canonical seeds must also produce distinct standing-transfer fingerprints and materially different context layouts.
+
+### B. Recommendation quality scales provisional opportunity
+
+Mean initial provisional standing from strong recommendations must exceed mean initial standing from weak recommendations by at least `0.07`. No imported recommendation may exceed the provisional standing cap of `0.28` before C has direct consequence with B.
+
+### C. Provisional standing buys useful early opportunity
+
+Across transferable contexts, provisional-standing early RMSE must be <= `90%` of the no-standing-transfer early RMSE.
+
+This is the positive value test. Social recommendation must do more than merely avoid harm.
+
+### D. Provisional standing avoids inherited doctrine
+
+Across locally mismatched contexts, provisional-standing early RMSE must be <= `85%` of inherited-authority early RMSE.
+
+This is the authority-boundary test. A relationship that was well earned for A may still fail to generalize to C.
+
+### E. Opportunity cost remains bounded versus refusing recommendation
+
+Across the whole mixed world, provisional-standing total RMSE may be at most `105%` of no-standing-transfer total RMSE.
+
+The protocol deliberately allows a small aggregate price for useful early social opportunity because some recommendations are locally wrong. A result that requires large global damage to gain local speed does not pass.
+
+### F. The provisional middle condition outperforms inherited authority
+
+Across the whole history, provisional-standing total RMSE must be <= `93%` of inherited-authority total RMSE.
+
+### G. Direct consequence revokes strong local mismatch
+
+After C has accumulated substantial local evidence in strongly mismatched contexts:
+
+- late strong-mismatch RMSE must be <= `0.09`;
+- mean final B standing in those contexts must be <= `0.20`.
+
+Second-hand permission must remain revocable by C's own lived consequence.
+
+### H. Direct consequence renews transferable standing
+
+Mean final B standing in strongly recommended transferable contexts must be >= `0.90`.
+
+A recommendation that survives C's own repeated consequence should become locally earned rather than remain permanently second-hand.
+
+### I. Standing transfer is bounded public communication
+
+Provisional and inherited-authority conditions each receive exactly one recommendation packet per context (`12` packets) at `0.03` work units per packet, for `0.36` recommendation work. The no-transfer baseline receives zero recommendation packets.
+
+B's ordinary prediction contact is held constant across all treatments and is outside this differential recommendation cost.
+
+## Protocol 07 verdict rule
+
+- `Support`: all nine checks pass.
+- `Mixed`: at least seven checks pass.
+- `Disconfirm`: fewer than seven checks pass.
+
+If a result lands near a boundary, interpretation changes before thresholds do.
+
+## Protocol 07 replication interpretation
+
+The canonical five seeds should vary C's already-earned standing for A, context placement, evidence depth, recommendation strength, B-to-C transferability, target geometry, noise, and encounter order. The important comparative pattern is not that provisional standing must always beat local-only learning. The preregistered claim is a **middle condition**: useful early opportunity where social knowledge generalizes, materially less contamination than inherited authority where it does not, and only a tightly bounded aggregate cost relative to refusing standing transfer altogether.
+
+
+### Accepted Protocol 07 result
+
+The canonical development matrix returned **5/5 Support with 45/45 checks passing**. The nine boundaries above are frozen. The result is retained as mechanism-discovery evidence, not fresh validation, because the canonical seeds were part of the development loop.
+
+---
+
+## v0.8 validation interpretation
+
+Protocol 01-07 thresholds and verdict rules remain unchanged during the first holdout pass. The validation layer does not add a hidden second set of success thresholds. It reports:
+
+- protocol verdict counts across holdout-v1;
+- assertion outcomes separated into manipulation, mechanism outcome, safety boundary, and accounting categories;
+- preregistered stress slices over Protocol 03-07 world descriptors;
+- diagnostics when every result or assertion passes, or when challenge coverage is thin.
+
+A Mixed or Disconfirm holdout result is not automatically a laboratory failure. It may be the most useful evidence produced by this phase if it identifies a coherent boundary of applicability. Conversely, 20/20 Support should trigger an assay-sensitivity review rather than a stronger claim by default.
+
+The twenty holdout-v1 seeds are frozen before outcome inspection. If any protocol mechanism or preregistered boundary is changed in response to holdout-v1, that set becomes development evidence for the revised mechanism and cannot serve as its fresh confirmation set.

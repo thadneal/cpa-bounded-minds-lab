@@ -1,6 +1,6 @@
 # CPA Bounded Minds Laboratory
 
-Version **0.6.0**
+Version **0.8.0**
 
 This repository is the successor experimental program to the completed CPA Cognitive Development Lab. The earlier lab studied development inside one bounded organism. This laboratory moves the boundary outward:
 
@@ -54,19 +54,30 @@ Narrow result: repeated bounded interaction can produce a distributed convention
 
 ### Protocol 06 - incomplete epistemic ancestry
 
-`06-incomplete-epistemic-ancestry` is the current targeted protocol. Seven peers report into seed-generated contexts where apparent agreement can arise in two importantly different ways: several genuinely independent roots may converge, or several peer reports may descend from one upstream episode that has been copied through the social field.
+`06-incomplete-epistemic-ancestry` is frozen Supported. The canonical five-seed matrix returned Support in all five histories with all 40 preregistered checks passing. Mean total RMSE was about `0.15245` for inferred ancestry versus `0.19603` for naive agreement counting, while shared-root pair recall averaged about `94.8%` and false merging of independent roots averaged about `3.1%`.
 
-Public ancestry is deliberately incomplete. Some reports preserve an opaque upstream hint, many omit it, and many expose only an immediate-sender alias. Every report also carries a compact developmental signature that is copied imperfectly rather than acting as a perfect lineage identifier.
+Narrow result: a bounded receiver can recover enough epistemic ancestry from incomplete public origin hints and developmental signatures to discount echoed agreement while preserving genuine independent convergence. Perfect global provenance was unnecessary in this synthetic world family. The hidden-root oracle remains an evaluator calibration reference, not a theoretical RMSE lower bound.
 
-The experiment compares:
+### Protocol 07 - provisional standing transfer
 
-- `ancestry-inferred`, the receiver groups likely shared ancestry using only the incomplete public hints and signature similarity, then lets each inferred lineage contribute one bounded unit of corroborative support;
-- `naive-agreement`, every peer report is counted as independent corroboration;
-- `oracle-ancestry`, true hidden roots are supplied only as a calibration ceiling and are not proposed CPA machinery.
+`07-provisional-standing-transfer` is frozen Supported. The canonical development matrix returned Support in all five histories with all 45 preregistered checks passing. Mean provisional total RMSE was about `0.17440`, versus `0.16906` for refusing standing transfer and `0.20524` for inherited authority. On transferable contexts, provisional standing reduced early RMSE from about `0.35690` to `0.30333`. On locally mismatched recommendations it remained worse than no transfer (`0.53531` versus `0.47943`) but substantially better than inherited authority (`0.68191`). Direct consequence later drove strong transferable standing to about `0.9695` and strong mismatch standing to about `0.0712`.
 
-The generated world contains echo traps, genuine independent convergence, mixed lineages, and deliberately ambiguous lineages. Protocol 06 succeeds only if inferred ancestry reduces echo-driven error, preserves independent convergence, recovers most true shared-root pairs, avoids excessive false merges, and remains close to the oracle while using the same bounded public report set.
+Narrow result: second-hand standing can buy useful provisional opportunity without being copied as lived authority, but social transfer carries a measurable cost when recommendations fail to generalize. The useful principle is conditional permission, not a universal reputation scalar.
 
-The canonical matrix remains `101,211,307,401,503`. See `docs/EXPERIMENTS.md` and `docs/FALSIFICATION.md` before interpreting results.
+## v0.8 validation phase
+
+Protocols 01-07 are now frozen as the **mechanism-discovery set**. Version 0.8.0 deliberately does not add Protocol 08. It asks whether the existing mechanisms survive fresh pressure without retuning them.
+
+Two seed sets are now named explicitly:
+
+- `development-v1`: `101,211,307,401,503`. These histories were repeatedly used while constructing and calibrating the first seven assays. They are regression data, not fresh validation.
+- `holdout-v1`: twenty previously unused seeds registered in source. Protocol mechanics and falsification thresholds must remain frozen while this set is interpreted.
+
+A completed Desktop session now writes both `validation-report.json` and `validation-summary.md`. Validation separates checks into **manipulation**, **mechanism outcome**, **safety boundary**, and **accounting constraint** categories so exact packet accounting or world-construction checks do not inflate the apparent evidential weight of mechanism outcomes.
+
+The report also applies preregistered **challenge slices** to holdout worlds for Protocols 03-07, including high source instability, dense conflicting social evidence, high regime shift, weak ancestry visibility, and fragile recommender transfer. These slices are filters over world descriptors, not new tuned treatments. Protocols 01 and 02 predate the seed-as-lived-circumstance correction, so their holdout evidence is explicitly marked weaker.
+
+The validation report warns when every run or every assertion still passes. In this phase, observing Mixed or Disconfirm outcomes can be scientifically useful because it begins to reveal an operating envelope.
 
 ## Solution
 
@@ -87,8 +98,9 @@ Projects target .NET 10. The WPF Desktop Lab targets `net10.0-windows`.
 ```powershell
 dotnet build Cpa.BoundedMindsLab.sln -c Release
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --experiment 06-incomplete-epistemic-ancestry --seed 101
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --experiment 06-incomplete-epistemic-ancestry --replicate 101,211,307,401,503 --output _artifacts/protocol-06-five-seed
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --validation --output _artifacts/validation-holdout-v1
+# Regression only:
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --replicate 101,211,307,401,503 --output _artifacts/development-v1-regression
 ```
 
 For live inspection on Windows 11:
@@ -97,7 +109,7 @@ For live inspection on Windows 11:
 dotnet run --project src/Cpa.BoundedMindsLab.Desktop
 ```
 
-The Desktop Lab opens with `101, 211, 307, 401, 503` already entered in **Seeds**, selects the newest protocol by default, and includes the running application version in the main and maximized-graph window titles. Graphs explain axis meaning and preferred metric direction/context, provide show-all/hide-all series controls, and update incrementally from bounded background telemetry at an adaptive display cadence.
+The Desktop Lab opens with **Holdout v1 (20, frozen)** selected, enters the twenty holdout seeds, selects all frozen Protocols 01-07 by default, and includes the running application version in the main and maximized-graph window titles. Graphs explain axis meaning and preferred metric direction/context, provide show-all/hide-all series controls, and update incrementally from bounded background telemetry at an adaptive display cadence.
 
 ## Visualization boundary
 
@@ -111,4 +123,4 @@ The workbench also exposes protocol progress, per-seed judged results, active-se
 
 Carry forward only what survives pressure: bounded causal execution, persistent private history, compact public surfaces, revisable standing, explicit cost, and provenance distinct from agreement.
 
-The v0.3.0 methodological correction remains active: if history is part of the theory, replication should eventually vary **what was lived**, not merely the order in which nearly identical events were encountered.
+The v0.3.0 methodological correction remains active: if history is part of the theory, replication must vary **what was lived**, not merely the order in which nearly identical events were encountered. Version 0.8 additionally treats the canonical five seeds as development data and preserves a separate frozen holdout set.

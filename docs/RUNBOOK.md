@@ -14,49 +14,45 @@ dotnet build Cpa.BoundedMindsLab.sln -c Release
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
 ```
 
-Treat analyzer failures as build failures. Warnings are errors. Version 0.6.0 defines **18 invariant tests**.
+Treat analyzer failures as build failures. Warnings are errors. Version 0.8.0 defines **23 invariant/regression tests**. `scripts/verify.ps1` and `scripts/verify.sh` first verify the frozen Protocol 01-07 source hashes before building.
 
-## Targeted Protocol 06 check
+## Development regression
 
-```powershell
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- `
-  --experiment 06-incomplete-epistemic-ancestry `
-  --seed 101 `
-  --output _artifacts/protocol-06-seed-101
-```
-
-Then run the canonical matrix without changing thresholds:
-
-```powershell
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- `
-  --experiment 06-incomplete-epistemic-ancestry `
-  --replicate 101,211,307,401,503 `
-  --output _artifacts/protocol-06-five-seed
-```
-
-Inspect these together before interpreting the verdict:
-
-- `missing_origin_rate` and `immediate_sender_hint_rate`;
-- `inferred_echo_trap_rmse` versus `naive_echo_trap_rmse`;
-- `inferred_rmse` versus `naive_rmse` and `oracle_rmse`;
-- `inferred_independent_rmse` versus `naive_independent_rmse`;
-- `inferred_echo_pair_recall`;
-- `inferred_false_merge_rate`;
-- packet count and communication work.
-
-Do not tune the signature merge radius or falsification thresholds after seeing the five-seed matrix. Interpret the result first.
-
-## Full-suite checkpoint
-
-After Protocol 06 is interpreted, run all six protocols across the canonical matrix:
+The old five-seed matrix is now explicitly development data:
 
 ```powershell
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- `
   --replicate 101,211,307,401,503 `
-  --output _artifacts/full-suite-0.6.0
+  --output _artifacts/development-v1-regression
 ```
 
-This checkpoint is useful because v0.6.0 adds a new environment/experiment, two invariants, and protocol-aware Desktop progress. Earlier protocol mechanics remain frozen.
+Use this only to detect regressions against the frozen mechanism-discovery record. Do not treat another 5/5 result as fresh evidence.
+
+## Holdout validation
+
+Run the complete frozen catalog across holdout-v1 without changing mechanisms or falsification boundaries:
+
+```powershell
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
+  --validation `
+  --output _artifacts/validation-holdout-v1
+```
+
+Expected root artifacts include:
+
+```text
+replication-report.json
+validation-report.json
+validation-summary.md
+session-manifest.json
+seed-809/
+...
+seed-8089/
+```
+
+Interpret the validation report before changing code. In particular, inspect `mechanism-outcome` and `safety-boundary` failures separately from manipulation/accounting checks, and inspect the preregistered challenge slices. A perfect all-Support result is a reason to review assay sensitivity, not a reason to silently strengthen the claim.
+
+If holdout-v1 causes a mechanism or threshold change, do not rerun the revised mechanism and call holdout-v1 fresh confirmation. Register a new holdout set first.
 
 ## Desktop Lab
 
@@ -64,21 +60,11 @@ This checkpoint is useful because v0.6.0 adds a new environment/experiment, two 
 dotnet run --project src/Cpa.BoundedMindsLab.Desktop
 ```
 
-The main window title includes the running assembly version. Seeds default to `101, 211, 307, 401, 503`. Protocol 06 is selected by default.
+The main window title includes the running assembly version. The Run panel defaults to **Holdout v1 (20, frozen)** and all seven protocols selected. The Seed set control can switch to **Development v1 (5, regression only)** or Custom. Editing the seed text automatically marks the set as Custom unless it exactly matches one registered set.
 
-Protocol 06 progress should move through:
+The graph Seed selector can revisit completed histories. Focus path scopes Metric choices. Legend keys remain individually clickable and Show all/Hide all acts on the current metric. Graph telemetry updates incrementally at the adaptive display cadence; experiment execution remains isolated from WPF.
 
-```text
-Generate incomplete ancestry
-Compare corroboration rules
-Judge ancestry discrimination
-```
-
-The graph Seed selector can revisit completed seed histories. Focus path scopes Metric choices. Legend keys remain individually clickable and Show all/Hide all acts on the current metric.
-
-Graph telemetry again updates incrementally at the adaptive display cadence. This restores the pre-v0.5.2 depiction behavior after boundary-batched rendering showed no noticeable UI benefit. The experiment worker remains isolated from WPF regardless of graph cadence.
-
-Data-grid cells wrap text. Column headers expose resize grippers. Resizing columns must redistribute width within the existing table surface rather than resize the containing pane or window.
+Protocol result assertion detail now includes the validation category (`manipulation`, `mechanism-outcome`, `safety-boundary`, or `accounting-constraint`). Data-grid cells wrap text and headers expose resize grippers; resizing columns redistributes width inside the existing table surface.
 
 ## Cancellation and stepping
 

@@ -293,7 +293,7 @@ The canonical five-seed matrix returned **5/5 Support with 35/35 checks passing*
 
 Name: `06-incomplete-epistemic-ancestry`
 
-Status: **implemented in v0.6.0, result pending**.
+Status: **frozen Supported**.
 
 ### Question
 
@@ -354,3 +354,142 @@ A successful result would support a narrow claim:
 > A bounded mind can recover enough ancestry structure from incomplete public traces to stop copied agreement from masquerading as independent corroboration, while still preserving genuinely independent convergence.
 
 It would not establish a final provenance format, a universal ancestry detector, or a hidden central registry. The oracle path exists only to show how much error remains because ancestry is incomplete.
+
+### Accepted Protocol 06 result
+
+The canonical five-seed matrix returned **5/5 Support with 40/40 checks passing**. Mean inferred total RMSE was approximately `0.15245` versus `0.19603` for naive agreement counting. Shared-root pair recall averaged about `94.8%`, while false merging of independent roots averaged about `3.1%`. The accepted claim remains narrow: incomplete public ancestry can be useful without becoming a perfect provenance registry. The oracle treatment is a calibration reference and is not assumed to be a theoretical RMSE lower bound in finite noisy samples.
+
+---
+
+## Protocol 07: provisional standing transfer
+
+Name: `07-provisional-standing-transfer`
+
+Status: **frozen Supported**.
+
+### Question
+
+Can standing earned by one mind buy a source provisional opportunity in another mind without being inherited as though the receiver had lived the recommender's history?
+
+### Why this follows Protocol 06
+
+Protocols 01, 03, and 06 together imply that second-hand influence should preserve distinctions among lived authority, developmental warrant, and evidential origin. Protocol 07 moves that question from evidence content to **social permission**. If mind A has learned that peer B is useful, what, if anything, should receiver C inherit from that relationship?
+
+The working hypothesis is that standing can cross a mind boundary only as a discounted opportunity to matter. It should not arrive with the authority that A earned through A's own consequence.
+
+### Seed-generated standing-transfer world
+
+The world contains three abstract social positions:
+
+```text
+A = recommender
+B = recommended source
+C = receiver
+```
+
+Each seed generates twelve contexts. Every world includes:
+
+- at least three `StrongTransferable` contexts, where A has substantial evidence for B and B also predicts C's local target well;
+- at least three `StrongLocalMismatch` contexts, where A's standing for B is well earned in A's history but B does not generalize to C;
+- several `WeakTransferable` and `WeakLocalMismatch` contexts with sparse recommendation evidence.
+
+The seed also varies C's already-earned credibility for A, A's evidence depth, A's standing for B, target geometry, B's estimate, receiver noise, and encounter order. This keeps the comparison controlled within a seed while making the five canonical histories materially different social circumstances.
+
+### Public recommendation packet
+
+A emits one compact context-specific recommendation:
+
+```text
+context id
+B's public estimate
+A's standing for B
+A's evidence count
+```
+
+C's standing for A is **not** contained in the packet. It remains part of C's private social history. The provisional path combines those two histories locally.
+
+B's ordinary public prediction surface is held constant across all treatments. The experiment therefore isolates transfer of standing rather than access to B.
+
+### Provisional-standing condition
+
+C begins with a small exploration floor. A recommendation can raise B above that floor, but the transferred standing is:
+
+1. discounted by C's own standing for A;
+2. discounted by A's evidence depth;
+3. capped at `0.28` before C has direct consequence with B.
+
+Afterward, only C's own observed outcomes renew or revoke B's standing.
+
+### No-standing-transfer baseline
+
+C receives no recommendation packet. B begins at the common exploration floor of `0.04` and must earn influence entirely through C's local consequence.
+
+This baseline tests the value of social recommendation itself. It is not a no-contact condition.
+
+### Inherited-authority control
+
+C copies A's standing for B directly. This deliberately treats A's relationship as though C had already lived it. It is the social analogue of doctrinal inheritance and exists to expose the cost of collapsing second-hand standing into local authority.
+
+### Receiver update
+
+C maintains a local estimate per context and a separate standing for B. Prediction blends C's local estimate with B's public estimate according to current local evidence and B's current standing. Direct C consequence updates both C's local estimate and B's standing.
+
+The evaluator stratifies error by context kind and by how much direct evidence C had accumulated before the prediction. Context-kind labels are never inputs to the receiver.
+
+### Metrics
+
+Live metrics include:
+
+```text
+prediction
+target
+absolute_error
+rolling_rmse
+source_standing
+local_evidence
+context_kind        # evaluator stratification only
+```
+
+Final metrics include:
+
+```text
+total RMSE
+early transferable RMSE
+early mismatch RMSE
+late strong-mismatch RMSE
+mean initial strong recommendation standing
+mean initial weak recommendation standing
+maximum initial standing
+final strong-transferable standing
+final strong-mismatch standing
+recommendation packet count
+recommendation communication work
+```
+
+### Communication cost
+
+A recommendation packet costs `0.03` work units. Provisional and inherited-authority conditions receive exactly one recommendation packet per context (`12` total, `0.36` work). The no-transfer baseline receives none. Ordinary B prediction contact is identical across treatments and is outside this differential recommendation cost.
+
+### What success would mean
+
+A successful result would support a narrow claim:
+
+> Standing can cross a bounded mind boundary as provisional permission to matter, buying useful social opportunity without granting the receiver someone else's lived authority.
+
+Success would not establish a universal reputation system, a scalar trust ontology, or a transitive social ranking. It would show only that a discounted, context-specific transfer can occupy a useful middle condition between ignoring social recommendation and inheriting it as doctrine.
+
+### Accepted Protocol 07 result
+
+The canonical development matrix returned **5/5 Support with 45/45 checks passing**. Mean provisional total RMSE was approximately `0.17440`, versus `0.16906` for no standing transfer and `0.20524` for inherited authority. Transferable early RMSE improved from about `0.35690` to `0.30333`; locally mismatched provisional recommendations remained somewhat worse than refusing transfer (`0.53531` versus `0.47943`) but far better than inherited authority (`0.68191`). Final strong-transferable standing averaged about `0.9695`, while final strong-mismatch standing fell to about `0.0712`.
+
+The accepted claim is intentionally asymmetric: provisional social standing can buy useful early opportunity, but it is not free and it need not beat local-only discovery over every mixed history. Its value is the middle condition between ignoring social information and inheriting another mind's authority.
+
+---
+
+## Validation phase: frozen Protocols 01-07
+
+Version 0.8.0 adds no Protocol 08. The first seven protocols become a frozen mechanism-discovery set. The canonical five seeds are renamed `development-v1`; a separate twenty-seed `holdout-v1` is registered before its outcomes are inspected.
+
+Validation does not alter protocol verdict rules. Instead it adds reporting metadata that separates manipulation, mechanism outcome, safety boundary, and accounting checks, plus preregistered challenge slices over stressful Protocol 03-07 world descriptors. Completed sessions write `validation-report.json` and `validation-summary.md`.
+
+A perfect holdout pass is not required. The purpose is to discover whether the mechanisms have an operating envelope and whether the assays can expose it. Any mechanism changed after seeing holdout-v1 requires a future fresh holdout before another confirmation claim.

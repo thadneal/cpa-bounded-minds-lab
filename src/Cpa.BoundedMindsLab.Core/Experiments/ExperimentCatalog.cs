@@ -10,6 +10,7 @@ public static class ExperimentCatalog
         new BoundedCommunicationBeforeLanguageExperiment(),
         new EmergentConventionArtificialCultureExperiment(),
         new IncompleteEpistemicAncestryExperiment(),
+        new ProvisionalStandingTransferExperiment(),
     ];
 
     public static IReadOnlyList<IExperiment> All => Experiments;
