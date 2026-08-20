@@ -14,7 +14,7 @@ dotnet build Cpa.BoundedMindsLab.sln -c Release
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
 ```
 
-Treat analyzer failures as build failures. Warnings are errors. Version 0.10.0 defines **30 invariant/regression tests**. `scripts/verify.ps1` and `scripts/verify.sh` first verify the frozen Protocol 01-07 source hashes before building.
+Treat analyzer failures as build failures. Warnings are errors. Version 0.11.0 defines **32 invariant/regression tests**. `scripts/verify.ps1` and `scripts/verify.sh` first verify the frozen Protocol 01-07 source hashes before building.
 
 ## Development regression
 
@@ -28,31 +28,30 @@ dotnet run --project src/Cpa.BoundedMindsLab.Cli -- `
 
 Use this only to detect regressions against the frozen mechanism-discovery record. Do not treat another 5/5 result as fresh evidence.
 
-## Parameterized falsification (current research run)
+## Protocol 08 development run (current research run)
 
 After build/self-test and frozen-hash verification:
 
 ```powershell
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
+  --experiment 08-strategic-public-influence `
+  --replicate 101,211,307,401,503 `
+  --output _artifacts/protocol-08-development-v1
+```
+
+This is development evidence. Protocol 08 is new work and has not yet earned a frozen holdout. The canonical seeds are used to test whether the mechanism behaves coherently across meaningfully different strategic social worlds; they must not later be relabeled as fresh confirmation.
+
+## Consumed parameterized-falsification-v1 reproducibility
+
+`parameterized-falsification-v1` is now consumed exploratory evidence. Reproduce it only for determinism, artifact, or implementation checks:
+
+```powershell
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
   --falsify `
-  --output _artifacts/parameterized-falsification-v1
+  --output _artifacts/parameterized-falsification-v1-repro
 ```
 
-The run produces:
-
-```text
-parameterized-plan.json
-parameterized-report.json
-parameterized-summary.md
-p03-history-informativeness.csv
-p04-equal-budget-comparator.csv
-p05-volatility-surface.csv
-p06-ancestry-opacity.csv
-p07-reliability-prevalence.csv
-p07-reliability-severity.csv
-```
-
-Run this phase without changing the registered profiles after inspecting outcomes. Negative margins are expected and useful.
+The historical run produced `parameterized-plan.json`, `parameterized-report.json`, `parameterized-summary.md`, and six profile CSV surfaces. Do not describe a reproduction as validation of a revised mechanism.
 
 ## Consumed challenge-v1 reproducibility
 
@@ -84,7 +83,7 @@ A rerun is not fresh validation. If a mechanism is changed after seeing holdout-
 dotnet run --project src/Cpa.BoundedMindsLab.Desktop
 ```
 
-The main window title includes the running assembly version. The Run panel now defaults to **Development v1 (5, regression only)** and all seven protocols selected, so opening the visualization does not encourage accidental reuse of consumed holdout-v1 as fresh evidence. The Seed set control still exposes **Holdout v1 (20, consumed / reproducibility only)** and Custom. Editing the seed text automatically marks the set as Custom unless it exactly matches one registered set.
+The main window title includes the running assembly version. The Run panel now defaults to **Development v1 (5, regression only)** and all eight protocols selected, so opening the visualization does not encourage accidental reuse of consumed holdout-v1 as fresh evidence. The Seed set control still exposes **Holdout v1 (20, consumed / reproducibility only)** and Custom. Editing the seed text automatically marks the set as Custom unless it exactly matches one registered set.
 
 The graph Seed selector can revisit completed histories. Focus path scopes Metric choices. Legend keys remain individually clickable and Show all/Hide all acts on the current metric. Graph telemetry updates incrementally at the adaptive display cadence; experiment execution remains isolated from WPF.
 

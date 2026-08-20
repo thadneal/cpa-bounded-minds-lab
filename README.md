@@ -1,6 +1,6 @@
 # CPA Bounded Minds Laboratory
 
-Version **0.10.0**
+Version **0.11.0**
 
 This repository is the successor experimental program to the completed CPA Cognitive Development Lab. The earlier lab studied development inside one bounded organism. This laboratory moves the boundary outward:
 
@@ -116,24 +116,42 @@ This phase is intentionally adversarial rather than confirmatory. Mixed or Disco
 
 One limitation is explicit: Protocol 04's `challenge-v1` profile stresses the environment but **does not yet replace semantic smoothing with the stronger equal-budget alternative** proposed after holdout review. That remains a separate control-strengthening task if P04 continues to resist environmental stress.
 
-## v0.10 parameterized falsification phase
+## v0.10 parameterized falsification result
 
-`challenge-v1` is now consumed exploratory evidence. Its 100 runs returned **78 Support / 22 Mixed / 0 Disconfirm**, with **317/320 mechanism**, **207/220 safety**, **133/140 manipulation**, and **78/80 accounting** checks passing. The run exposed real mechanism edges, but it also showed that the composite challenge stress scores were usually not monotonic causal variables. See `docs/CHALLENGE_V1_RESULTS.md`.
+`parameterized-falsification-v1` is now consumed exploratory evidence. Six 7x7 surfaces with seven deterministic replicates per cell produced **294 controlled cells / 2,058 runs**. **176/294 cells had a negative mean primary boundary margin**, with **1,201/2,058 replicates** crossing at least one registered boundary. See `docs/PARAMETERIZED_FALSIFICATION_V1_RESULTS.md`.
 
-Version 0.10.0 therefore adds **no Protocol 08**. `parameterized-falsification-v1` intervenes on controlled causal axes outside the original frozen generator support while leaving Protocols 01-07 and their world generators byte-for-byte unchanged.
+The durable conclusions are narrower than the frozen mechanisms:
 
-Registered surfaces:
+- P03: developmental instability is information, not an automatic trust penalty. A changing history may reflect adaptation rather than unreliability.
+- P04: preserving epistemic shape remains useful, but no single weighted reducer dominated a competent equal-budget alternative across the controlled surface.
+- P05: subtle drift can reinforce an obsolete but still "good enough" convention; culture needs both revisability and resistance to needless churn.
+- P06: the frozen ancestry heuristic over-relied on signature similarity. Provenance must provide negative as well as positive dependence evidence, and ancestry should remain probabilistic rather than hard identity.
+- P07: recommendation credibility is distinct from expected local generalizability. Authority repair should scale with contradiction strength, and eventual correction does not erase the cost paid before repair.
 
-- P03 history instability x present rule error;
-- P04 warrant asymmetry x minority-correct fraction, with a stronger **equal-public-budget standing-weighted robust consensus** comparator;
-- P05 repeated change frequency x change magnitude;
-- P06 origin missingness x developmental-signature separation;
-- P07 recommender credibility x mismatch prevalence;
-- P07 recommender credibility x mismatch severity.
+These surfaces should not be reused as confirmation after mechanism tuning. The original Protocol 01-07 experiment/world sources remain frozen.
 
-Each surface is `7 x 7` with seven deterministic replicates per cell. The P07 severity surface starts in the strong-contradiction regime because its frozen residual-standing ceiling was registered for strong mismatch rather than weak disagreement. The runner writes JSON, a Markdown summary, and one CSV per profile. Negative boundary margins are desired operating-envelope evidence. These surfaces are exploratory falsification and must not be reused as confirmation after mechanism tuning.
+## v0.11 Protocol 08 - strategic public influence
 
-The lab is **not yet being closed**. `docs/NEXT_LAB.md` records two social protocol families that may still belong here after falsification: strategic public influence and coalition/authority cascades. The same document sketches a candidate successor **Trace and Interface Laboratory**, inspired by the attached *Traces of the Other* paper but formulated as synthetic causal/interface research rather than a commitment to conscious realism or the external reality of DMT entities.
+`08-strategic-public-influence` begins a new development cycle inside the same Bounded Minds Laboratory. It addresses a remaining assumption in Protocols 01-07: public evidence may be wrong, incomplete, correlated, or locally mismatched, but the peer has not yet **learned how to shape its public posture in order to gain influence**.
+
+The synthetic peer has a private objective and can observe C's resulting public prediction. It cannot read C's private state, source standing, calibration values, local counterfactual, or implementation. From the fit between that public response and its own objective it adaptively chooses among calibrated, assertive, and hedged confidence presentations. Seed-generated worlds contain:
+
+- genuinely aligned peer contexts;
+- persistently divergent objectives;
+- two betrayal contexts where the peer is initially aligned, can earn influence, and later becomes divergent;
+- optional partial-alignment contexts.
+
+The three registered conditions are:
+
+1. **accountable-consequence** - source standing and confidence calibration are receiver-owned and revised by C's direct consequence;
+2. **self-report-naive** - self-reported confidence receives direct leverage and standing changes only weakly;
+3. **local-only** - C refuses peer influence and learns only from direct consequence.
+
+Ten preregistered checks ask whether the strategic sender really discovers leverage in the naive control, useful aligned peer help survives, strategic capture and betrayal remain correctable, self-reported confidence does not become authority, total opportunity cost stays near the local-only baseline, and public communication remains explicitly bounded.
+
+The sender's private objective is available to the **synthetic world/evaluator**, not to receiver cognition. This protocol tests whether consequence can make public influence answerable while the other mind's interior remains inaccessible.
+
+Protocol 09, authority/standing cascades, remains a candidate rather than an assumed next step. It should be decided after Protocol 08 results. The candidate Trace and Interface Laboratory remains documented in `docs/NEXT_LAB.md`.
 
 ## Solution
 
@@ -154,7 +172,9 @@ Projects target .NET 10. The WPF Desktop Lab targets `net10.0-windows`.
 ```powershell
 dotnet build Cpa.BoundedMindsLab.sln -c Release
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --falsify --output _artifacts/parameterized-falsification-v1
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --experiment 08-strategic-public-influence --replicate 101,211,307,401,503 --output _artifacts/protocol-08-development-v1
+# Reproduce consumed parameterized-falsification-v1 only when needed:
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --falsify --output _artifacts/parameterized-falsification-v1-repro
 # Reproduce consumed challenge-v1 only when needed:
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --challenge --output _artifacts/challenge-v1-repro
 # Reproduce the consumed holdout only when needed:
@@ -169,7 +189,7 @@ For live inspection on Windows 11:
 dotnet run --project src/Cpa.BoundedMindsLab.Desktop
 ```
 
-The Desktop Lab opens with **Development v1 (5, regression only)** selected to avoid accidentally treating consumed holdout-v1 as fresh evidence. Holdout v1 remains available as a reproducibility preset. `parameterized-falsification-v1` and consumed `challenge-v1` are CLI-only research runners; they do not use the ordinary Desktop seed selector. The application version remains visible in the main and maximized-graph window titles. Graphs explain axis meaning and preferred metric direction/context, provide show-all/hide-all series controls, and update incrementally from bounded background telemetry at an adaptive display cadence.
+The Desktop Lab opens with **Development v1 (5, regression only)** selected to avoid accidentally treating consumed holdout-v1 as fresh evidence. Holdout v1 remains available as a reproducibility preset. `parameterized-falsification-v1` and `challenge-v1` are consumed CLI-only reproducibility runners; they do not use the ordinary Desktop seed selector. Protocol 08 uses the ordinary Desktop/CLI experiment path. The application version remains visible in the main and maximized-graph window titles. Graphs explain axis meaning and preferred metric direction/context, provide show-all/hide-all series controls, and update incrementally from bounded background telemetry at an adaptive display cadence.
 
 ## Visualization boundary
 
@@ -183,4 +203,4 @@ The workbench also exposes protocol progress, per-seed judged results, active-se
 
 Carry forward only what survives pressure: bounded causal execution, persistent private history, compact public surfaces, revisable standing, explicit cost, and provenance distinct from agreement.
 
-The v0.3.0 methodological correction remains active: if history is part of the theory, replication must vary **what was lived**, not merely the order in which nearly identical events were encountered. Version 0.8 separated development from a frozen holdout; version 0.9 consumed that holdout and searched the frozen generator families adversarially; version 0.10 replaces composite stress ranking with controlled causal intervention surfaces.
+The v0.3.0 methodological correction remains active: if history is part of the theory, replication must vary **what was lived**, not merely the order in which nearly identical events were encountered. Version 0.8 separated development from a frozen holdout; version 0.9 searched the frozen generator families adversarially; version 0.10 mapped controlled failure surfaces; version 0.11 returns to mechanism discovery only for the still-open question of strategic public influence.

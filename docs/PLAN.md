@@ -154,48 +154,61 @@ The revised protocol lessons are preserved in `CHALLENGE_V1_RESULTS.md`. In shor
 
 ### Parameterized falsification phase: parameterized-falsification-v1
 
-Status: **implemented in v0.10.0; results pending**.
+Status: **completed and consumed in v0.10.0**.
 
-Version 0.10 still adds no Protocol 08. Instead of searching more generated seeds, it copies the relevant frozen local equations into controlled micro-assays and intervenes directly on causal variables outside the original generator support.
+The controlled phase executed six `7 x 7` surfaces with seven deterministic replicates per cell: **294 cells / 2,058 runs**. `176/294` cells had a negative mean primary margin and `1,201/2,058` replicates crossed at least one registered boundary. Full interpretation is preserved in `PARAMETERIZED_FALSIFICATION_V1_RESULTS.md`.
 
-Six `7 x 7` response surfaces are registered, with seven deterministic replicates per cell:
+The phase changed the implementation conclusions without rewriting the frozen Protocol 01-07 record:
 
-1. **P03 history instability x present rule error**;
-2. **P04 warrant asymmetry x minority-correct fraction**, against a stronger same-information, equal-public-budget standing-weighted robust-consensus comparator;
-3. **P05 change frequency x change magnitude**, including repeated regime changes not available in the frozen P05 generator;
-4. **P06 origin missingness x developmental-signature separation**, including complete provenance blindness;
-5. **P07 recommender credibility x mismatch prevalence**;
-6. **P07 recommender credibility x strong mismatch severity**.
+- P03 developmental instability should modify uncertainty rather than automatically lower standing;
+- P04 supports preserving epistemic shape but not one privileged aggregation rule;
+- P05 exposed cultural hysteresis when stale convention remains "good enough" to reinforce itself;
+- P06 falsified the frozen hard-ish grouping heuristic as a durable design because signature similarity could override negative provenance evidence;
+- P07 separated recommender credibility from local generalizability and showed that eventual authority repair can arrive after material opportunity cost.
 
-The P07 severity surface begins in the strong-contradiction regime because the frozen `0.20` residual-standing safety boundary was registered for strongly mismatched recommendations, not for weak disagreement that should rationally retain standing.
+The surfaces are now consumed exploratory evidence. Any mechanism revised from them requires a later fresh validation design.
 
-Each cell records a signed primary boundary margin and the mean diagnostics needed to understand why it crosses. A negative margin is desired falsification information. These surfaces are exploratory development evidence; if mechanisms are later changed, the same surfaces must not be reinterpreted as fresh confirmation.
+### Protocol 08: strategic public influence
 
-The authoritative runner writes `parameterized-report.json`, `parameterized-plan.json`, `parameterized-summary.md`, and one CSV surface per profile.
+Status: **implemented in v0.11.0; development results pending**.
+
+Question:
+
+> Can direct consequence keep a strategically self-presenting peer useful where objectives align while limiting capture where the peer learns to optimize its public posture for influence?
+
+Why it remains in this lab:
+
+Protocols 01-07 already assume independent private interiors and bounded public surfaces. Their senders can be wrong, noisy, correlated, or locally mismatched, but they do not learn how to shape the public surface itself to gain more influence. Strategic public influence is therefore still a relation among already-perceptible bounded minds, not a hidden-source/interface problem for the successor lab.
+
+Protocol 08 uses a peer B with a private objective. B can observe C's resulting public prediction and adapt among calibrated, assertive, and hedged confidence presentations according to how well that response fits B's objective. B cannot inspect C's private standing, calibration state, local estimate, counterfactual prediction, or implementation.
+
+Seed-generated worlds contain genuine alignment, persistent divergence, and two betrayal contexts where B is initially aligned long enough to earn influence before its private objective changes. Three paired paths compare:
+
+1. **accountable-consequence** - C owns source standing and confidence calibration; direct consequence revises both;
+2. **self-report-naive** - self-reported confidence gets direct leverage and standing changes only weakly;
+3. **local-only** - C refuses peer influence and learns only from consequence.
+
+Ten preregistered checks cover world composition, learned strategic leverage, useful aligned help, strategic-capture reduction, reduced exploitability, betrayal repair, residual authority, opportunity cost, preservation of useful standing, and bounded public exchange.
 
 ### Current-lab closure question
 
-The Bounded Minds Laboratory is **not closed** by v0.10. Parameterized falsification should finish before deciding whether the social research question has been exhausted.
+The Bounded Minds Laboratory is **not closed by v0.11**. Protocol 08 tests one remaining assumption that the parameterized phase made more important rather than less important.
 
-Two protocol families still plausibly belong here because they concern influence among already-perceptible bounded peers rather than perception of hidden causes:
+After Protocol 08, decide whether **Protocol 09 - coalition / authority cascade** remains distinct. The question is whether permission itself can circulate through recommendation loops, factions, prestige, or bridge nodes and acquire apparently independent support without enough fresh consequence. This is different from P06 evidence ancestry and from P07 one-hop standing transfer.
 
-- **strategic public influence**: can consequence-based standing limit a peer that learns to shape its public posture strategically in order to gain influence while its private interior remains unavailable?
-- **coalition / authority cascade**: can recommendations, standing, prestige, or factional loops become self-reinforcing even when the underlying evidence is not independently renewed?
+Do not add Protocol 09 automatically. If Protocol 08 plus the existing P06/P07 findings already answer the cascade question, close the lab instead. If it remains a genuine social failure mode, run it before final synthesis.
 
-These are candidates, not commitments. After the falsification surfaces are reviewed, add them only if they test a social failure mode that is not already answered by Protocols 01-07.
-
-A candidate successor **Trace and Interface Laboratory** is documented in `NEXT_LAB.md`. Its question begins one layer earlier: how a bounded observer detects and represents structured causal influence when the source itself is only indirectly available through an interface.
+The candidate successor **Trace and Interface Laboratory** remains documented in `NEXT_LAB.md`. Its question begins one layer earlier: how an observer detects structured causal influence when the source itself is only indirectly available through an interface.
 
 ## Result cadence
 
-For the v0.10 parameterized falsification phase:
+For v0.11 Protocol 08:
 
-1. rebuild under the pinned .NET 10 SDK and run the **30** invariant/regression checks;
-2. verify `docs/FROZEN_PROTOCOL_SHA256.txt` before running any research command;
-3. run `parameterized-falsification-v1` once without modifying frozen Protocol 01-07 experiment/world source or the registered response surfaces;
-4. inspect response surfaces, negative replicate counts, and null regions rather than reducing the phase to a Support percentage;
-5. treat crossover, non-monotonicity, and comparator wins as useful causal evidence;
-6. do not tune a mechanism from these surfaces and then reuse the same surface as confirmation;
-7. after review, decide whether strategic-public-influence and authority-cascade protocols still add unresolved bounded-minds evidence;
-8. only then prepare a closeout/handoff to the candidate Trace and Interface Laboratory;
-9. keep `holdout-v1` and `challenge-v1` reproducibility-only.
+1. rebuild under the pinned .NET 10 SDK and run the **32** invariant/regression checks;
+2. verify `docs/FROZEN_PROTOCOL_SHA256.txt` so Protocols 01-07 and their world generators remain unchanged;
+3. run Protocol 08 across development-v1 (`101,211,307,401,503`) without changing its ten registered boundaries;
+4. inspect sender tactic rates, aligned benefit, divergent/betrayal repair, residual standing, total RMSE, and communication cost together;
+5. treat development-v1 as assay development, not fresh validation;
+6. do not reuse holdout-v1, challenge-v1, or parameterized-falsification-v1 as confirmation for a changed mechanism;
+7. after Protocol 08 review, decide whether Protocol 09 remains necessary;
+8. only then decide whether the current lab has earned closeout and handoff to the Trace and Interface Laboratory.

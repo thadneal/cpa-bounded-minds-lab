@@ -341,3 +341,24 @@ Run the challenge from the CLI, then use the Desktop Lab for development regress
 The Desktop Lab remains the ordinary protocol/development-history workbench. `parameterized-falsification-v1` is intentionally CLI-only because its 7 x 7 evaluator-side response surfaces are not ordinary seed histories and should not be presented through the existing Seed -> Focus Path -> Metric navigation as though they were one cognitive run.
 
 The Desktop defaults remain Development v1 regression data. Consumed holdout-v1 stays available only for reproduction, while consumed challenge-v1 and the current parameterized runner remain explicit CLI research modes. No graph or table behavior changes in v0.10.
+
+## v0.11 Protocol 08 workbench
+
+Protocol 08 is now available through the ordinary experiment catalog and uses the existing Development v1 seed preset. Protocol Progress follows:
+
+```text
+Let a peer learn public leverage
+  seed-specific aligned, divergent + betrayal contexts
+  B adapts self-reported confidence from C's public response
+Compare receiver boundaries
+  consequence-grounded standing + calibration
+  self-report-naive control
+  local-only baseline
+Judge strategic capture and useful influence
+  ten falsification checks
+  protocol verdict
+```
+
+Run notes explain that the sender may learn from receiver public prediction but cannot inspect receiver-private standing or calibration. New graph guidance distinguishes sender objective, self-reported confidence, receiver-owned calibration trust, peer influence weight, sender utility, and presentation tactic.
+
+No visualization mechanics changed in v0.11. Incremental graph updates, table wrapping/resizing, per-metric show/hide controls, seed-scoped telemetry, and experiment/UI isolation remain unchanged.

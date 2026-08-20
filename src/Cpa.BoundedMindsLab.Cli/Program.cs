@@ -81,14 +81,14 @@ catch (Exception exception)
 
 static void PrintHelp()
 {
-    Console.WriteLine("CPA Bounded Minds Lab 0.10.0");
+    Console.WriteLine("CPA Bounded Minds Lab 0.11.0");
     Console.WriteLine();
     Console.WriteLine("  --list");
     Console.WriteLine("  --self-test");
     Console.WriteLine("  --all");
     Console.WriteLine("  --validation          Reproduce frozen Protocols 01-07 on the consumed 20-seed holdout-v1 set");
     Console.WriteLine("  --challenge           Reproduce consumed challenge-v1 adversarial seed sweeps");
-    Console.WriteLine("  --falsify             Run parameterized-falsification-v1 controlled causal sweeps");
+    Console.WriteLine("  --falsify             Reproduce consumed parameterized-falsification-v1 causal sweeps");
     Console.WriteLine("  --experiment <name>   Repeat to select several experiments");
     Console.WriteLine("  --seed <ulong>        Single-history seed (default 101)");
     Console.WriteLine("  --replicate <csv>     Explicit replication seeds; 101,211,307,401,503 is development-v1");

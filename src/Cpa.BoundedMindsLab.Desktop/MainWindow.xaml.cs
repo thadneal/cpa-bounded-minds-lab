@@ -24,6 +24,7 @@ public partial class MainWindow : Window
     private const string Protocol05Name = "05-emergent-convention-artificial-culture";
     private const string Protocol06Name = "06-incomplete-epistemic-ancestry";
     private const string Protocol07Name = "07-provisional-standing-transfer";
+    private const string Protocol08Name = "08-strategic-public-influence";
     private static readonly int[] BoundaryDelays = [0, 2, 10];
     private static readonly char[] SeedSeparators = [',', ';', ' ', '\t', '\r', '\n'];
     private readonly DesktopRunCoordinator _coordinator = new();
@@ -583,7 +584,11 @@ public partial class MainWindow : Window
         if (!string.Equals(_progressExperiment, experiment, StringComparison.Ordinal))
         {
             _progressExperiment = experiment;
-            if (string.Equals(experiment, Protocol07Name, StringComparison.Ordinal))
+            if (string.Equals(experiment, Protocol08Name, StringComparison.Ordinal))
+            {
+                SetProtocol08ProgressLabels();
+            }
+            else if (string.Equals(experiment, Protocol07Name, StringComparison.Ordinal))
             {
                 SetProtocol07ProgressLabels();
             }
@@ -613,6 +618,12 @@ public partial class MainWindow : Window
             }
 
             SetAllProgressPending();
+        }
+
+        if (string.Equals(experiment, Protocol08Name, StringComparison.Ordinal))
+        {
+            UpdateProtocol08Progress(timeline);
+            return;
         }
 
         if (string.Equals(experiment, Protocol07Name, StringComparison.Ordinal))
@@ -746,6 +757,48 @@ public partial class MainWindow : Window
             experimentComplete ? ProgressMark.Complete : syncComplete ? ProgressMark.Current : ProgressMark.Pending);
     }
 
+
+    private void UpdateProtocol08Progress(TelemetryTimelineSnapshot timeline)
+    {
+        var experimentStarted = HasTimelineEvent(timeline, Protocol08Name, ExperimentFrameKind.ExperimentStarted);
+        var scenarioGenerated = HasTimelineEvent(timeline, Protocol08Name, ExperimentFrameKind.DevelopmentalEvent, "scenario", "strategic-social-world-generated");
+        var accountableStarted = HasTimelineEvent(timeline, Protocol08Name, ExperimentFrameKind.PhaseChanged, "accountable-consequence", "strategic-interaction");
+        var accountableComplete = HasTimelineEvent(timeline, Protocol08Name, ExperimentFrameKind.DevelopmentalEvent, "accountable-consequence", "path-complete");
+        var naiveStarted = HasTimelineEvent(timeline, Protocol08Name, ExperimentFrameKind.PhaseChanged, "self-report-naive", "strategic-interaction");
+        var naiveComplete = HasTimelineEvent(timeline, Protocol08Name, ExperimentFrameKind.DevelopmentalEvent, "self-report-naive", "path-complete");
+        var localStarted = HasTimelineEvent(timeline, Protocol08Name, ExperimentFrameKind.PhaseChanged, "local-only", "strategic-interaction");
+        var localComplete = HasTimelineEvent(timeline, Protocol08Name, ExperimentFrameKind.DevelopmentalEvent, "local-only", "path-complete");
+        var experimentComplete = HasTimelineEvent(timeline, Protocol08Name, ExperimentFrameKind.ExperimentCompleted);
+
+        SetProgressLine(SourceDirectProgressText,
+            scenarioGenerated ? ProgressMark.Complete : experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(SourcePublishProgressText,
+            accountableStarted ? ProgressMark.Complete : scenarioGenerated ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(SourceStepText,
+            accountableStarted || experimentComplete ? ProgressMark.Complete : experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressCard(SourceProgressCard,
+            accountableStarted || experimentComplete ? ProgressMark.Complete : experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
+
+        SetProgressLine(ReceiverLocalProgressText,
+            accountableComplete || naiveStarted ? ProgressMark.Complete : accountableStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(ReceiverProvisionalProgressText,
+            naiveComplete || localStarted ? ProgressMark.Complete : naiveStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(ReceiverLivedProgressText,
+            localComplete ? ProgressMark.Complete : localStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(ReceiverStepText,
+            localComplete || experimentComplete ? ProgressMark.Complete : accountableStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressCard(ReceiverProgressCard,
+            localComplete || experimentComplete ? ProgressMark.Complete : accountableStarted ? ProgressMark.Current : ProgressMark.Pending);
+
+        SetProgressLine(EvaluationAssertionsProgressText,
+            experimentComplete ? ProgressMark.Complete : localComplete ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(EvaluationVerdictProgressText,
+            experimentComplete ? ProgressMark.Complete : ProgressMark.Pending);
+        SetProgressLine(EvaluationStepText,
+            experimentComplete ? ProgressMark.Complete : localComplete ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressCard(EvaluationProgressCard,
+            experimentComplete ? ProgressMark.Complete : localComplete ? ProgressMark.Current : ProgressMark.Pending);
+    }
 
     private void UpdateProtocol07Progress(TelemetryTimelineSnapshot timeline)
     {
@@ -1005,6 +1058,20 @@ public partial class MainWindow : Window
     }
 
 
+    private void SetProtocol08ProgressLabels()
+    {
+        SetProgressLabel(SourceStepText, "1. Let a peer learn public leverage");
+        SetProgressLabel(SourceDirectProgressText, "Seed-specific aligned, divergent + betrayal contexts");
+        SetProgressLabel(SourcePublishProgressText, "B adapts self-reported confidence from C's public response");
+        SetProgressLabel(ReceiverStepText, "2. Compare receiver boundaries");
+        SetProgressLabel(ReceiverLocalProgressText, "Consequence-grounded standing + calibration");
+        SetProgressLabel(ReceiverProvisionalProgressText, "Self-report-naive control");
+        SetProgressLabel(ReceiverLivedProgressText, "Local-only baseline");
+        SetProgressLabel(EvaluationStepText, "3. Judge strategic capture and useful influence");
+        SetProgressLabel(EvaluationAssertionsProgressText, "Ten falsification checks");
+        SetProgressLabel(EvaluationVerdictProgressText, "Protocol verdict");
+    }
+
     private void SetProtocol07ProgressLabels()
     {
         SetProgressLabel(SourceStepText, "1. Receive a social recommendation");
@@ -1115,7 +1182,7 @@ public partial class MainWindow : Window
     private void ResetProtocolProgress()
     {
         _progressExperiment = null;
-        SetProtocol07ProgressLabels();
+        SetProtocol08ProgressLabels();
         SetAllProgressPending();
     }
 

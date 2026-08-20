@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.11.0 - 2026-08-20
+
+- Recorded `parameterized-falsification-v1` as consumed exploratory evidence: 294 controlled cells / 2,058 deterministic runs, with 176/294 cells showing a negative mean primary boundary margin and 1,201/2,058 replicates crossing at least one registered boundary.
+- Revised the durable P03-P07 conclusions from the controlled surfaces: developmental instability is not automatically a trust penalty; typed communication does not imply one universal reducer; subtle drift can reinforce obsolete culture; ancestry needs negative as well as positive dependence evidence; and transferred standing needs local generalizability plus proportional consequence-driven repair.
+- Added `docs/PARAMETERIZED_FALSIFICATION_V1_RESULTS.md` and updated the plan, validation method, research ledger, falsification record, architecture notes, source reconciliation, runbook, and next-lab boundary around those results.
+- Added Protocol 08, `08-strategic-public-influence`, testing whether receiver-owned consequence can keep an adaptively self-presenting peer useful without granting its public confidence direct authority or inspecting its private objective.
+- Added `StrategicInfluenceWorld`, with seed-generated aligned, divergent, partial-alignment, and betrayal contexts. In betrayal contexts the peer can first earn influence under alignment and later become strategically divergent.
+- Added three Protocol 08 conditions: `accountable-consequence`, `self-report-naive`, and `local-only`. The strategic sender observes its own objective and public influence feedback but cannot read receiver-private source standing, calibration trust, or implementation state.
+- Added ten preregistered Protocol 08 checks covering world construction, strategic leverage discovery, useful aligned help, strategic-capture resistance, exploitability reduction, betrayal correction, public-confidence/authority separation, bounded opportunity cost, earned aligned standing, and explicit communication cost.
+- Classified Protocol 08 assertions into manipulation, mechanism-outcome, safety-boundary, and accounting evidence without changing the existing Protocol 01-07 taxonomy.
+- Added Protocol 08 telemetry and metric guidance for public confidence, peer weight, calibration trust, sender utility/objective, and presentation tactic; updated Desktop Protocol Progress and Run Notes without changing graph/table rendering behavior.
+- Added two Protocol 08 development invariants, bringing the suite to **32 tests**. The seed-101 fixture remains development evidence, not confirmation.
+- Kept all frozen Protocol 01-07 experiment and world-generator source files byte-for-byte unchanged under the existing SHA-256 manifest. Protocol 08 is deliberately outside that frozen boundary until its development and later validation record justify freezing it.
+- Updated CLI help, assembly versions, artifact metadata, and window titles to v0.11.0. `--falsify`, `--challenge`, and `--validation` are now explicitly historical reproduction modes; the current research run is the Protocol 08 five-seed development matrix.
+
 ## 0.10.0 - 2026-08-20
 
 - Recorded challenge-v1 as consumed exploratory evidence: 78 Support / 22 Mixed / 0 Disconfirm across 100 adversarial runs, with 317/320 mechanism, 207/220 safety, 133/140 manipulation, and 78/80 accounting checks passing.

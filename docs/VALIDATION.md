@@ -1,6 +1,6 @@
 # Validation and Operating-Envelope Method
 
-Version 0.10.0 keeps Protocols 01-07 frozen and moves the laboratory from consumed holdout/challenge evidence into controlled parameterized falsification.
+Version 0.11.0 keeps Protocols 01-07 frozen, records parameterized-falsification-v1 as consumed exploratory evidence, and returns to targeted mechanism discovery for Protocol 08 strategic public influence.
 
 The distinction matters:
 
@@ -21,7 +21,7 @@ That holdout was consumed on 2026-08-20.
 
 `docs/FROZEN_PROTOCOL_SHA256.txt` contains SHA-256 hashes for all seven experiment files and their seven world generators. `scripts/verify.ps1` and `scripts/verify.sh` check those hashes before build/self-test.
 
-Version 0.10.0 leaves those files byte-for-byte unchanged. Challenge and parameterized-falsification tooling are added beside them rather than editing the frozen assays.
+Version 0.11.0 leaves those files byte-for-byte unchanged. Challenge and parameterized-falsification tooling remain beside the frozen assays. Protocol 08 is new development work and is deliberately outside the Protocol 01-07 frozen source boundary.
 
 ## Seed sets
 
@@ -119,7 +119,9 @@ The profile-specific conclusions and exact failure examples are preserved in `CH
 
 ## parameterized-falsification-v1
 
-Version 0.10 replaces composite seed ranking with controlled causal intervention. This is **not validation** in the confirmatory sense. It is exploratory falsification designed to map null, useful, crossover, and harmful regions.
+Status: **consumed exploratory evidence**.
+
+Version 0.10 replaced composite seed ranking with controlled causal intervention. This was **not validation** in the confirmatory sense. It was exploratory falsification designed to map null, useful, crossover, and harmful regions. The completed phase produced 294 controlled cells / 2,058 deterministic runs; 176/294 cells had a negative mean primary boundary margin and 1,201/2,058 replicates crossed at least one registered boundary. Full interpretation is preserved in `PARAMETERIZED_FALSIFICATION_V1_RESULTS.md`.
 
 The runner does not change frozen Protocol 01-07 experiment or world-generator source. Instead, protocol-local micro-assays copy selected frozen equations into independent controlled probes so causal variables can be separated and pushed beyond the support of the original generated worlds.
 
@@ -146,7 +148,7 @@ If a frozen mechanism is later revised in response to these surfaces, none of `d
 
 ## Automated outputs
 
-The authoritative current falsification command writes:
+The consumed falsification reproducer writes:
 
 ```text
 parameterized-plan.json
@@ -166,7 +168,7 @@ Consumed `challenge-v1` and `holdout-v1` keep their historical artifacts for rep
 
 ## Invariant suite
 
-Version 0.10.0 defines **30 self-tests**. In addition to the existing protocol, telemetry, validation, and challenge checks, parameterized-falsification tests verify that:
+Version 0.11.0 defines **32 self-tests**. In addition to the existing protocol, telemetry, validation, and challenge checks, parameterized-falsification tests verify that:
 
 - challenge-v1 selection is deterministic;
 - development-v1 and consumed holdout-v1 seeds are excluded;
@@ -175,18 +177,31 @@ Version 0.10.0 defines **30 self-tests**. In addition to the existing protocol, 
 - all six registered parameterized profiles expose complete 7 x 7 grids;
 - the P04 stronger comparator consumes exactly the same public communication work as the typed path;
 - the P06 probe reaches complete origin blindness while retaining finite measurable outputs;
-- the two P07 surfaces intervene on prevalence and severity separately.
+- the two P07 surfaces intervene on prevalence and severity separately;
+- Protocol 08 canonical seeds generate distinct strategic social worlds with aligned, divergent, and betrayal contexts;
+- the Protocol 08 seed-101 development fixture completes with the preregistered experiment contract intact.
 
-These are assay-integrity checks. They do not assert that any parameterized cell should remain positive.
+The parameterized items are assay-integrity checks and do not assert that any controlled cell should remain positive. The Protocol 08 fixture is a development regression, not fresh confirmation.
 
 ## Authoritative Windows sequence
+
+Protocol 08 is new development evidence. The current authoritative research run is its five-seed development matrix after verification:
 
 ```powershell
 ./scripts/verify.ps1
 
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
+  --experiment 08-strategic-public-influence `
+  --replicate 101,211,307,401,503 `
+  --output _artifacts/protocol-08-development-v1
+```
+
+To reproduce parameterized-falsification-v1 without making a new confirmation claim:
+
+```powershell
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
   --falsify `
-  --output _artifacts/parameterized-falsification-v1
+  --output _artifacts/parameterized-falsification-v1-repro
 ```
 
 To reproduce the consumed holdout without making a new validation claim:

@@ -11,6 +11,7 @@ public static class ExperimentCatalog
         new EmergentConventionArtificialCultureExperiment(),
         new IncompleteEpistemicAncestryExperiment(),
         new ProvisionalStandingTransferExperiment(),
+        new StrategicPublicInfluenceExperiment(),
     ];
 
     public static IReadOnlyList<IExperiment> All => Experiments;

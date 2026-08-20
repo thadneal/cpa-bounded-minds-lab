@@ -373,3 +373,20 @@ The final layer is exploratory falsification, not proposed CPA anatomy. Constant
 ## Boundary to a possible successor laboratory
 
 Bounded Minds assumes peers are already perceptible participants with public surfaces. A later Trace and Interface Laboratory would move the experimental boundary earlier, asking how an observer can detect structured causal influence when the source is only indirectly available through a bounded sense/interface. That question is adjacent to CPA's sense boundary but distinct from the present lab's social-evidence problem, so it should not be folded into the current protocol catalog merely to preserve continuity.
+
+## v0.11 strategic public influence boundary
+
+Protocol 08 adds a deliberately asymmetric social boundary without changing the frozen Protocol 01-07 architecture.
+
+A strategic peer has a private objective and can adapt how it presents confidence after observing the receiver's resulting public prediction. It cannot read the receiver's private estimate, counterfactual no-peer prediction, source standing, calibration state, or code path. This preserves the central bounded-minds premise: one mind may affect another through a disciplined public residue without gaining privileged interior access.
+
+The receiver owns two distinct social quantities:
+
+- **source standing** - permission earned from how well the peer's estimate survives direct consequence;
+- **calibration trust** - how well the peer's self-reported confidence corresponds to later observed quality.
+
+Self-reported confidence is therefore not standing. It may modulate immediate opportunity, but it cannot directly manufacture durable authority.
+
+The experiment also preserves a no-peer baseline. This matters architecturally because resisting manipulation by silencing all public influence would be a trivial but unacceptable solution. A useful bounded ecology should remain permeable to peers that continue to earn influence while becoming resistant to strategically advantageous presentation that repeatedly fails consequence.
+
+No new shared inspector is introduced. The protocol evaluator knows the sender's synthetic private objective so it can score alignment and betrayal, but receiver cognition does not receive that label or objective as evidence.

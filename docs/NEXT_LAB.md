@@ -8,20 +8,21 @@ Not yet.
 
 The current laboratory has a coherent subject: **what develops among bounded minds when they exchange selected public evidence while preserving independent interiors**. Protocols 01-07 established and then stressed several mechanisms inside that subject. Holdout-v1 and challenge-v1 showed that the laboratory is now mature enough to ask about failure surfaces rather than simply accumulating supportive mechanisms.
 
-Version 0.10 therefore remains inside this lab. `parameterized-falsification-v1` is unfinished work on the existing record, not the beginning of the successor lab.
+`parameterized-falsification-v1` is now complete and consumed. Its controlled surfaces showed interpretable failure regions in P03-P07 and were sufficient to stop sweeping the old local equations. Version 0.11 remains inside this lab for a different reason: Protocol 08 addresses a still-open social assumption, strategic self-presentation by an already-perceptible peer.
 
 A reasonable closure criterion is:
 
-1. controlled failure surfaces exist for the important P03-P07 mechanisms;
-2. Protocol 04 has faced a competent equal-budget alternative rather than only early semantic smoothing;
-3. the remaining social failure modes have been considered explicitly;
-4. any final synthesis protocol is run before the findings are translated into the next lab or the eventual Rust organism.
+1. controlled failure surfaces exist for the important P03-P07 mechanisms (**complete**);
+2. Protocol 04 has faced a competent equal-budget alternative rather than only early semantic smoothing (**complete**);
+3. strategic public influence is tested without private-state inspection (**Protocol 08 active**);
+4. authority/standing cascades are either tested or explicitly judged redundant after Protocol 08;
+5. any final synthesis/closeout needed to reconcile the social findings is completed before translation into the next lab or eventual Rust organism.
 
 ## Protocols that may still belong here
 
 Two protocol families remain plausible enough that the lab should not be closed before deciding whether to run them.
 
-### Candidate Protocol 08 - strategic public influence
+### Protocol 08 - strategic public influence (active)
 
 Question:
 
@@ -31,7 +32,7 @@ Why it belongs here:
 
 Protocols 03, 04, 06, and 07 assume public signals are noisy, incomplete, or locally mismatched, but not strategically optimized to exploit the receiver's standing rules. A developing social ecology should eventually face signals whose public confidence, provenance hints, recommendation relationships, or agreement patterns are adversarially selected.
 
-This should not become a generic cybersecurity simulation. The relevant CPA question is whether **consequence can make public influence answerable when interiors remain private**.
+This is not a generic cybersecurity simulation. The implemented CPA question is whether **consequence can make public influence answerable when interiors remain private**. The sender learns which public confidence posture gains influence from observed outcomes but cannot inspect the receiver's private standing/calibration state. A local-only baseline prevents success by simply silencing social input.
 
 ### Candidate Protocol 09 - coalition / authority cascade
 
@@ -45,7 +46,7 @@ P06 studies evidential ancestry and P07 studies transferred standing one relatio
 
 A useful final social protocol would test whether local standing remains grounded when recommendations form loops, factions, bridge nodes, or prestige cascades.
 
-These candidates should be judged after parameterized falsification. If the controlled surfaces reveal that existing mechanisms already answer these questions adequately, the lab should close rather than manufacture extra protocols.
+Protocol 08 is now active development work. Protocol 09 should be judged after its results. If strategic influence plus the existing ancestry/standing findings already explain circular authority well enough, the lab should close rather than manufacture extra protocols. If permission can still become self-supporting through a network in a way P06-P08 do not capture, Protocol 09 remains justified.
 
 ## Candidate next lab: Trace and Interface Laboratory
 
@@ -74,25 +75,25 @@ A Trace and Interface Laboratory could instead ask:
 
 ### Possible early experiments
 
-1. **Trace without identity**  
+1. **Trace without identity**
    A hidden process perturbs a shared world. The observer never receives a source label. Can recurring causal structure become a stable local trace without prematurely inventing an agent identity?
 
-2. **Perceptibility boundary**  
+2. **Perceptibility boundary**
    Vary overlap between a hidden process's effects and the observer's sense channel. At what point does influence become detectable, and how does the observer represent undetectable versus weakly detectable causes?
 
-3. **Interface aliasing**  
+3. **Interface aliasing**
    Hold the hidden process fixed while changing the observer's representational channel. Can the same underlying influence produce different but behaviorally adequate public traces?
 
-4. **Perturbed accessible state space**  
+4. **Perturbed accessible state space**
    Expand or reorganize the observer's available representation under controlled perturbation. Does this reveal previously inaccessible causal regularity, and when does added freedom instead increase false structure / false agency?
 
-5. **External-variable constraint**  
+5. **External-variable constraint**
    Couple a hidden process to a blinded external variable. A genuine inferred trace should covary with the hidden variable beyond an endogenous-control condition. This directly borrows the paper's falsification logic while remaining entirely synthetic.
 
-6. **Intersubjective trace convergence**  
+6. **Intersubjective trace convergence**
    Isolate several observers from one another while exposing them to the same hidden causal process. Do their independently learned traces share nontrivial structure beyond what common priors or shared interface design predict?
 
-7. **Agentic versus non-agentic dynamics**  
+7. **Agentic versus non-agentic dynamics**
    Do responsiveness, temporal coherence, counterfactual sensitivity, and causal independence cause the observer to form different representations from rigid low-dimensional environmental processes? Can the system avoid treating complexity alone as agency?
 
 ### Important boundary
@@ -116,8 +117,10 @@ The likely sequence is now:
 
 ```text
 Bounded Minds Lab
-  -> parameterized falsification
-  -> decide/run final social protocols if still unresolved
+  -> parameterized falsification (complete / consumed)
+  -> Protocol 08 strategic public influence
+  -> decide Protocol 09 authority cascade from P08 evidence
+  -> final social synthesis if needed
   -> freeze lab retrospective + handoff
 
 Trace & Interface Lab (candidate)

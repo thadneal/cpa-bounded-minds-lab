@@ -605,13 +605,98 @@ Version 0.10 adds no Protocol 08. `challenge-v1` is consumed with 78 Support / 2
 
 These probes deliberately isolate selected frozen equations from the full protocol worlds. Their purpose is to locate operating boundaries, not to create new protocol Support counts. They write signed margins and surface CSVs rather than new protocol verdicts.
 
-## Possible remaining protocols in this laboratory
+## Remaining social questions in this laboratory
 
-The current laboratory should not be closed merely because the first seven protocols have been frozen. After the parameterized surfaces are interpreted, two social failure modes remain plausible bounded-minds protocols:
+The current laboratory should not be closed merely because the first seven protocols are frozen and their local mechanisms have been stressed. The parameterized surfaces are now consumed. They left one social assumption clearly unresolved and one further question still plausible:
 
-1. **Strategic public influence**: a peer learns to manipulate its public posture, standing cues, or apparent uncertainty to gain influence while private state remains inaccessible. The question is whether consequence-based standing and bounded public surfaces can limit strategic presentation without granting a central inspector.
-2. **Coalition / authority cascade**: recommendation and standing circulate through several peers or factions and become mutually reinforcing without enough independent consequence. This differs from P06's copied evidence because the duplicated object is permission/authority rather than the evidence claim itself.
+1. **Protocol 08 - strategic public influence (implemented in v0.11)**: a peer learns which public confidence posture gains influence while private state remains inaccessible. The question is whether consequence-grounded standing and calibration can limit strategic presentation without granting a central inspector or silencing useful peers.
+2. **Candidate Protocol 09 - coalition / authority cascade**: recommendation and standing circulate through several peers or factions and become mutually reinforcing without enough independent consequence. This differs from P06's copied evidence because the duplicated object is permission/authority rather than the evidence claim itself.
 
-Do not add either protocol automatically. The parameterized phase may show that an existing mechanism already addresses the failure. A new protocol belongs here only if it tests a genuinely unresolved relation among already-perceptible bounded minds.
+Protocol 09 should not be added automatically. It belongs here only if Protocol 08 results leave circular permission/authority as a genuinely distinct failure mode among already-perceptible bounded minds. Otherwise the lab should move to synthesis and closeout rather than manufacture another protocol.
 
 The proposed successor in `NEXT_LAB.md` begins at a different boundary: the observer may not have direct access to the source process at all and must infer structured influence through an interface.
+
+## Parameterized falsification result: v0.10 consumed
+
+The six controlled surfaces completed with **294 cells / 2,058 deterministic runs**. `176/294` cells had a negative mean primary margin. The result is preserved in `PARAMETERIZED_FALSIFICATION_V1_RESULTS.md` and should now be treated as consumed exploratory evidence rather than a fresh confirmation surface.
+
+The most important revisions are:
+
+- P03 instability should modify uncertainty rather than act as an automatic scalar trust penalty;
+- P04's durable result is preservation of epistemic shape, not one privileged aggregation rule;
+- P05 can reinforce a stale convention while performance remains merely good enough;
+- P06's frozen grouping heuristic can let signature similarity override negative provenance evidence and should not become durable architecture;
+- P07 needs local-generalizability estimation in addition to recommender credibility, and contradiction repair should be proportional rather than categorical.
+
+## Protocol 08: strategic public influence
+
+Status: **implemented in v0.11.0; development result pending**.
+
+Name: `08-strategic-public-influence`
+
+Question:
+
+> Can direct consequence keep a strategically self-presenting peer useful where objectives align while limiting capture where the peer learns to optimize its public posture for influence?
+
+### Why this is a distinct bounded-minds question
+
+Earlier protocols assume that a public signal can be incomplete, noisy, correlated, overconfident, or locally wrong. They do not let the sender adapt its public presentation because particular presentations move the receiver more effectively.
+
+Protocol 08 keeps both interiors private. Peer B has a private objective and sees only public feedback: after publishing an estimate and self-reported confidence, it can observe C's resulting public prediction and score how closely that response fits B's objective. B never reads C's source-standing array, calibration state, local estimate, counterfactual prediction, or implementation.
+
+B adaptively chooses among three presentation tactics:
+
+- **calibrated** confidence, derived from B's own evidence quality;
+- **assertive** confidence (`0.98`);
+- **hedged** confidence (`0.35`).
+
+The tactic learner receives sender-side influence utility only. It is therefore able to discover leverage without being granted hidden access to the receiver.
+
+### Seed-generated social world
+
+Each world contains twelve contexts and thirty receiver observations per context. Every seed contains at least:
+
+- four genuinely aligned contexts;
+- four persistently divergent contexts;
+- two betrayal contexts that begin aligned for ten local exposures and then switch to a divergent sender objective.
+
+The remaining two contexts are seed-selected from aligned, divergent, or partial-alignment conditions. Receiver targets, noise, sender evidence quality, context placement, and divergent objectives vary with the seed.
+
+The seed label is evaluator metadata. C never receives the context-kind label as evidence.
+
+### Conditions
+
+**Accountable consequence**
+
+C owns source standing and a separate calibration-trust value. B's self-reported confidence can affect immediate opportunity, but only through those receiver-owned terms. After direct consequence, C updates local prediction, source standing, and confidence calibration. Large source error applies an additional standing penalty.
+
+**Self-report naive**
+
+C gives self-reported confidence direct leverage. Source standing changes only weakly and does not meaningfully govern immediate peer weight. This control is intentionally exploitable, but unlike earlier static controls the sender must actually discover that exploitability from interaction.
+
+**Local only**
+
+C ignores B and learns only from direct consequence. This bounds the cost of keeping a potentially strategic peer available.
+
+### Preregistered checks
+
+1. `seed-generates-strategic-social-world` - every seed contains substantial aligned/divergent exposure plus exactly two betrayal contexts;
+2. `strategic-sender-discovers-naive-leverage` - late divergent assertive presentation rate in the naive receiver is at least `0.50`;
+3. `accountable-public-influence-preserves-useful-help` - accountable early aligned RMSE is at least 25% lower than local-only;
+4. `consequence-limits-strategic-capture` - accountable total RMSE is at least 40% lower than self-report naive;
+5. `accountable-consequence-reduces-exploitability` - late divergent assertive rate falls by at least `0.15` relative to naive;
+6. `betrayal-remains-correctable` - late betrayal RMSE is at most 20% of naive and final betrayal standing is at most `0.10`;
+7. `public-claims-do-not-become-authority` - final divergent standing is at most `0.08` and at least four times lower than naive;
+8. `opportunity-cost-remains-bounded-versus-local` - accountable total RMSE may be at most 5% worse than local-only;
+9. `aligned-standing-remains-earned` - repeated aligned consequence retains final source standing of at least `0.85`;
+10. `strategic-public-exchange-is-bounded` - the two peer paths exchange exactly one compact posture per interaction at equal explicit cost, while local-only receives none.
+
+All ten checks are required for Support. Eight or nine passing checks produce Mixed; fewer than eight produce Disconfirm.
+
+### Interpretation boundary
+
+A positive result would **not** show that manipulation has been solved generally. The sender has only three confidence-presentation tactics, one scalar estimate, and a simple influence objective. The result would establish a narrower property:
+
+> Receiver-owned standing and calibration can make an adaptive public influence channel answerable to consequence without requiring private-state inspection, while still preserving useful influence where objectives remain aligned.
+
+The exact confidence values, learning rates, standing update, and penalty constants remain protocol instruments. The candidate architectural pressure is that self-presented confidence should not be allowed to become its own authority.

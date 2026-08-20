@@ -535,3 +535,104 @@ For every profile, distinguish:
 5. **unstable region**: mixed replicate signs reveal sensitivity rather than a clean boundary.
 
 Do not retune the response surface after seeing it. Any mechanism revision makes this phase development evidence for a future design, not confirmation of that revision.
+
+## v0.10 parameterized-falsification result
+
+`parameterized-falsification-v1` is consumed. Across 294 controlled cells, 176 had a negative mean primary margin and 1,201 of 2,058 deterministic replicates crossed at least one registered boundary. The result is interpreted in `PARAMETERIZED_FALSIFICATION_V1_RESULTS.md`.
+
+The phase succeeded by falsifying several overly specific implementation readings: developmental instability is not inherently distrust-worthy, no single P04 reducer dominates, convention can be trapped by merely adequate performance, P06 signature similarity can erase negative provenance evidence, and P07 credibility cannot substitute for local generalizability.
+
+Do not tune a revised P03-P07 mechanism against these surfaces and then call the same surface confirmatory evidence.
+
+## Protocol 08 falsification contract
+
+Protocol 08 returns to ordinary protocol development after the controlled operating-envelope phase. Its key methodological requirement is that the strategic sender must not receive receiver-private state as an optimization signal.
+
+The sender may observe only its own private objective, the public posture it emitted, and the receiver's resulting public prediction. It has no counterfactual view of what the receiver would have predicted without the message. It adapts its presentation tactic from how well the observed public response fits its own objective.
+
+The receiver conditions are paired on the same generated world and direct consequence stream.
+
+### Manipulation checks
+
+`seed-generates-strategic-social-world`
+
+The world must include at least four aligned contexts, at least four persistently divergent contexts, and exactly two betrayal contexts. Betrayal contexts are initially aligned for ten local exposures before the sender's private objective becomes divergent.
+
+`strategic-sender-discovers-naive-leverage`
+
+The naive receiver must actually be exploitable by the adaptive sender. Late divergent assertive-presentation rate must reach at least `0.50`. Without this check, a low-error naive control could simply mean that the sender failed to discover the intended strategic pressure.
+
+### Mechanism outcomes
+
+`accountable-public-influence-preserves-useful-help`
+
+```text
+accountable_early_aligned_rmse <= 0.75 * local_early_aligned_rmse
+```
+
+The defense may not solve manipulation by refusing useful social information.
+
+`consequence-limits-strategic-capture`
+
+```text
+accountable_rmse <= 0.60 * naive_rmse
+```
+
+The accountable receiver must materially resist the strategically exploitable control across the mixed world.
+
+`accountable-consequence-reduces-exploitability`
+
+```text
+accountable_late_divergent_assertive_rate
+    <= naive_late_divergent_assertive_rate - 0.15
+```
+
+This is a sender-side behavioral check. Consequence should change which public presentation tactics remain rewarding, even though the sender never sees the receiver's private standing or calibration state.
+
+`aligned-standing-remains-earned`
+
+```text
+accountable_final_aligned_standing >= 0.85
+```
+
+Useful peers must be allowed to retain influence after repeated successful consequence.
+
+### Safety boundaries
+
+`betrayal-remains-correctable`
+
+```text
+accountable_late_betrayal_rmse <= 0.20 * naive_late_betrayal_rmse
+accountable_final_betrayal_standing <= 0.10
+```
+
+A peer that first earns influence and later changes its private objective must not be protected by its earlier good history indefinitely.
+
+`public-claims-do-not-become-authority`
+
+```text
+accountable_final_divergent_standing <= 0.08
+naive_final_divergent_standing >= 4 * accountable_final_divergent_standing
+```
+
+Self-reported confidence is a public claim, not receiver-owned authority.
+
+`opportunity-cost-remains-bounded-versus-local`
+
+```text
+accountable_rmse <= 1.05 * local_only_rmse
+```
+
+Keeping the strategic peer available may impose limited exploration cost, but it may not become substantially worse than refusing peer influence altogether.
+
+### Accounting constraint
+
+`strategic-public-exchange-is-bounded`
+
+Both peer paths exchange exactly one compact public posture per interaction at identical explicit cost. The local-only baseline receives no public peer packet.
+
+### Verdict
+
+All ten checks are required for Support. Eight or nine passing checks produce Mixed. Fewer than eight produce Disconfirm.
+
+A Support verdict should be read narrowly. It would not validate the exact standing/calibration equations or claim general resistance to deception. It would support the architectural pressure that **public self-presentation must remain answerable to receiver-owned consequence without requiring interior inspection**.

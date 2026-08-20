@@ -368,3 +368,44 @@ This phase is intentionally exploratory. A mechanism changed in response to thes
 The Bounded Minds Laboratory should not close before these surfaces are interpreted. Two social questions may still deserve protocols here: strategic manipulation of public posture and self-reinforcing authority/standing cascades. They remain candidates pending falsification results.
 
 A different question is also becoming visible: how a bounded observer detects another process only through the trace of its causal influence on an interface. That belongs more naturally to a successor Trace and Interface Laboratory than to this lab, which begins from already-perceptible peers. The attached *Traces of the Other* paper is useful as a formal and experimental source for that successor, without requiring any commitment to its consciousness-first ontology or to the external reality of DMT entities.
+
+## 2026-08-20 - parameterized-falsification-v1 consumed; Protocol 08 opens strategic-public-influence question
+
+### Controlled falsification result
+
+The v0.10 controlled phase completed six `7 x 7` surfaces with seven deterministic replicates per cell: **294 cells / 2,058 runs**. `176/294` cells had negative mean primary margins and `1,201/2,058` replicates crossed at least one registered boundary.
+
+The phase was useful because failures were mechanistically legible rather than random collapse:
+
+- P03 over-penalized instability even when a final rule remained useful;
+- P04 showed that preserving typed epistemic shape does not imply one universal aggregation rule;
+- P05 exposed a satisficing/hysteresis trap in which obsolete convention could reinforce itself while still barely successful;
+- P06 showed that the frozen signature-based grouping rule could merge explicitly independent roots because different-origin evidence did not veto similarity;
+- P07 separated recommendation credibility from local generalizability and showed that authority can eventually repair only after meaningful developmental cost has already accumulated.
+
+The result is now frozen as consumed exploratory evidence in `PARAMETERIZED_FALSIFICATION_V1_RESULTS.md`.
+
+### Why Protocol 08 still belongs here
+
+The controlled phase did not answer a different assumption shared by the first seven protocols: public posture was not itself strategically optimized by another mind.
+
+Protocol 08 therefore introduces a peer that can learn which confidence presentation gains influence. The peer remains bounded: it sees its own objective and the receiver's public resulting prediction, not the receiver's private state. The receiver must preserve useful aligned influence while making divergent and betrayed influence answerable to direct consequence.
+
+### Protocol 08 design
+
+Three paired conditions are registered:
+
+- accountable consequence;
+- self-report-naive control;
+- local-only baseline.
+
+The sender adaptively chooses calibrated, assertive, or hedged confidence. Seeded worlds include aligned, divergent, and betrayal contexts. Ten preregistered checks separate world manipulation, mechanism outcomes, safety boundaries, and communication accounting.
+
+### Next evidence
+
+1. build under .NET 10 and run 32 self-tests;
+2. run Protocol 08 across development-v1 only;
+3. inspect tactic adaptation and receiver outcomes together;
+4. do not treat another development 5/5 as confirmation;
+5. decide after results whether authority/standing cascades remain a distinct Protocol 09 question;
+6. close the Bounded Minds Laboratory only after that decision, then hand off to the candidate Trace and Interface Laboratory.

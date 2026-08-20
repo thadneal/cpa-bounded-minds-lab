@@ -15,7 +15,9 @@ public static class ValidationCheckTaxonomy
             || assertionName is "complementary-private-histories"
             or "preserved-disagreement"
             or "typed-surface-preserves-public-disagreement"
-            or "provenance-is-partial-rather-than-clean")
+            or "provenance-is-partial-rather-than-clean"
+            or "seed-generates-strategic-social-world"
+            or "strategic-sender-discovers-naive-leverage")
         {
             return Manipulation;
         }
@@ -25,7 +27,8 @@ public static class ValidationCheckTaxonomy
             or "bounded-developmental-transfer"
             or "typed-communication-remains-bounded"
             or "earned-convention-compresses-communication"
-            or "standing-transfer-is-bounded-public-communication")
+            or "standing-transfer-is-bounded-public-communication"
+            or "strategic-public-exchange-is-bounded")
         {
             return AccountingConstraint;
         }
@@ -44,7 +47,10 @@ public static class ValidationCheckTaxonomy
             or "inference-approaches-perfect-ancestry-with-bounded-public-data"
             or "provisional-standing-avoids-inherited-doctrine"
             or "opportunity-cost-remains-bounded-versus-no-transfer"
-            or "direct-consequence-revokes-strong-local-mismatch")
+            or "direct-consequence-revokes-strong-local-mismatch"
+            or "betrayal-remains-correctable"
+            or "public-claims-do-not-become-authority"
+            or "opportunity-cost-remains-bounded-versus-local")
         {
             return SafetyBoundary;
         }

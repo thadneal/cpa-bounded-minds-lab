@@ -34,6 +34,8 @@ public static class SelfTestSuite
         Run("protocol-06-development-fixture-seed-101", TestProtocolSix, passed);
         Run("protocol-07-default-seeds-create-distinct-standing-transfer-worlds", TestProtocolSevenSeedSemantics, passed);
         Run("protocol-07-development-fixture-seed-101", TestProtocolSeven, passed);
+        Run("protocol-08-default-seeds-create-distinct-strategic-influence-worlds", TestProtocolEightSeedSemantics, passed);
+        Run("protocol-08-development-fixture-seed-101", TestProtocolEight, passed);
         Run("validation-seed-sets-are-frozen-and-disjoint", TestValidationSeedSets, passed);
         Run("validation-check-taxonomy-separates-evidence-types", TestValidationTaxonomy, passed);
         Run("validation-report-identifies-development-regression", TestValidationReport, passed);
@@ -319,6 +321,44 @@ public static class SelfTestSuite
     }
 
 
+    private static void TestProtocolEightSeedSemantics()
+    {
+        var fingerprints = new HashSet<ulong>();
+        var layouts = new HashSet<string>(StringComparer.Ordinal);
+        var worldsWithPartialAlignment = 0;
+        foreach (var seed in ExperimentDefaults.DevelopmentSeeds)
+        {
+            var scenario = StrategicInfluenceWorld.CreateScenario(seed);
+            Assert(fingerprints.Add(scenario.Fingerprint), $"Default seed {seed} should produce a distinct strategic-influence fingerprint.");
+            layouts.Add(string.Join(",", scenario.Cells.Select(cell => (int)cell.ContextKind)));
+            Assert(StrategicInfluenceWorld.CountKind(scenario, StrategicInfluenceContextKind.Aligned) >= 4, "Each Protocol 08 world should contain several genuinely aligned peer contexts.");
+            Assert(StrategicInfluenceWorld.CountKind(scenario, StrategicInfluenceContextKind.Divergent) >= 4, "Each Protocol 08 world should contain several strategically divergent peer contexts.");
+            Assert(StrategicInfluenceWorld.CountKind(scenario, StrategicInfluenceContextKind.Betrayal) == 2, "Each Protocol 08 world should contain exactly two contexts where alignment later becomes strategic divergence.");
+            if (StrategicInfluenceWorld.CountKind(scenario, StrategicInfluenceContextKind.PartialAlignment) > 0)
+            {
+                worldsWithPartialAlignment++;
+            }
+        }
+
+        Assert(layouts.Count >= 4, "The canonical Protocol 08 seeds should vary where aligned, divergent, betrayal, and partial-alignment contexts occur.");
+        Assert(worldsWithPartialAlignment >= 2, "The canonical Protocol 08 development set should include multiple worlds with partial-alignment contexts rather than only binary agreement/disagreement.");
+    }
+
+    private static void TestProtocolEight()
+    {
+        var output = CreateTemporaryDirectory();
+        try
+        {
+            var run = ExperimentRunner.Run([ExperimentCatalog.Get("08-strategic-public-influence")], 101, output, quiet: true);
+            Assert(run.Experiments.Single().Verdict == ExperimentVerdict.Support, "Protocol 08 should meet its preregistered synthetic development boundaries for seed 101.");
+        }
+        finally
+        {
+            Directory.Delete(output, recursive: true);
+        }
+    }
+
+
     private static void TestValidationSeedSets()
     {
         Assert(ExperimentDefaults.DevelopmentSeeds.Count == 5, "development-v1 must remain the frozen five-seed regression set.");
@@ -336,6 +376,9 @@ public static class SelfTestSuite
         Assert(ValidationCheckTaxonomy.Classify("whole-history-benefit") == ValidationCheckTaxonomy.MechanismOutcome, "Whole-history outcome checks should remain mechanism evidence.");
         Assert(ValidationCheckTaxonomy.Classify("independent-roots-are-not-overmerged") == ValidationCheckTaxonomy.SafetyBoundary, "Overmerge protection should be a safety-boundary check.");
         Assert(ValidationCheckTaxonomy.Classify("bounded-developmental-transfer") == ValidationCheckTaxonomy.AccountingConstraint, "Communication accounting should not be counted as mechanism evidence.");
+        Assert(ValidationCheckTaxonomy.Classify("strategic-sender-discovers-naive-leverage") == ValidationCheckTaxonomy.Manipulation, "Protocol 08 leverage discovery should remain a manipulation check.");
+        Assert(ValidationCheckTaxonomy.Classify("betrayal-remains-correctable") == ValidationCheckTaxonomy.SafetyBoundary, "Protocol 08 betrayal repair should remain a safety-boundary check.");
+        Assert(ValidationCheckTaxonomy.Classify("strategic-public-exchange-is-bounded") == ValidationCheckTaxonomy.AccountingConstraint, "Protocol 08 public exchange should remain an accounting check.");
     }
 
     private static void TestValidationReport()

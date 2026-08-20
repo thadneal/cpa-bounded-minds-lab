@@ -150,3 +150,11 @@ The attached *Traces of the Other - Are DMT Entities Real?* paper is **not** imp
 Those questions fit a candidate successor Trace and Interface Laboratory because they concern **whether/how a source becomes perceptible through a bounded interface**. Bounded Minds instead assumes a peer has already crossed that boundary and asks how the peer's public evidence, standing, ancestry, disagreement, and conventions should influence another bounded mind.
 
 This distinction protects both programs from premature synthesis. The current lab can finish social falsification and any remaining public-influence/authority-cascade protocols without pretending it has tested interface-level hidden-cause inference. The successor can borrow CPA's bounded sense/public-residue discipline without inheriting the current lab's social-world assumptions.
+
+## v0.11 strategic influence and source reconciliation
+
+The v0.10 parameterized result is reconciled as a warning against promoting experimental formulas into architectural anatomy. The CPA source framing continues to support bounded public surfaces, typed warrant, local consequence, and permissioned influence, but it does not require the exact P03 standing curve, P04 weighted reducer, P05 success threshold, P06 grouping rule, or P07 revocation constants.
+
+Protocol 08 remains consistent with the source-level distinction between representation and permission. A peer may publicly report confidence, but confidence about its own claim is not the same thing as receiver-owned authority to shape future cognition. The new assay therefore treats public confidence as a signal whose value must remain answerable to direct consequence.
+
+This protocol also stays within the Bounded Minds Laboratory rather than the candidate Trace and Interface Laboratory. Peer B is already perceptible and has an explicit public channel. The unresolved question is governance of influence, not detection of a hidden causal source through a restricted interface.

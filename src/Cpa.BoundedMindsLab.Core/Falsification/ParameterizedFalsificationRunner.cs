@@ -33,7 +33,7 @@ public static class ParameterizedFalsificationRunner
         var replicateRuns = profileReports.Sum(profile => profile.Cells.Sum(cell => cell.Replicates));
         var result = new FalsificationReport(
             "cpa-bounded-minds-parameterized-falsification-v1",
-            "0.10.0",
+            "0.11.0",
             ParameterizedFalsificationPlan.Name,
             profileReports.Count,
             allCells,
@@ -129,7 +129,7 @@ public static class ParameterizedFalsificationRunner
     private static object BuildPlanDocument() => new
     {
         schema = "cpa-bounded-minds-parameterized-falsification-plan-v1",
-        version = "0.10.0",
+        version = "0.11.0",
         name = ParameterizedFalsificationPlan.Name,
         purpose = "Controlled causal intervention beyond the support of the frozen P03-P07 world generators. This is exploratory falsification, not confirmation.",
         profiles = ParameterizedFalsificationPlan.Profiles.Select(profile => new

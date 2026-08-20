@@ -49,6 +49,13 @@ public sealed record MetricGuidance(
                 "Lower is better when outcome quality is comparable.");
         }
 
+        if (normalized.Contains("sender_utility", StringComparison.Ordinal))
+        {
+            return Guidance(
+                "Sender-side influence utility: how closely the receiver's resulting public prediction fits the sender's private objective.",
+                "Higher is preferred by the strategic sender, not necessarily by the receiver or protocol evaluator.");
+        }
+
         if (normalized.Contains("utility", StringComparison.Ordinal))
         {
             return Guidance(
@@ -106,6 +113,41 @@ public sealed record MetricGuidance(
             return Guidance(
                 "Distance between peer public predictions or postures.",
                 "Context-dependent; informative early disagreement can help, while unresolved late disagreement is usually lower-better.");
+        }
+
+        if (normalized.Contains("public_confidence", StringComparison.Ordinal))
+        {
+            return Guidance(
+                "Confidence self-reported by the public sender for its current posture.",
+                "Calibration is preferred; higher is not inherently better because the sender may strategically overstate it.");
+        }
+
+        if (normalized.Contains("calibration_trust", StringComparison.Ordinal))
+        {
+            return Guidance(
+                "Receiver-owned trust in how well the sender's self-reported confidence matches later consequence.",
+                "Higher is better only when the sender's confidence remains calibrated to observed outcomes.");
+        }
+
+        if (normalized.Contains("peer_weight", StringComparison.Ordinal))
+        {
+            return Guidance(
+                "Immediate influence weight granted to the peer's public estimate during the current prediction.",
+                "Context-dependent; useful peers may warrant more weight, while divergent or manipulative peers should lose it.");
+        }
+
+        if (normalized.Contains("presentation_tactic", StringComparison.Ordinal))
+        {
+            return Guidance(
+                "Categorical code for the sender's current public presentation tactic: calibrated, assertive, or hedged.",
+                "No intrinsic direction; use it to inspect how strategy changes under different receiver boundaries.");
+        }
+
+        if (normalized.Contains("sender_objective", StringComparison.Ordinal))
+        {
+            return Guidance(
+                "Private objective the strategic sender is trying to move the receiver toward in the synthetic world.",
+                "No intrinsic direction; compare it with the receiver target to see whether interests are aligned or divergent.");
         }
 
         if (normalized.Contains("standing", StringComparison.Ordinal))
