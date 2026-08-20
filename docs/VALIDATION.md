@@ -1,12 +1,13 @@
 # Validation and Operating-Envelope Method
 
-Version 0.9.0 keeps Protocols 01-07 frozen and moves the laboratory from first holdout validation into an adversarial operating-envelope phase.
+Version 0.10.0 keeps Protocols 01-07 frozen and moves the laboratory from consumed holdout/challenge evidence into controlled parameterized falsification.
 
 The distinction matters:
 
 - `development-v1` is construction/regression data;
 - `holdout-v1` was the first frozen confirmatory set and is now consumed;
-- `challenge-v1` is intentionally adversarial exploration, not a second holdout.
+- `challenge-v1` is consumed adversarial exploration, not a second holdout;
+- `parameterized-falsification-v1` is controlled causal exploration outside the frozen generator support, not confirmation.
 
 ## Why the validation method changed
 
@@ -20,7 +21,7 @@ That holdout was consumed on 2026-08-20.
 
 `docs/FROZEN_PROTOCOL_SHA256.txt` contains SHA-256 hashes for all seven experiment files and their seven world generators. `scripts/verify.ps1` and `scripts/verify.sh` check those hashes before build/self-test.
 
-Version 0.9.0 leaves those files byte-for-byte unchanged. Challenge tooling is added beside them rather than editing the frozen assays.
+Version 0.10.0 leaves those files byte-for-byte unchanged. Challenge and parameterized-falsification tooling are added beside them rather than editing the frozen assays.
 
 ## Seed sets
 
@@ -110,141 +111,73 @@ These categories do not change a frozen protocol verdict. They change how much e
 
 ## challenge-v1
 
-`challenge-v1` is an outcome-blind adversarial search inside the frozen Protocol 03-07 world-generator families.
+`challenge-v1` is now **consumed exploratory evidence**. The frozen challenge returned 78 Support / 22 Mixed / 0 Disconfirm across 100 adversarial runs. Category results were 317/320 mechanism, 207/220 safety, 133/140 manipulation, and 78/80 accounting checks.
 
-Candidate seeds are fixed to:
+The most important methodological result was that the composite descriptor rankings were not reliably monotonic causal stress variables. Several descriptor components could strengthen the mechanism they were intended to challenge. P04 was the clearest example: more conflict density often increased the value of preserving typed epistemic shape.
 
-```text
-10001-29999
-```
+The profile-specific conclusions and exact failure examples are preserved in `CHALLENGE_V1_RESULTS.md`. `challenge-v1` can be reproduced, but it must not be used as a new holdout or as confirmation after mechanism changes.
 
-The development and consumed holdout seeds are excluded. For each challenge profile, the candidate worlds are scored using **only scenario descriptors**. No experiment result, assertion, RMSE, standing outcome, or protocol verdict participates in seed selection.
+## parameterized-falsification-v1
 
-The candidates are sorted by profile stress score, divided into five ordered rank bands, and four deterministic seeds are selected from each band. This gives:
+Version 0.10 replaces composite seed ranking with controlled causal intervention. This is **not validation** in the confirmatory sense. It is exploratory falsification designed to map null, useful, crossover, and harmful regions.
 
-```text
-5 profiles
-5 bands per profile
-4 seeds per band
-20 runs per profile
-100 challenge runs total
-```
+The runner does not change frozen Protocol 01-07 experiment or world-generator source. Instead, protocol-local micro-assays copy selected frozen equations into independent controlled probes so causal variables can be separated and pushed beyond the support of the original generated worlds.
 
-Stress scores are profile-local ranks. A score from P03 must not be compared numerically with a score from P07.
-
-### P03 source instability
-
-Stress inputs include unstable/sparse history prevalence, transition magnitude, and thin minimum evidence.
-
-Boundary margin:
+Registered surfaces:
 
 ```text
-doctrinal_rmse - developmental_rmse
+P03  history instability      x present rule error
+P04  warrant asymmetry        x minority-correct fraction
+P05  change frequency         x change magnitude
+P06  origin missingness       x signature separation
+P07  recommender credibility  x mismatch prevalence
+P07  recommender credibility  x strong mismatch severity
 ```
 
-Positive means developmental transfer still has lower whole-history RMSE. Zero is the crossover.
+Each surface is 7 x 7 with seven deterministic replicates per cell. P04 uses the same public estimate/standing/uncertainty packets and equal communication cost in both arms, strengthening the comparator without promoting the comparator into CPA architecture.
 
-### P04 conflict density
+P07 has two surfaces because challenge-v1 showed that opportunity cost and residual authority are distinct failure modes. The severity axis starts at strong mismatch rather than zero, because the frozen residual-standing ceiling applies to strong local contradiction.
 
-Stress inputs include informative/misleading dissent prevalence, private evidence span, and private-target spread.
+A negative primary margin is useful boundary evidence. It does not automatically refute the entire originating protocol, because the micro-assay intentionally isolates one local mechanism from the full protocol ecology.
 
-Boundary margin:
+### Confirmation rule after parameterized falsification
 
-```text
-(semantic_smoothed_rmse * 0.97) - typed_rmse
-```
-
-Positive means typed communication still satisfies the frozen 3% whole-history advantage requirement.
-
-Important limitation: this remains the frozen semantic-smoothing control. Challenge v1 does not yet add the stronger equal-budget negotiation alternative proposed after holdout review.
-
-### P05 regime shift
-
-Stress inputs include shifted-context count, mean post-formation cost movement, and preference diversity.
-
-Boundary margin is the minimum of:
-
-```text
-earned_stable_retention_coverage - 0.90
-
-earned_changed_revision_coverage - 0.85
-
-earned_changed_shifted_late_utility - frozen_changed_shifted_late_utility - 0.20
-```
-
-Positive means the adaptive culture both retains enough unchanged convention and remains better than frozen culture after change.
-
-### P06 ancestry visibility
-
-Stress inputs include missing-origin rate, immediate-sender hints, ambiguous-lineage prevalence, and low root-signature separation.
-
-Boundary margin is the minimum of:
-
-```text
-(naive_rmse * 0.88) - inferred_rmse
-
-(naive_independent_rmse * 1.15) - inferred_independent_rmse
-```
-
-Positive means ancestry inference remains better overall and stays within the frozen 12% whole-history advantage and 15% independent-evidence safety allowances.
-
-### P07 recommender fragility
-
-Stress inputs include weak receiver-to-recommender credibility, strong local mismatch prevalence, mismatch magnitude, and standing behind those recommendations.
-
-Boundary margin is the minimum of:
-
-```text
-(no_transfer_rmse * 1.05) - provisional_rmse
-
-0.20 - provisional_final_strong_mismatch_standing
-```
-
-Positive means provisional transfer remains inside the frozen opportunity-cost and revocation safety boundaries.
-
-## Challenge interpretation
-
-`challenge-v1` is designed to fail.
-
-A Mixed verdict, Disconfirm verdict, or negative boundary margin is useful evidence about the mechanism's operating envelope. A monotonic decline in boundary margin as stress rises is especially informative.
-
-A non-monotonic curve is also evidence. It may mean the mechanism has a complex response, or it may mean the registered stress descriptor is not aligned with the actual causal pressure. The report warns when the highest stress band improves relative to the lowest.
-
-If all five profiles remain entirely inside their boundaries, do not simply increase the number of random seeds and call that stronger validation. The correct next step would be a parameterized challenge that deliberately moves world conditions beyond the original frozen generator support.
+If a frozen mechanism is later revised in response to these surfaces, none of `development-v1`, `holdout-v1`, `challenge-v1`, or `parameterized-falsification-v1` can serve as fresh confirmation of the revision. A future validation set must be registered before its outcomes are examined.
 
 ## Automated outputs
 
-The authoritative challenge command writes:
+The authoritative current falsification command writes:
 
 ```text
-challenge-plan.json
-challenge-report.json
-challenge-summary.md
-p03-source-instability/
-  q1-low/
-    seed-N/
-      frames.ndjson
-      manifest.json
-      03-developmental-versus-doctrinal-transfer/
-        result.json
-        metrics.csv
-...
+parameterized-plan.json
+parameterized-report.json
+parameterized-summary.md
+p03-history-informativeness.csv
+p04-equal-budget-comparator.csv
+p05-volatility-surface.csv
+p06-ancestry-opacity.csv
+p07-reliability-prevalence.csv
+p07-reliability-severity.csv
 ```
 
-`challenge-plan.json` records the complete outcome-blind seed selection and descriptors before any result interpretation.
+`parameterized-plan.json` records the registered axes, replicate count, primary margin, and interpretation limit. `parameterized-report.json` records every cell's mean/min/max margin, negative-replicate count, and diagnostic metrics. `parameterized-summary.md` presents the complete surface in human-readable form.
 
-`challenge-report.json` and `challenge-summary.md` report stress bands, verdicts, evidence categories, signed boundary margins, and the first observed failure band.
+Consumed `challenge-v1` and `holdout-v1` keep their historical artifacts for reproduction. They are not rewritten by the parameterized runner.
 
 ## Invariant suite
 
-Version 0.9.0 defines **26 self-tests**. In addition to the existing protocol, telemetry, and validation checks, challenge tests verify that:
+Version 0.10.0 defines **30 self-tests**. In addition to the existing protocol, telemetry, validation, and challenge checks, parameterized-falsification tests verify that:
 
 - challenge-v1 selection is deterministic;
 - development-v1 and consumed holdout-v1 seeds are excluded;
 - each profile contains all five registered bands with four unique seeds per band;
 - selected stress is nondecreasing by band.
+- all six registered parameterized profiles expose complete 7 x 7 grids;
+- the P04 stronger comparator consumes exactly the same public communication work as the typed path;
+- the P06 probe reaches complete origin blindness while retaining finite measurable outputs;
+- the two P07 surfaces intervene on prevalence and severity separately.
 
-These are assay-integrity checks. They do not assert that any challenge run should Support.
+These are assay-integrity checks. They do not assert that any parameterized cell should remain positive.
 
 ## Authoritative Windows sequence
 
@@ -252,8 +185,8 @@ These are assay-integrity checks. They do not assert that any challenge run shou
 ./scripts/verify.ps1
 
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
-  --challenge `
-  --output _artifacts/challenge-v1
+  --falsify `
+  --output _artifacts/parameterized-falsification-v1
 ```
 
 To reproduce the consumed holdout without making a new validation claim:
@@ -266,4 +199,4 @@ dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
 
 ## Interpretation rule
 
-Do not tune a frozen mechanism from challenge-v1 and then describe the same challenge run as validation. Challenge results are developmental pressure. If a mechanism is revised and later deserves confirmation, register a new future holdout before seeing its outcomes.
+Do not tune a frozen mechanism from challenge-v1 or parameterized-falsification-v1 and then describe the same evidence as validation. Both are developmental pressure. If a mechanism is revised and later deserves confirmation, register a new future holdout before seeing its outcomes.

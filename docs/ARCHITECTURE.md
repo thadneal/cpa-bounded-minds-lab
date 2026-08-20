@@ -344,3 +344,32 @@ frozen world generator --descriptor only--> stress ranking --> selected seed
 ```
 
 This distinction is important for eventual CPA synthesis. The challenge framework is a laboratory instrument for deciding which behavioral pressures deserve further implementation work. It is not a proposed meta-cognitive subsystem that a CPA mind should use to score its own worlds.
+
+
+## v0.10 parameterized-falsification boundary
+
+The parameterized runner is **outside the cognitive architecture**. It is evaluator-side apparatus for controlled intervention. It may copy a frozen protocol's local equation into a micro-assay, but the micro-assay is not a new column, shared memory mechanism, coordinator, or runtime service.
+
+This separation is important for two reasons. First, it prevents the laboratory from smuggling an evaluator's knowledge of hidden targets, ancestry, or regime changes into an ordinary treatment. Second, it lets the research program push one causal variable beyond the frozen world-generator support without rewriting the historical protocol.
+
+The hierarchy is now:
+
+```text
+frozen protocol mechanism
+    lives inside experiment treatment
+
+frozen world generator
+    supplies historical mechanism-discovery/holdout worlds
+
+challenge-v1
+    evaluator-side seed selection inside frozen generator support
+
+parameterized-falsification-v1
+    evaluator-side controlled micro-assays outside generator support
+```
+
+The final layer is exploratory falsification, not proposed CPA anatomy. Constants and reducers copied into it remain experimental instruments. The architectural candidate is the behavioral pressure revealed by the surface, such as "ancestry dependence must degrade gracefully under provenance loss," not the exact threshold or equation used to measure that pressure.
+
+## Boundary to a possible successor laboratory
+
+Bounded Minds assumes peers are already perceptible participants with public surfaces. A later Trace and Interface Laboratory would move the experimental boundary earlier, asking how an observer can detect structured causal influence when the source is only indirectly available through a bounded sense/interface. That question is adjacent to CPA's sense boundary but distinct from the present lab's social-evidence problem, so it should not be folded into the current protocol catalog merely to preserve continuity.

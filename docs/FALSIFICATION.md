@@ -450,3 +450,88 @@ The desired output is not necessarily a clean monotonic failure curve. Interpret
 3. **margin improves or oscillates strongly with registered stress**: the stress descriptor may not align with the actual causal pressure, and the challenge itself needs revision before architectural conclusions are drawn.
 
 Do not convert a challenge-v1 result into a new pass threshold after seeing the curve. If a mechanism is revised, challenge-v1 becomes developmental evidence for that revision and a later fresh holdout is required for confirmation.
+
+
+## v0.10 parameterized falsification interpretation
+
+challenge-v1 is consumed. Its composite stress bands exposed failures, but they did not provide reliable causal axes. Version 0.10 therefore asks a different question: **where does a frozen local mechanism cross its registered functional or safety boundary when two variables are independently controlled?**
+
+This phase adds no Protocol 08 and does not change any frozen protocol verdict rule. The micro-assays are deliberately smaller than the original worlds so an observed crossover can be attributed to the intervention rather than to a bundle of seed-dependent circumstances.
+
+### P03 history-informativeness surface
+
+Axes: history instability x present rule error.
+
+Primary margin:
+
+```text
+doctrinal_rmse - developmental_rmse
+```
+
+Positive means the frozen developmental-standing rule still improves transfer relative to doctrine. Negative means old developmental instability has become a net discount on a final rule that is currently useful.
+
+### P04 equal-budget comparator surface
+
+Axes: warrant asymmetry x minority-correct fraction.
+
+Both paths receive identical estimate, standing, and uncertainty packets at identical public communication cost. The frozen typed reducer is compared with a standing-weighted robust median rather than the destructive semantic-smoothing control.
+
+Primary margin:
+
+```text
+equal_budget_robust_rmse - typed_rmse
+```
+
+Negative regions are particularly useful: they show where preserving graded public shape through the frozen weighted reducer is not enough to beat a competent same-information alternative. This remains an assay comparison, not a claim that the robust median belongs in CPA.
+
+### P05 convention-volatility surface
+
+Axes: repeated change frequency x change magnitude.
+
+Primary margin is the worse of the frozen utility allowance and communication-work allowance:
+
+```text
+min(
+  adaptive_utility - 0.98 * fresh_utility,
+  0.35 * fresh_work_per_episode - adaptive_work_per_episode
+)
+```
+
+The probe deliberately allows repeated regime changes outside the one-shift frozen world family. Negative regions identify where cultural compression becomes too costly or too maladaptive to justify itself.
+
+### P06 ancestry-opacity surface
+
+Axes: origin missingness x developmental-signature separation.
+
+Primary margin is the worse of:
+
+```text
+(naive_rmse * 0.88) - inferred_rmse
+(naive_independent_rmse * 1.15) - inferred_independent_rmse
+```
+
+The surface reaches complete origin blindness. A good failure mode is graceful loss of ancestry advantage; a dangerous failure mode is confident grouping that suppresses independent convergence.
+
+### P07 reliability x mismatch prevalence
+
+Axes: recommender credibility x strong-mismatch prevalence.
+
+Primary margin is the worse of the frozen 5% opportunity-cost allowance and 7% benefit over inherited authority. This surface asks when social recommendation ceases to pay for itself as bad transfer becomes common.
+
+### P07 reliability x strong mismatch severity
+
+Axes: recommender credibility x source-target divergence in the strong-mismatch regime. Mismatch prevalence is fixed at one half.
+
+Primary margin is the worse of the opportunity-cost allowance and the frozen `0.20` residual-standing ceiling. The severity sweep starts at `0.60`; weak or zero divergence is not a valid test of a safety rule registered for strong local contradiction.
+
+### Surface interpretation
+
+For every profile, distinguish:
+
+1. **null region**: the mechanism adds little because the causal problem it addresses is absent;
+2. **useful region**: positive margin with meaningful benefit;
+3. **crossover region**: margin approaches or crosses zero;
+4. **harmful region**: negative margin persists across replicates;
+5. **unstable region**: mixed replicate signs reveal sensitivity rather than a clean boundary.
+
+Do not retune the response surface after seeing it. Any mechanism revision makes this phase development evidence for a future design, not confirmation of that revision.

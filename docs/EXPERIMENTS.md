@@ -595,3 +595,23 @@ This asks where social opportunity becomes too costly or where locally contradic
 Challenge bands are ranks within a frozen generator family, not new protocol verdict thresholds and not universal stress units. Negative margins, Mixed/Disconfirm outcomes, and non-monotonic stress-response curves are expected to be informative.
 
 If no profile crosses a boundary, challenge-v1 should not be expanded by simply mining more seeds indefinitely. The next step would be parameterized environmental interventions beyond the support of the original generators.
+
+
+## Parameterized falsification phase: v0.10
+
+Version 0.10 adds no Protocol 08. `challenge-v1` is consumed with 78 Support / 22 Mixed / 0 Disconfirm, and its non-monotonic composite stress rankings motivate controlled causal surfaces instead of more seed mining.
+
+`parameterized-falsification-v1` runs six 7 x 7 surfaces with seven deterministic replicates per cell: P03 history instability x present rule error; P04 warrant asymmetry x minority-correct fraction against a same-information/equal-budget robust comparator; P05 repeated change frequency x magnitude; P06 origin missingness x signature separation; and two P07 surfaces separating mismatch prevalence from strong mismatch severity.
+
+These probes deliberately isolate selected frozen equations from the full protocol worlds. Their purpose is to locate operating boundaries, not to create new protocol Support counts. They write signed margins and surface CSVs rather than new protocol verdicts.
+
+## Possible remaining protocols in this laboratory
+
+The current laboratory should not be closed merely because the first seven protocols have been frozen. After the parameterized surfaces are interpreted, two social failure modes remain plausible bounded-minds protocols:
+
+1. **Strategic public influence**: a peer learns to manipulate its public posture, standing cues, or apparent uncertainty to gain influence while private state remains inaccessible. The question is whether consequence-based standing and bounded public surfaces can limit strategic presentation without granting a central inspector.
+2. **Coalition / authority cascade**: recommendation and standing circulate through several peers or factions and become mutually reinforcing without enough independent consequence. This differs from P06's copied evidence because the duplicated object is permission/authority rather than the evidence claim itself.
+
+Do not add either protocol automatically. The parameterized phase may show that an existing mechanism already addresses the failure. A new protocol belongs here only if it tests a genuinely unresolved relation among already-perceptible bounded minds.
+
+The proposed successor in `NEXT_LAB.md` begins at a different boundary: the observer may not have direct access to the source process at all and must infer structured influence through an interface.

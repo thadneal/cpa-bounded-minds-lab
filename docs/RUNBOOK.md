@@ -14,7 +14,7 @@ dotnet build Cpa.BoundedMindsLab.sln -c Release
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
 ```
 
-Treat analyzer failures as build failures. Warnings are errors. Version 0.9.0 defines **26 invariant/regression tests**. `scripts/verify.ps1` and `scripts/verify.sh` first verify the frozen Protocol 01-07 source hashes before building.
+Treat analyzer failures as build failures. Warnings are errors. Version 0.10.0 defines **30 invariant/regression tests**. `scripts/verify.ps1` and `scripts/verify.sh` first verify the frozen Protocol 01-07 source hashes before building.
 
 ## Development regression
 
@@ -28,34 +28,43 @@ dotnet run --project src/Cpa.BoundedMindsLab.Cli -- `
 
 Use this only to detect regressions against the frozen mechanism-discovery record. Do not treat another 5/5 result as fresh evidence.
 
-## Operating-envelope challenge
+## Parameterized falsification (current research run)
 
-The authoritative v0.9 experiment is `challenge-v1`:
+After build/self-test and frozen-hash verification:
+
+```powershell
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
+  --falsify `
+  --output _artifacts/parameterized-falsification-v1
+```
+
+The run produces:
+
+```text
+parameterized-plan.json
+parameterized-report.json
+parameterized-summary.md
+p03-history-informativeness.csv
+p04-equal-budget-comparator.csv
+p05-volatility-surface.csv
+p06-ancestry-opacity.csv
+p07-reliability-prevalence.csv
+p07-reliability-severity.csv
+```
+
+Run this phase without changing the registered profiles after inspecting outcomes. Negative margins are expected and useful.
+
+## Consumed challenge-v1 reproducibility
+
+`challenge-v1` is consumed exploratory evidence. Reproduce it only when checking determinism or artifacts:
 
 ```powershell
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
   --challenge `
-  --output _artifacts/challenge-v1
+  --output _artifacts/challenge-v1-repro
 ```
 
-The harness first writes `challenge-plan.json`, which records outcome-blind seed selection from frozen world descriptors. It then runs 100 selected cases: five Protocol 03-07 profiles x five stress bands x four seeds.
-
-Expected root artifacts include:
-
-```text
-challenge-plan.json
-challenge-report.json
-challenge-summary.md
-p03-source-instability/
-p04-conflict-density/
-p05-regime-shift/
-p06-ancestry-visibility/
-p07-recommender-fragility/
-```
-
-Read boundary margins by stress band before changing any mechanism. Mixed/Disconfirm outcomes and negative margins are useful operating-envelope evidence. If the extreme band remains entirely positive, do not simply mine more seeds indefinitely; the next challenge should parameterize the world beyond the frozen generator support.
-
-Protocol 04's challenge-v1 profile still compares typed communication with the original semantic-smoothing control. The stronger equal-budget alternative remains unresolved.
+Do not describe a reproduction as fresh validation.
 
 ## Consumed holdout reproducibility
 

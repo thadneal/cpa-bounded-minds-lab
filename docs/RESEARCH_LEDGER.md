@@ -345,3 +345,26 @@ Protocol 04 also retains its original semantic-smoothing control in challenge-v1
 5. treat negative margins, Mixed/Disconfirm outcomes, and non-monotonic stress curves as useful information;
 6. decide whether the next phase needs parameterized stress, a stronger P04 comparator, or a mechanism revision;
 7. register a new future holdout only after any revised mechanism is again frozen and ready for confirmation.
+
+
+## 2026-08-20 - challenge-v1 consumed; controlled falsification replaces composite stress
+
+### challenge-v1 result
+
+The 100 selected adversarial runs returned **78 Support / 22 Mixed / 0 Disconfirm**. Category totals were **317/320 mechanism**, **207/220 safety**, **133/140 manipulation**, and **78/80 accounting**.
+
+The challenge exposed real operating pressure: P03 crossed a whole-history developmental-transfer boundary, P05 lost stable retention and exceeded communication allowance in a high-pressure world, P06 again harmed genuine independent convergence under uncertain ancestry, and P07 reached a 10/20 Mixed profile with the extreme band 0/4 Support.
+
+The run also exposed a flaw in the challenge method. Profile-level composite stress scores mixed variables that could push a mechanism in opposite directions. P04 was the clearest case: increasing conflict density frequently strengthened the typed path rather than challenging it.
+
+### v0.10 pivot
+
+`parameterized-falsification-v1` replaces seed ranking with independent controlled interventions while leaving frozen Protocol 01-07 experiment/world source unchanged. Six response surfaces separate the causal pressures identified by challenge-v1. P04 receives a stronger equal-information/equal-budget comparator, and P07 splits prevalence from strong mismatch severity.
+
+This phase is intentionally exploratory. A mechanism changed in response to these surfaces will require a future preregistered holdout before confirmation.
+
+### Laboratory boundary
+
+The Bounded Minds Laboratory should not close before these surfaces are interpreted. Two social questions may still deserve protocols here: strategic manipulation of public posture and self-reinforcing authority/standing cascades. They remain candidates pending falsification results.
+
+A different question is also becoming visible: how a bounded observer detects another process only through the trace of its causal influence on an interface. That belongs more naturally to a successor Trace and Interface Laboratory than to this lab, which begins from already-perceptible peers. The attached *Traces of the Other* paper is useful as a formal and experimental source for that successor, without requiring any commitment to its consciousness-first ontology or to the external reality of DMT entities.

@@ -1,6 +1,6 @@
 # CPA Bounded Minds Laboratory
 
-Version **0.9.0**
+Version **0.10.0**
 
 This repository is the successor experimental program to the completed CPA Cognitive Development Lab. The earlier lab studied development inside one bounded organism. This laboratory moves the boundary outward:
 
@@ -116,6 +116,25 @@ This phase is intentionally adversarial rather than confirmatory. Mixed or Disco
 
 One limitation is explicit: Protocol 04's `challenge-v1` profile stresses the environment but **does not yet replace semantic smoothing with the stronger equal-budget alternative** proposed after holdout review. That remains a separate control-strengthening task if P04 continues to resist environmental stress.
 
+## v0.10 parameterized falsification phase
+
+`challenge-v1` is now consumed exploratory evidence. Its 100 runs returned **78 Support / 22 Mixed / 0 Disconfirm**, with **317/320 mechanism**, **207/220 safety**, **133/140 manipulation**, and **78/80 accounting** checks passing. The run exposed real mechanism edges, but it also showed that the composite challenge stress scores were usually not monotonic causal variables. See `docs/CHALLENGE_V1_RESULTS.md`.
+
+Version 0.10.0 therefore adds **no Protocol 08**. `parameterized-falsification-v1` intervenes on controlled causal axes outside the original frozen generator support while leaving Protocols 01-07 and their world generators byte-for-byte unchanged.
+
+Registered surfaces:
+
+- P03 history instability x present rule error;
+- P04 warrant asymmetry x minority-correct fraction, with a stronger **equal-public-budget standing-weighted robust consensus** comparator;
+- P05 repeated change frequency x change magnitude;
+- P06 origin missingness x developmental-signature separation;
+- P07 recommender credibility x mismatch prevalence;
+- P07 recommender credibility x mismatch severity.
+
+Each surface is `7 x 7` with seven deterministic replicates per cell. The P07 severity surface starts in the strong-contradiction regime because its frozen residual-standing ceiling was registered for strong mismatch rather than weak disagreement. The runner writes JSON, a Markdown summary, and one CSV per profile. Negative boundary margins are desired operating-envelope evidence. These surfaces are exploratory falsification and must not be reused as confirmation after mechanism tuning.
+
+The lab is **not yet being closed**. `docs/NEXT_LAB.md` records two social protocol families that may still belong here after falsification: strategic public influence and coalition/authority cascades. The same document sketches a candidate successor **Trace and Interface Laboratory**, inspired by the attached *Traces of the Other* paper but formulated as synthetic causal/interface research rather than a commitment to conscious realism or the external reality of DMT entities.
+
 ## Solution
 
 ```text
@@ -135,7 +154,9 @@ Projects target .NET 10. The WPF Desktop Lab targets `net10.0-windows`.
 ```powershell
 dotnet build Cpa.BoundedMindsLab.sln -c Release
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --challenge --output _artifacts/challenge-v1
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --falsify --output _artifacts/parameterized-falsification-v1
+# Reproduce consumed challenge-v1 only when needed:
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --challenge --output _artifacts/challenge-v1-repro
 # Reproduce the consumed holdout only when needed:
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --validation --output _artifacts/validation-holdout-v1-repro
 # Regression only:
@@ -148,7 +169,7 @@ For live inspection on Windows 11:
 dotnet run --project src/Cpa.BoundedMindsLab.Desktop
 ```
 
-The Desktop Lab opens with **Development v1 (5, regression only)** selected to avoid accidentally treating consumed holdout-v1 as fresh evidence. Holdout v1 remains available as a reproducibility preset. `challenge-v1` uses profile-specific seeds and is therefore run authoritatively from the CLI. The application version remains visible in the main and maximized-graph window titles. Graphs explain axis meaning and preferred metric direction/context, provide show-all/hide-all series controls, and update incrementally from bounded background telemetry at an adaptive display cadence.
+The Desktop Lab opens with **Development v1 (5, regression only)** selected to avoid accidentally treating consumed holdout-v1 as fresh evidence. Holdout v1 remains available as a reproducibility preset. `parameterized-falsification-v1` and consumed `challenge-v1` are CLI-only research runners; they do not use the ordinary Desktop seed selector. The application version remains visible in the main and maximized-graph window titles. Graphs explain axis meaning and preferred metric direction/context, provide show-all/hide-all series controls, and update incrementally from bounded background telemetry at an adaptive display cadence.
 
 ## Visualization boundary
 
@@ -162,4 +183,4 @@ The workbench also exposes protocol progress, per-seed judged results, active-se
 
 Carry forward only what survives pressure: bounded causal execution, persistent private history, compact public surfaces, revisable standing, explicit cost, and provenance distinct from agreement.
 
-The v0.3.0 methodological correction remains active: if history is part of the theory, replication must vary **what was lived**, not merely the order in which nearly identical events were encountered. Version 0.8 separated development from a frozen holdout; version 0.9 marks that holdout consumed and moves to outcome-blind adversarial stress rather than treating repeated green runs as additional confirmation.
+The v0.3.0 methodological correction remains active: if history is part of the theory, replication must vary **what was lived**, not merely the order in which nearly identical events were encountered. Version 0.8 separated development from a frozen holdout; version 0.9 consumed that holdout and searched the frozen generator families adversarially; version 0.10 replaces composite stress ranking with controlled causal intervention surfaces.

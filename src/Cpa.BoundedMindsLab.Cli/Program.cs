@@ -1,6 +1,7 @@
 using Cpa.BoundedMindsLab.Cli.Cli;
 using Cpa.BoundedMindsLab.Challenge;
 using Cpa.BoundedMindsLab.Experiments;
+using Cpa.BoundedMindsLab.Falsification;
 using Cpa.BoundedMindsLab.Verification;
 using Cpa.BoundedMindsLab.Validation;
 
@@ -35,9 +36,10 @@ try
         return 0;
     }
 
-    if (parsed.Validation && parsed.Challenge)
+    var specialModes = (parsed.Validation ? 1 : 0) + (parsed.Challenge ? 1 : 0) + (parsed.Falsify ? 1 : 0);
+    if (specialModes > 1)
     {
-        throw new ArgumentException("--validation and --challenge are mutually exclusive.");
+        throw new ArgumentException("--validation, --challenge, and --falsify are mutually exclusive.");
     }
 
     if (parsed.Validation)
@@ -49,6 +51,12 @@ try
     if (parsed.Challenge)
     {
         ChallengeRunner.RunV1(parsed.OutputDirectory);
+        return 0;
+    }
+
+    if (parsed.Falsify)
+    {
+        ParameterizedFalsificationRunner.RunV1(parsed.OutputDirectory);
         return 0;
     }
 
@@ -73,13 +81,14 @@ catch (Exception exception)
 
 static void PrintHelp()
 {
-    Console.WriteLine("CPA Bounded Minds Lab 0.9.0");
+    Console.WriteLine("CPA Bounded Minds Lab 0.10.0");
     Console.WriteLine();
     Console.WriteLine("  --list");
     Console.WriteLine("  --self-test");
     Console.WriteLine("  --all");
     Console.WriteLine("  --validation          Reproduce frozen Protocols 01-07 on the consumed 20-seed holdout-v1 set");
-    Console.WriteLine("  --challenge           Run challenge-v1 operating-envelope sweeps for frozen Protocols 03-07");
+    Console.WriteLine("  --challenge           Reproduce consumed challenge-v1 adversarial seed sweeps");
+    Console.WriteLine("  --falsify             Run parameterized-falsification-v1 controlled causal sweeps");
     Console.WriteLine("  --experiment <name>   Repeat to select several experiments");
     Console.WriteLine("  --seed <ulong>        Single-history seed (default 101)");
     Console.WriteLine("  --replicate <csv>     Explicit replication seeds; 101,211,307,401,503 is development-v1");

@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.10.0 - 2026-08-20
+
+- Recorded challenge-v1 as consumed exploratory evidence: 78 Support / 22 Mixed / 0 Disconfirm across 100 adversarial runs, with 317/320 mechanism, 207/220 safety, 133/140 manipulation, and 78/80 accounting checks passing.
+- Revised the challenge conclusion: composite descriptor stress was generally not a monotonic causal variable. P03, P05, P06, and P07 exposed real boundaries, while P04 conflict density often strengthened the typed mechanism rather than attacking it.
+- Added no Protocol 08. Introduced `parameterized-falsification-v1`, a controlled causal-intervention phase outside the original frozen generator support while keeping Protocol 01-07 experiment/world source unchanged.
+- Added six 7 x 7 response surfaces with seven deterministic replicates per cell: P03 history instability x present rule error; P04 warrant asymmetry x minority-correct fraction; P05 repeated change frequency x magnitude; P06 origin missingness x signature separation; P07 recommender credibility x mismatch prevalence; and P07 recommender credibility x strong mismatch severity.
+- Strengthened the P04 assay with a same-information, equal-public-budget standing-weighted robust-consensus comparator rather than extending the deliberately smoothing control.
+- Split P07 opportunity-cost prevalence from residual-authority severity so challenge-v1's two distinct failure modes are no longer hidden inside one fragility score. The strong-mismatch severity axis begins where the frozen residual-standing safety rule is meaningful.
+- Added `--falsify` to the CLI plus `parameterized-plan.json`, `parameterized-report.json`, `parameterized-summary.md`, and per-profile CSV surfaces.
+- Added four parameterized-assay invariants, bringing the suite to 30 tests.
+- Documented that the current Bounded Minds Laboratory is not yet closed. Strategic public influence and coalition/authority cascades remain candidate final social protocols after the falsification surfaces are reviewed.
+- Added `docs/NEXT_LAB.md` describing a candidate Trace and Interface Laboratory inspired by the formal/experimental questions in *Traces of the Other*, without adopting conscious realism or treating DMT entity externality as an assumption.
+- Updated README, plan, experiments, validation, falsification, challenge results, research ledger, architecture, source reconciliation, Desktop Lab, runbook, artifact metadata, CLI, assembly versions, and window titles for v0.10.0.
+
 ## 0.9.0 - 2026-08-20
 
 - Recorded the completed frozen holdout-v1 result: 121 Support / 19 Mixed / 0 Disconfirm across 140 protocol runs, with 981/1000 preregistered checks passing. Preserved the category split of 399/400 mechanism outcomes, 288/300 safety boundaries, 174/180 manipulation checks, and 120/120 accounting constraints.

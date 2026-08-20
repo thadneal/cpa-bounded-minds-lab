@@ -139,3 +139,14 @@ This phase is intentionally narrower than a new cognitive protocol. It is a sele
 - let second-hand standing buy limited opportunity while durable authority remains locally earned.
 
 challenge-v1 also records what it does **not** resolve. Its stress remains inside the original world-generator support, and Protocol 04 still lacks a stronger equal-budget alternative to semantic smoothing. If the frozen mechanisms survive the selected extreme bands, the next useful move is to widen the world rather than to declare the mechanism universal.
+
+
+## v0.10 controlled falsification and successor-source boundary
+
+The challenge-v1 result is now reconciled as exploratory pressure, not another validation set. Its main methodological lesson is that a composite scenario descriptor should not be promoted into a causal concept merely because it is convenient to rank. Version 0.10 therefore manipulates causal axes directly while keeping the historical Protocol 01-07 experiment/world source frozen.
+
+The attached *Traces of the Other - Are DMT Entities Real?* paper is **not** imported into the present laboratory as evidence for conscious realism, DMT entities, or phenomenal consciousness. Its useful contribution is narrower and formal: another agent's interior is unavailable; influence is mediated through a world/interface; an observer can only encounter a trace of that influence in its own state dynamics; perceptibility depends on channel overlap; and external constraint or cross-observer structure can serve as discriminating experimental pressure.
+
+Those questions fit a candidate successor Trace and Interface Laboratory because they concern **whether/how a source becomes perceptible through a bounded interface**. Bounded Minds instead assumes a peer has already crossed that boundary and asks how the peer's public evidence, standing, ancestry, disagreement, and conventions should influence another bounded mind.
+
+This distinction protects both programs from premature synthesis. The current lab can finish social falsification and any remaining public-influence/authority-cascade protocols without pretending it has tested interface-level hidden-cause inference. The successor can borrow CPA's bounded sense/public-residue discipline without inheriting the current lab's social-world assumptions.

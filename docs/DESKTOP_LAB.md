@@ -334,3 +334,10 @@ No validation metadata is visible to experiment cognition. Seed-set labels, chec
 The Desktop visualization does not add a synthetic `Challenge v1` seed preset. challenge-v1 selects different seed sets for P03, P04, P05, P06, and P07 based on profile-specific world descriptors, so presenting one shared seed list in the UI would misrepresent the design.
 
 Run the challenge from the CLI, then use the Desktop Lab for development regression, holdout reproducibility, or targeted manual inspection of individual seeds. The main UI explicitly labels holdout-v1 as consumed.
+
+
+## v0.10 parameterized-falsification desktop stance
+
+The Desktop Lab remains the ordinary protocol/development-history workbench. `parameterized-falsification-v1` is intentionally CLI-only because its 7 x 7 evaluator-side response surfaces are not ordinary seed histories and should not be presented through the existing Seed -> Focus Path -> Metric navigation as though they were one cognitive run.
+
+The Desktop defaults remain Development v1 regression data. Consumed holdout-v1 stays available only for reproduction, while consumed challenge-v1 and the current parameterized runner remain explicit CLI research modes. No graph or table behavior changes in v0.10.

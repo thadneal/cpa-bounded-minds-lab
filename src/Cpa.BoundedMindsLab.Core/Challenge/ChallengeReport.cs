@@ -77,7 +77,7 @@ public static class ChallengeReportBuilder
 
         return new ChallengeReport(
             "cpa-bounded-minds-challenge-v1",
-            "0.9.0",
+            "0.10.0",
             ChallengePlan.Name,
             ChallengePlan.CandidateSeedStart,
             ChallengePlan.CandidateSeedEnd,

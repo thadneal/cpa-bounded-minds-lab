@@ -5,6 +5,7 @@ using Cpa.BoundedMindsLab.Development;
 using Cpa.BoundedMindsLab.Domain;
 using Cpa.BoundedMindsLab.Environments;
 using Cpa.BoundedMindsLab.Experiments;
+using Cpa.BoundedMindsLab.Falsification;
 using Cpa.BoundedMindsLab.Validation;
 
 namespace Cpa.BoundedMindsLab.Verification;
@@ -39,6 +40,10 @@ public static class SelfTestSuite
         Run("challenge-v1-selection-is-deterministic", TestChallengeSelectionDeterminism, passed);
         Run("challenge-v1-excludes-consumed-seeds", TestChallengeSelectionExcludesConsumedSeeds, passed);
         Run("challenge-v1-spans-monotonic-stress-bands", TestChallengeStressBands, passed);
+        Run("parameterized-falsification-plan-is-complete", TestParameterizedFalsificationPlan, passed);
+        Run("parameterized-p04-comparator-has-equal-public-cost", TestParameterizedProtocolFourComparator, passed);
+        Run("parameterized-p06-reaches-complete-provenance-blindness", TestParameterizedProtocolSixBlindness, passed);
+        Run("parameterized-p07-separates-prevalence-from-severity", TestParameterizedProtocolSevenAxes, passed);
         Run("frame-sequence-is-contiguous", TestFrameSequence, passed);
         return passed;
     }
@@ -393,6 +398,37 @@ public static class SelfTestSuite
                 priorMaximum = maximum;
             }
         }
+    }
+
+    private static void TestParameterizedFalsificationPlan()
+    {
+        Assert(ParameterizedFalsificationPlan.Profiles.Count == 6, "parameterized-falsification-v1 should contain the five frozen P03-P07 targets plus a second P07 surface that separates mismatch severity from prevalence.");
+        Assert(ParameterizedFalsificationPlan.Profiles.All(profile => profile.XAxis.Values.Length == 7 && profile.YAxis.Values.Length == 7), "Every parameterized falsification profile should expose a 7x7 controlled surface.");
+        Assert(ParameterizedFalsificationPlan.Profiles.All(profile => profile.Replicates == ParameterizedFalsificationPlan.ReplicatesPerCell), "Every profile should use the registered replicate count.");
+        Assert(ParameterizedFalsificationPlan.Profiles.Select(profile => profile.Id).Distinct(StringComparer.Ordinal).Count() == ParameterizedFalsificationPlan.Profiles.Count, "Parameterized falsification profile identifiers must be unique.");
+    }
+
+    private static void TestParameterizedProtocolFourComparator()
+    {
+        var metrics = ParameterizedProbes.EvaluateProtocol04(0.35, 0.50, 404UL);
+        Assert(Math.Abs(metrics["typed_communication_work"] - metrics["equal_budget_communication_work"]) <= 1e-12, "The stronger P04 comparator must receive exactly the same public communication budget as the typed path.");
+        Assert(double.IsFinite(metrics["boundary_margin"]), "The equal-budget P04 margin must be finite.");
+    }
+
+    private static void TestParameterizedProtocolSixBlindness()
+    {
+        var metrics = ParameterizedProbes.EvaluateProtocol06(1.0, 0.05, 606UL);
+        Assert(double.IsFinite(metrics["boundary_margin"]), "P06 parameterized falsification must remain numerically defined under complete origin-hint missingness and highly overlapping signatures.");
+        Assert(metrics["echo_pair_recall"] is >= 0.0 and <= 1.0, "P06 echo recall must remain a probability under complete provenance blindness.");
+        Assert(metrics["false_merge_rate"] is >= 0.0 and <= 1.0, "P06 false-merge rate must remain a probability under complete provenance blindness.");
+    }
+
+    private static void TestParameterizedProtocolSevenAxes()
+    {
+        var prevalence = ParameterizedProbes.EvaluateProtocol07Prevalence(0.45, 0.80, 707UL);
+        var severity = ParameterizedProbes.EvaluateProtocol07Severity(0.45, 0.80, 707UL);
+        Assert(double.IsFinite(prevalence["boundary_margin"]) && double.IsFinite(severity["boundary_margin"]), "Both P07 controlled surfaces must produce finite margins.");
+        Assert(Math.Abs(prevalence["mismatch_contexts"] - severity["mismatch_contexts"]) > 1e-12, "P07 prevalence and severity surfaces must not collapse into the same intervention. The prevalence surface varies how many contexts mismatch; the severity surface holds prevalence near one half.");
     }
 
     private static void TestFrameSequence()

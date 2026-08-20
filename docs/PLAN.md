@@ -125,35 +125,77 @@ Protocols 01 and 02 remain mechanism demonstrations with weaker holdout meaning 
 
 ### Operating-envelope challenge phase: challenge-v1
 
-Status: **implemented in v0.9.0; challenge result pending**.
+Status: **completed and consumed in v0.9.0**.
 
-Version 0.9 still adds no Protocol 08. Instead, it asks where the frozen Protocol 03-07 mechanisms stop working. `challenge-v1` searches a fixed candidate seed range (`10001-29999`) using only world descriptors, before experiment outcomes are observed. Development and holdout seeds are excluded.
+`challenge-v1` selected 100 adversarial runs from the frozen Protocol 03-07 generator families using preregistered, outcome-blind world descriptors. It returned:
 
-Each profile sorts candidate worlds by a preregistered stress score, divides that generator distribution into five ordered bands, and selects four deterministic seeds from each band. This produces 20 runs per profile and 100 runs total.
+```text
+78 Support
+22 Mixed
+0 Disconfirm
 
-Registered profiles:
+mechanism outcome   317 / 320
+safety boundary     207 / 220
+manipulation         133 / 140
+accounting             78 / 80
+```
 
-1. **P03 source instability**: unstable/sparse history prevalence, transition magnitude, thin evidence;
-2. **P04 conflict density**: dissent prevalence, evidence imbalance, private-target spread;
-3. **P05 regime shift**: shifted-context count, cost-landscape movement, private preference diversity;
-4. **P06 ancestry visibility**: missing/alias hints, ambiguous lineage, root-signature separation;
-5. **P07 recommender fragility**: weak recommender credibility, mismatch prevalence, mismatch magnitude.
+The challenge exposed useful boundaries, but it also falsified an assumption in the challenge apparatus itself: a composite world-level "stress" score is generally not a monotonic causal variable when its ingredients can help and hurt a mechanism in different ways.
 
-Each profile defines a signed boundary margin. Positive remains inside the frozen operating envelope, zero is the registered crossover, and negative indicates a boundary violation. The report also preserves the manipulation/mechanism/safety/accounting taxonomy.
+The revised protocol lessons are preserved in `CHALLENGE_V1_RESULTS.md`. In short:
 
-This is intentionally not a second holdout. Challenge seeds are selected adversarially from preregistered descriptors in order to reveal failure surfaces. Outcomes may inform the next architecture or challenge design, but they cannot be used to turn challenge-v1 into confirmatory evidence.
+- P03 crossed a real developmental-versus-doctrinal mechanism boundary in an extreme world, but higher source instability could also make developmental context *more* useful;
+- P04 did not receive a meaningful adversarial test because greater conflict density fed the condition typed communication was designed to exploit;
+- P05 exposed the cost of keeping culture plastic enough to revise while retaining stable convention;
+- P06 again showed that soft ancestry weighting can suppress genuine independence even without obvious categorical false merges;
+- P07 reached a clear fragile-transfer region, while also exposing a distinct residual-authority failure that cannot be collapsed into opportunity cost.
 
-Two limitations are explicit. First, challenge-v1 remains inside the original frozen world-generator support; if no boundaries appear, the next step is parameterized stress beyond that support. Second, P04 still lacks a stronger equal-budget alternative control. Its current challenge profile stresses the environment only.
+`challenge-v1` is now consumed exploratory evidence. It may be reproduced, but its selected seeds and composite stress scores are not a future confirmation set.
+
+### Parameterized falsification phase: parameterized-falsification-v1
+
+Status: **implemented in v0.10.0; results pending**.
+
+Version 0.10 still adds no Protocol 08. Instead of searching more generated seeds, it copies the relevant frozen local equations into controlled micro-assays and intervenes directly on causal variables outside the original generator support.
+
+Six `7 x 7` response surfaces are registered, with seven deterministic replicates per cell:
+
+1. **P03 history instability x present rule error**;
+2. **P04 warrant asymmetry x minority-correct fraction**, against a stronger same-information, equal-public-budget standing-weighted robust-consensus comparator;
+3. **P05 change frequency x change magnitude**, including repeated regime changes not available in the frozen P05 generator;
+4. **P06 origin missingness x developmental-signature separation**, including complete provenance blindness;
+5. **P07 recommender credibility x mismatch prevalence**;
+6. **P07 recommender credibility x strong mismatch severity**.
+
+The P07 severity surface begins in the strong-contradiction regime because the frozen `0.20` residual-standing safety boundary was registered for strongly mismatched recommendations, not for weak disagreement that should rationally retain standing.
+
+Each cell records a signed primary boundary margin and the mean diagnostics needed to understand why it crosses. A negative margin is desired falsification information. These surfaces are exploratory development evidence; if mechanisms are later changed, the same surfaces must not be reinterpreted as fresh confirmation.
+
+The authoritative runner writes `parameterized-report.json`, `parameterized-plan.json`, `parameterized-summary.md`, and one CSV surface per profile.
+
+### Current-lab closure question
+
+The Bounded Minds Laboratory is **not closed** by v0.10. Parameterized falsification should finish before deciding whether the social research question has been exhausted.
+
+Two protocol families still plausibly belong here because they concern influence among already-perceptible bounded peers rather than perception of hidden causes:
+
+- **strategic public influence**: can consequence-based standing limit a peer that learns to shape its public posture strategically in order to gain influence while its private interior remains unavailable?
+- **coalition / authority cascade**: can recommendations, standing, prestige, or factional loops become self-reinforcing even when the underlying evidence is not independently renewed?
+
+These are candidates, not commitments. After the falsification surfaces are reviewed, add them only if they test a social failure mode that is not already answered by Protocols 01-07.
+
+A candidate successor **Trace and Interface Laboratory** is documented in `NEXT_LAB.md`. Its question begins one layer earlier: how a bounded observer detects and represents structured causal influence when the source itself is only indirectly available through an interface.
 
 ## Result cadence
 
-For the v0.9 operating-envelope phase:
+For the v0.10 parameterized falsification phase:
 
-1. rebuild under the pinned .NET 10 SDK and run the 26 invariant/regression checks;
-2. verify `docs/FROZEN_PROTOCOL_SHA256.txt`;
-3. run `challenge-v1` once without modifying Protocol 03-07 mechanisms, world generators, or preregistered thresholds;
-4. inspect boundary margins by stress band together with verdicts and category-level failures;
-5. treat Mixed, Disconfirm, and negative margins as useful boundary evidence rather than failed development;
-6. inspect non-monotonic curves carefully, because a stress score that does not track failure pressure is itself evidence that the challenge descriptor is poor;
-7. if no selected profile crosses a boundary, do not increase seed count indefinitely. Move to parameterized generator stress beyond the frozen support;
-8. do not reuse consumed holdout-v1 as confirmation after any mechanism change. Register a new future holdout only when a revised mechanism is ready for confirmation.
+1. rebuild under the pinned .NET 10 SDK and run the **30** invariant/regression checks;
+2. verify `docs/FROZEN_PROTOCOL_SHA256.txt` before running any research command;
+3. run `parameterized-falsification-v1` once without modifying frozen Protocol 01-07 experiment/world source or the registered response surfaces;
+4. inspect response surfaces, negative replicate counts, and null regions rather than reducing the phase to a Support percentage;
+5. treat crossover, non-monotonicity, and comparator wins as useful causal evidence;
+6. do not tune a mechanism from these surfaces and then reuse the same surface as confirmation;
+7. after review, decide whether strategic-public-influence and authority-cascade protocols still add unresolved bounded-minds evidence;
+8. only then prepare a closeout/handoff to the candidate Trace and Interface Laboratory;
+9. keep `holdout-v1` and `challenge-v1` reproducibility-only.
