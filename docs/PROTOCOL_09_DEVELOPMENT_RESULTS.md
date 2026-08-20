@@ -8,7 +8,7 @@ Seeds: `101, 211, 307, 401, 503`
 
 Result: **5 Support / 0 Mixed / 0 Disconfirm**, with **50/50 preregistered checks passing**.
 
-This result is strong enough to justify freezing the exact experiment and world-generator sources and moving to a fresh Protocol 09 holdout plus controlled operating-envelope falsification. It is still development evidence because the five canonical seeds were the known regression/development set.
+This result justified freezing the exact experiment and world-generator sources before a fresh Protocol 09 holdout plus controlled operating-envelope falsification. It remains development evidence because the five canonical seeds were the known regression/development set. The later final evidence is recorded separately in `PROTOCOL_09_VALIDATION_RESULTS.md`.
 
 ## Mean results
 

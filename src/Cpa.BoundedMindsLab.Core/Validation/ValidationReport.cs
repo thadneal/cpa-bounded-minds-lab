@@ -133,7 +133,7 @@ public static class ValidationReportBuilder
         }
         else if (seedSet == ValidationPlan.AuthorityAncestryHoldoutSetName)
         {
-            diagnostics.Add("This session uses the preregistered Protocol 09 p09-holdout-v1 seed set. On its first execution it is fresh validation evidence; after that first execution it is consumed and reruns are reproducibility checks only.");
+            diagnostics.Add("This session uses the consumed Protocol 09 p09-holdout-v1 seed set. Its first registered execution completed on 2026-08-20; reruns are reproducibility checks only.");
         }
         else
         {
@@ -179,7 +179,7 @@ public static class ValidationReportBuilder
 
         return new ValidationReport(
             "cpa-bounded-minds-validation-v1",
-            "0.14.0",
+            "1.0.0",
             seedSet,
             seeds,
             fullProtocolSet,

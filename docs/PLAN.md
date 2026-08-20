@@ -186,7 +186,7 @@ Narrow result: public influence can remain useful and strategically adaptive wit
 
 ### Protocol 09: authority ancestry / circular standing
 
-Status: **frozen after coherent development-v1; fresh validation and controlled falsification registered in v0.14**.
+Status: **frozen; fresh holdout 20/20 Support; controlled operating envelope characterized; laboratory closed in v1.0.0**.
 
 Question:
 
@@ -196,39 +196,38 @@ The development matrix returned **5/5 Support with 50/50 preregistered checks pa
 
 This supports a distinct network-level failure mode: **permission can have ancestry even when evidence itself is not duplicated**. The exact root/path sketch representation remains an assay instrument. See `PROTOCOL_09_DEVELOPMENT_RESULTS.md`.
 
-### v0.14 evidence phase
+### Final Protocol 09 evidence phase
 
-The exact Protocol 09 experiment and world-generator files are now frozen by SHA-256. Before any Protocol 09 holdout outcome is observed, the lab registers:
+The exact Protocol 09 experiment and world-generator files were frozen by SHA-256 before holdout observation. The registered evidence then ran in the intended order:
 
-- `p09-holdout-v1`: twenty fresh seeds, disjoint from development-v1, holdout-v1, p08-holdout-v1, and challenge-v1;
-- `authority-ancestry-falsification-v1`: six controlled 7 x 7 surfaces with seven deterministic replicates per cell.
+1. `p09-holdout-v1` first, with twenty fresh seeds disjoint from development-v1, holdout-v1, p08-holdout-v1, and challenge-v1;
+2. `authority-ancestry-falsification-v1` second, with six controlled `7 x 7` surfaces and seven deterministic replicates per cell.
 
-The controlled surfaces vary:
+The fresh holdout returned **20/20 Support with 200/200 checks passing**. Mean total RMSE was `0.17881` for authority ancestry, `0.20117` for recursive endorsement, and `0.20183` for direct-only learning. Recursive circular standing amplified from `0.11840` to `0.89165` apparent authority (about `7.53x`) without new independent grounding, while ancestry-sensitive circular authority remained near `0.22224`.
 
-1. independent grounding diversity x peer trust;
-2. circulation depth x ancestry fidelity;
-3. circular-root strength x receiver mismatch;
-4. consequence delay x circulation depth;
-5. grounded consequence noise x delay (null-harm);
-6. network closure x independent-root count.
+The six controlled surfaces produced **294 cells / 2,058 runs**. They established an interpretable operating envelope rather than a universal win:
 
-The holdout must run **first** and its artifact must be preserved before the controlled surfaces are interpreted. No mechanism changes are permitted between the fresh holdout and the falsification run.
+- independent grounding diversity remained useful across the full registered peer-trust surface;
+- ancestry fidelity had to rise with circulation depth, with roughly `0.70+` fidelity becoming useful at 8-12 rounds in this probe;
+- low receiver mismatch made circularity discount net harmful, confirming that circularity is dependence evidence rather than falsehood;
+- sufficiently noisy receiver consequence (`0.30` in the registered all-grounded surface) made ancestry caution harmful across all tested delays;
+- minimal network closure mattered less than whether authority rested on genuinely distinct roots.
 
-### Current-lab closure question
+Both artifacts are consumed evidence. See `PROTOCOL_09_VALIDATION_RESULTS.md`.
 
-The Bounded Minds Laboratory is now in its intended final evidence phase. No Protocol 10 is planned by default. If the frozen P09 result survives fresh holdout with a useful, interpretable operating envelope, move to synthesis and closeout. A new social protocol should appear only if this phase exposes a genuinely independent phenomenon that cannot be expressed as evidence ancestry, standing transfer, strategic influence, or authority ancestry.
+### Laboratory closure
 
-The candidate successor **Trace and Interface Laboratory** remains documented in `NEXT_LAB.md`. Its question begins one layer earlier: how an observer detects structured causal influence when the source itself is only indirectly available through an interface.
+The Bounded Minds Laboratory is **complete**. No Protocol 10 is planned. The final P09 phase did not expose a distinct social phenomenon that requires extending the current protocol sequence.
 
-## Result cadence
+The final durable synthesis is recorded in `LAB_CLOSEOUT.md`. The successor **Trace and Interface Laboratory** is documented in `NEXT_LAB.md` and begins one layer earlier: how a bounded observer detects structured causal influence when the source itself is only indirectly available through an interface.
 
-For v0.14:
+## Closeout regression cadence
 
-1. rebuild under the pinned .NET 10 SDK and run the **41** invariant/regression checks;
-2. verify `docs/FROZEN_PROTOCOL_SHA256.txt` so the exact Protocol 01-09 frozen sources remain unchanged;
-3. run `--p09-validation` once and preserve the resulting `p09-holdout-v1` artifact before inspecting or changing anything;
-4. review the holdout as independent evidence without tuning the frozen assay;
-5. run `--p09-falsify` and interpret failure surfaces as operating-envelope evidence, including regions where ancestry caution becomes net harmful;
-6. revise the durable behavioral conclusion, not the frozen scalar equations;
-7. close Bounded Minds unless the evidence reveals a truly new social failure mode;
-8. write the final handoff to the successor Trace and Interface Laboratory.
+Version 1.0.0 is a synthesis/closeout release, not a new experiment. The final local checkpoint is:
+
+1. rebuild under the pinned .NET 10 SDK;
+2. run the **42** invariant/regression checks;
+3. verify `docs/FROZEN_PROTOCOL_SHA256.txt` so the exact Protocol 01-09 frozen sources remain unchanged;
+4. optionally run the canonical `development-v1` matrix as a regression-only full-protocol checkpoint;
+5. retain all holdout/falsification runners only for reproducibility, never as fresh evidence;
+6. begin new scientific claims in a new laboratory with new preregistration and holdouts.

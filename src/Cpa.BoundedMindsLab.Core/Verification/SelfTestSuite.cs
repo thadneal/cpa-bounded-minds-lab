@@ -12,6 +12,19 @@ namespace Cpa.BoundedMindsLab.Verification;
 
 public static class SelfTestSuite
 {
+    private static readonly string[] ClosedProtocolNames =
+    [
+        "01-local-shared-memory-contamination",
+        "02-peer-disagreement-preserved-interiors",
+        "03-developmental-versus-doctrinal-transfer",
+        "04-bounded-communication-before-language",
+        "05-emergent-convention-artificial-culture",
+        "06-incomplete-epistemic-ancestry",
+        "07-provisional-standing-transfer",
+        "08-strategic-public-influence",
+        "09-authority-ancestry-circular-standing",
+    ];
+
     public static IReadOnlyList<string> RunAll()
     {
         var passed = new List<string>();
@@ -38,6 +51,7 @@ public static class SelfTestSuite
         Run("protocol-08-development-fixture-seed-101", TestProtocolEight, passed);
         Run("protocol-09-default-seeds-create-distinct-authority-cascade-worlds", TestProtocolNineSeedSemantics, passed);
         Run("protocol-09-development-fixture-seed-101", TestProtocolNine, passed);
+        Run("closeout-catalog-is-exactly-protocols-01-through-09", TestClosedProtocolCatalog, passed);
         Run("validation-seed-sets-are-frozen-and-disjoint", TestValidationSeedSets, passed);
         Run("validation-check-taxonomy-separates-evidence-types", TestValidationTaxonomy, passed);
         Run("validation-report-identifies-development-regression", TestValidationReport, passed);
@@ -48,10 +62,10 @@ public static class SelfTestSuite
         Run("parameterized-p04-comparator-has-equal-public-cost", TestParameterizedProtocolFourComparator, passed);
         Run("parameterized-p06-reaches-complete-provenance-blindness", TestParameterizedProtocolSixBlindness, passed);
         Run("parameterized-p07-separates-prevalence-from-severity", TestParameterizedProtocolSevenAxes, passed);
-        Run("p08-holdout-is-fresh-and-disjoint", TestStrategicInfluenceHoldoutSeeds, passed);
+        Run("p08-holdout-is-frozen-and-disjoint", TestStrategicInfluenceHoldoutSeeds, passed);
         Run("p08-falsification-plan-is-complete", TestStrategicInfluenceFalsificationPlan, passed);
         Run("p08-falsification-null-harm-surface-is-defined", TestStrategicInfluenceNullHarmProbe, passed);
-        Run("p09-holdout-is-fresh-and-disjoint", TestAuthorityAncestryHoldoutSeeds, passed);
+        Run("p09-holdout-is-frozen-and-disjoint", TestAuthorityAncestryHoldoutSeeds, passed);
         Run("p09-falsification-plan-is-complete", TestAuthorityAncestryFalsificationPlan, passed);
         Run("p09-falsification-approximate-ancestry-is-defined", TestAuthorityAncestryApproximateFidelityProbe, passed);
         Run("p09-falsification-null-harm-surface-is-defined", TestAuthorityAncestryNullHarmProbe, passed);
@@ -407,6 +421,12 @@ public static class SelfTestSuite
         }
     }
 
+
+    private static void TestClosedProtocolCatalog()
+    {
+        var actual = ExperimentCatalog.All.Select(experiment => experiment.Name).ToArray();
+        Assert(actual.SequenceEqual(ClosedProtocolNames), "The v1.0.0 closeout catalog must contain exactly frozen Protocols 01-09 in order; a new social protocol requires a new explicit research decision.");
+    }
 
     private static void TestValidationSeedSets()
     {

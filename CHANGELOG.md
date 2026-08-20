@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.0.0 - 2026-08-20
+
+- Closed the CPA Bounded Minds Laboratory after Protocol 09. No Protocol 10 is planned.
+- Recorded the first preregistered `p09-holdout-v1` execution as consumed evidence: 20/20 Support, 200/200 checks passed, with mean authority-ancestry RMSE `0.178808` versus `0.201173` recursive endorsement and `0.201826` direct-only.
+- Recorded mean recursive circular amplification of about `7.53x` from weak initial peer standing without new independent grounding; authority ancestry preserved a materially lower circular authority surface while retaining grounded social opportunity.
+- Recorded `authority-ancestry-falsification-v1` as consumed exploratory operating-envelope evidence: six 7x7 profiles, 294 cells, and 2,058 deterministic replicate runs.
+- Added `docs/PROTOCOL_09_VALIDATION_RESULTS.md` with the final holdout metrics and per-surface interpretation.
+- Added `docs/LAB_CLOSEOUT.md` with a nine-protocol confidence classification, cross-protocol synthesis, explicit non-claims, and methodological closeout.
+- Finalized `docs/NEXT_LAB.md` as the handoff to the Trace and Interface Laboratory rather than a candidate future branch.
+- Updated plan, research ledger, experiments, validation, falsification, architecture, runbook, source reconciliation, README, CLI help, artifact version strings, and Desktop fallback titles for the closed-lab state.
+- Changed Protocol 09 validation/falsification CLI diagnostics from fresh-evidence instructions to consumed-evidence reproducibility guidance.
+- Added a closeout invariant fixing the ordinary experiment catalog at exactly Protocols 01-09, bringing the self-test suite to 42 checks.
+- Preserved every SHA-256-frozen Protocol 01-09 experiment/world file byte-for-byte.
+
 ## 0.14.0 - 2026-08-20
 
 - Recorded the canonical Protocol 09 development result: **5/5 Support with 50/50 preregistered checks passing** across seeds `101,211,307,401,503`.

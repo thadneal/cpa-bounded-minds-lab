@@ -30,7 +30,7 @@ public static class AuthorityAncestryFalsificationRunner
         var replicateRuns = profileReports.Sum(profile => profile.Cells.Sum(cell => cell.Replicates));
         var result = new FalsificationReport(
             "cpa-bounded-minds-authority-ancestry-falsification-v1",
-            "0.14.0",
+            "1.0.0",
             AuthorityAncestryFalsificationPlan.Name,
             profileReports.Count,
             allCells,
@@ -41,7 +41,7 @@ public static class AuthorityAncestryFalsificationRunner
                 "The exact Protocol 09 experiment and world-generator sources are frozen. These probes copy selected local equations into controlled interventions so root diversity, lineage fidelity, topology, consequence delay, and consequence noise can be varied independently.",
                 "Circularity is not treated as evidence of falsehood. Several surfaces deliberately contain useful circular or fully grounded influence so over-deterrence is visible as a failure rather than rewarded as caution.",
                 "A negative margin is desired boundary information. Do not tune Protocol 09 from these results and then reuse the same surfaces as confirmation.",
-                "Run and preserve the fresh p09-holdout-v1 artifact before using these surfaces to revise any durable interpretation.",
+                "The preregistered p09-holdout-v1 artifact was preserved before the first interpretation of these surfaces. Both evidence sets are now consumed and reruns are reproducibility only.",
             ]);
 
         File.WriteAllText(Path.Combine(outputDirectory, "authority-ancestry-falsification-report.json"), JsonSerializer.Serialize(result, JsonOptions));
@@ -119,7 +119,7 @@ public static class AuthorityAncestryFalsificationRunner
     private static object BuildPlanDocument() => new
     {
         schema = "cpa-bounded-minds-authority-ancestry-falsification-plan-v1",
-        version = "0.14.0",
+        version = "1.0.0",
         name = AuthorityAncestryFalsificationPlan.Name,
         purpose = "Controlled operating-envelope falsification of frozen Protocol 09 after its canonical development result. This is exploratory evidence, not confirmation.",
         profiles = AuthorityAncestryFalsificationPlan.Profiles.Select(profile => new

@@ -81,24 +81,14 @@ A Supported development result would **not** establish a production authority-an
 
 The result matters only if it shows a distinct failure mode not already explained by P06-P08.
 
-## Development result and next evidence
+## Development and final evidence
 
 The canonical development matrix returned **5/5 Support with 50/50 preregistered checks passing**. Mean recursive circular authority rose from mean peer standing `0.11874` to `0.88673` (about 7.47x amplification), while ancestry-sensitive circular authority remained `0.22327`. Authority ancestry preserved independently grounded initial authority near `0.61060`, reduced total RMSE to `0.17860`, and later direct consequence drove circular standing near `0.02328`.
 
-The exact experiment and world-generator files are now frozen in `FROZEN_PROTOCOL_SHA256.txt`. See `PROTOCOL_09_DEVELOPMENT_RESULTS.md`.
+The exact experiment and world-generator files were then frozen in `FROZEN_PROTOCOL_SHA256.txt`. The preregistered twenty-seed `p09-holdout-v1` subsequently returned **20/20 Support with 200/200 checks passing**. Mean total RMSE was `0.178808` for authority ancestry, `0.201173` for recursive endorsement, and `0.201826` for direct-only learning. Recursive circular amplification averaged `7.533969x`.
 
-The next evidence sequence is fixed:
+The six-surface `authority-ancestry-falsification-v1` phase then mapped where the mechanism helps and where it becomes costly. The result showed that ancestry fidelity must scale with circulation depth, low-mismatch circular influence can be legitimately useful, noisy consequence can create over-deterrence, and independent grounding diversity matters more than simple graph closure in the registered topology probe.
 
-```powershell
-# Fresh holdout first. First execution consumes p09-holdout-v1.
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
-  --p09-validation `
-  --output _artifacts/p09-holdout-v1
+See `PROTOCOL_09_DEVELOPMENT_RESULTS.md` and `PROTOCOL_09_VALIDATION_RESULTS.md`. Both final evidence artifacts are consumed.
 
-# Only after preserving that artifact:
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
-  --p09-falsify `
-  --output _artifacts/authority-ancestry-falsification-v1
-```
-
-No Protocol 10 should be added by default. The controlled surfaces exist to characterize where the frozen P09 mechanism helps, where approximate ancestry ceases to be enough, and where caution itself becomes costly.
+Protocol 09 closes the Bounded Minds social sequence. No Protocol 10 is planned.

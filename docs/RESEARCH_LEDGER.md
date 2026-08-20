@@ -526,3 +526,50 @@ The surfaces deliberately include regions where circular authority is benign and
 ### Laboratory boundary
 
 No Protocol 10 is planned by default. Run and preserve the fresh P09 holdout first, then map the operating envelope without changing the frozen mechanism. If the combined evidence remains coherent, move to Bounded Minds synthesis and closeout, then hand off to the Trace and Interface Laboratory.
+
+## 2026-08-20 - Protocol 09 holdout and operating envelope consumed; Bounded Minds closes at v1.0.0
+
+### Fresh Protocol 09 holdout
+
+The preregistered twenty-seed `p09-holdout-v1` was executed after the exact Protocol 09 experiment and world-generator sources were frozen. It returned **20/20 Support with 200/200 checks passing**.
+
+Mean total RMSE was `0.178808` for authority ancestry, `0.201173` for recursive endorsement, and `0.201826` for direct-only learning. Recursive endorsement amplified weak circular peer standing from `0.118401` to `0.891651` apparent receiver authority, about `7.53x`, without new independent grounding. Authority ancestry held the corresponding circular authority near `0.222243` while preserving independently grounded authority near `0.614592`. Later receiver-owned consequence left grounded standing near `0.891559` and circular standing near `0.026415`.
+
+The holdout is now consumed. Reruns are reproducibility checks only.
+
+### authority-ancestry-falsification-v1
+
+The six registered `7 x 7` surfaces executed **294 cells / 2,058 deterministic runs**.
+
+The main boundaries were coherent:
+
+- grounding diversity x peer trust: `0/49` negative mean cells;
+- circulation depth x ancestry fidelity: `39/49` negative mean cells, with useful ancestry requiring both enough recurrence to create an amplification problem and enough lineage fidelity to detect it;
+- circular-root strength x receiver mismatch: `29/49` negative mean cells, showing that circularity is not itself evidence of falsehood;
+- consequence delay x circulation depth: `7/49` negative mean cells, all at the shallowest two-round circulation condition;
+- all-grounded consequence noise x delay: `7/49` negative mean cells, all at noise `0.30`;
+- minimal network closure x independent-root count: `7/49` negative mean cells, all at one effective independent root.
+
+The most durable P09 interpretation is that **permission itself can have ancestry**. Social repetition must not silently become independent warrant. At the same time, ancestry is dependence information rather than a truth label, and its useful fidelity depends on how deeply authority is allowed to recirculate.
+
+See `PROTOCOL_09_VALIDATION_RESULTS.md`.
+
+### Closeout decision
+
+The final P09 evidence did not expose a distinct social failure mode that requires Protocol 10. The current laboratory has completed its natural arc:
+
+```text
+foreign memory
+  -> preserved disagreement
+  -> developmental transfer
+  -> typed public communication
+  -> emergent convention
+  -> evidential ancestry
+  -> provisional standing
+  -> strategic public influence
+  -> authority ancestry
+```
+
+Version 1.0.0 therefore closes the Bounded Minds Laboratory. Protocol-local constants remain experimental instruments. The durable output is the behavioral synthesis in `LAB_CLOSEOUT.md`.
+
+The next laboratory should begin from a different uncertainty: the source of influence is no longer given as a peer. The handoff to the Trace and Interface Laboratory is finalized in `NEXT_LAB.md`.

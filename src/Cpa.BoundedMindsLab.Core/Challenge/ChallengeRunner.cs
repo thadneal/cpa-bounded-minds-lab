@@ -48,7 +48,7 @@ public static class ChallengeRunner
         var plan = new
         {
             schema = "cpa-bounded-minds-challenge-plan-v1",
-            version = "0.14.0",
+            version = "1.0.0",
             name = ChallengePlan.Name,
             candidateSeedStart = ChallengePlan.CandidateSeedStart,
             candidateSeedEnd = ChallengePlan.CandidateSeedEnd,

@@ -440,3 +440,20 @@ The final P09 phase now separates three layers:
 The controlled phase deliberately attacks assumptions that were clean in the development assay. Authority-root diversity may be fractional/effective rather than perfectly enumerated, ancestry fidelity may degrade, receiver consequence may arrive late or noisily, circular influence may be benign, and network recurrence may exist even when every participating source is useful. Those interventions test whether the behavioral pressure survives outside an exact-genealogy toy world.
 
 A durable CPA synthesis should carry forward only what survives that pressure: social permission can have dependence structure, repeated permission need not equal independent permission, topology can manufacture apparent warrant, and local consequence must retain the ability to revise whatever provisional authority ancestry permits. Approximate ancestry that fails gracefully would be more architecturally interesting than exact sketches that work only because the laboratory supplied perfect lineage.
+
+## v1.0 closeout architectural interpretation
+
+The final Protocol 09 evidence does not justify adding another social subsystem. It sharpens which distinctions future CPA work should preserve.
+
+The fresh P09 holdout reproduced the authority-cascade phenomenon across twenty unseen histories, and the controlled surfaces then showed that the mechanism's value depends on recurrence depth, lineage fidelity, receiver mismatch, consequence quality, and genuine root diversity. The architectural lesson is not "track every authority path exactly." It is that social permission has **dependence structure** that should remain visible long enough to prevent repeated endorsement from silently becoming independent warrant.
+
+Several implications now survive the lab as behavioral constraints:
+
+- a receiver should be able to distinguish independent grounding from socially repeated permission;
+- authority ancestry should attenuate claims of independence rather than classify circular information as false;
+- the fidelity required of ancestry information should grow with the depth of social recirculation;
+- uncertainty in the receiver's own consequence channel must not be collapsed into source unreliability;
+- recurrent topology matters only through the causal/evidential dependence it creates, not because cycles are intrinsically suspect;
+- direct local consequence remains the final developmental authority over provisional social standing.
+
+Version 1.0.0 makes no change to any SHA-256-frozen Protocol 01-09 experiment or world file. The Bounded Minds architecture work is now a closed experimental record. Future implementation should import these distinctions selectively, preferably through simpler local rules and learned/developmental representation rather than by copying the laboratory's bit sketches or scalar standing equations.

@@ -657,7 +657,7 @@ The exact confidence values, learning rates, standing update, and penalty consta
 
 ## Protocol 09: authority ancestry / circular standing
 
-Status: **frozen after coherent development; fresh holdout and operating-envelope phase registered in v0.14**.
+Status: **frozen and complete; fresh holdout 20/20 Support; operating envelope characterized; lab closed in v1.0.0**.
 
 Name: `09-authority-ancestry-circular-standing`
 
@@ -721,8 +721,12 @@ A Supported development result would not establish the five-peer ring, bit sketc
 
 See `PROTOCOL_09_DESIGN.md` for the full preregistered development design.
 
-### Current evidence cadence
+### Final evidence
 
-The canonical `development-v1` matrix (`101,211,307,401,503`) returned **5/5 Support with 50/50 checks passing**. Recursive endorsement amplified weak circular standing by a mean `7.47x`, while ancestry-sensitive authority kept circular permission materially lower and preserved useful independently grounded social opportunity. The exact experiment and world-generator sources are now frozen.
+The canonical `development-v1` matrix (`101,211,307,401,503`) returned **5/5 Support with 50/50 checks passing**. Recursive endorsement amplified weak circular standing by a mean `7.47x`, while ancestry-sensitive authority kept circular permission materially lower and preserved useful independently grounded social opportunity. The exact experiment and world-generator sources were then frozen.
 
-Run the twenty-seed `p09-holdout-v1` once with `--p09-validation` and preserve that artifact before interpreting `--p09-falsify`. The falsification plan maps six controlled surfaces without changing the frozen mechanism, including approximate ancestry, delayed/noisy consequence, and all-grounded null-harm regions. No Protocol 10 is planned by default; if this final evidence phase remains coherent, proceed to Bounded Minds synthesis and closeout.
+The preregistered twenty-seed `p09-holdout-v1` returned **20/20 Support with 200/200 checks passing**. Mean total RMSE was `0.178808` for authority ancestry, `0.201173` for recursive endorsement, and `0.201826` for direct-only learning. Mean circular peer standing of `0.118401` became `0.891651` apparent authority under recursive endorsement, about `7.53x`, while ancestry-sensitive circular authority remained `0.222243`.
+
+`authority-ancestry-falsification-v1` then executed **294 cells / 2,058 runs** across six controlled surfaces. The phase showed that grounding diversity remains distinct from social repetition, approximate lineage needs enough fidelity for circulation depth, circularity is not a truth label, noisy receiver consequence can turn caution into over-deterrence, and minimal graph closure matters less than independent grounding diversity in the registered topology probe.
+
+Both evidence sets are consumed. See `PROTOCOL_09_VALIDATION_RESULTS.md`. Protocol 09 closes the social experiment sequence; no Protocol 10 is planned.

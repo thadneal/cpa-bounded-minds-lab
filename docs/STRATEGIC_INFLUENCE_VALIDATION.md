@@ -83,4 +83,4 @@ dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
   --p08-falsify --output _artifacts/strategic-influence-falsification-v1-repro
 ```
 
-Protocol 09 subsequently tested that distinct network question. Its development matrix returned 5/5 Support, and the exact P09 assay is now frozen. The current final evidence phase is the fresh `p09-holdout-v1` followed by controlled authority-ancestry operating-envelope falsification.
+Protocol 09 subsequently tested that distinct network question. Its development matrix returned 5/5 Support, its fresh twenty-seed holdout returned 20/20 Support, and its six controlled authority-ancestry surfaces characterized the operating envelope. Protocol 09 now closes the Bounded Minds Laboratory; see `PROTOCOL_09_VALIDATION_RESULTS.md` and `LAB_CLOSEOUT.md`.

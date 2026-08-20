@@ -105,7 +105,7 @@ catch (Exception exception)
 
 static void PrintHelp()
 {
-    Console.WriteLine("CPA Bounded Minds Lab 0.14.0");
+    Console.WriteLine("CPA Bounded Minds Lab 1.0.0");
     Console.WriteLine();
     Console.WriteLine("  --list");
     Console.WriteLine("  --self-test");
@@ -115,8 +115,8 @@ static void PrintHelp()
     Console.WriteLine("  --falsify             Reproduce consumed parameterized-falsification-v1 causal sweeps");
     Console.WriteLine("  --p08-validation      Reproduce consumed Protocol 08 p08-holdout-v1");
     Console.WriteLine("  --p08-falsify         Reproduce consumed Protocol 08 strategic-influence failure surfaces");
-    Console.WriteLine("  --p09-validation      Run frozen Protocol 09 on fresh p09-holdout-v1 (first execution consumes it)");
-    Console.WriteLine("  --p09-falsify         Map frozen Protocol 09 operating-envelope surfaces after preserving holdout output");
+    Console.WriteLine("  --p09-validation      Reproduce consumed Protocol 09 p09-holdout-v1");
+    Console.WriteLine("  --p09-falsify         Reproduce consumed Protocol 09 authority-ancestry failure surfaces");
     Console.WriteLine("  --experiment <name>   Repeat to select one or more ordinary experiment runs (Protocols 01-09 are frozen)");
     Console.WriteLine("  --seed <ulong>        Single-history seed (default 101)");
     Console.WriteLine("  --replicate <csv>     Explicit replication seeds; 101,211,307,401,503 is development-v1");

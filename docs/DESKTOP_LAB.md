@@ -385,6 +385,6 @@ The visualization remains observer-only. Root coverage, social authority, cycle-
 Metric guidance now distinguishes authority magnitude from authority quality. Higher social authority is not universally preferred; it is useful only when independently grounded or later confirmed. Root coverage is likewise contextual, while RMSE retains the ordinary lower-is-better interpretation.
 
 
-### v0.14 evidence boundary
+### v1.0 closed evidence boundary
 
-The fresh Protocol 09 holdout and controlled falsification are intentionally CLI-only (`--p09-validation`, then `--p09-falsify`). The Desktop Lab must not make those modes look like ordinary development presets, because the first holdout execution changes evidence status.
+The consumed Protocol 09 holdout and controlled falsification remain intentionally CLI-only (`--p09-validation`, `--p09-falsify`) for reproducibility. The Desktop Lab remains a development/history workbench and must not present consumed evidence as a fresh preset.

@@ -1,141 +1,201 @@
-# Current-Lab Boundary and Candidate Next Laboratory
+# Handoff to the Trace and Interface Laboratory
 
-Status: **final Bounded Minds evidence phase; successor boundary prepared**
+Status: **Bounded Minds Laboratory closed; successor research boundary ready**
 
-## Is the Bounded Minds Laboratory finished?
+## Why the boundary moves here
 
-Not quite, but it is now at the edge of its natural subject.
+The Bounded Minds Laboratory is complete at Protocol 09. Its subject was social development among peers whose existence and public communication surfaces were already given.
 
-The current laboratory has a coherent question: **what develops among bounded minds when they exchange selected public evidence and permission while preserving independent interiors**. Protocols 01-09 now have development evidence. P03-P07 were challenged through frozen holdout, adversarial generator search, and controlled causal surfaces; P08 completed a fresh twenty-seed holdout and five strategic-influence falsification surfaces; P09 has now produced a distinct coherent development result and its exact assay is frozen.
+That laboratory established useful pressures around provisional transfer, disagreement, developmental context, typed communication, convention, evidential ancestry, standing, strategic influence, and authority ancestry. The final Protocol 09 holdout and operating-envelope work did not expose a new social phenomenon that requires Protocol 10.
 
-Protocol 08 therefore no longer blocks closure. Its result is frozen and characterized: receiver-owned, consequence-grounded permission can preserve useful strategic social influence without private-state inspection, but delayed/noisy consequence, pervasive divergence, and weak/late betrayal expose real costs.
+The next unresolved question begins earlier:
 
-One final evidence task remains before synthesis: independently validate and map the operating envelope of **authority ancestry / circular standing** without changing its frozen mechanism.
+> **When can a bounded developing observer infer that another process is exerting structured causal influence through a limited interface when the source itself is not directly available?**
 
-A reasonable closure criterion is now:
+This is a different experimental object. The observer is no longer told that a peer exists. It must learn from traces on its own side of an interface.
 
-1. controlled failure surfaces exist for the important P03-P07 mechanisms (**complete**);
-2. Protocol 04 has faced a competent equal-budget alternative (**complete**);
-3. strategic public influence has faced fresh validation and controlled falsification (**complete**);
-4. circular authority / permission ancestry is demonstrated as a distinct development-stage failure mode (**complete; 5/5 Support**);
-5. Protocol 09 faces its fresh holdout and controlled operating-envelope phase (**registered; next run**);
-6. the laboratory writes a final behavioral synthesis before the next lab begins.
+## Source of the idea
 
-## Final candidate protocol in this laboratory
+The attached paper *Traces of the Other - Are DMT Entities Real?* is useful here for a formal move rather than for its metaphysical claims.
 
-### Protocol 09 - authority ancestry / circular standing (frozen; final evidence phase)
+In the paper's conscious-agent framing, one agent does not perceive another by inspecting its interior. The other process acts through a world/channel, and some of those effects alter the observer's accessible experience. The effective channel is written as:
+
+```text
+Phi = P_A A_B D_B
+```
+
+A trace is observer-side structure induced through that mediated influence. The source does not have to be reconstructed directly for the observer to detect stable, causally constrained effects.
+
+CPA can borrow this experimental grammar without assuming conscious realism, external DMT entities, or phenomenal consciousness. The useful ideas are:
+
+- mediated causal influence instead of interior access;
+- observer-side traces rather than source reconstruction;
+- interface-dependent representation;
+- restricted perceptibility;
+- controlled perturbation of accessible state/representation space;
+- external constraint as a discriminator between endogenous structure and hidden influence;
+- inter-observer convergence as a possible additional constraint.
+
+## What the successor should inherit from Bounded Minds
+
+The new laboratory should carry forward **experimental discipline and behavioral constraints**, not the current lab's scalar formulas.
+
+### Architectural constraints
+
+1. **Bounded interiors**
+   A hidden process must never become observable through privileged state inspection merely to make the experiment easier.
+
+2. **Public/observable residue only**
+   The observer learns from effects available through its sense/interface boundary.
+
+3. **Typed uncertainty**
+   Uncertainty about whether a trace exists, what caused it, whether it is stable, and whether it is agentic should remain separable.
+
+4. **No automatic agency from complexity**
+   Complex, surprising, or coherent dynamics are not by themselves evidence of another mind.
+
+5. **Receiver-owned consequence**
+   Learned trace standing must remain answerable to later externally constrained outcomes.
+
+6. **Dependence-aware corroboration**
+   Repeated observations and multiple observers must not be counted as independent when they share a common causal source or interface artifact.
+
+7. **Explicit cognitive/communication cost**
+   Wider sensing, richer representation, repeated probing, and cross-observer consultation must have visible cost.
+
+8. **Development rather than one-shot classification**
+   The observer should change its future readiness after repeated successful or failed trace detection.
+
+### Methodological constraints
+
+The successor should begin with the stronger method learned late in this lab:
+
+```text
+mechanism discovery
+  -> varied lived histories
+  -> frozen holdout
+  -> controlled causal surfaces
+  -> explicit null-harm and false-positive regions
+```
+
+A mechanism should be allowed to lose. The experiment should distinguish manipulation success from mechanism success, safety from performance, and accounting from cognition.
+
+## Proposed first research arc
+
+The exact protocol order should remain revisable, but the following sequence is coherent.
+
+### Candidate Protocol 01 - trace without identity
+
+A hidden process perturbs a shared synthetic world. The observer receives no source label and no declaration that an agent exists.
 
 Question:
 
-> Can a bounded ecology distinguish authority earned from independent consequence from permission that has recursively circulated through locally reasonable endorsements?
+> Can repeated structured influence become a stable local trace without prematurely inventing an identity or agent model?
 
-Why it belongs here:
+Controls should include endogenous patterned noise and a rigid non-agentic hidden process so recurrence alone cannot satisfy the assay.
 
-P06 studies evidence ancestry. P07 studies second-hand standing. P08 studies strategic public presentation. None of them directly tests a network in which standing itself circulates through several peers and returns as apparently independent legitimacy.
+### Candidate Protocol 02 - perceptibility boundary
 
-Protocol 09 therefore treats **permission to matter** as something that can have ancestry. The development world contains independently grounded authority roots and circular traps. The ancestry-aware condition carries compact root/path sketches so a mind can recognize returned or overlapping permission without inspecting private interiors or consulting a global reputation registry. The recursive control keeps each local endorsement individually plausible while discarding authority ancestry, allowing a network-level cascade to emerge if the loop is sufficient.
+Vary overlap between hidden-process effects and the observer's sense channel.
 
-The canonical development matrix returned **5/5 Support with 50/50 preregistered checks passing**, so the distinction survived development review. The exact experiment and world-generator sources are now frozen.
+Question:
 
-This remains the final protocol unless the registered stress phase exposes a genuinely new mechanism that cannot be expressed as evidence ancestry, standing transfer, strategic influence, or authority ancestry. No Protocol 10 is planned by default. Run the fresh P09 holdout first, then the six controlled operating-envelope surfaces, then close the social protocol sequence if the combined evidence remains coherent.
+> At what coupling strength or channel overlap does causal influence become detectably useful, and how should weakly detectable influence differ from absent influence?
 
-## Candidate next lab: Trace and Interface Laboratory
+This is the cleanest place to study a synthetic analogue of a perception kernel's restricted sensitivity.
 
-The attached paper *Traces of the Other - Are DMT Entities Real?* suggests a research direction that is adjacent to, but distinct from, the Bounded Minds Laboratory.
+### Candidate Protocol 03 - interface aliasing
 
-The paper's useful formal move is not the metaphysical conclusion. It defines perception between agents as **mediated causal influence**: one agent does not access another agent's interior directly; the other agent acts on a world/channel, and the observer's perception process converts some of those effects into updates in its own experience. A `trace` is the observer-side dynamical residue of that mediated influence.
+Hold the hidden process fixed while changing the observer's representational channel.
 
-In the paper's notation, the effective channel from agent B to observer A is composed as `Phi = P_A A_B D_B`. The trace lives on the A side: it is the subset and transition structure of A's accessible states whose dynamics can be influenced through that channel. This is especially useful experimentally because it does not require direct reconstruction of B. A synthetic laboratory can ask whether structured influence is detectable, stable, externally constrained, or shared across observers while the hidden source remains inaccessible.
+Question:
 
-That is unusually compatible with CPA's engineering concerns:
+> Can the same underlying influence produce different observer-side traces that are behaviorally adequate without any one trace being treated as a literal depiction of the source?
 
-- bounded interiors;
-- public residue rather than private-state inspection;
-- sense channels that admit only selected difference;
-- representations that are useful without being complete depictions of their source;
-- perturbations that change which signals become detectable;
-- the possibility of mistaking endogenous structure for externally constrained influence.
+This matters for CPA because useful representation need not be source-isomorphic.
 
-But it asks a different foundational question from this lab.
+### Candidate Protocol 04 - accessible-state perturbation
 
-The Bounded Minds Laboratory begins with peers that are already perceptible and asks how their evidence should influence one another.
+Expand or reorganize the observer's representational capacity under controlled intervention.
 
-A Trace and Interface Laboratory could instead ask:
+Question:
 
-> **When can a bounded developing observer infer that another process is exerting structured causal influence through a limited interface, when the source itself is not directly available?**
+> Can a richer interface reveal causal regularity that was previously inaccessible, and when does added representational freedom instead increase false structure or false agency?
 
-### Possible early experiments
+This should include null-source conditions. Increased expressive capacity must be allowed to hurt.
 
-1. **Trace without identity**
-   A hidden process perturbs a shared world. The observer never receives a source label. Can recurring causal structure become a stable local trace without prematurely inventing an agent identity?
+### Candidate Protocol 05 - external-variable constraint
 
-2. **Perceptibility boundary**
-   Vary overlap between a hidden process's effects and the observer's sense channel. At what point does influence become detectable, and how does the observer represent undetectable versus weakly detectable causes?
+Blindly couple the hidden process to an external variable unavailable to the observer.
 
-3. **Interface aliasing**
-   Hold the hidden process fixed while changing the observer's representational channel. Can the same underlying influence produce different but behaviorally adequate public traces?
+Question:
 
-4. **Perturbed accessible state space**
-   Expand or reorganize the observer's available representation under controlled perturbation. Does this reveal previously inaccessible causal regularity, and when does added freedom instead increase false structure / false agency?
+> Does an inferred trace covary with externally controlled structure beyond matched endogenous controls?
 
-5. **External-variable constraint**
-   Couple a hidden process to a blinded external variable. A genuine inferred trace should covary with the hidden variable beyond an endogenous-control condition. This directly borrows the paper's falsification logic while remaining entirely synthetic.
+This directly adopts one of the strongest falsification ideas from *Traces of the Other*: externally constrained dynamics are more informative than subjective coherence alone.
 
-6. **Intersubjective trace convergence**
-   Isolate several observers from one another while exposing them to the same hidden causal process. Do their independently learned traces share nontrivial structure beyond what common priors or shared interface design predict?
+### Candidate Protocol 06 - inter-observer trace convergence
 
-7. **Agentic versus non-agentic dynamics**
-   Do responsiveness, temporal coherence, counterfactual sensitivity, and causal independence cause the observer to form different representations from rigid low-dimensional environmental processes? Can the system avoid treating complexity alone as agency?
+Several isolated observers encounter the same hidden causal process through separately parameterized interfaces.
 
-### Important boundary
+Question:
 
-The new lab should not assume that conscious realism is true, that DMT entities are external agents, or that phenomenal consciousness has been engineered.
+> Do independently developed traces share nontrivial causal structure beyond common priors, common interface design, or shared training history?
 
-The paper is most useful here as a source of **formal and experimental questions**:
+Bounded Minds' ancestry lessons are important here. Shared convergence can be falsely inflated if observers inherit the same upstream representation or developmental prior.
 
-- mediated influence rather than interior access;
-- trace dynamics;
-- interface-dependent representation;
-- restricted perceptibility;
-- controlled perturbation;
-- external constraint and intersubjective correlation as discriminating tests.
+### Candidate Protocol 07 - agentic versus non-agentic dynamics
 
-A synthetic CPA lab can study those ideas rigorously without deciding their metaphysical interpretation.
+Compare hidden processes that differ in responsiveness, counterfactual sensitivity, temporal coherence, and adaptive action while controlling superficial complexity.
 
-## Relationship to eventual CPA implementation
+Question:
 
-The likely sequence is now:
+> Which dynamical properties justify treating a trace as evidence of an autonomous source rather than as structured environment dynamics?
+
+The goal is not to define consciousness. It is to test whether the observer can distinguish causal signatures of responsive processes from elaborate but rigid ones.
+
+## Strong warning from the completed lab
+
+The successor should resist creating an "otherness detector" whose score silently becomes truth.
+
+Bounded Minds repeatedly showed why this is risky. Agreement can share ancestry. Authority can recirculate. Consequence can be noisy. A useful social prior can be locally wrong. The same logic applies here:
+
+- a stable trace may arise from the observer's own dynamics;
+- multiple observations may share one artifact;
+- multiple observers may share the same prior bias;
+- richer representation may create convincing endogenous structure;
+- apparent agency may emerge from a complex but non-responsive process;
+- true hidden influence may be weak, aliased, or represented differently by different observers.
+
+The successor should treat "another process is influencing me" as a revisable hypothesis with typed warrant.
+
+## Relationship to CPA
+
+The broad research sequence is now:
 
 ```text
-Bounded Minds Lab
-  -> P03-P07 validation + falsification (complete / consumed)
-  -> Protocol 08 strategic public influence (validated / characterized)
-  -> Protocol 09 authority ancestry / circular standing (development supported / frozen)
-  -> fresh P09 holdout + controlled operating-envelope stress
-  -> final social synthesis + retrospective + handoff
+Cognitive Development Lab
+  -> development inside one bounded organism
 
-Trace & Interface Lab (candidate)
+Bounded Minds Lab (complete, v1.0.0)
+  -> development among already-perceptible bounded peers
+  -> evidence/authority transfer and social correction
+
+Trace and Interface Lab
   -> hidden causal influence through bounded senses
-  -> trace formation / perceptibility / aliasing / perturbation
-  -> false agency and intersubjective constraint
+  -> trace formation, perceptibility, aliasing, perturbation
+  -> false agency, external constraint, inter-observer convergence
 
 later synthesis
-  -> combine validated developmental and interface pressures
+  -> combine durable developmental, social, and interface pressures
   -> small integrated CPA organism
-  -> Rust substrate
+  -> Rust substrate / performance implementation
 ```
 
-The successor should inherit behavioral pressures, failure surfaces, and experimental discipline. It should not inherit the current laboratory's constants as architecture.
+The new lab should start from a small synthetic observer and hidden-process world rather than importing the Bounded Minds social machinery wholesale. Reuse test discipline and conceptual constraints first. Reuse code only where it remains genuinely neutral infrastructure.
 
-## v0.14 transition checkpoint
+## Closeout decision
 
-The Bounded Minds Laboratory is now close enough to closure that **Protocol 09 is the last currently justified social protocol**. Its development result is coherent and distinct, and its exact assay has been frozen before holdout observation.
+The final P09 evidence gives no reason to extend the current social protocol sequence. The correct next move is a clean repository/laboratory boundary.
 
-The remaining decision is evidence-driven rather than architectural:
-
-- run and preserve the fresh twenty-seed `p09-holdout-v1`;
-- then map the six preregistered authority-ancestry operating-envelope surfaces without modifying P09;
-- if the combined record remains coherent, stop protocol expansion and write the final Bounded Minds synthesis;
-- if a boundary fails, record the failure as part of the laboratory result unless it reveals a genuinely independent phenomenon that justifies a new experiment.
-
-The candidate Trace and Interface Laboratory remains the natural successor because it changes the starting assumption from an already-recognized peer to structured causal residue at an observer boundary.
+Protocol 10 is intentionally absent.

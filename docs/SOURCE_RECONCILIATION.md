@@ -193,3 +193,18 @@ The reviewed `protocol-09-development-v1` artifact returned 5/5 Support with 50/
 Version 0.14 adds validation and controlled-probe infrastructure around that frozen boundary rather than modifying it. `p09-holdout-v1` supplies twenty fresh seeds through `--p09-validation`; `authority-ancestry-falsification-v1` supplies six parameterized surfaces through `--p09-falsify`. The latter copies the frozen local equations into explicit micro-world probes so ancestry fidelity, consequence quality/timing, root diversity, circulation depth, receiver mismatch, and network closure can be intervened on without pretending those extensions were part of the original generator.
 
 The source-level carry-forward is a constraint, not a new CPA anatomy: authority can acquire ancestry, circular permission should not masquerade as independent warrant, approximate genealogy must be tested, and later receiver-owned consequence remains able to revoke social standing. No Protocol 10 is introduced by default.
+
+## v1.0.0 closeout reconciliation
+
+The final Protocol 09 evidence phase completed without changing the SHA-256-frozen authority-ancestry experiment or world generator. `p09-holdout-v1` returned 20/20 Support with 200/200 checks passing. `authority-ancestry-falsification-v1` then mapped six controlled surfaces across 294 cells / 2,058 deterministic runs.
+
+The final source-level carry-forward remains deliberately narrower than the laboratory implementation:
+
+- permission can acquire ancestry distinct from evidence ancestry;
+- repeated social endorsement should not silently become independent warrant;
+- circular influence can still be useful, so dependence metadata must not become a truth label;
+- approximate lineage needs fidelity appropriate to the depth of circulation;
+- receiver-owned consequence remains the corrective authority, and uncertainty in that consequence channel must remain distinguishable from source unreliability;
+- graph closure by itself is not the durable variable; independent causal/epistemic grounding is.
+
+Version 1.0.0 therefore closes the Bounded Minds Laboratory without introducing Protocol 10. The final synthesis is `LAB_CLOSEOUT.md`; `NEXT_LAB.md` is now the explicit handoff to the Trace and Interface Laboratory. The successor should inherit experimental discipline and behavioral constraints rather than copy the current standing equations, bit sketches, protocol-local reducers, or synthetic network topology.
