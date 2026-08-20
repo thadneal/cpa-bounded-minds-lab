@@ -19,7 +19,7 @@ Unless a protocol explicitly challenges one of them:
 7. no ordinary path receives unrestricted access to all private interiors;
 8. artificial controls are labeled as controls rather than promoted into architecture.
 
-## Seed policy and the v0.8 validation correction
+## Seed policy, consumed holdout, and challenge selection
 
 Protocols 01 and 02 are frozen records and keep their original seed semantics. Their seeds mainly perturb schedule and observation noise. Beginning with Protocol 03, a seed selects a member of a preregistered developmental-world family and can change what was lived: evidence depth, source reliability, local target relationships, regime transitions, overlap, and encounter order. Treatments within one seed still receive the same generated world.
 
@@ -36,7 +36,9 @@ holdout-v1 = 809, 977, 1201, 1429, 1693, 2017, 2371, 2741, 3163, 3581,
              4001, 4441, 4871, 5303, 5741, 6211, 6673, 7121, 7603, 8089
 ```
 
-The holdout set must not become another tuning set. If a protocol is modified after seeing holdout-v1, that mechanism requires a new validation set rather than another claim on holdout-v1.
+The holdout set was consumed on 2026-08-20 and must not become another tuning/confirmation set. If a protocol is modified after seeing holdout-v1, that mechanism requires a new future validation set rather than another claim on holdout-v1.
+
+Version 0.9 adds `challenge-v1`. Challenge seeds are not a holdout: they are selected adversarially from a fixed candidate range using evaluator-side world descriptors before outcomes are run. They exist to expose failure surfaces.
 
 ## Experimental arc
 
@@ -100,37 +102,58 @@ Narrow result: another mind's standing can purchase limited, context-specific op
 
 ### Validation phase: frozen Protocols 01-07
 
-Status: **implemented in v0.8.0; holdout result pending**.
+Status: **completed in v0.8.0; holdout-v1 consumed**.
 
-Version 0.8 deliberately adds no Protocol 08. The next question is whether the mechanism-discovery set survives fresh pressure when protocol code and preregistered thresholds are frozen.
+The frozen twenty-seed holdout produced 121 Support and 19 Mixed verdicts across 140 protocol runs. It therefore broke the development phase's perfect-Support pattern without requiring any protocol retuning. Across 1,000 preregistered checks, 981 passed and 19 failed. Category-level results were:
 
-The validation report separates four kinds of evidence:
+- mechanism outcome: `399/400`;
+- safety boundary: `288/300`;
+- manipulation: `174/180`;
+- accounting constraint: `120/120`.
 
-1. **manipulation**: did the generated world/control actually contain the intended condition?
-2. **mechanism outcome**: did the proposed behavior produce the predicted functional result?
-3. **safety boundary**: did the behavior remain revisable, selective, or otherwise avoid the failure mode under test?
-4. **accounting constraint**: did communication/compute stay within the explicit budget?
+The failures revised the mechanism record:
 
-These categories remain visible together, but passing an exact packet count no longer psychologically counts as the same kind of confirmation as lower RMSE under a difficult social circumstance.
+- P03 showed that developmental context is useful but not guaranteed to beat doctrine on whole-history error;
+- P05 exposed a tension between cultural revisability and stable-context retention;
+- P06 exposed the danger of over-discounting genuinely independent evidence under uncertain ancestry;
+- P07 exposed opportunity cost and occasional residual authority under fragile recommendation transfer;
+- P04 remained unusually robust in the frozen family, but its semantic-smoothing control is still weaker than the equal-budget alternative we ultimately want to test.
 
-The first validation pass also defines preregistered challenge **slices** over holdout world descriptors for Protocols 03-07. They do not alter frozen mechanisms or thresholds:
+Protocols 01 and 02 remain mechanism demonstrations with weaker holdout meaning because their seeds predate lived-circumstance semantics.
 
-- high source instability (P03);
-- dense conflicting social evidence (P04);
-- high regime shift (P05);
-- weak ancestry visibility (P06);
-- fragile recommender transfer (P07).
+`holdout-v1` is now consumed. It is retained only for reproducibility. If any frozen mechanism is changed after this point, a future confirmatory claim requires a new holdout.
 
-A validation report should explicitly warn about 100% Support or 100% assertion pass rates. Mixed or Disconfirm outcomes can be valuable because they begin to identify an operating envelope. Protocols 01 and 02 retain a special limitation: their older seed semantics do not produce the same degree of lived-world variation, so fresh seed numbers provide weaker validation there.
+### Operating-envelope challenge phase: challenge-v1
+
+Status: **implemented in v0.9.0; challenge result pending**.
+
+Version 0.9 still adds no Protocol 08. Instead, it asks where the frozen Protocol 03-07 mechanisms stop working. `challenge-v1` searches a fixed candidate seed range (`10001-29999`) using only world descriptors, before experiment outcomes are observed. Development and holdout seeds are excluded.
+
+Each profile sorts candidate worlds by a preregistered stress score, divides that generator distribution into five ordered bands, and selects four deterministic seeds from each band. This produces 20 runs per profile and 100 runs total.
+
+Registered profiles:
+
+1. **P03 source instability**: unstable/sparse history prevalence, transition magnitude, thin evidence;
+2. **P04 conflict density**: dissent prevalence, evidence imbalance, private-target spread;
+3. **P05 regime shift**: shifted-context count, cost-landscape movement, private preference diversity;
+4. **P06 ancestry visibility**: missing/alias hints, ambiguous lineage, root-signature separation;
+5. **P07 recommender fragility**: weak recommender credibility, mismatch prevalence, mismatch magnitude.
+
+Each profile defines a signed boundary margin. Positive remains inside the frozen operating envelope, zero is the registered crossover, and negative indicates a boundary violation. The report also preserves the manipulation/mechanism/safety/accounting taxonomy.
+
+This is intentionally not a second holdout. Challenge seeds are selected adversarially from preregistered descriptors in order to reveal failure surfaces. Outcomes may inform the next architecture or challenge design, but they cannot be used to turn challenge-v1 into confirmatory evidence.
+
+Two limitations are explicit. First, challenge-v1 remains inside the original frozen world-generator support; if no boundaries appear, the next step is parameterized stress beyond that support. Second, P04 still lacks a stronger equal-budget alternative control. Its current challenge profile stresses the environment only.
 
 ## Result cadence
 
-For the v0.8 validation phase:
+For the v0.9 operating-envelope phase:
 
-1. rebuild under the pinned .NET 10 SDK and run the 23 invariant/regression checks;
-2. verify `docs/FROZEN_PROTOCOL_SHA256.txt` before running validation;
-3. run all seven frozen protocols across `holdout-v1` exactly once without mechanism or threshold changes;
-4. inspect protocol verdict rates, mechanism/safety categories, and challenge-slice coverage together;
-5. treat all-Support or all-pass outcomes as an assay-sensitivity warning rather than automatic confirmation;
-6. record any Mixed/Disconfirm results as candidate operating-envelope evidence before deciding whether a mechanism should be revised;
-7. if code is changed from holdout evidence, retire `holdout-v1` for confirmation and register a new holdout set before making a new validation claim.
+1. rebuild under the pinned .NET 10 SDK and run the 26 invariant/regression checks;
+2. verify `docs/FROZEN_PROTOCOL_SHA256.txt`;
+3. run `challenge-v1` once without modifying Protocol 03-07 mechanisms, world generators, or preregistered thresholds;
+4. inspect boundary margins by stress band together with verdicts and category-level failures;
+5. treat Mixed, Disconfirm, and negative margins as useful boundary evidence rather than failed development;
+6. inspect non-monotonic curves carefully, because a stress score that does not track failure pressure is itself evidence that the challenge descriptor is poor;
+7. if no selected profile crosses a boundary, do not increase seed count indefinitely. Move to parameterized generator stress beyond the frozen support;
+8. do not reuse consumed holdout-v1 as confirmation after any mechanism change. Register a new future holdout only when a revised mechanism is ready for confirmation.

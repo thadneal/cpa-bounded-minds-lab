@@ -55,8 +55,8 @@ public partial class MainWindow : Window
         MetricPlot.SeriesVisibilityChanged += PlotSeriesVisibilityChanged;
         DataContext = this;
         _updatingSeedPreset = true;
-        SeedPresetComboBox.SelectedIndex = 0;
-        SeedTextBox.Text = string.Join(", ", ExperimentDefaults.HoldoutSeeds);
+        SeedPresetComboBox.SelectedIndex = 1;
+        SeedTextBox.Text = string.Join(", ", ExperimentDefaults.DevelopmentSeeds);
         _updatingSeedPreset = false;
         OutputTextBox.Text = ResolveDefaultArtifactRoot();
         ResetProtocolProgress();

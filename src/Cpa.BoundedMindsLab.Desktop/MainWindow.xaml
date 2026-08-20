@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:Cpa.BoundedMindsLab.Desktop.Controls"
-        Title="CPA Bounded Minds Laboratory v0.8.0"
+        Title="CPA Bounded Minds Laboratory v0.9.0"
         Width="1540"
         Height="930"
         MinWidth="1120"
@@ -63,12 +63,12 @@
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" Grid.Column="0" Text="Seed set" VerticalAlignment="Center" Margin="2,5,8,5" />
                         <ComboBox x:Name="SeedPresetComboBox" Grid.Row="0" Grid.Column="1" SelectionChanged="SeedPresetSelectionChanged">
-                            <ComboBoxItem Content="Holdout v1 (20, frozen)" Tag="holdout" />
+                            <ComboBoxItem Content="Holdout v1 (20, consumed / reproducibility only)" Tag="holdout" />
                             <ComboBoxItem Content="Development v1 (5, regression only)" Tag="development" />
                             <ComboBoxItem Content="Custom" Tag="custom" />
                         </ComboBox>
                         <TextBlock Grid.Row="1" Grid.Column="0" Text="Seeds" VerticalAlignment="Top" Margin="2,7,8,5" />
-                        <TextBox x:Name="SeedTextBox" Grid.Row="1" Grid.Column="1" MinHeight="54" TextWrapping="Wrap" AcceptsReturn="True" TextChanged="SeedTextChanged" ToolTip="Holdout v1 is intentionally frozen. Editing this box makes the run custom." />
+                        <TextBox x:Name="SeedTextBox" Grid.Row="1" Grid.Column="1" MinHeight="54" TextWrapping="Wrap" AcceptsReturn="True" TextChanged="SeedTextChanged" ToolTip="holdout-v1 has been consumed and is now reproducibility-only. challenge-v1 uses profile-specific seeds through the CLI. Editing this box makes the run custom." />
                         <TextBlock Grid.Row="2" Grid.Column="0" Text="Pace" VerticalAlignment="Center" Margin="2,5,8,5" />
                         <ComboBox x:Name="PaceComboBox" Grid.Row="2" Grid.Column="1" SelectedIndex="0">
                             <ComboBoxItem Content="Maximum" />
@@ -303,7 +303,7 @@
                         <TextBlock Text="Provisional standing transfer - frozen Supported baseline" FontSize="14" Margin="0,2,0,6" />
                         <TextBlock Text="Mind A has directly earned context-specific standing for peer B and can recommend B to receiver C. The provisional path lets that second-hand standing buy limited opportunity after discounting it by C's own standing for A and A's evidence depth. A no-transfer baseline makes B earn influence from an exploration floor, while an inherited-authority control copies A's standing as though C had lived A's relationship. C's own consequence must remain the final authority in all cases." TextWrapping="Wrap" />
                         <TextBlock Text="Validation phase" FontSize="18" FontWeight="SemiBold" Margin="0,14,0,0" />
-                        <TextBlock Text="Protocols 01-07 are frozen. development-v1 is regression data; holdout-v1 is the first registered 20-seed validation set and must not be tuned against then reused." FontSize="14" Margin="0,2,0,6" TextWrapping="Wrap" />
+                        <TextBlock Text="Protocols 01-07 are frozen. development-v1 is regression data; holdout-v1 was consumed on 2026-08-20 and is reproducibility-only. challenge-v1 now searches operating envelopes with outcome-blind, profile-specific stress bands." FontSize="14" Margin="0,2,0,6" TextWrapping="Wrap" />
                         <TextBlock Text="Completed sessions write validation-report.json and validation-summary.md. Checks are separated into manipulation, mechanism outcome, safety boundary, and accounting categories. Predeclared challenge slices identify stressful holdout worlds without changing the frozen protocol mechanics or thresholds. Protocols 01 and 02 predate seed-as-lived-circumstance semantics, so their holdout evidence remains weaker than Protocols 03-07." TextWrapping="Wrap" />
                         <TextBlock Text="The graph and tables are observational only. Experiments never read UI state, render timing, selected metric, splitter geometry, display telemetry backlog, or line visibility." Foreground="{StaticResource MutedBrush}" TextWrapping="Wrap" Margin="0,10,0,0" />
                     </StackPanel>

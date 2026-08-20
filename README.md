@@ -1,6 +1,6 @@
 # CPA Bounded Minds Laboratory
 
-Version **0.8.0**
+Version **0.9.0**
 
 This repository is the successor experimental program to the completed CPA Cognitive Development Lab. The earlier lab studied development inside one bounded organism. This laboratory moves the boundary outward:
 
@@ -64,20 +64,57 @@ Narrow result: a bounded receiver can recover enough epistemic ancestry from inc
 
 Narrow result: second-hand standing can buy useful provisional opportunity without being copied as lived authority, but social transfer carries a measurable cost when recommendations fail to generalize. The useful principle is conditional permission, not a universal reputation scalar.
 
-## v0.8 validation phase
+## v0.8 holdout result
 
-Protocols 01-07 are now frozen as the **mechanism-discovery set**. Version 0.8.0 deliberately does not add Protocol 08. It asks whether the existing mechanisms survive fresh pressure without retuning them.
+The first frozen holdout was consumed on **2026-08-20**. Protocols 01-07 remained byte-for-byte frozen while twenty previously unused seeds were run. The result broke the development phase's perfect-Support pattern:
 
-Two seed sets are now named explicitly:
+```text
+140 protocol runs
+121 Support
+19 Mixed
+0 Disconfirm
 
-- `development-v1`: `101,211,307,401,503`. These histories were repeatedly used while constructing and calibrating the first seven assays. They are regression data, not fresh validation.
-- `holdout-v1`: twenty previously unused seeds registered in source. Protocol mechanics and falsification thresholds must remain frozen while this set is interpreted.
+1000 preregistered checks
+981 passed
+19 failed
 
-A completed Desktop session now writes both `validation-report.json` and `validation-summary.md`. Validation separates checks into **manipulation**, **mechanism outcome**, **safety boundary**, and **accounting constraint** categories so exact packet accounting or world-construction checks do not inflate the apparent evidential weight of mechanism outcomes.
+mechanism outcome   399 / 400
+safety boundary     288 / 300
+manipulation         174 / 180
+accounting           120 / 120
+```
 
-The report also applies preregistered **challenge slices** to holdout worlds for Protocols 03-07, including high source instability, dense conflicting social evidence, high regime shift, weak ancestry visibility, and fragile recommender transfer. These slices are filters over world descriptors, not new tuned treatments. Protocols 01 and 02 predate the seed-as-lived-circumstance correction, so their holdout evidence is explicitly marked weaker.
+The result revised several conclusions rather than merely repeating them:
 
-The validation report warns when every run or every assertion still passes. In this phase, observing Mixed or Disconfirm outcomes can be scientifically useful because it begins to reveal an operating envelope.
+- **Protocol 03:** developmental context remained useful, but not universally better than doctrine. One holdout world crossed the whole-history mechanism boundary while preserving the expected unstable-history calibration benefit.
+- **Protocol 04:** typed communication remained robust in the frozen environmental family. Its only Mixed holdout was a manipulation miss, not a mechanism reversal. The stronger equal-budget comparator remains unresolved.
+- **Protocol 05:** distributed convention still compressed coordination cheaply, but revisability occasionally disturbed conventions in contexts that had not changed. Cultural plasticity and cultural stability are therefore competing pressures.
+- **Protocol 06:** ancestry-sensitive corroboration still strongly reduced echo amplification, but four safety failures showed that uncertain ancestry can suppress genuinely independent evidence. Ancestry should be treated as uncertain dependence evidence, not hard deduplication.
+- **Protocol 07:** provisional standing still improved useful early access and remained much safer than inherited authority, but fragile transfer worlds exposed opportunity cost and occasional residual standing after contradiction. Second-hand standing should buy conditional opportunity, not durable authority.
+
+Protocols 01 and 02 remain useful mechanism demonstrations, but their old seed semantics make their 20/20 holdout outcomes weaker validation evidence than Protocols 03-07.
+
+`holdout-v1` is now **consumed**. It may be rerun for reproducibility, but it must not be treated as fresh validation after any tuning. See `docs/HOLDOUT_V1_RESULTS.md` for the preserved result and revised protocol conclusions.
+
+## v0.9 operating-envelope challenge phase
+
+Version 0.9.0 deliberately adds **no Protocol 08**. The next question is where the existing mechanisms stop working. `challenge-v1` performs an outcome-blind adversarial seed search over the frozen Protocol 03-07 world generators and records performance across five stress bands.
+
+For each profile, candidate seeds `10001-29999` are scored from **world descriptors only**, before experiment outcomes are observed. The development and consumed holdout seeds are excluded. Four seeds are selected from each quintile-like stress band, yielding **20 runs per profile / 100 total challenge runs**.
+
+The five registered profiles are:
+
+- Protocol 03 source instability;
+- Protocol 04 conflict density;
+- Protocol 05 regime shift;
+- Protocol 06 ancestry visibility;
+- Protocol 07 recommender fragility.
+
+Each profile reports a signed **boundary margin** where positive remains inside the registered operating envelope and zero is the intended crossover. The challenge report also keeps manipulation, mechanism, safety, and accounting checks separate.
+
+This phase is intentionally adversarial rather than confirmatory. Mixed or Disconfirm outcomes, negative boundary margins, and non-monotonic stress curves are useful evidence. If no profile crosses a boundary, the correct conclusion is not unlimited robustness; it is that the frozen generators remain too protected and a later challenge must parameterize worlds beyond their original support.
+
+One limitation is explicit: Protocol 04's `challenge-v1` profile stresses the environment but **does not yet replace semantic smoothing with the stronger equal-budget alternative** proposed after holdout review. That remains a separate control-strengthening task if P04 continues to resist environmental stress.
 
 ## Solution
 
@@ -98,7 +135,9 @@ Projects target .NET 10. The WPF Desktop Lab targets `net10.0-windows`.
 ```powershell
 dotnet build Cpa.BoundedMindsLab.sln -c Release
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --validation --output _artifacts/validation-holdout-v1
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --challenge --output _artifacts/challenge-v1
+# Reproduce the consumed holdout only when needed:
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --validation --output _artifacts/validation-holdout-v1-repro
 # Regression only:
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --replicate 101,211,307,401,503 --output _artifacts/development-v1-regression
 ```
@@ -109,7 +148,7 @@ For live inspection on Windows 11:
 dotnet run --project src/Cpa.BoundedMindsLab.Desktop
 ```
 
-The Desktop Lab opens with **Holdout v1 (20, frozen)** selected, enters the twenty holdout seeds, selects all frozen Protocols 01-07 by default, and includes the running application version in the main and maximized-graph window titles. Graphs explain axis meaning and preferred metric direction/context, provide show-all/hide-all series controls, and update incrementally from bounded background telemetry at an adaptive display cadence.
+The Desktop Lab opens with **Development v1 (5, regression only)** selected to avoid accidentally treating consumed holdout-v1 as fresh evidence. Holdout v1 remains available as a reproducibility preset. `challenge-v1` uses profile-specific seeds and is therefore run authoritatively from the CLI. The application version remains visible in the main and maximized-graph window titles. Graphs explain axis meaning and preferred metric direction/context, provide show-all/hide-all series controls, and update incrementally from bounded background telemetry at an adaptive display cadence.
 
 ## Visualization boundary
 
@@ -123,4 +162,4 @@ The workbench also exposes protocol progress, per-seed judged results, active-se
 
 Carry forward only what survives pressure: bounded causal execution, persistent private history, compact public surfaces, revisable standing, explicit cost, and provenance distinct from agreement.
 
-The v0.3.0 methodological correction remains active: if history is part of the theory, replication must vary **what was lived**, not merely the order in which nearly identical events were encountered. Version 0.8 additionally treats the canonical five seeds as development data and preserves a separate frozen holdout set.
+The v0.3.0 methodological correction remains active: if history is part of the theory, replication must vary **what was lived**, not merely the order in which nearly identical events were encountered. Version 0.8 separated development from a frozen holdout; version 0.9 marks that holdout consumed and moves to outcome-blind adversarial stress rather than treating repeated green runs as additional confirmation.

@@ -1,4 +1,5 @@
 using Cpa.BoundedMindsLab.Cli.Cli;
+using Cpa.BoundedMindsLab.Challenge;
 using Cpa.BoundedMindsLab.Experiments;
 using Cpa.BoundedMindsLab.Verification;
 using Cpa.BoundedMindsLab.Validation;
@@ -34,9 +35,20 @@ try
         return 0;
     }
 
+    if (parsed.Validation && parsed.Challenge)
+    {
+        throw new ArgumentException("--validation and --challenge are mutually exclusive.");
+    }
+
     if (parsed.Validation)
     {
         ValidationRunner.RunHoldout(parsed.OutputDirectory);
+        return 0;
+    }
+
+    if (parsed.Challenge)
+    {
+        ChallengeRunner.RunV1(parsed.OutputDirectory);
         return 0;
     }
 
@@ -61,12 +73,13 @@ catch (Exception exception)
 
 static void PrintHelp()
 {
-    Console.WriteLine("CPA Bounded Minds Lab 0.8.0");
+    Console.WriteLine("CPA Bounded Minds Lab 0.9.0");
     Console.WriteLine();
     Console.WriteLine("  --list");
     Console.WriteLine("  --self-test");
     Console.WriteLine("  --all");
-    Console.WriteLine("  --validation          Run frozen Protocols 01-07 on the 20-seed holdout-v1 set");
+    Console.WriteLine("  --validation          Reproduce frozen Protocols 01-07 on the consumed 20-seed holdout-v1 set");
+    Console.WriteLine("  --challenge           Run challenge-v1 operating-envelope sweeps for frozen Protocols 03-07");
     Console.WriteLine("  --experiment <name>   Repeat to select several experiments");
     Console.WriteLine("  --seed <ulong>        Single-history seed (default 101)");
     Console.WriteLine("  --replicate <csv>     Explicit replication seeds; 101,211,307,401,503 is development-v1");

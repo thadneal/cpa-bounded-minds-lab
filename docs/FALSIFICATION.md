@@ -359,3 +359,94 @@ Protocol 01-07 thresholds and verdict rules remain unchanged during the first ho
 A Mixed or Disconfirm holdout result is not automatically a laboratory failure. It may be the most useful evidence produced by this phase if it identifies a coherent boundary of applicability. Conversely, 20/20 Support should trigger an assay-sensitivity review rather than a stronger claim by default.
 
 The twenty holdout-v1 seeds are frozen before outcome inspection. If any protocol mechanism or preregistered boundary is changed in response to holdout-v1, that set becomes development evidence for the revised mechanism and cannot serve as its fresh confirmation set.
+
+### holdout-v1 observed falsification pressure
+
+The consumed holdout produced 19 Mixed verdicts. The important failures were not evenly distributed:
+
+- P03 produced one mechanism-outcome miss: developmental whole-history RMSE slightly exceeded doctrine in one world.
+- P04 produced one manipulation miss: the generated world did not contain enough initial disagreement for the intended assay strength.
+- P05 produced five manipulation misses and two substantive stable-retention safety failures.
+- P06 produced four independent-convergence safety failures.
+- P07 produced five opportunity-cost safety failures and one excessive residual-standing safety failure.
+
+These failures are now part of the interpretation of the frozen protocols. They are not reasons to move their existing thresholds after the fact.
+
+---
+
+## v0.9 challenge-v1 falsification interpretation
+
+challenge-v1 does not introduce new protocol verdict rules. It introduces **operating-envelope margins** for deliberately selected stress bands.
+
+Seed selection is outcome-blind. Candidate worlds are ranked from preregistered scenario descriptors before any protocol outcome is run. Development-v1 and consumed holdout-v1 are excluded.
+
+### P03 source-instability margin
+
+```text
+doctrinal_rmse - developmental_rmse
+```
+
+- positive: developmental transfer remains better on whole-history RMSE;
+- zero: crossover;
+- negative: doctrine is better in that selected world.
+
+A negative margin is useful boundary evidence even if the frozen P03 verdict remains Mixed rather than Disconfirm.
+
+### P04 conflict-density margin
+
+```text
+(semantic_smoothed_rmse * 0.97) - typed_rmse
+```
+
+- positive: typed communication remains better than the frozen semantic-smoothing control;
+- zero/negative: the frozen comparative mechanism has crossed its whole-history boundary.
+
+This does **not** falsify a stronger claim about language or equal-budget negotiation because challenge-v1 still uses the original smoothing control.
+
+### P05 regime-shift margin
+
+Use the minimum of:
+
+```text
+earned_stable_retention_coverage - 0.90
+
+earned_changed_revision_coverage - 0.85
+
+earned_changed_shifted_late_utility - frozen_changed_shifted_late_utility - 0.20
+```
+
+A negative margin means either cultural revision has become too indiscriminate or adaptive culture no longer outperforms the frozen habit after change.
+
+### P06 ancestry-visibility margin
+
+Use the minimum of:
+
+```text
+(naive_rmse * 0.88) - inferred_rmse
+
+(naive_independent_rmse * 1.15) - inferred_independent_rmse
+```
+
+A negative margin means ancestry inference is no longer worth its whole-history cost, or it has become too destructive to genuinely independent convergence.
+
+### P07 recommender-fragility margin
+
+Use the minimum of:
+
+```text
+(no_transfer_rmse * 1.05) - provisional_rmse
+
+0.20 - provisional_final_strong_mismatch_standing
+```
+
+A negative margin means provisional social opportunity either costs more than the frozen allowance relative to learning alone or leaves too much locally contradicted standing.
+
+### Stress-curve interpretation
+
+The desired output is not necessarily a clean monotonic failure curve. Interpret three possibilities separately:
+
+1. **margin degrades with stress and crosses zero**: useful operating-envelope evidence;
+2. **margin degrades but never crosses zero**: the mechanism survives the frozen generator family, but the family may still be too narrow;
+3. **margin improves or oscillates strongly with registered stress**: the stress descriptor may not align with the actual causal pressure, and the challenge itself needs revision before architectural conclusions are drawn.
+
+Do not convert a challenge-v1 result into a new pass threshold after seeing the curve. If a mechanism is revised, challenge-v1 becomes developmental evidence for that revision and a later fresh holdout is required for confirmation.

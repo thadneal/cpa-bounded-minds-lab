@@ -1,4 +1,5 @@
 using Cpa.BoundedMindsLab.Core;
+using Cpa.BoundedMindsLab.Challenge;
 using Cpa.BoundedMindsLab.Communication;
 using Cpa.BoundedMindsLab.Development;
 using Cpa.BoundedMindsLab.Domain;
@@ -35,6 +36,9 @@ public static class SelfTestSuite
         Run("validation-seed-sets-are-frozen-and-disjoint", TestValidationSeedSets, passed);
         Run("validation-check-taxonomy-separates-evidence-types", TestValidationTaxonomy, passed);
         Run("validation-report-identifies-development-regression", TestValidationReport, passed);
+        Run("challenge-v1-selection-is-deterministic", TestChallengeSelectionDeterminism, passed);
+        Run("challenge-v1-excludes-consumed-seeds", TestChallengeSelectionExcludesConsumedSeeds, passed);
+        Run("challenge-v1-spans-monotonic-stress-bands", TestChallengeStressBands, passed);
         Run("frame-sequence-is-contiguous", TestFrameSequence, passed);
         return passed;
     }
@@ -346,6 +350,49 @@ public static class SelfTestSuite
         Assert(report.SeedSet == ValidationPlan.DevelopmentSetName, "The canonical five seeds must be labeled development data in validation reports.");
         Assert(report.Diagnostics.Any(message => message.Contains("development set", StringComparison.OrdinalIgnoreCase)), "Development-set validation reports must warn against fresh-validation interpretation.");
         Assert(report.Categories.Single(category => category.Category == ValidationCheckTaxonomy.MechanismOutcome).Checks == ExperimentDefaults.DevelopmentSeeds.Count, "Mechanism checks must be tallied separately from accounting and manipulation checks.");
+    }
+
+    private static void TestChallengeSelectionDeterminism()
+    {
+        var first = ChallengePlan.BuildSelections();
+        var second = ChallengePlan.BuildSelections();
+        Assert(first.Count == ChallengePlan.Profiles.Count * ChallengePlan.BandCount * ChallengePlan.SeedsPerBand, "challenge-v1 must select the registered number of runs.");
+        Assert(first.SequenceEqual(second), "challenge-v1 seed selection must be deterministic and depend only on frozen world descriptors.");
+    }
+
+    private static void TestChallengeSelectionExcludesConsumedSeeds()
+    {
+        var consumed = ExperimentDefaults.DevelopmentSeeds.Concat(ExperimentDefaults.HoldoutSeeds).ToHashSet();
+        var selections = ChallengePlan.BuildSelections();
+        Assert(selections.All(selection => !consumed.Contains(selection.Seed)), "challenge-v1 must not reuse development-v1 or consumed holdout-v1 seeds.");
+        foreach (var profile in ChallengePlan.Profiles)
+        {
+            var profileSeeds = selections.Where(selection => selection.ProfileId == profile.Id).Select(selection => selection.Seed).ToArray();
+            Assert(profileSeeds.Distinct().Count() == profileSeeds.Length, $"Challenge profile {profile.Id} must not repeat a selected seed across bands.");
+        }
+    }
+
+    private static void TestChallengeStressBands()
+    {
+        var selections = ChallengePlan.BuildSelections();
+        foreach (var profile in ChallengePlan.Profiles)
+        {
+            var groups = selections
+                .Where(selection => selection.ProfileId == profile.Id)
+                .GroupBy(selection => selection.BandIndex)
+                .OrderBy(group => group.Key)
+                .ToArray();
+            Assert(groups.Length == ChallengePlan.BandCount, $"Challenge profile {profile.Id} must contain all registered stress bands.");
+            var priorMaximum = double.NegativeInfinity;
+            foreach (var group in groups)
+            {
+                Assert(group.Count() == ChallengePlan.SeedsPerBand, $"Challenge profile {profile.Id} band {group.Key} must contain the registered number of seeds.");
+                var minimum = group.Min(selection => selection.StressScore);
+                var maximum = group.Max(selection => selection.StressScore);
+                Assert(minimum >= priorMaximum, $"Challenge profile {profile.Id} stress bands must be nondecreasing.");
+                priorMaximum = maximum;
+            }
+        }
     }
 
     private static void TestFrameSequence()

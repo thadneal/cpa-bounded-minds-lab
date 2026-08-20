@@ -121,3 +121,21 @@ Version 0.8 therefore freezes the Protocol 01-07 experiment/world sources and re
 The challenge slices are intentionally evaluator-side filters over already-generated world descriptors. They do not become new cognitive senses, pressure channels, or hidden labels. Their purpose is to ask where a mechanism stops working, not to tell the mechanism that it is being challenged.
 
 This validation phase is directly relevant to eventual CPA synthesis. What may survive into Rust is not a collection of fitted constants, but a smaller set of behavioral laws whose useful envelope remains visible under fresh histories.
+
+## v0.9 challenge reconciliation: failure surfaces before synthesis
+
+holdout-v1 changed the evidential character of the lab. The first seven mechanisms no longer look uniformly successful. Their central effects remained strong, but safety failures appeared around convention retention, ancestry over-discounting, and social-standing carryover. Protocol 03 also produced a genuine whole-history comparative miss.
+
+That result reinforces the project's original architectural caution. The laboratory should not react by embedding every successful protocol-local rule into CPA. It should ask which behavioral pressures remain useful as conditions become adverse.
+
+challenge-v1 therefore lives entirely outside cognition. It ranks candidate frozen worlds from evaluator-visible descriptors, chooses profile-specific stress bands before outcomes are run, and reports signed boundary margins afterward. The minds never receive the stress score, band, challenge identity, or selection logic.
+
+This phase is intentionally narrower than a new cognitive protocol. It is a selection instrument for eventual synthesis. The strongest carry-forward candidates after holdout are currently behavioral constraints rather than equations:
+
+- preserve a distinction between foreign and lived authority;
+- preserve enough developmental/source shape for public influence to remain accountable;
+- let conventions earn compression but reopen under consequence without gratuitous churn;
+- treat ancestry as uncertain dependence evidence rather than hard duplicate identity;
+- let second-hand standing buy limited opportunity while durable authority remains locally earned.
+
+challenge-v1 also records what it does **not** resolve. Its stress remains inside the original world-generator support, and Protocol 04 still lacks a stronger equal-budget alternative to semantic smoothing. If the frozen mechanisms survive the selected extreme bands, the next useful move is to widen the world rather than to declare the mechanism universal.

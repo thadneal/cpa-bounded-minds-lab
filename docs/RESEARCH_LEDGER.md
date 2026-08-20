@@ -274,3 +274,74 @@ The validation report separates manipulation, mechanism outcome, safety boundary
 3. inspect category-level failures and challenge-slice coverage before looking for a single headline pass rate;
 4. welcome coherent Mixed/Disconfirm outcomes as possible operating-envelope evidence;
 5. if holdout evidence motivates a change, retire holdout-v1 for confirmation and register a new future holdout.
+
+---
+
+## 2026-08-20 - holdout-v1 consumed; operating-envelope challenge begins
+
+### Holdout result
+
+The first frozen twenty-seed holdout completed with all Protocol 01-07 source/world hashes unchanged. Across 140 protocol runs, 121 returned Support and 19 Mixed. No run returned Disconfirm. Across 1,000 preregistered checks, 981 passed and 19 failed.
+
+The category split is more important than the headline pass rate:
+
+```text
+mechanism outcome   399 / 400
+safety boundary     288 / 300
+manipulation         174 / 180
+accounting           120 / 120
+```
+
+The result resolves the earlier concern that the lab had become an all-green mechanism generator. The data still look internally coherent, but the holdout shows that the first seven protocols have real edges.
+
+### Revised conclusions
+
+**P03:** developmental context remains useful for transfer calibration, especially around unstable source histories, but one holdout world made developmental whole-history RMSE slightly worse than doctrine. The implementation lesson is not "developmental transfer always wins." It is that developmental history can be informative calibration evidence.
+
+**P04:** typed communication retained its advantage throughout the frozen holdout family. The only Mixed run failed to instantiate enough initial disagreement. This is encouraging but incomplete because the semantic-smoothing control is deliberately destructive and consumes more communication work. A stronger equal-budget alternative remains unresolved.
+
+**P05:** convention still compressed repeated coordination with little utility loss, but two substantive holdout failures unnecessarily revised a convention in a stable context. Plasticity and cultural retention are competing pressures. A future CPA should not equate revisability with constant willingness to rewrite collective habit.
+
+**P06:** ancestry inference still strongly reduced echo amplification, but four safety failures degraded genuine independent convergence. The important architectural correction is that inferred ancestry should influence corroborative weight softly. It should not become hard deduplication or categorical identity.
+
+**P07:** provisional standing still accelerated useful discovery and remained safer than inherited authority, but fragile recommendation worlds exposed nontrivial opportunity cost. One world also retained excessive standing for a strongly mismatched source after prediction had mostly corrected. Correct behavior in the moment is therefore not enough; latent permission must remain answerable to consequence.
+
+Protocols 01 and 02 remain useful mechanism demonstrations, but their pre-v0.3 seed semantics make their 20/20 holdout Support weak evidence of developmental generalization.
+
+### Validation consequence
+
+`holdout-v1` is now consumed. It remains useful for reproducibility but can no longer serve as fresh confirmation after mechanism changes.
+
+The main research question also changes. The laboratory no longer needs another synthetic mechanism merely to extend the sequence. It needs failure surfaces.
+
+### challenge-v1
+
+Version 0.9 adds no Protocol 08. It introduces an adversarial operating-envelope search over the frozen P03-P07 world generators.
+
+Candidate seeds `10001-29999` are scored from scenario descriptors only. No experiment outcome participates in selection. Development and holdout seeds are excluded. Each profile is divided into five ranked stress bands with four deterministic seeds per band, giving 20 runs per profile and 100 runs total.
+
+Profiles:
+
+1. P03 source instability;
+2. P04 conflict density;
+3. P05 regime shift;
+4. P06 ancestry visibility;
+5. P07 recommender fragility.
+
+Each profile defines a signed boundary margin. Positive is inside the frozen envelope. Zero is the intended crossover. Negative is useful failure evidence.
+
+### Important limitation
+
+challenge-v1 remains inside the support of the original frozen world generators. It is a more adversarial search, not arbitrary world intervention. If the extreme bands still do not cross boundaries, the next step should be parameterized generator stress rather than ever larger seed counts.
+
+Protocol 04 also retains its original semantic-smoothing control in challenge-v1. A stronger equal-budget comparator remains a separate test if environmental stress does not challenge the result.
+
+### Next evidence
+
+1. verify frozen source hashes and build under .NET 10;
+2. run all 26 invariant/regression tests;
+3. run `challenge-v1` once without changing any frozen protocol or world generator;
+4. inspect boundary margin by stress band, not merely Support count;
+5. treat negative margins, Mixed/Disconfirm outcomes, and non-monotonic stress curves as useful information;
+6. decide whether the next phase needs parameterized stress, a stronger P04 comparator, or a mechanism revision;
+7. register a new future holdout only after any revised mechanism is again frozen and ready for confirmation.

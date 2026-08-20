@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.9.0 - 2026-08-20
+
+- Recorded the completed frozen holdout-v1 result: 121 Support / 19 Mixed / 0 Disconfirm across 140 protocol runs, with 981/1000 preregistered checks passing. Preserved the category split of 399/400 mechanism outcomes, 288/300 safety boundaries, 174/180 manipulation checks, and 120/120 accounting constraints.
+- Revised the accepted interpretation of Protocols 03-07 from the holdout evidence: developmental transfer is useful but not universally superior to doctrine; convention plasticity can disturb stable culture; ancestry inference can over-discount genuine independence; and provisional standing carries opportunity cost plus occasional residual authority after contradiction.
+- Marked `holdout-v1` consumed and reproducibility-only. Desktop now defaults back to Development v1 to avoid accidental reinterpretation of the consumed holdout as fresh validation.
+- Added no Protocol 08. Introduced `challenge-v1`, an outcome-blind operating-envelope search over the frozen Protocol 03-07 world generators.
+- Added five challenge profiles: P03 source instability, P04 conflict density, P05 regime shift, P06 ancestry visibility, and P07 recommender fragility. Candidate seeds 10001-29999 are ranked from scenario descriptors only, divided into five stress bands, and sampled at four seeds per band for 100 total challenge runs.
+- Added signed boundary margins per challenge profile so the report records where a mechanism crosses an existing function/safety boundary rather than reducing the phase to another Support count.
+- Added `challenge-plan.json`, `challenge-report.json`, and `challenge-summary.md` artifacts plus profile/band/seed result directories. The plan records outcome-blind seed selection before results are interpreted.
+- Added `--challenge` to the CLI. `--validation` remains available for holdout-v1 reproducibility and is explicitly labeled as such.
+- Added three challenge-assay invariants, bringing the suite to 26 tests: deterministic selection, exclusion of development/consumed holdout seeds, and monotonic stress-band construction.
+- Kept every frozen Protocol 01-07 experiment and world-generator source file byte-for-byte unchanged under the existing SHA-256 manifest.
+- Kept Protocol 04's stronger equal-budget alternative control explicitly unresolved; challenge-v1 stresses only the frozen environmental family and original semantic-smoothing comparator.
+- Updated README, plan, experiments, validation, falsification, research ledger, architecture, source reconciliation, Desktop Lab, runbook, artifact metadata, CLI, assembly versions, and window titles for v0.9.0.
+
 ## 0.8.0 - 2026-08-20
 
 - Froze Protocol 07 as Supported after the canonical development matrix returned 5/5 Support with all 45 preregistered checks passing. Recorded the useful early transfer benefit, the measurable cost relative to refusing standing transfer, and the substantially safer behavior relative to inherited authority.

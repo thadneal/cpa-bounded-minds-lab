@@ -223,6 +223,8 @@ The one-packet shortcut replaces three fresh preference packets only after local
 
 The `frozen-convention` control forms the same culture as the adaptive path, then refuses to revise after the world changes. It is a pathological contrast for social inertia, not proposed CPA anatomy.
 
+Holdout-v1 added an important correction: revisability is not free. Two substantive holdout worlds changed a convention in a stable context. The architectural pressure is therefore not simply "make culture revisable." A future CPA needs a local balance between reopening stale convention and protecting still-useful convention from needless churn.
+
 ## Protocol 06 incomplete ancestry boundary
 
 Protocol 06 separates **surface agreement** from **independent evidential origin** without assuming that perfect provenance exists.
@@ -257,6 +259,8 @@ The `naive-agreement` control assigns every report its own corroborative group. 
 All paths receive the same 98 reports and pay the same communication cost. The only treatment difference is how public corroboration is reduced locally. This prevents ancestry inference from hiding extra retrieval, consultation, or communication work.
 
 The signature distance and clustering rule are protocol instruments. A passing result would support the need to preserve ancestry uncertainty and discount probable echoes. It would not establish Euclidean signature clustering, a universal provenance packet, or a global ancestry service as CPA anatomy.
+
+Holdout-v1 exposed four independent-convergence safety failures. That shifts the architectural interpretation: ancestry should behave like uncertain evidence of dependence that softly reduces corroborative weight. It should not become a hard deduplication relation, even when an inferred grouping looks confident.
 
 ## Protocol 07 provisional standing-transfer boundary
 
@@ -297,12 +301,14 @@ local consequence can also revoke it
 
 The scalar standing equation, exploration floor, and cap are protocol instruments. A passing result would support the architectural principle that social standing should remain context-specific, receiver-relative, and revisable. It would not establish a global reputation system or transitive trust graph.
 
+Holdout-v1 makes the latent-state problem explicit. A receiver can correct its prediction while still carrying too much standing for a source that has become locally wrong. Future CPA standing should therefore be judged not only by current behavior but also by the residual permission it leaves available for later cognition.
 
-## Validation layer is outside cognition
 
-Version 0.8 adds a validation/reporting layer around the frozen experiments. It is not part of the cognitive architecture.
+## Validation and challenge layers are outside cognition
 
-`ValidationPlan`, `ValidationReportBuilder`, and the Desktop/CLI seed presets can see protocol names, final metrics, assertions, and evaluator world descriptors after a run. They cannot inject validation categories, challenge labels, holdout identity, or diagnostics into a mind's prediction/update path.
+Versions 0.8 and 0.9 add validation/challenge tooling around the frozen experiments. None of it is part of the cognitive architecture.
+
+`ValidationPlan`, `ValidationReportBuilder`, `ChallengePlan`, `ChallengeReportBuilder`, and the Desktop/CLI orchestration can see protocol names, final metrics, assertions, and evaluator world descriptors. They cannot inject validation categories, challenge labels, holdout identity, stress scores, or diagnostics into a mind's prediction/update path.
 
 The separation is deliberate:
 
@@ -316,7 +322,25 @@ validation/reporting layer
         +--> seed-set classification
         +--> assertion taxonomy
         +--> challenge-slice filtering
+        +--> outcome-blind stress-band selection
+        +--> signed operating-envelope margins
         +--> assay-sensitivity diagnostics
 ```
 
 The protocol/world SHA-256 manifest further protects this boundary by making unnoticed mechanism changes visible before validation.
+
+
+### challenge-v1 boundary
+
+challenge-v1 selects profile-specific seeds from frozen world descriptors before running the associated experiment. It does not modify any mind, treatment, protocol threshold, or world generator. The selected stress score is evaluator metadata only.
+
+```text
+frozen world generator --descriptor only--> stress ranking --> selected seed
+        |                                                     |
+        +---------------- ordinary experiment <---------------+
+                                      |
+                                      v
+                              challenge report
+```
+
+This distinction is important for eventual CPA synthesis. The challenge framework is a laboratory instrument for deciding which behavioral pressures deserve further implementation work. It is not a proposed meta-cognitive subsystem that a CPA mind should use to score its own worlds.

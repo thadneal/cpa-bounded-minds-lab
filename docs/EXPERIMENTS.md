@@ -493,3 +493,105 @@ Version 0.8.0 adds no Protocol 08. The first seven protocols become a frozen mec
 Validation does not alter protocol verdict rules. Instead it adds reporting metadata that separates manipulation, mechanism outcome, safety boundary, and accounting checks, plus preregistered challenge slices over stressful Protocol 03-07 world descriptors. Completed sessions write `validation-report.json` and `validation-summary.md`.
 
 A perfect holdout pass is not required. The purpose is to discover whether the mechanisms have an operating envelope and whether the assays can expose it. Any mechanism changed after seeing holdout-v1 requires a future fresh holdout before another confirmation claim.
+
+### holdout-v1 result
+
+The frozen holdout completed with **121 Support / 19 Mixed / 0 Disconfirm** across 140 protocol runs. Of 1,000 preregistered checks, 981 passed. Mechanism outcomes remained very strong (`399/400`), while the more informative failures appeared mainly in safety (`288/300`) and manipulation (`174/180`).
+
+The result narrows several protocol claims:
+
+- P03 developmental context is calibration evidence, not a guarantee of lower whole-history error than doctrine.
+- P05 convention plasticity can spill into stable contexts; revisability and retention must be balanced.
+- P06 inferred ancestry can over-discount real independence; ancestry should remain probabilistic dependence evidence rather than hard identity.
+- P07 recommendation standing can impose opportunity cost and may leave residual permission after local contradiction.
+- P04 remains robust in the frozen world family, but its semantic-smoothing comparator is still not the strongest equal-budget alternative we want eventually.
+
+Protocols 01 and 02 retain a weaker validation interpretation because their seed semantics mostly perturb order/noise rather than lived circumstance.
+
+`holdout-v1` is consumed and is now reproducibility-only.
+
+---
+
+## Operating-envelope phase: challenge-v1
+
+Version 0.9.0 still adds no Protocol 08. It introduces a separate adversarial harness around frozen Protocols 03-07.
+
+The challenge harness does not modify the frozen protocol or world-generator files. Instead it scans candidate seeds `10001-29999`, derives profile-specific stress descriptors from the generated world **before running the experiment**, sorts those worlds into five stress bands, and selects four deterministic seeds per band. Development and holdout seeds are excluded.
+
+This creates 20 selected runs per profile and 100 challenge runs total.
+
+### Profile 1: P03 source instability
+
+Stress combines unstable/sparse history prevalence, source transition magnitude, and thin minimum evidence.
+
+The signed boundary margin is:
+
+```text
+doctrinal_rmse - developmental_rmse
+```
+
+Zero is the whole-history crossover.
+
+### Profile 2: P04 conflict density
+
+Stress combines dissent prevalence, private evidence imbalance, and private-target spread.
+
+The signed boundary margin is:
+
+```text
+(semantic_smoothed_rmse * 0.97) - typed_rmse
+```
+
+Zero is the frozen typed-vs-smoothing crossover.
+
+This profile is intentionally limited. It stresses the same frozen control and does not yet introduce the proposed stronger equal-budget alternative.
+
+### Profile 3: P05 regime shift
+
+Stress combines shifted-context count, mean movement in the peer/action cost surface, and initial preference diversity.
+
+The boundary margin is the worse of two safety/function margins:
+
+```text
+earned_stable_retention_coverage - 0.90
+
+earned_changed_revision_coverage - 0.85
+
+earned_changed_shifted_late_utility - frozen_changed_shifted_late_utility - 0.20
+```
+
+The first negative component identifies either excess cultural churn or failure to outperform cultural inertia after change.
+
+### Profile 4: P06 ancestry visibility
+
+Stress combines missing origin hints, immediate-sender aliases, ambiguous-lineage prevalence, and low root-signature separation.
+
+The boundary margin is the worse of:
+
+```text
+(naive_rmse * 0.88) - inferred_rmse
+
+(naive_independent_rmse * 1.15) - inferred_independent_rmse
+```
+
+This lets the challenge distinguish useful echo suppression from harmful discounting of genuinely independent evidence.
+
+### Profile 5: P07 recommender fragility
+
+Stress combines low C-to-A credibility, strong local mismatch prevalence, mismatch magnitude, and recommendation standing on those mismatches.
+
+The boundary margin is the worse of:
+
+```text
+(no_transfer_rmse * 1.05) - provisional_rmse
+
+0.20 - provisional_final_strong_mismatch_standing
+```
+
+This asks where social opportunity becomes too costly or where locally contradicted authority fails to revoke.
+
+### Challenge interpretation
+
+Challenge bands are ranks within a frozen generator family, not new protocol verdict thresholds and not universal stress units. Negative margins, Mixed/Disconfirm outcomes, and non-monotonic stress-response curves are expected to be informative.
+
+If no profile crosses a boundary, challenge-v1 should not be expanded by simply mining more seeds indefinitely. The next step would be parameterized environmental interventions beyond the support of the original generators.

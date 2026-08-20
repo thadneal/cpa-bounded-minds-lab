@@ -189,7 +189,7 @@ When several experiments run within one seed, the progress surface changes as th
 
 ## Default experiment selection
 
-The default changed in v0.8.0 because the laboratory is now in validation rather than protocol-development mode. The Desktop Lab opens with all frozen Protocols 01-07 selected and **Holdout v1 (20, frozen)** as the seed preset. Development v1 remains available as a five-seed regression preset, and Custom allows exploratory seeds. Historical sections below describe the default behavior of earlier releases.
+The default changed again in v0.9.0 after holdout-v1 was consumed. The Desktop Lab opens with all frozen Protocols 01-07 selected and **Development v1 (5, regression only)** as the seed preset. Holdout v1 remains available but is labeled consumed/reproducibility-only. challenge-v1 uses protocol-specific adversarial seeds and is run authoritatively through the CLI rather than represented as one misleading shared Desktop seed preset. Historical sections below describe earlier defaults.
 
 ## v0.3.0 seed and Protocol 03 updates
 
@@ -312,7 +312,7 @@ Judge social authority transfer
 Protocol 06 now appears in Run notes as a frozen Supported baseline. The graph remains incrementally updated, seed-scoped, display-bounded, and observer-only. No new protocol logic depends on graph state, selected seed, focus path, metric, legend visibility, table sizing, or render timing.
 
 
-## v0.8.0 validation workbench
+## v0.8.0 validation workbench (holdout now consumed)
 
 The Desktop Lab now treats seed-set identity as scientific metadata rather than a free-form convenience. The Run panel offers:
 
@@ -327,3 +327,10 @@ Editing the seed text automatically reclassifies the selection unless it exactly
 Every completed Desktop session writes `validation-report.json` and `validation-summary.md` in addition to the existing replication/session artifacts. The Protocol results assertion table includes a Category column so manipulation, mechanism outcome, safety boundary, and accounting checks remain visibly distinct during review.
 
 No validation metadata is visible to experiment cognition. Seed-set labels, check categories, challenge-slice filters, diagnostic warnings, table layout, and graph state are evaluator/workbench concerns only.
+
+
+## v0.9.0 challenge-phase desktop stance
+
+The Desktop visualization does not add a synthetic `Challenge v1` seed preset. challenge-v1 selects different seed sets for P03, P04, P05, P06, and P07 based on profile-specific world descriptors, so presenting one shared seed list in the UI would misrepresent the design.
+
+Run the challenge from the CLI, then use the Desktop Lab for development regression, holdout reproducibility, or targeted manual inspection of individual seeds. The main UI explicitly labels holdout-v1 as consumed.

@@ -125,7 +125,7 @@ public static class ValidationReportBuilder
         }
         else if (seedSet == ValidationPlan.HoldoutSetName)
         {
-            diagnostics.Add("This session uses the frozen holdout-v1 seed set. Do not tune protocol mechanics or preregistered thresholds from these outcomes and then reuse holdout-v1 as validation.");
+            diagnostics.Add("This session uses the frozen holdout-v1 seed set, which was consumed on 2026-08-20. Reruns are reproducibility checks only; do not treat them as fresh validation or retune protocol mechanics from these outcomes.");
         }
         else
         {
@@ -160,7 +160,7 @@ public static class ValidationReportBuilder
 
         return new ValidationReport(
             "cpa-bounded-minds-validation-v1",
-            "0.8.0",
+            "0.9.0",
             seedSet,
             seeds,
             fullProtocolSet,
