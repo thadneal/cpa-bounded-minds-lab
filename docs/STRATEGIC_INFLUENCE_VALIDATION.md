@@ -83,4 +83,4 @@ dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
   --p08-falsify --output _artifacts/strategic-influence-falsification-v1-repro
 ```
 
-The next active question is Protocol 09 authority ancestry / circular standing. It tests whether **permission itself** can appear independently warranted after circulating through a social network, a problem not answered by P08's dyadic strategic-influence result.
+Protocol 09 subsequently tested that distinct network question. Its development matrix returned 5/5 Support, and the exact P09 assay is now frozen. The current final evidence phase is the fresh `p09-holdout-v1` followed by controlled authority-ancestry operating-envelope falsification.

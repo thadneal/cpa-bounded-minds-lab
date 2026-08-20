@@ -55,6 +55,32 @@ public static class ExperimentDefaults
         68213UL,
     ];
 
+    // Registered in v0.14.0 for frozen Protocol 09 only. These seeds were selected before any Protocol 09 holdout outcomes were executed or inspected.
+    // After the first --p09-validation execution, this set is consumed and reruns are reproducibility only.
+    public static IReadOnlyList<ulong> AuthorityAncestryHoldoutSeeds { get; } =
+    [
+        70111UL,
+        71429UL,
+        72817UL,
+        74209UL,
+        75679UL,
+        77101UL,
+        78593UL,
+        80021UL,
+        81517UL,
+        83003UL,
+        84521UL,
+        86011UL,
+        87539UL,
+        89051UL,
+        90617UL,
+        92141UL,
+        93703UL,
+        95279UL,
+        96821UL,
+        98411UL,
+    ];
+
     // Compatibility alias for older tooling and documentation. In v0.8+ this set is explicitly developmental, not holdout validation.
     public static IReadOnlyList<ulong> ReplicationSeeds => DevelopmentSeeds;
 }

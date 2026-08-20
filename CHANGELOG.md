@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.14.0 - 2026-08-20
+
+- Recorded the canonical Protocol 09 development result: **5/5 Support with 50/50 preregistered checks passing** across seeds `101,211,307,401,503`.
+- Preserved the key developmental distinction: recursive endorsement amplified one weak circular root from mean local standing `0.11874` to apparent authority `0.88673` (`7.47x`), while ancestry-sensitive aggregation held initial circular authority to `0.22327`.
+- Froze the exact Protocol 09 experiment and world-generator sources under `docs/FROZEN_PROTOCOL_SHA256.txt` before any Protocol 09 holdout outcome was executed or inspected.
+- Added `docs/PROTOCOL_09_DEVELOPMENT_RESULTS.md` and revised the durable interpretation: authority ancestry is distinct from evidence ancestry, second-hand standing, and strategic public posture because permission itself can be recursively duplicated by network topology.
+- Registered fresh twenty-seed `p09-holdout-v1`, disjoint from development-v1, the consumed P01-P07 holdout, the consumed P08 holdout, and challenge-v1 selections. The first `--p09-validation` execution consumes this set.
+- Added `--p09-validation`, which runs only frozen Protocol 09 over the preregistered holdout and writes ordinary replication, validation, and session-manifest artifacts.
+- Added `authority-ancestry-falsification-v1` and `--p09-falsify`: six controlled 7 x 7 surfaces with seven deterministic replicates per cell (294 cells / 2,058 runs).
+- Added P09 surfaces for grounding diversity x peer trust, circulation depth x ancestry fidelity, circular-root strength x receiver mismatch, consequence delay x circulation depth, all-grounded consequence noise x delay, and network closure x independent-root diversity.
+- Added an explicit approximate-lineage intervention so the operating-envelope phase can test whether ancestry remains useful when public genealogy is incomplete rather than perfectly known.
+- Added two all-grounded safety views (no circular trap) to expose over-deterrence, noisy-consequence confusion, or topology costs instead of counting all caution as successful defense.
+- Added four P09 validation/falsification invariants, bringing the suite from 37 to **41 self-tests**. The fresh holdout is registered but is not executed by self-tests.
+- Updated README, plan, validation/falsification guidance, experiment catalog, runbook, research ledger, Desktop notes, next-lab boundary, and source reconciliation for the final P09 evidence phase.
+- No Protocol 10 is planned by default. Evidence order is now: preserve the fresh P09 holdout, map the frozen P09 operating envelope, then move toward Bounded Minds synthesis/closeout and the Trace and Interface Laboratory if the result remains coherent.
+
 ## 0.13.0 - 2026-08-20
 
 - Recorded the fresh Protocol 08 holdout result: **20/20 Support with 200/200 preregistered checks passing**, including 80/80 mechanism-outcome, 60/60 safety-boundary, 40/40 manipulation, and 20/20 accounting checks.

@@ -129,7 +129,11 @@ public static class ValidationReportBuilder
         }
         else if (seedSet == ValidationPlan.StrategicInfluenceHoldoutSetName)
         {
-            diagnostics.Add("This session uses the preregistered Protocol 08 p08-holdout-v1 seed set. On its first execution it is fresh validation evidence; after that first execution it is consumed and reruns are reproducibility checks only.");
+            diagnostics.Add("This session uses the consumed Protocol 08 p08-holdout-v1 seed set. Reruns are reproducibility checks only.");
+        }
+        else if (seedSet == ValidationPlan.AuthorityAncestryHoldoutSetName)
+        {
+            diagnostics.Add("This session uses the preregistered Protocol 09 p09-holdout-v1 seed set. On its first execution it is fresh validation evidence; after that first execution it is consumed and reruns are reproducibility checks only.");
         }
         else
         {
@@ -141,6 +145,10 @@ public static class ValidationReportBuilder
             if (seedSet == ValidationPlan.StrategicInfluenceHoldoutSetName && experimentNames.Length == 1 && string.Equals(experimentNames[0], "08-strategic-public-influence", StringComparison.Ordinal))
             {
                 diagnostics.Add("This is the registered Protocol 08-only holdout, not a partial rerun of the legacy Protocol 01-07 holdout.");
+            }
+            else if (seedSet == ValidationPlan.AuthorityAncestryHoldoutSetName && experimentNames.Length == 1 && string.Equals(experimentNames[0], "09-authority-ancestry-circular-standing", StringComparison.Ordinal))
+            {
+                diagnostics.Add("This is the registered Protocol 09-only holdout, not a partial rerun of the legacy Protocol 01-07 holdout.");
             }
             else
             {
@@ -171,7 +179,7 @@ public static class ValidationReportBuilder
 
         return new ValidationReport(
             "cpa-bounded-minds-validation-v1",
-            "0.13.0",
+            "0.14.0",
             seedSet,
             seeds,
             fullProtocolSet,

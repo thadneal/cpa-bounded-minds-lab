@@ -363,9 +363,9 @@ Run notes explain that the sender may learn from receiver public prediction but 
 
 No visualization mechanics changed in v0.11. Incremental graph updates, table wrapping/resizing, per-metric show/hide controls, seed-scoped telemetry, and experiment/UI isolation remain unchanged.
 
-## v0.13 Protocol 09 workbench
+## v0.14 Protocol 09 frozen-workbench status
 
-Protocol 08 now appears as frozen, independently validated evidence. Protocol 09 is the active development assay and Protocol Progress follows:
+Protocol 08 remains frozen, independently validated evidence. Protocol 09 is now also frozen after its 5/5 development result. Protocol Progress remains available for deterministic development/reproduction inspection and follows:
 
 ```text
 Generate authority world
@@ -383,3 +383,8 @@ Judge authority ancestry
 The visualization remains observer-only. Root coverage, social authority, cycle-return rate, standing, and receiver error are projected telemetry; no graph selection, legend state, table width, render cadence, or progress state can feed back into experiment cognition.
 
 Metric guidance now distinguishes authority magnitude from authority quality. Higher social authority is not universally preferred; it is useful only when independently grounded or later confirmed. Root coverage is likewise contextual, while RMSE retains the ordinary lower-is-better interpretation.
+
+
+### v0.14 evidence boundary
+
+The fresh Protocol 09 holdout and controlled falsification are intentionally CLI-only (`--p09-validation`, then `--p09-falsify`). The Desktop Lab must not make those modes look like ordinary development presets, because the first holdout execution changes evidence status.

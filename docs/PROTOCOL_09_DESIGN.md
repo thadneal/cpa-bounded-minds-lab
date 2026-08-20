@@ -2,7 +2,7 @@
 
 Protocol: `09-authority-ancestry-circular-standing`
 
-Status: **development protocol in v0.13**
+Status: **frozen after development-v1 in v0.14**
 
 ## Question
 
@@ -81,15 +81,24 @@ A Supported development result would **not** establish a production authority-an
 
 The result matters only if it shows a distinct failure mode not already explained by P06-P08.
 
-## Next evidence decision
+## Development result and next evidence
 
-Run the canonical development matrix first:
+The canonical development matrix returned **5/5 Support with 50/50 preregistered checks passing**. Mean recursive circular authority rose from mean peer standing `0.11874` to `0.88673` (about 7.47x amplification), while ancestry-sensitive circular authority remained `0.22327`. Authority ancestry preserved independently grounded initial authority near `0.61060`, reduced total RMSE to `0.17860`, and later direct consequence drove circular standing near `0.02328`.
+
+The exact experiment and world-generator files are now frozen in `FROZEN_PROTOCOL_SHA256.txt`. See `PROTOCOL_09_DEVELOPMENT_RESULTS.md`.
+
+The next evidence sequence is fixed:
 
 ```powershell
+# Fresh holdout first. First execution consumes p09-holdout-v1.
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
-  --experiment 09-authority-ancestry-circular-standing `
-  --replicate 101,211,307,401,503 `
-  --output _artifacts/protocol-09-development-v1
+  --p09-validation `
+  --output _artifacts/p09-holdout-v1
+
+# Only after preserving that artifact:
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
+  --p09-falsify `
+  --output _artifacts/authority-ancestry-falsification-v1
 ```
 
-If P09 produces a coherent new result, freeze it before designing any holdout or falsification surface. If it collapses into a restatement of P06-P08, close the social protocol sequence instead of tuning it into distinctness.
+No Protocol 10 should be added by default. The controlled surfaces exist to characterize where the frozen P09 mechanism helps, where approximate ancestry ceases to be enough, and where caution itself becomes costly.

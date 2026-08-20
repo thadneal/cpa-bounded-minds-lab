@@ -14,22 +14,27 @@ dotnet build Cpa.BoundedMindsLab.sln -c Release
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
 ```
 
-Treat analyzer failures as build failures. Warnings are errors. Version 0.13.0 defines **37 invariant/regression tests**. `scripts/verify.ps1` and `scripts/verify.sh` first verify the frozen Protocol 01-08 source hashes before building.
+Treat analyzer failures as build failures. Warnings are errors. Version 0.14.0 defines **41 invariant/regression tests**. `scripts/verify.ps1` and `scripts/verify.sh` first verify the frozen Protocol 01-09 source hashes before building.
 
-## Current research run: Protocol 09 development-v1
+## Current research run: Protocol 09 fresh holdout, then operating envelope
 
-Protocol 08 development, fresh holdout, and controlled falsification are complete and consumed. Protocol 09 is the active development protocol:
+Protocol 09 development is complete and the exact assay is frozen. The canonical five-seed matrix returned **5/5 Support with 50/50 checks passing**. The next evidence order is fixed: consume the fresh holdout before inspecting the controlled falsification surfaces.
 
 ```powershell
 ./scripts/verify.ps1
 
+# First execution is fresh evidence and consumes p09-holdout-v1.
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
-  --experiment 09-authority-ancestry-circular-standing `
-  --replicate 101,211,307,401,503 `
-  --output _artifacts/protocol-09-development-v1
+  --p09-validation `
+  --output _artifacts/p09-holdout-v1
+
+# Preserve the holdout artifact before this exploratory operating-envelope phase.
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
+  --p09-falsify `
+  --output _artifacts/authority-ancestry-falsification-v1
 ```
 
-This five-seed matrix is development evidence only. Preserve and interpret it before deciding whether Protocol 09 deserves an exact-source freeze plus a fresh holdout/falsification phase. Do not tune the protocol to force novelty if the result is redundant with P06-P08.
+Do not modify `AuthorityAncestryCircularStandingExperiment.cs` or `AuthorityAncestryWorld.cs` between these phases. Negative falsification margins are useful boundary evidence, not a reason to tune the frozen protocol and reinterpret the same cells as confirmation.
 
 ## Development regression
 
@@ -85,7 +90,7 @@ dotnet run --project src/Cpa.BoundedMindsLab.Desktop
 
 The window title includes the running assembly version. The Run panel remains a development/history workbench rather than the authoritative CLI surface for consumed validation phases. Seed -> Focus Path -> Metric scopes graph inspection. Legend keys remain individually clickable; Show all/Hide all acts on the current metric. Graph telemetry updates incrementally at the adaptive display cadence while experiment execution remains isolated from WPF.
 
-Protocol Progress recognizes Protocol 09's authority-world generation, social authority development, receiver consequence, and evaluation phases. Run notes identify Protocols 01-08 as frozen evidence and Protocol 09 as active development.
+Protocol Progress still recognizes Protocol 09's authority-world generation, social authority development, receiver consequence, and evaluation phases for deterministic reproduction. Run notes should treat Protocols 01-09 as frozen evidence; the fresh P09 holdout and controlled falsification remain CLI-only evidence modes.
 
 Protocol-result assertion detail includes validation category (`manipulation`, `mechanism-outcome`, `safety-boundary`, or `accounting-constraint`). Data-grid cells wrap text and headers expose resize grippers; column resizing redistributes width inside the existing table surface.
 

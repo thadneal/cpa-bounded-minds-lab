@@ -51,6 +51,10 @@ public static class SelfTestSuite
         Run("p08-holdout-is-fresh-and-disjoint", TestStrategicInfluenceHoldoutSeeds, passed);
         Run("p08-falsification-plan-is-complete", TestStrategicInfluenceFalsificationPlan, passed);
         Run("p08-falsification-null-harm-surface-is-defined", TestStrategicInfluenceNullHarmProbe, passed);
+        Run("p09-holdout-is-fresh-and-disjoint", TestAuthorityAncestryHoldoutSeeds, passed);
+        Run("p09-falsification-plan-is-complete", TestAuthorityAncestryFalsificationPlan, passed);
+        Run("p09-falsification-approximate-ancestry-is-defined", TestAuthorityAncestryApproximateFidelityProbe, passed);
+        Run("p09-falsification-null-harm-surface-is-defined", TestAuthorityAncestryNullHarmProbe, passed);
         Run("frame-sequence-is-contiguous", TestFrameSequence, passed);
         return passed;
     }
@@ -550,6 +554,45 @@ public static class SelfTestSuite
         Assert(double.IsFinite(metrics["boundary_margin"]), "The Protocol 08 aligned null-harm probe must produce a finite boundary margin.");
         Assert(metrics["accountable_final_aligned_standing"] is >= 0.0 and <= 1.0, "Protocol 08 aligned standing must remain bounded as a probability-like standing value.");
         Assert(metrics["local_early_aligned_rmse"] >= 0.0 && metrics["accountable_early_aligned_rmse"] >= 0.0, "Protocol 08 aligned error metrics must remain nonnegative.");
+    }
+
+
+    private static void TestAuthorityAncestryHoldoutSeeds()
+    {
+        var seeds = ExperimentDefaults.AuthorityAncestryHoldoutSeeds;
+        Assert(seeds.Count == 20, "p09-holdout-v1 must contain exactly twenty preregistered seeds.");
+        Assert(seeds.Distinct().Count() == seeds.Count, "p09-holdout-v1 seeds must be unique.");
+        var consumed = ExperimentDefaults.DevelopmentSeeds
+            .Concat(ExperimentDefaults.HoldoutSeeds)
+            .Concat(ExperimentDefaults.StrategicInfluenceHoldoutSeeds)
+            .Concat(ChallengePlan.BuildSelections().Select(selection => selection.Seed))
+            .ToHashSet();
+        Assert(seeds.All(seed => !consumed.Contains(seed)), "p09-holdout-v1 must not reuse development-v1, either consumed holdout, or challenge-v1 seeds.");
+        Assert(ValidationPlan.ClassifySeedSet(seeds) == ValidationPlan.AuthorityAncestryHoldoutSetName, "The Protocol 09 holdout must classify as p09-holdout-v1.");
+    }
+
+    private static void TestAuthorityAncestryFalsificationPlan()
+    {
+        Assert(AuthorityAncestryFalsificationPlan.Profiles.Count == 6, "Protocol 09 falsification should register six distinct operating-envelope profiles.");
+        Assert(AuthorityAncestryFalsificationPlan.Profiles.All(profile => profile.XAxis.Values.Length == 7 && profile.YAxis.Values.Length == 7), "Every Protocol 09 falsification profile should expose a 7x7 surface.");
+        Assert(AuthorityAncestryFalsificationPlan.Profiles.All(profile => profile.Replicates == AuthorityAncestryFalsificationPlan.ReplicatesPerCell), "Every Protocol 09 falsification profile should use the registered replicate count.");
+        Assert(AuthorityAncestryFalsificationPlan.Profiles.Select(profile => profile.Id).Distinct(StringComparer.Ordinal).Count() == AuthorityAncestryFalsificationPlan.Profiles.Count, "Protocol 09 falsification profile identifiers must be unique.");
+    }
+
+    private static void TestAuthorityAncestryApproximateFidelityProbe()
+    {
+        var metrics = AuthorityAncestryProbes.EvaluateCirculationDepthVersusAncestryFidelity(8.0, 0.50, 909UL);
+        Assert(double.IsFinite(metrics["boundary_margin"]), "Protocol 09 ancestry-fidelity probe must remain numerically defined with partial lineage information.");
+        Assert(metrics["ancestry_initial_circular_authority"] is >= 0.0 and <= 1.0, "Protocol 09 approximate circular authority must remain bounded.");
+        Assert(metrics["recursive_initial_circular_authority"] is >= 0.0 and <= 1.0, "Protocol 09 recursive circular authority must remain bounded.");
+    }
+
+    private static void TestAuthorityAncestryNullHarmProbe()
+    {
+        var metrics = AuthorityAncestryProbes.EvaluateGroundedNoiseVersusDelay(0.15, 6.0, 919UL);
+        Assert(double.IsFinite(metrics["boundary_margin"]), "Protocol 09 grounded null-harm probe must produce a finite boundary margin.");
+        Assert(metrics["ancestry_final_grounded_standing"] is >= 0.0 and <= 1.0, "Protocol 09 grounded standing must remain bounded under noisy delayed consequence.");
+        Assert(metrics["ancestry_early_grounded_rmse"] >= 0.0 && metrics["direct_early_grounded_rmse"] >= 0.0, "Protocol 09 grounded error metrics must remain nonnegative.");
     }
 
     private static void TestFrameSequence()

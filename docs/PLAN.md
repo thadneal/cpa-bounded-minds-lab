@@ -186,50 +186,49 @@ Narrow result: public influence can remain useful and strategically adaptive wit
 
 ### Protocol 09: authority ancestry / circular standing
 
-Status: **active development protocol in v0.13**.
+Status: **frozen after coherent development-v1; fresh validation and controlled falsification registered in v0.14**.
 
 Question:
 
 > Can a bounded ecology distinguish authority earned from independent consequence from permission that has recursively circulated through locally reasonable endorsements?
 
-Why it remains distinct:
+The development matrix returned **5/5 Support with 50/50 preregistered checks passing**. Mean total RMSE was `0.17860` for authority ancestry, `0.20144` for recursive endorsement, and `0.20207` for direct-only learning. The recursive control amplified mean circular peer standing from `0.11874` to receiver authority `0.88673` (about 7.47x) without adding independent grounding. Authority ancestry held the same circular contexts to `0.22327`, preserved independently grounded authority near `0.61060`, and later receiver-owned consequence drove circular standing near `0.02328`.
 
-- P06 studied duplicated **evidence ancestry**.
-- P07 studied one-hop **standing transfer**.
-- P08 studied **strategic presentation** by one peer.
-- P09 studies whether **permission itself** can become self-supporting through a social loop even when every local transfer looks reasonable.
+This supports a distinct network-level failure mode: **permission can have ancestry even when evidence itself is not duplicated**. The exact root/path sketch representation remains an assay instrument. See `PROTOCOL_09_DEVELOPMENT_RESULTS.md`.
 
-Each world contains five endorsing peers and twelve contexts: four independently grounded contexts with several direct authority roots, four circular traps with one weak direct root, two mixed contexts, and two sparse-grounding contexts.
+### v0.14 evidence phase
 
-Three paired conditions compare:
+The exact Protocol 09 experiment and world-generator files are now frozen by SHA-256. Before any Protocol 09 holdout outcome is observed, the lab registers:
 
-1. **authority-ancestry** - compact root and path sketches let peers discount duplicated or returned permission, and let the receiver avoid counting overlapping authority roots as independent warrant;
-2. **recursive-endorsement** - local standing transfer remains individually reasonable but discards authority ancestry, allowing circular amplification to emerge at the network level;
-3. **direct-only** - the receiver ignores social permission and learns only from its own consequence.
+- `p09-holdout-v1`: twenty fresh seeds, disjoint from development-v1, holdout-v1, p08-holdout-v1, and challenge-v1;
+- `authority-ancestry-falsification-v1`: six controlled 7 x 7 surfaces with seven deterministic replicates per cell.
 
-Direct consequence remains sovereign in every path. Authority ancestry is only a way to shape initial permission, not a truth detector. The bit sketches, five-peer ring, and fixed update constants are assay instruments rather than proposed CPA anatomy.
+The controlled surfaces vary:
 
-Ten preregistered checks require the control to instantiate real circular amplification, require ancestry-sensitive transfer to preserve independently grounded benefit, require materially less circular capture, preserve later revocation and useful grounded standing, and keep communication cost exactly paired. See `PROTOCOL_09_DESIGN.md`.
+1. independent grounding diversity x peer trust;
+2. circulation depth x ancestry fidelity;
+3. circular-root strength x receiver mismatch;
+4. consequence delay x circulation depth;
+5. grounded consequence noise x delay (null-harm);
+6. network closure x independent-root count.
+
+The holdout must run **first** and its artifact must be preserved before the controlled surfaces are interpreted. No mechanism changes are permitted between the fresh holdout and the falsification run.
 
 ### Current-lab closure question
 
-The Bounded Minds Laboratory is **approaching closeout but not yet closed**. Protocol 09 is the last currently identified social-epistemic question that appears distinct rather than merely a stronger stress test of an earlier mechanism.
-
-If Protocol 09 produces a coherent new effect, freeze it and subject it to the same evidence discipline used for P08 before synthesis. If it collapses into P06-P08, do not manufacture distinctness by tuning. Close the protocol sequence and move to final Bounded Minds synthesis.
-
-No Protocol 10 is planned. A new social protocol should appear only if Protocol 09 exposes another independent failure mode that cannot be expressed as evidence ancestry, standing transfer, strategic influence, or authority ancestry.
+The Bounded Minds Laboratory is now in its intended final evidence phase. No Protocol 10 is planned by default. If the frozen P09 result survives fresh holdout with a useful, interpretable operating envelope, move to synthesis and closeout. A new social protocol should appear only if this phase exposes a genuinely independent phenomenon that cannot be expressed as evidence ancestry, standing transfer, strategic influence, or authority ancestry.
 
 The candidate successor **Trace and Interface Laboratory** remains documented in `NEXT_LAB.md`. Its question begins one layer earlier: how an observer detects structured causal influence when the source itself is only indirectly available through an interface.
 
 ## Result cadence
 
-For v0.13 Protocol 09:
+For v0.14:
 
-1. rebuild under the pinned .NET 10 SDK and run the **37** invariant/regression checks;
-2. verify `docs/FROZEN_PROTOCOL_SHA256.txt` so the exact Protocol 01-08 frozen sources remain unchanged;
-3. run Protocol 09 on `development-v1` (`101,211,307,401,503`);
-4. inspect whether recursive endorsement actually creates circular authority rather than assuming the manipulation worked;
-5. inspect early independently grounded benefit, early circular capture, whole-history cost, and later receiver-owned revocation separately;
-6. if the result is distinct and coherent, freeze the exact P09 experiment/world source before designing any holdout or controlled falsification;
-7. if it is redundant or incoherent, stop protocol expansion and move directly to Bounded Minds closeout;
-8. after the final social evidence is preserved, write the behavioral handoff for the successor Trace and Interface Laboratory.
+1. rebuild under the pinned .NET 10 SDK and run the **41** invariant/regression checks;
+2. verify `docs/FROZEN_PROTOCOL_SHA256.txt` so the exact Protocol 01-09 frozen sources remain unchanged;
+3. run `--p09-validation` once and preserve the resulting `p09-holdout-v1` artifact before inspecting or changing anything;
+4. review the holdout as independent evidence without tuning the frozen assay;
+5. run `--p09-falsify` and interpret failure surfaces as operating-envelope evidence, including regions where ancestry caution becomes net harmful;
+6. revise the durable behavioral conclusion, not the frozen scalar equations;
+7. close Bounded Minds unless the evidence reveals a truly new social failure mode;
+8. write the final handoff to the successor Trace and Interface Laboratory.

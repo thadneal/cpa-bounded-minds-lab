@@ -767,3 +767,67 @@ Both social paths use the same modeled public packet count and communication cos
 All ten checks are required for Support. Eight or nine passing checks produce Mixed. Fewer than eight produce Disconfirm.
 
 A Supported development result would not validate the five-peer ring, bit sketches, scalar standing update, or exact thresholds. It would support the narrower hypothesis that **authority ancestry is behaviorally distinct from evidence ancestry and can matter before direct consequence settles social permission**.
+
+---
+
+## Protocol 09 operating-envelope phase: authority-ancestry-falsification-v1
+
+Protocol 09 development is now consumed and the exact assay is frozen. The next controlled phase does **not** modify the frozen experiment. It copies selected Protocol 09 local equations into smaller intervention probes so causal pressures that the original generator coupled together can be varied independently.
+
+The phase contains six `7 x 7` surfaces with seven deterministic replicates per cell, for **294 cells / 2,058 controlled runs** when executed.
+
+### 1. Grounding diversity x peer trust
+
+Question: how many independently earned authority roots are needed before useful social permission remains distinguishable from one weak root circulating through highly trusted peers?
+
+The primary margin requires both an early grounded advantage over direct-only learning and a material authority gap between independently grounded and circular contexts.
+
+This surface tests whether authority ancestry depends on genuine grounding diversity or merely on low trust.
+
+### 2. Circulation depth x ancestry fidelity
+
+Question: how much lineage information can be lost before returned permission again looks independent?
+
+`ancestry_fidelity` continuously degrades overlap and return-path recognition toward naive independence counting. The primary margin requires less early circular capture than recursive endorsement and retention of the registered relative circular-authority discount.
+
+This is the most important bridge toward a mature CPA implementation because exact genealogy is unlikely to be available forever. A useful result would show a region where approximate ancestry remains sufficient.
+
+### 3. Circular-root strength x receiver mismatch
+
+Question: when is circular authority actually harmful enough that discounting it pays for the social opportunity cost?
+
+The sweep includes zero and low mismatch. Negative cells there are legitimate evidence that circularity alone is not a reason for distrust. The ancestry path should be allowed to lose when a recursively reinforced source is genuinely useful.
+
+### 4. Consequence delay x circulation depth
+
+Question: how long can receiver-owned consequence be delayed before recursive authority causes developmental cost that ancestry filtering no longer contains?
+
+Direct updates are queued by same-context exposure count while the frozen prediction and standing equations remain unchanged. The primary margin compares whole-history ancestry performance with both recursive endorsement and a 5% direct-only allowance.
+
+### 5. Grounded consequence noise x delay
+
+This is the Protocol 09 **null-harm surface**. Every context is genuinely useful and independently grounded. There is no circular trap.
+
+A negative region means the social defense is suppressing useful permission or confusing uncertainty in the receiver's consequence channel with unreliability of the social source.
+
+### 6. Network closure x independent-root count
+
+Question: does recurrent topology itself suppress legitimate authority, or can several independent roots remain useful even when endorsements return through the network?
+
+The five-peer ring is opened into an acyclic chain by scaling only the wraparound edge. This is intentionally a minimal topology intervention rather than a realistic social-network model.
+
+### Evidence order
+
+Run and preserve the fresh `p09-holdout-v1` artifact **before** interpreting these surfaces:
+
+```powershell
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
+  --p09-validation `
+  --output _artifacts/p09-holdout-v1
+
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
+  --p09-falsify `
+  --output _artifacts/authority-ancestry-falsification-v1
+```
+
+Negative margins are useful boundary evidence. Do not tune Protocol 09 from these surfaces and then reinterpret the same cells as confirmation.

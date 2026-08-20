@@ -1,6 +1,6 @@
 # Validation and Operating-Envelope Method
 
-Version 0.13.0 keeps Protocols 01-08 frozen, records the completed Protocol 08 holdout and strategic falsification as consumed evidence, and opens Protocol 09 authority ancestry / circular standing as development work.
+Version 0.14.0 freezes Protocols 01-09, records the coherent Protocol 09 development result, preregisters a fresh Protocol 09 holdout, and adds a separate controlled operating-envelope falsification phase.
 
 The evidence sets have different jobs:
 
@@ -10,7 +10,8 @@ The evidence sets have different jobs:
 - `parameterized-falsification-v1` is consumed controlled causal exploration for P03-P07;
 - `p08-holdout-v1` is the consumed fresh Protocol 08 holdout;
 - `strategic-influence-falsification-v1` is consumed controlled operating-envelope evidence for P08;
-- Protocol 09 begins again at development-v1 and must earn a fresh holdout only after its development result is interpreted and its exact assay is frozen.
+- `p09-holdout-v1` is the fresh, not-yet-consumed Protocol 09 holdout until its first `--p09-validation` execution;
+- `authority-ancestry-falsification-v1` is preregistered controlled operating-envelope exploration for frozen P09 and should be run after the holdout artifact is preserved.
 
 ## Why the validation method changed
 
@@ -20,9 +21,9 @@ Version 0.8 froze Protocols 01-07 and their world generators, registered twenty 
 
 ## Frozen source boundary
 
-`docs/FROZEN_PROTOCOL_SHA256.txt` contains SHA-256 hashes for **eight experiment files and eight world generators**, Protocols 01-08. `scripts/verify.ps1` and `scripts/verify.sh` check those hashes before build/self-test.
+`docs/FROZEN_PROTOCOL_SHA256.txt` contains SHA-256 hashes for **nine experiment files and nine world generators**, Protocols 01-09. `scripts/verify.ps1` and `scripts/verify.sh` check those hashes before build/self-test.
 
-Version 0.13.0 leaves all sixteen files byte-for-byte unchanged. Protocol 09 is new development work and is deliberately outside the frozen Protocol 01-08 boundary until its development result is reviewed.
+Version 0.14.0 adds the exact Protocol 09 experiment and world-generator files to the frozen boundary after the canonical development result was reviewed. Holdout and falsification code are outside that mechanism boundary and may not alter the frozen P09 equations.
 
 ## Seed sets
 
@@ -59,6 +60,21 @@ Status: **consumed on 2026-08-20**.
 Protocol 08 returned **20/20 Support with 200/200 checks passing**. Mean total RMSE was `0.17873` for accountable consequence, `0.35608` for self-report naive, and `0.18599` for local-only. Accountable early aligned RMSE was `0.23478` versus `0.41033` local-only. Late divergent and betrayal RMSE were `0.03049` and `0.02973`, versus `0.41716` and `0.42072` in the naive condition.
 
 The holdout does not imply social influence is free. Accountable treatment was worse than local-only in 5/20 histories, with the worst case remaining just inside the frozen 5% opportunity-cost allowance. See `PROTOCOL_08_VALIDATION_RESULTS.md`.
+
+### p09-holdout-v1
+
+```text
+70111, 71429, 72817, 74209, 75679,
+77101, 78593, 80021, 81517, 83003,
+84521, 86011, 87539, 89051, 90617,
+92141, 93703, 95279, 96821, 98411
+```
+
+Status: **fresh and unconsumed at source release time**.
+
+These twenty seeds were registered only after the exact Protocol 09 experiment and world-generator files were frozen. They are disjoint from development-v1, the consumed Protocol 01-07 holdout, the consumed P08 holdout, and challenge-v1 selected seeds. The first `--p09-validation` execution consumes the set.
+
+The holdout must be preserved before controlled P09 falsification is interpreted. If the holdout exposes a failure, do not modify Protocol 09 and rerun the same seeds as fresh evidence.
 
 ## Evidence taxonomy
 
@@ -119,35 +135,38 @@ The accumulated evidence supports carrying forward behavioral pressures, not pro
 - ancestry is uncertain evidence about dependence, not hard duplicate identity;
 - second-hand standing can grant conditional opportunity, but durable authority remains answerable to local consequence;
 - receiver-owned consequence can discipline strategically optimized public influence without inspecting another mind's private objective;
-- source uncertainty, channel uncertainty, context generalizability, and participation eligibility should not be silently collapsed into one standing scalar.
+- source uncertainty, channel uncertainty, context generalizability, and participation eligibility should not be silently collapsed into one standing scalar;
+- permission itself can carry ancestry: several locally reasonable endorsements may still derive their authority from one weak root, so independent authority grounding and social repetition must remain distinguishable.
 
 The exact standing caps, learning rates, packet costs, thresholds, bit sketches, grouping rules, and control implementations remain assay instruments.
 
-## Protocol 09 development evidence cadence
+## Protocol 09 fresh-validation and falsification cadence
 
-Protocol 09 asks whether **permission itself** can acquire apparently independent warrant by recursively circulating through a network of locally reasonable endorsements. This is distinct from P06 evidence ancestry and P08 strategic self-presentation.
+The canonical development result is preserved in `PROTOCOL_09_DEVELOPMENT_RESULTS.md`: **5/5 Support, 50/50 checks passing**, with mean recursive circular amplification of about 7.47x and a materially lower ancestry-sensitive circular authority surface. That development result justified freezing the exact assay.
 
-The first authoritative run is development-v1 only:
+Run the next evidence in this order:
 
 ```powershell
 ./scripts/verify.ps1
 
+# First execution is fresh validation and consumes p09-holdout-v1.
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
-  --experiment 09-authority-ancestry-circular-standing `
-  --replicate 101,211,307,401,503 `
-  --output _artifacts/protocol-09-development-v1
+  --p09-validation `
+  --output _artifacts/p09-holdout-v1
+
+# Preserve and review the holdout artifact first. Then map the operating envelope.
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
+  --p09-falsify `
+  --output _artifacts/authority-ancestry-falsification-v1
 ```
 
-A clean five-seed result is **development evidence**, not validation. Do not register or inspect a P09 holdout until the development result has been interpreted and the exact Protocol 09 experiment/world files have either been frozen or the protocol has been judged redundant.
+`authority-ancestry-falsification-v1` contains six 7 x 7 surfaces with seven deterministic replicates per cell, for **294 cells / 2,058 controlled runs** when executed. It deliberately includes null-harm and benign-circularity regions so ancestry caution can fail rather than being rewarded automatically.
 
 ## Invariant suite
 
-Version 0.13.0 defines **37 self-tests**. Existing validation, challenge, parameterized-falsification, and P08 validation/falsification integrity checks remain. Two new Protocol 09 tests verify that:
+Version 0.14.0 defines **41 self-tests**. Existing validation, challenge, parameterized-falsification, and P08 validation/falsification integrity checks remain. Protocol 09 checks verify the frozen development fixture, fresh holdout disjointness, six-surface falsification plan integrity, partial-ancestry numerical behavior, and the all-grounded null-harm probe.
 
-- the canonical development seeds generate distinct authority-cascade worlds with the required independent-grounding and circular-trap structure;
-- the seed-101 Protocol 09 development fixture satisfies the preregistered synthetic contract.
-
-Those are development/assay-integrity checks. They are not fresh evidence for the Protocol 09 hypothesis.
+These are assay-integrity checks. They are not fresh evidence for the Protocol 09 hypothesis and do not execute the p09 holdout.
 
 ## Reproducibility commands
 
@@ -173,6 +192,14 @@ dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
 # Protocol 08 controlled surfaces
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
   --p08-falsify --output _artifacts/strategic-influence-falsification-v1-repro
+
+# Protocol 09 fresh holdout (first execution only)
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
+  --p09-validation --output _artifacts/p09-holdout-v1
+
+# Protocol 09 operating envelope after holdout preservation
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
+  --p09-falsify --output _artifacts/authority-ancestry-falsification-v1
 ```
 
 ## Interpretation rule

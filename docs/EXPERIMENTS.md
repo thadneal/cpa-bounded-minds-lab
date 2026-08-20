@@ -657,7 +657,7 @@ The exact confidence values, learning rates, standing update, and penalty consta
 
 ## Protocol 09: authority ancestry / circular standing
 
-Status: **active development protocol in v0.13**.
+Status: **frozen after coherent development; fresh holdout and operating-envelope phase registered in v0.14**.
 
 Name: `09-authority-ancestry-circular-standing`
 
@@ -723,4 +723,6 @@ See `PROTOCOL_09_DESIGN.md` for the full preregistered development design.
 
 ### Current evidence cadence
 
-Protocol 09 starts only with `development-v1` (`101,211,307,401,503`). If the result is distinct and intelligible, freeze the exact experiment/world sources before designing a fresh holdout or controlled falsification. If it proves redundant with P06-P08, close the protocol sequence instead of tuning it into a separate finding.
+The canonical `development-v1` matrix (`101,211,307,401,503`) returned **5/5 Support with 50/50 checks passing**. Recursive endorsement amplified weak circular standing by a mean `7.47x`, while ancestry-sensitive authority kept circular permission materially lower and preserved useful independently grounded social opportunity. The exact experiment and world-generator sources are now frozen.
+
+Run the twenty-seed `p09-holdout-v1` once with `--p09-validation` and preserve that artifact before interpreting `--p09-falsify`. The falsification plan maps six controlled surfaces without changing the frozen mechanism, including approximate ancestry, delayed/noisy consequence, and all-grounded null-harm regions. No Protocol 10 is planned by default; if this final evidence phase remains coherent, proceed to Bounded Minds synthesis and closeout.

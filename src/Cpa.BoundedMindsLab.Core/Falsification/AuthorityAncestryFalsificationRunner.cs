@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace Cpa.BoundedMindsLab.Falsification;
 
-public static class ParameterizedFalsificationRunner
+public static class AuthorityAncestryFalsificationRunner
 {
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
@@ -13,15 +13,12 @@ public static class ParameterizedFalsificationRunner
 
     public static FalsificationReport RunV1(string outputDirectory)
     {
-        if (string.IsNullOrWhiteSpace(outputDirectory))
-        {
-            throw new ArgumentException("Output directory is required.", nameof(outputDirectory));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(outputDirectory);
         Directory.CreateDirectory(outputDirectory);
-        var profileReports = new List<FalsificationProfileReport>(ParameterizedFalsificationPlan.Profiles.Count);
-        foreach (var profile in ParameterizedFalsificationPlan.Profiles)
+        var profileReports = new List<FalsificationProfileReport>(AuthorityAncestryFalsificationPlan.Profiles.Count);
+        foreach (var profile in AuthorityAncestryFalsificationPlan.Profiles)
         {
-            Console.WriteLine($"Falsification profile: {profile.Name}");
+            Console.WriteLine($"Protocol 09 falsification profile: {profile.Name}");
             var cells = RunProfile(profile);
             var report = BuildProfileReport(profile, cells);
             profileReports.Add(report);
@@ -32,23 +29,24 @@ public static class ParameterizedFalsificationRunner
         var allCells = profileReports.Sum(profile => profile.Cells.Count);
         var replicateRuns = profileReports.Sum(profile => profile.Cells.Sum(cell => cell.Replicates));
         var result = new FalsificationReport(
-            "cpa-bounded-minds-parameterized-falsification-v1",
+            "cpa-bounded-minds-authority-ancestry-falsification-v1",
             "0.14.0",
-            ParameterizedFalsificationPlan.Name,
+            AuthorityAncestryFalsificationPlan.Name,
             profileReports.Count,
             allCells,
             replicateRuns,
             profileReports,
             [
-                "parameterized-falsification-v1 is exploratory falsification, not a fresh holdout and not a new Protocol 08.",
-                "Frozen Protocol 01-07 experiment and world-generator files remain unchanged; these micro-assays copy selected frozen local equations into controlled intervention probes so causal axes can be separated.",
-                "challenge-v1 is consumed developmental evidence. Its composite stress rankings should not be treated as monotonic causal variables.",
-                "A negative margin is desired boundary information. Do not tune a mechanism and then reinterpret the same surface as confirmation.",
-                "Protocol 04 receives a stronger same-information comparator in this phase. The comparator is an assay control, not proposed CPA machinery.",
+                "authority-ancestry-falsification-v1 is exploratory operating-envelope evidence. It must not be treated as fresh confirmation of Protocol 09.",
+                "The exact Protocol 09 experiment and world-generator sources are frozen. These probes copy selected local equations into controlled interventions so root diversity, lineage fidelity, topology, consequence delay, and consequence noise can be varied independently.",
+                "Circularity is not treated as evidence of falsehood. Several surfaces deliberately contain useful circular or fully grounded influence so over-deterrence is visible as a failure rather than rewarded as caution.",
+                "A negative margin is desired boundary information. Do not tune Protocol 09 from these results and then reuse the same surfaces as confirmation.",
+                "Run and preserve the fresh p09-holdout-v1 artifact before using these surfaces to revise any durable interpretation.",
             ]);
-        File.WriteAllText(Path.Combine(outputDirectory, "parameterized-report.json"), JsonSerializer.Serialize(result, JsonOptions));
-        File.WriteAllText(Path.Combine(outputDirectory, "parameterized-plan.json"), JsonSerializer.Serialize(BuildPlanDocument(), JsonOptions));
-        File.WriteAllText(Path.Combine(outputDirectory, "parameterized-summary.md"), BuildSummary(result));
+
+        File.WriteAllText(Path.Combine(outputDirectory, "authority-ancestry-falsification-report.json"), JsonSerializer.Serialize(result, JsonOptions));
+        File.WriteAllText(Path.Combine(outputDirectory, "authority-ancestry-falsification-plan.json"), JsonSerializer.Serialize(BuildPlanDocument(), JsonOptions));
+        File.WriteAllText(Path.Combine(outputDirectory, "authority-ancestry-falsification-summary.md"), BuildSummary(result));
         return result;
     }
 
@@ -71,7 +69,7 @@ public static class ParameterizedFalsificationRunner
             }
         }
 
-        return cells.ToArray();
+        return [.. cells];
     }
 
     private static FalsificationCellResult SummarizeCell(
@@ -80,17 +78,11 @@ public static class ParameterizedFalsificationRunner
         double y,
         Dictionary<string, double>[] runs)
     {
-        if (runs.Length == 0)
-        {
-            throw new InvalidOperationException($"Falsification profile {profile.Id} produced no replicates.");
-        }
-
         var metricNames = runs.SelectMany(metrics => metrics.Keys).Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal).ToArray();
         var means = new Dictionary<string, double>(StringComparer.Ordinal);
-        for (var metricIndex = 0; metricIndex < metricNames.Length; metricIndex++)
+        foreach (var metricName in metricNames)
         {
-            var metricName = metricNames[metricIndex];
-            means[metricName] = runs.Average(metrics => metrics.TryGetValue(metricName, out var value) ? value : 0.0);
+            means[metricName] = runs.Average(metrics => metrics[metricName]);
         }
 
         var margins = runs.Select(metrics => metrics[profile.PrimaryMarginMetric]).ToArray();
@@ -107,9 +99,7 @@ public static class ParameterizedFalsificationRunner
             means);
     }
 
-    private static FalsificationProfileReport BuildProfileReport(
-        FalsificationProfileDefinition profile,
-        FalsificationCellResult[] cells) => new(
+    private static FalsificationProfileReport BuildProfileReport(FalsificationProfileDefinition profile, FalsificationCellResult[] cells) => new(
         profile.Id,
         profile.Name,
         profile.Protocol,
@@ -128,11 +118,11 @@ public static class ParameterizedFalsificationRunner
 
     private static object BuildPlanDocument() => new
     {
-        schema = "cpa-bounded-minds-parameterized-falsification-plan-v1",
+        schema = "cpa-bounded-minds-authority-ancestry-falsification-plan-v1",
         version = "0.14.0",
-        name = ParameterizedFalsificationPlan.Name,
-        purpose = "Controlled causal intervention beyond the support of the frozen P03-P07 world generators. This is exploratory falsification, not confirmation.",
-        profiles = ParameterizedFalsificationPlan.Profiles.Select(profile => new
+        name = AuthorityAncestryFalsificationPlan.Name,
+        purpose = "Controlled operating-envelope falsification of frozen Protocol 09 after its canonical development result. This is exploratory evidence, not confirmation.",
+        profiles = AuthorityAncestryFalsificationPlan.Profiles.Select(profile => new
         {
             profile.Id,
             profile.Name,
@@ -155,9 +145,9 @@ public static class ParameterizedFalsificationRunner
         builder.Append(report.XAxis.Name).Append(',')
             .Append(report.YAxis.Name).Append(',')
             .Append("replicates,mean_primary_margin,minimum_primary_margin,maximum_primary_margin,negative_replicates");
-        for (var index = 0; index < metricNames.Length; index++)
+        foreach (var metricName in metricNames)
         {
-            builder.Append(',').Append(metricNames[index]);
+            builder.Append(',').Append(metricName);
         }
 
         builder.AppendLine();
@@ -170,9 +160,9 @@ public static class ParameterizedFalsificationRunner
                 .Append(Format(cell.MinimumPrimaryMargin)).Append(',')
                 .Append(Format(cell.MaximumPrimaryMargin)).Append(',')
                 .Append(cell.NegativeMargins.ToString(CultureInfo.InvariantCulture));
-            for (var index = 0; index < metricNames.Length; index++)
+            foreach (var metricName in metricNames)
             {
-                builder.Append(',').Append(Format(cell.MeanMetrics[metricNames[index]]));
+                builder.Append(',').Append(Format(cell.MeanMetrics[metricName]));
             }
 
             builder.AppendLine();
@@ -184,7 +174,7 @@ public static class ParameterizedFalsificationRunner
     private static string BuildSummary(FalsificationReport report)
     {
         var builder = new StringBuilder();
-        builder.AppendLine("# CPA Bounded Minds parameterized falsification summary");
+        builder.AppendLine("# CPA Bounded Minds Protocol 09 falsification summary");
         builder.AppendLine();
         builder.AppendLine($"- Version: {report.Version}");
         builder.AppendLine($"- Phase: {report.Name}");
@@ -192,7 +182,7 @@ public static class ParameterizedFalsificationRunner
         builder.AppendLine($"- Grid cells: {report.Cells}");
         builder.AppendLine($"- Deterministic replicate runs: {report.ReplicateRuns}");
         builder.AppendLine();
-        builder.AppendLine("This phase is not a new protocol sequence and not a fresh validation set. It deliberately intervenes on causal variables outside the original frozen generator support in order to locate failure surfaces.");
+        builder.AppendLine("This phase maps where authority ancestry remains useful, where approximate lineage becomes insufficient, and where caution itself becomes harmful. It does not change the frozen Protocol 09 result.");
         foreach (var profile in report.Results)
         {
             builder.AppendLine();
@@ -201,10 +191,6 @@ public static class ParameterizedFalsificationRunner
             builder.AppendLine(profile.Question);
             builder.AppendLine();
             builder.AppendLine(profile.Method);
-            builder.AppendLine();
-            builder.AppendLine($"X axis: **{profile.XAxis.Label}** - {profile.XAxis.Description}");
-            builder.AppendLine();
-            builder.AppendLine($"Y axis: **{profile.YAxis.Label}** - {profile.YAxis.Description}");
             builder.AppendLine();
             builder.AppendLine($"Primary margin: {profile.PrimaryMarginDescription}");
             builder.AppendLine();
@@ -239,9 +225,9 @@ public static class ParameterizedFalsificationRunner
         const ulong offset = 14695981039346656037UL;
         const ulong prime = 1099511628211UL;
         var hash = offset;
-        for (var index = 0; index < profileId.Length; index++)
+        foreach (var character in profileId)
         {
-            hash ^= profileId[index];
+            hash ^= character;
             hash *= prime;
         }
 

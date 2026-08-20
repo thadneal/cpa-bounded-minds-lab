@@ -1,6 +1,6 @@
 # CPA Bounded Minds Laboratory
 
-Version **0.13.0**
+Version **0.14.0**
 
 This repository is the successor experimental program to the completed CPA Cognitive Development Lab. The earlier lab studied development inside one bounded organism. This laboratory moves the boundary outward:
 
@@ -186,26 +186,20 @@ The accountable receiver cut total error by roughly half relative to naive self-
 
 The durable P08 principle is therefore **receiver-owned, consequence-grounded permission**, not the frozen scalar standing equation. `p08-holdout-v1` and `strategic-influence-falsification-v1` are now consumed evidence and may be rerun only for reproducibility. See `docs/PROTOCOL_08_VALIDATION_RESULTS.md`.
 
-## v0.13 Protocol 09 - authority ancestry / circular standing
+## v0.14 Protocol 09 - authority ancestry / circular standing
 
-Version 0.13 implements `09-authority-ancestry-circular-standing`, the final currently identified social-epistemic hole in this laboratory. P06 studied duplicated **evidence** ancestry. P07 studied second-hand standing. P08 studied strategic presentation by one peer. P09 asks whether **permission itself** can become apparently independent by recursively circulating through a social network.
+Protocol 09 is now **frozen after a coherent development result**. The canonical development matrix returned **5/5 Support with 50/50 preregistered checks passing**. Mean total RMSE was `0.17860` for authority ancestry, `0.20144` for recursive endorsement, and `0.20207` for direct-only learning.
 
-Five bounded peers exchange locally reasonable endorsements. Every development world contains:
+The most important manipulation succeeded cleanly: circular contexts began with mean peer standing near `0.11874`, yet recursive endorsement raised apparent receiver authority to `0.88673`, about **7.47x amplification without new independent grounding**. Authority ancestry held the same circular contexts to `0.22327` while preserving `0.61060` initial authority in independently grounded contexts. Later receiver-owned consequence drove circular standing down near `0.02328` while grounded standing remained near `0.88382`.
 
-- four contexts with several independently grounded authority roots;
-- four circular-authority traps that begin with one weak direct root;
-- two mixed-authority contexts;
-- two sparse-grounding contexts.
+Narrow result: permission itself can acquire misleading apparent independence when locally reasonable standing transfers recursively circulate. Authority ancestry can reduce that network-level composition failure while keeping useful social opportunity available. It does not make circularity false by definition, and direct-only learning still avoids the early cost of accepting a bad social prior.
 
-The treatments are:
+The exact Protocol 09 experiment and world-generator files are now included in `docs/FROZEN_PROTOCOL_SHA256.txt`. Version 0.14 registers two next-step evidence paths:
 
-1. **authority-ancestry** - each endorsement carries compact root and path sketches. A peer discounts returned permission and the receiver discounts overlapping authority roots before granting candidate influence.
-2. **recursive-endorsement** - control. Each peer locally trusts the predecessor's standing and can recursively strengthen the candidate without preserving authority ancestry. No individual endorsement step is deliberately irrational; the pathology belongs to the loop.
-3. **direct-only** - receiver ignores social permission and learns only through its own consequence.
+1. **`p09-holdout-v1`** - twenty previously unused seeds, frozen before any Protocol 09 holdout outcome is executed or inspected. The first `--p09-validation` run consumes this set.
+2. **`authority-ancestry-falsification-v1`** - six controlled 7x7 surfaces with seven deterministic replicates per cell. The surfaces vary grounding diversity, peer trust, circulation depth, ancestry fidelity, circular-root strength, receiver mismatch, consequence delay/noise, and minimal network closure.
 
-Ten preregistered checks require the control to actually amplify circular authority, require ancestry-sensitive transfer to preserve early benefit from independently grounded permission, require circular capture to be materially reduced, preserve later receiver-owned revocation and grounded standing, and keep both social treatments at identical explicit communication cost.
-
-Protocol 09 is **development evidence only** in v0.13. It should first run on `development-v1` (`101,211,307,401,503`). If it produces a distinct and intelligible result, the next release should freeze and stress it before Bounded Minds closeout. If it is redundant with P06-P08, the correct move is to close the lab rather than force a ninth mechanism to survive.
+Run and preserve the fresh holdout **before** interpreting the controlled falsification surfaces. No Protocol 10 is planned by default. If P09 survives this phase with a useful operating envelope, the next major step is Bounded Minds synthesis and closeout, followed by the Trace and Interface Laboratory. See `docs/PROTOCOL_09_DEVELOPMENT_RESULTS.md`.
 
 ## Solution
 
@@ -226,7 +220,10 @@ Projects target .NET 10. The WPF Desktop Lab targets `net10.0-windows`.
 ```powershell
 dotnet build Cpa.BoundedMindsLab.sln -c Release
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --experiment 09-authority-ancestry-circular-standing --replicate 101,211,307,401,503 --output _artifacts/protocol-09-development-v1
+# First execution is the fresh Protocol 09 holdout and consumes p09-holdout-v1:
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --p09-validation --output _artifacts/p09-holdout-v1
+# After preserving the holdout artifact, map the Protocol 09 operating envelope:
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --p09-falsify --output _artifacts/authority-ancestry-falsification-v1
 # Reproduce consumed Protocol 08 evidence only when needed:
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --p08-validation --output _artifacts/p08-holdout-v1-repro
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --p08-falsify --output _artifacts/strategic-influence-falsification-v1-repro
@@ -246,7 +243,7 @@ For live inspection on Windows 11:
 dotnet run --project src/Cpa.BoundedMindsLab.Desktop
 ```
 
-The Desktop Lab opens with **Development v1 (5, regression only)** selected to avoid accidentally treating consumed holdout-v1 as fresh evidence. Holdout v1 remains available as a reproducibility preset. `parameterized-falsification-v1` and `challenge-v1` are consumed CLI-only reproducibility runners; they do not use the ordinary Desktop seed selector. Protocol 09 development uses the ordinary Desktop/CLI experiment path. The consumed p08-holdout-v1 and strategic falsification runners remain CLI modes so their historical evidence status stays explicit. The application version remains visible in the main and maximized-graph window titles. Graphs explain axis meaning and preferred metric direction/context, provide show-all/hide-all series controls, and update incrementally from bounded background telemetry at an adaptive display cadence.
+The Desktop Lab opens with **Development v1 (5, regression only)** selected to avoid accidentally treating consumed holdout-v1 as fresh evidence. Holdout v1 remains available as a reproducibility preset. `parameterized-falsification-v1` and `challenge-v1` are consumed CLI-only reproducibility runners; they do not use the ordinary Desktop seed selector. Protocol 09 is frozen; its fresh holdout and controlled falsification are CLI-only modes so evidence status and run order remain explicit. The consumed p08-holdout-v1 and strategic falsification runners remain CLI modes for historical reproduction. The application version remains visible in the main and maximized-graph window titles. Graphs explain axis meaning and preferred metric direction/context, provide show-all/hide-all series controls, and update incrementally from bounded background telemetry at an adaptive display cadence.
 
 ## Visualization boundary
 
@@ -260,4 +257,4 @@ The workbench also exposes protocol progress, per-seed judged results, active-se
 
 Carry forward only what survives pressure: bounded causal execution, persistent private history, compact public surfaces, revisable standing, explicit cost, and provenance distinct from agreement.
 
-The v0.3.0 methodological correction remains active: if history is part of the theory, replication must vary **what was lived**, not merely the order in which nearly identical events were encountered. Version 0.8 separated development from a frozen holdout; version 0.9 searched the frozen generator families adversarially; version 0.10 mapped controlled failure surfaces; version 0.11 returned to mechanism discovery for strategic public influence; version 0.12 validated and stressed that mechanism; version 0.13 tests whether recursively circulated authority is a genuinely distinct final social failure mode before laboratory closeout.
+The v0.3.0 methodological correction remains active: if history is part of the theory, replication must vary **what was lived**, not merely the order in which nearly identical events were encountered. Version 0.8 separated development from a frozen holdout; version 0.9 searched the frozen generator families adversarially; version 0.10 mapped controlled failure surfaces; version 0.11 returned to mechanism discovery for strategic public influence; version 0.12 validated and stressed that mechanism; version 0.13 established recursively circulated authority as a distinct development finding; version 0.14 freezes that assay and begins fresh holdout plus operating-envelope falsification before laboratory closeout.

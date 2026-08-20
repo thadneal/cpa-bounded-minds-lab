@@ -184,3 +184,12 @@ Protocol 09 remains compatible with the CPA source framing while testing a relat
 The assay therefore does not treat endorsement as truth. It keeps endorsement lineage separate from direct consequence and asks whether a loop of locally plausible transfers can generate unjustified apparent independence. The experiment's root/path bit sketches are intentionally illustrative instrumentation. They should not be read back into the CPA technical outline as a prescribed authority registry.
 
 This remains inside Bounded Minds because every participant is already a perceptible peer with an explicit public channel. The candidate Trace and Interface Laboratory begins earlier, where a source process may be available only through observer-side causal traces rather than through an already established peer identity.
+
+
+## v0.14 Protocol 09 freeze and final evidence boundary
+
+The reviewed `protocol-09-development-v1` artifact returned 5/5 Support with 50/50 registered checks passing. The exact `AuthorityAncestryCircularStandingExperiment.cs` and `AuthorityAncestryWorld.cs` files were hashed into `FROZEN_PROTOCOL_SHA256.txt` before any P09 holdout outcome was executed or inspected.
+
+Version 0.14 adds validation and controlled-probe infrastructure around that frozen boundary rather than modifying it. `p09-holdout-v1` supplies twenty fresh seeds through `--p09-validation`; `authority-ancestry-falsification-v1` supplies six parameterized surfaces through `--p09-falsify`. The latter copies the frozen local equations into explicit micro-world probes so ancestry fidelity, consequence quality/timing, root diversity, circulation depth, receiver mismatch, and network closure can be intervened on without pretending those extensions were part of the original generator.
+
+The source-level carry-forward is a constraint, not a new CPA anatomy: authority can acquire ancestry, circular permission should not masquerade as independent warrant, approximate genealogy must be tested, and later receiver-owned consequence remains able to revoke social standing. No Protocol 10 is introduced by default.

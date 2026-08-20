@@ -30,7 +30,7 @@ public static class StrategicInfluenceFalsificationRunner
         var replicateRuns = profileReports.Sum(profile => profile.Cells.Sum(cell => cell.Replicates));
         var result = new FalsificationReport(
             "cpa-bounded-minds-strategic-influence-falsification-v1",
-            "0.13.0",
+            "0.14.0",
             StrategicInfluenceFalsificationPlan.Name,
             profileReports.Count,
             allCells,
@@ -121,7 +121,7 @@ public static class StrategicInfluenceFalsificationRunner
     private static object BuildPlanDocument() => new
     {
         schema = "cpa-bounded-minds-strategic-influence-falsification-plan-v1",
-        version = "0.13.0",
+        version = "0.14.0",
         name = StrategicInfluenceFalsificationPlan.Name,
         purpose = "Controlled falsification of frozen Protocol 08 receiver behavior across delayed consequence, stronger sender adaptation, betrayal, divergence prevalence, feedback observability, and aligned-noise over-deterrence conditions.",
         profiles = StrategicInfluenceFalsificationPlan.Profiles.Select(profile => new

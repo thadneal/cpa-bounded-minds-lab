@@ -474,3 +474,55 @@ The root/path sketches are deliberately experimental. A positive result would su
 4. interpret whether P09 is genuinely distinct from P06-P08 before freezing it;
 5. only then decide whether a fresh P09 holdout/falsification phase is justified;
 6. if P09 is distinct and survives an operating-envelope phase, move Bounded Minds toward synthesis/closeout rather than inventing Protocol 10 by default.
+
+## 2026-08-20 - Protocol 09 development accepted; exact assay frozen; final evidence phase begins
+
+### Development result
+
+The canonical Protocol 09 development matrix returned **5/5 Support with 50/50 preregistered checks passing**.
+
+Mean whole-history RMSE:
+
+```text
+authority ancestry       0.178603
+recursive endorsement    0.201444
+direct only              0.202067
+```
+
+The intended network pathology was present rather than assumed. Circular contexts began with mean peer standing `0.118736`, but recursive local endorsement raised receiver-visible authority to `0.886727`, about **7.47x amplification without new independent grounding**.
+
+Authority ancestry held circular authority to `0.223272` while preserving independently grounded authority at `0.610599`. It reduced early circular RMSE from `0.658380` to `0.535078`, preserved a large early grounded advantage over direct-only learning (`0.195969` versus `0.446566`), and later receiver consequence reduced circular standing to `0.023278` while grounded standing remained `0.883816`.
+
+The result is distinct from P06-P08. P06 concerned duplicated evidence, P07 second-hand standing, and P08 strategic public posture. P09 demonstrates a composition failure in which **permission itself can be recursively duplicated** through several otherwise bounded peers.
+
+### v0.14 freeze and fresh holdout
+
+The exact `AuthorityAncestryCircularStandingExperiment.cs` and `AuthorityAncestryWorld.cs` files are now included in `FROZEN_PROTOCOL_SHA256.txt`. No P09 holdout outcome was executed or inspected before the freeze.
+
+A fresh twenty-seed `p09-holdout-v1` is registered:
+
+```text
+70111, 71429, 72817, 74209, 75679,
+77101, 78593, 80021, 81517, 83003,
+84521, 86011, 87539, 89051, 90617,
+92141, 93703, 95279, 96821, 98411
+```
+
+The first `--p09-validation` execution consumes this set. Reruns after that point are reproducibility only.
+
+### Controlled operating envelope
+
+`authority-ancestry-falsification-v1` registers six 7 x 7 surfaces with seven deterministic replicates per cell:
+
+1. grounding diversity x peer trust;
+2. circulation depth x ancestry fidelity;
+3. circular-root strength x receiver mismatch;
+4. consequence delay x circulation depth;
+5. grounded consequence noise x delay;
+6. network closure x independent-root count.
+
+The surfaces deliberately include regions where circular authority is benign and where every social source is genuinely grounded. The assay should be able to show that ancestry caution costs too much rather than treating all suppression as success.
+
+### Laboratory boundary
+
+No Protocol 10 is planned by default. Run and preserve the fresh P09 holdout first, then map the operating envelope without changing the frozen mechanism. If the combined evidence remains coherent, move to Bounded Minds synthesis and closeout, then hand off to the Trace and Interface Laboratory.

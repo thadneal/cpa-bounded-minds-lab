@@ -426,3 +426,17 @@ The assay's compact `rootSketch` and `pathSketch` fields are not proposed engine
 The durable architectural question is narrower: **does permission require provenance/ancestry distinct from the ancestry of factual evidence?** If several endorsements descend from one authority root, repeated circulation should not automatically manufacture independent warrant. Conversely, independently grounded social authority must remain able to reinforce a useful peer.
 
 Direct receiver consequence remains sovereign in all Protocol 09 treatments. Authority ancestry shapes provisional social opportunity before direct experience accumulates; it does not become a hidden global reputation oracle.
+
+## v0.14 authority-ancestry evidence boundary
+
+The Protocol 09 development result supports the distinction strongly enough to freeze the exact assay. This changes its status, not its architectural authority. The five-peer ring and bit sketches remain laboratory instruments.
+
+The final P09 phase now separates three layers:
+
+1. **frozen authority-cascade assay** - the exact development experiment and world generator, protected by SHA-256;
+2. **fresh validation** - `p09-holdout-v1`, twenty preregistered unused seeds executed through `--p09-validation`;
+3. **controlled operating-envelope falsification** - six micro-world surfaces executed through `--p09-falsify` after the holdout artifact is preserved.
+
+The controlled phase deliberately attacks assumptions that were clean in the development assay. Authority-root diversity may be fractional/effective rather than perfectly enumerated, ancestry fidelity may degrade, receiver consequence may arrive late or noisily, circular influence may be benign, and network recurrence may exist even when every participating source is useful. Those interventions test whether the behavioral pressure survives outside an exact-genealogy toy world.
+
+A durable CPA synthesis should carry forward only what survives that pressure: social permission can have dependence structure, repeated permission need not equal independent permission, topology can manufacture apparent warrant, and local consequence must retain the ability to revise whatever provisional authority ancestry permits. Approximate ancestry that fails gracefully would be more architecturally interesting than exact sketches that work only because the laboratory supplied perfect lineage.

@@ -36,10 +36,10 @@ try
         return 0;
     }
 
-    var specialModes = (parsed.Validation ? 1 : 0) + (parsed.Challenge ? 1 : 0) + (parsed.Falsify ? 1 : 0) + (parsed.StrategicValidation ? 1 : 0) + (parsed.StrategicFalsify ? 1 : 0);
+    var specialModes = (parsed.Validation ? 1 : 0) + (parsed.Challenge ? 1 : 0) + (parsed.Falsify ? 1 : 0) + (parsed.StrategicValidation ? 1 : 0) + (parsed.StrategicFalsify ? 1 : 0) + (parsed.AuthorityValidation ? 1 : 0) + (parsed.AuthorityFalsify ? 1 : 0);
     if (specialModes > 1)
     {
-        throw new ArgumentException("--validation, --challenge, --falsify, --p08-validation, and --p08-falsify are mutually exclusive.");
+        throw new ArgumentException("Validation, challenge, and falsification special modes are mutually exclusive.");
     }
 
     if (parsed.Validation)
@@ -72,6 +72,18 @@ try
         return 0;
     }
 
+    if (parsed.AuthorityValidation)
+    {
+        AuthorityAncestryValidationRunner.RunHoldout(parsed.OutputDirectory);
+        return 0;
+    }
+
+    if (parsed.AuthorityFalsify)
+    {
+        AuthorityAncestryFalsificationRunner.RunV1(parsed.OutputDirectory);
+        return 0;
+    }
+
     var experiments = parsed.All || parsed.Experiments.Count == 0
         ? ExperimentCatalog.All.ToArray()
         : parsed.Experiments.Select(ExperimentCatalog.Get).ToArray();
@@ -93,7 +105,7 @@ catch (Exception exception)
 
 static void PrintHelp()
 {
-    Console.WriteLine("CPA Bounded Minds Lab 0.13.0");
+    Console.WriteLine("CPA Bounded Minds Lab 0.14.0");
     Console.WriteLine();
     Console.WriteLine("  --list");
     Console.WriteLine("  --self-test");
@@ -103,7 +115,9 @@ static void PrintHelp()
     Console.WriteLine("  --falsify             Reproduce consumed parameterized-falsification-v1 causal sweeps");
     Console.WriteLine("  --p08-validation      Reproduce consumed Protocol 08 p08-holdout-v1");
     Console.WriteLine("  --p08-falsify         Reproduce consumed Protocol 08 strategic-influence failure surfaces");
-    Console.WriteLine("  --experiment <name>   Repeat to select several experiments; current development target is 09-authority-ancestry-circular-standing");
+    Console.WriteLine("  --p09-validation      Run frozen Protocol 09 on fresh p09-holdout-v1 (first execution consumes it)");
+    Console.WriteLine("  --p09-falsify         Map frozen Protocol 09 operating-envelope surfaces after preserving holdout output");
+    Console.WriteLine("  --experiment <name>   Repeat to select one or more ordinary experiment runs (Protocols 01-09 are frozen)");
     Console.WriteLine("  --seed <ulong>        Single-history seed (default 101)");
     Console.WriteLine("  --replicate <csv>     Explicit replication seeds; 101,211,307,401,503 is development-v1");
     Console.WriteLine("  --output <directory>");
