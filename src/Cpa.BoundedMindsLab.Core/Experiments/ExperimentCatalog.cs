@@ -12,6 +12,7 @@ public static class ExperimentCatalog
         new IncompleteEpistemicAncestryExperiment(),
         new ProvisionalStandingTransferExperiment(),
         new StrategicPublicInfluenceExperiment(),
+        new AuthorityAncestryCircularStandingExperiment(),
     ];
 
     public static IReadOnlyList<IExperiment> All => Experiments;

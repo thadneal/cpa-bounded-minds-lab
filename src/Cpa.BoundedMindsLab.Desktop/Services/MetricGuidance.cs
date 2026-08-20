@@ -71,6 +71,13 @@ public sealed record MetricGuidance(
                 "Higher is better.");
         }
 
+        if (normalized.Contains("root_coverage", StringComparison.Ordinal))
+        {
+            return Guidance(
+                "Number of independently grounded authority roots represented by the current compact ancestry sketch.",
+                "Context-dependent; closer to the true number of independent roots is preferred over either duplication or loss.");
+        }
+
         if (normalized.Contains("coverage", StringComparison.Ordinal) ||
             normalized.Contains("retention", StringComparison.Ordinal) ||
             normalized.Contains("revision_coverage", StringComparison.Ordinal))
@@ -148,6 +155,29 @@ public sealed record MetricGuidance(
             return Guidance(
                 "Private objective the strategic sender is trying to move the receiver toward in the synthetic world.",
                 "No intrinsic direction; compare it with the receiver target to see whether interests are aligned or divergent.");
+        }
+
+        if (normalized.Contains("social_authority", StringComparison.Ordinal) ||
+            normalized.Contains("initial_grounded_authority", StringComparison.Ordinal) ||
+            normalized.Contains("initial_circular_authority", StringComparison.Ordinal))
+        {
+            return Guidance(
+                "Social permission granted to the candidate after public endorsements are combined.",
+                "Context-dependent; higher is preferred for independently grounded authority and lower for circularly recycled permission.");
+        }
+
+        if (normalized.Contains("cycle_return_rate", StringComparison.Ordinal))
+        {
+            return Guidance(
+                "Share of endorsement transfers whose compact path sketch shows that permission has returned to a peer already in its own ancestry.",
+                "Diagnostic; higher means more recursive circulation, not more independent warrant.");
+        }
+
+        if (normalized.Contains("authority_round", StringComparison.Ordinal))
+        {
+            return Guidance(
+                "Ordinal social-development round in the endorsement network.",
+                "No intrinsic direction; later values show how standing evolves as endorsements circulate.");
         }
 
         if (normalized.Contains("standing", StringComparison.Ordinal))

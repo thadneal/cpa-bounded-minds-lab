@@ -1,19 +1,17 @@
-# Protocol 08 validation and falsification plan
+# Protocol 08 validation and falsification record
 
-Version 0.12 freezes the exact Protocol 08 development implementation and starts two separate evidence paths.
+Protocol 08 is now **frozen, independently validated, and characterized by controlled falsification**. Version 0.13 does not change its experiment or world generator.
 
 ## Frozen boundary
 
-The following v0.11 development sources are now covered by `docs/FROZEN_PROTOCOL_SHA256.txt`:
+The exact v0.11 development sources remain covered by `docs/FROZEN_PROTOCOL_SHA256.txt`:
 
 - `src/Cpa.BoundedMindsLab.Core/Experiments/StrategicPublicInfluenceExperiment.cs`
 - `src/Cpa.BoundedMindsLab.Core/Environments/StrategicInfluenceWorld.cs`
 
-They must not change while `p08-holdout-v1` is being interpreted.
+## p08-holdout-v1: consumed
 
-## p08-holdout-v1
-
-Twenty previously unused seeds are preregistered in `ExperimentDefaults.StrategicInfluenceHoldoutSeeds`:
+The twenty preregistered seeds were run once after the Protocol 08 source freeze:
 
 ```text
 41047, 42131, 43391, 44621, 45893,
@@ -22,94 +20,67 @@ Twenty previously unused seeds are preregistered in `ExperimentDefaults.Strategi
 61781, 63347, 64997, 66617, 68213
 ```
 
-These seeds were registered without executing or inspecting Protocol 08 outcomes. They are disjoint from development-v1, the consumed Protocol 01-07 holdout, and challenge-v1 selected seeds.
+Result: **20/20 Support, 200/200 preregistered checks passing**.
 
-The authoritative first run is:
+Key means:
 
-```powershell
-./scripts/verify.ps1
-
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
-  --p08-validation `
-  --output _artifacts/p08-holdout-v1
+```text
+accountable total RMSE          0.17873
+self-report-naive total RMSE    0.35608
+local-only total RMSE           0.18599
+accountable early aligned RMSE  0.23478
+local-only early aligned RMSE   0.41033
+accountable late divergent RMSE 0.03049
+naive late divergent RMSE       0.41716
+accountable late betrayal RMSE  0.02973
+naive late betrayal RMSE        0.42072
+final aligned standing          0.91084
+final divergent standing        0.02557
+final betrayal standing         0.02530
 ```
 
-The first execution **consumes** this holdout. Reruns after inspection are reproducibility checks only.
+Accountable treatment was nevertheless worse than local-only in 5/20 histories. The worst remained just inside the frozen 5% opportunity-cost allowance. This is important evidence that social openness carries real cost rather than providing free benefit.
 
-The ordinary frozen Protocol 08 verdict and all ten preregistered assertions remain unchanged. Validation reporting continues to separate manipulation, mechanism-outcome, safety-boundary, and accounting evidence.
+The holdout is consumed. Reruns are reproducibility only. See `PROTOCOL_08_VALIDATION_RESULTS.md`.
 
-## strategic-influence-falsification-v1
+## strategic-influence-falsification-v1: consumed
 
-This is exploratory operating-envelope evidence, not a second holdout. It may deliberately extend the adversary and consequence schedule beyond the original world generator while keeping the accountable receiver equations frozen.
+Five 7 x 7 response surfaces with seven deterministic replicates per cell produced **245 cells / 1,715 controlled runs**. `128/245` cells had negative mean primary margins. Those negative cells are boundary evidence, not a new aggregate Protocol 08 verdict.
 
-Five 7 x 7 response surfaces use seven deterministic replicates per cell: **245 cells / 1,715 controlled runs**.
+### Consequence delay x sender adaptation
 
-### 1. Consequence delay x sender adaptation
+Delay dominated sender adaptation speed. As direct consequence was delayed, accountability's large advantage over the naive receiver progressively disappeared. In the tested range the accountable path generally approached local-only performance rather than becoming catastrophically captured.
 
-Question: can a strategic sender learn presentation faster than consequence can calibrate influence?
+### Betrayal timing x severity
 
-The consequence-delay axis postpones receiver-owned direct observation by `0, 1, 2, 4, 6, 10, 16` same-context exposures. Sender adaptation speed ranges from `0.5x` through `8x`; `1.0x` reproduces the frozen sample-mean tactic update.
+Mild contradiction can leave earned authority sticky, and late betrayal leaves less post-change consequence before evaluation. The surface therefore mixes revocation strength with revocation latency. It supports treating contradiction magnitude and elapsed corrective evidence as distinct pressures.
 
-The primary margin combines aligned help, capture resistance, and the 5% local-only opportunity-cost allowance. The 0.15 exploitability-reduction boundary is applied only when the naive sender actually reaches the original `0.50` leverage manipulation threshold; absent leverage is not counted as a receiver failure.
+### Divergence prevalence x consequence delay
 
-### 2. Betrayal timing x severity
+This produced the clearest opportunity-cost crossover. Accountable social openness remained competitive while useful alignment was common, then became net costly when persistent divergence dominated the social environment. Context standing alone is therefore insufficient; a broader peer eligibility or recruitment pressure may need to learn whether another mind is worth consulting at all.
 
-Question: how much earned standing remains safely revisable if objective divergence appears early or late and at different magnitudes?
+### Feedback observability x sender adaptation
 
-Betrayal begins after exposure `2, 5, 8, 10, 14, 20, 26`, with post-change sender-target divergence from `0.20` through `1.30` before clamping.
+Public feedback is not intrinsically a vulnerability. It is both the channel by which a strategic sender can learn leverage and the channel by which consequence can make that leverage stop paying. Low observability also weakens the naive manipulation itself, so absent exploitation must not be counted as a defense failure.
 
-The primary boundary retains the frozen betrayal test: late accountable error must stay below 20% of naive error and final betrayal standing must stay at or below `0.10`.
+### Aligned observation noise x consequence delay
 
-### 3. Divergence prevalence x consequence delay
+Every peer was genuinely aligned. Aligned-help remained useful throughout, but final standing declined as consequence noise increased. The mechanism was confusing unreliable observation with unreliable source behavior. A durable architecture should keep **source reliability** and **consequence-channel reliability** as different uncertainty types.
 
-Question: when does keeping the peer socially available become net harmful compared with learning alone?
+## Accepted Protocol 08 conclusion
 
-The fraction of persistently divergent contexts varies from zero to all contexts while consequence delay varies independently. The primary boundary is the frozen 5% opportunity-cost allowance relative to local-only learning.
+> Receiver-owned, consequence-grounded permission can keep a strategically adaptive peer useful without private-state inspection, but only within an operating envelope shaped by consequence timeliness, objective alignment, observation quality, and whether the peer remains worth recruiting.
 
-This surface deliberately does not require accountable treatment to beat naive treatment when divergence prevalence is zero. In a world where the peer is always useful, aggressive social trust may legitimately win.
+Do not carry the frozen learning rates, confidence presentations, standing formula, or scalar penalty constants into CPA as anatomy. The stronger carry-forward constraints are typed uncertainty, receiver-owned authority, consequence answerability, bounded social opportunity, and the separation of source quality from channel quality.
 
-### 4. Feedback observability x sender adaptation
-
-Question: how much can the sender learn from receiver public reactions before accountability stops reducing exploitability?
-
-The sender can update tactic value from public influence feedback on `0%` through `100%` of interactions while adaptation speed varies from `0.5x` through `8x`. If the naive sender never reaches the original leverage manipulation threshold, the surface reports that manipulation as inactive rather than treating the missing exploitability contrast as a failure of accountability.
-
-The receiver still exposes no private standing, local estimate, calibration state, or implementation detail.
-
-### 5. Aligned observation noise x consequence delay
-
-Question: can defense become over-deterrence?
-
-Every context is genuinely aligned. There is no hidden divergence or betrayal. Direct receiver consequence becomes progressively noisy and delayed.
-
-The accountable path must still improve early aligned RMSE by at least 25% versus local-only and retain final aligned standing of at least `0.85`. Negative cells are regions where a mechanism designed to resist strategic capture has begun suppressing a useful peer.
-
-## Run order
-
-Run and preserve the fresh holdout first. Interpret it before treating the falsification surfaces as explanatory context.
-
-Then run:
+## Reproduction only
 
 ```powershell
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
-  --p08-falsify `
-  --output _artifacts/strategic-influence-falsification-v1
+  --p08-validation --output _artifacts/p08-holdout-v1-repro
+
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
+  --p08-falsify --output _artifacts/strategic-influence-falsification-v1-repro
 ```
 
-The falsification runner writes:
-
-- `strategic-falsification-plan.json`
-- `strategic-falsification-report.json`
-- `strategic-falsification-summary.md`
-- one CSV per response surface
-
-A negative margin is expected and useful. Do not change the receiver mechanism and then reinterpret the same surfaces as confirmation.
-
-## Decision after this phase
-
-The next research decision is not automatically Protocol 09. The evidence should answer two questions first:
-
-1. Does strategic public influence have an intelligible operating envelope rather than succeeding only inside the development generator?
-2. Does authority/standing circulation among several minds remain a distinct failure mode after strategic public influence is understood?
-
-If the second answer remains yes, Protocol 09 should test circular endorsement and authority cascades. If not, the laboratory should move toward closeout and handoff to the candidate Trace and Interface Laboratory.
+The next active question is Protocol 09 authority ancestry / circular standing. It tests whether **permission itself** can appear independently warranted after circulating through a social network, a problem not answered by P08's dyadic strategic-influence result.

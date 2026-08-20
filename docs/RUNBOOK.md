@@ -14,11 +14,26 @@ dotnet build Cpa.BoundedMindsLab.sln -c Release
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
 ```
 
-Treat analyzer failures as build failures. Warnings are errors. Version 0.12.0 defines **35 invariant/regression tests**. `scripts/verify.ps1` and `scripts/verify.sh` first verify the frozen Protocol 01-08 source hashes before building.
+Treat analyzer failures as build failures. Warnings are errors. Version 0.13.0 defines **37 invariant/regression tests**. `scripts/verify.ps1` and `scripts/verify.sh` first verify the frozen Protocol 01-08 source hashes before building.
+
+## Current research run: Protocol 09 development-v1
+
+Protocol 08 development, fresh holdout, and controlled falsification are complete and consumed. Protocol 09 is the active development protocol:
+
+```powershell
+./scripts/verify.ps1
+
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
+  --experiment 09-authority-ancestry-circular-standing `
+  --replicate 101,211,307,401,503 `
+  --output _artifacts/protocol-09-development-v1
+```
+
+This five-seed matrix is development evidence only. Preserve and interpret it before deciding whether Protocol 09 deserves an exact-source freeze plus a fresh holdout/falsification phase. Do not tune the protocol to force novelty if the result is redundant with P06-P08.
 
 ## Development regression
 
-The old five-seed matrix is now explicitly development data:
+The canonical five-seed set is explicitly development data:
 
 ```powershell
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- `
@@ -26,69 +41,41 @@ dotnet run --project src/Cpa.BoundedMindsLab.Cli -- `
   --output _artifacts/development-v1-regression
 ```
 
-Use this only to detect regressions against the frozen mechanism-discovery record. Do not treat another 5/5 result as fresh evidence.
+Use this only to detect regressions against the experimental record. Another all-Support run is not fresh confirmation.
 
-## Protocol 08 fresh holdout (current research run)
+## Consumed Protocol 08 reproduction
 
-Protocol 08 development-v1 is complete and its exact experiment/world sources are frozen. The next authoritative evidence is the preregistered twenty-seed `p08-holdout-v1` set:
+The twenty-seed `p08-holdout-v1` returned 20/20 Support and is consumed. Its five controlled falsification surfaces are also consumed.
 
 ```powershell
-./scripts/verify.ps1
-
+# Holdout reproduction only
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
   --p08-validation `
-  --output _artifacts/p08-holdout-v1
-```
+  --output _artifacts/p08-holdout-v1-repro
 
-The **first execution consumes this holdout**. Preserve the artifact before changing Protocol 08 or inspecting controlled falsification results. A later rerun is reproducibility only.
-
-## Protocol 08 controlled falsification
-
-After the fresh holdout is preserved and interpreted, map the operating envelope:
-
-```powershell
+# Operating-envelope reproduction only
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
   --p08-falsify `
-  --output _artifacts/strategic-influence-falsification-v1
+  --output _artifacts/strategic-influence-falsification-v1-repro
 ```
 
-This runs five 7 x 7 surfaces with seven replicates per cell. Negative margins are expected boundary evidence. Do not tune the receiver and then reuse these surfaces as confirmation.
+Do not describe reruns as fresh evidence and do not modify the frozen Protocol 08 sources.
 
-## Consumed parameterized-falsification-v1 reproducibility
-
-`parameterized-falsification-v1` is now consumed exploratory evidence. Reproduce it only for determinism, artifact, or implementation checks:
+## Other consumed evidence reproduction
 
 ```powershell
+# P03-P07 controlled falsification
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
-  --falsify `
-  --output _artifacts/parameterized-falsification-v1-repro
-```
+  --falsify --output _artifacts/parameterized-falsification-v1-repro
 
-The historical run produced `parameterized-plan.json`, `parameterized-report.json`, `parameterized-summary.md`, and six profile CSV surfaces. Do not describe a reproduction as validation of a revised mechanism.
-
-## Consumed challenge-v1 reproducibility
-
-`challenge-v1` is consumed exploratory evidence. Reproduce it only when checking determinism or artifacts:
-
-```powershell
+# Adversarial challenge
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
-  --challenge `
-  --output _artifacts/challenge-v1-repro
-```
+  --challenge --output _artifacts/challenge-v1-repro
 
-Do not describe a reproduction as fresh validation.
-
-## Consumed holdout reproducibility
-
-`holdout-v1` was consumed on 2026-08-20. Rerun it only to reproduce the frozen v0.8 result:
-
-```powershell
+# P01-P07 frozen holdout
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
-  --validation `
-  --output _artifacts/validation-holdout-v1-repro
+  --validation --output _artifacts/validation-holdout-v1-repro
 ```
-
-A rerun is not fresh validation. If a mechanism is changed after seeing holdout-v1, a future confirmation claim requires a new registered holdout.
 
 ## Desktop Lab
 
@@ -96,11 +83,11 @@ A rerun is not fresh validation. If a mechanism is changed after seeing holdout-
 dotnet run --project src/Cpa.BoundedMindsLab.Desktop
 ```
 
-The main window title includes the running assembly version. The Run panel now defaults to **Development v1 (5, regression only)** and all eight protocols selected, so opening the visualization does not encourage accidental reuse of consumed holdout-v1 as fresh evidence. The Seed set control still exposes **Holdout v1 (20, consumed / reproducibility only)** and Custom. Editing the seed text automatically marks the set as Custom unless it exactly matches one registered set.
+The window title includes the running assembly version. The Run panel remains a development/history workbench rather than the authoritative CLI surface for consumed validation phases. Seed -> Focus Path -> Metric scopes graph inspection. Legend keys remain individually clickable; Show all/Hide all acts on the current metric. Graph telemetry updates incrementally at the adaptive display cadence while experiment execution remains isolated from WPF.
 
-The graph Seed selector can revisit completed histories. Focus path scopes Metric choices. Legend keys remain individually clickable and Show all/Hide all acts on the current metric. Graph telemetry updates incrementally at the adaptive display cadence; experiment execution remains isolated from WPF.
+Protocol Progress recognizes Protocol 09's authority-world generation, social authority development, receiver consequence, and evaluation phases. Run notes identify Protocols 01-08 as frozen evidence and Protocol 09 as active development.
 
-Protocol result assertion detail now includes the validation category (`manipulation`, `mechanism-outcome`, `safety-boundary`, or `accounting-constraint`). Data-grid cells wrap text and headers expose resize grippers; resizing columns redistributes width inside the existing table surface.
+Protocol-result assertion detail includes validation category (`manipulation`, `mechanism-outcome`, `safety-boundary`, or `accounting-constraint`). Data-grid cells wrap text and headers expose resize grippers; column resizing redistributes width inside the existing table surface.
 
 ## Cancellation and stepping
 

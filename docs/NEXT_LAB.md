@@ -4,49 +4,39 @@ Status: **working research boundary, not a closure decision**
 
 ## Is the Bounded Minds Laboratory finished?
 
-Not yet.
+Not quite, but it is now at the edge of its natural subject.
 
-The current laboratory has a coherent subject: **what develops among bounded minds when they exchange selected public evidence while preserving independent interiors**. Protocols 01-07 established and then stressed several mechanisms inside that subject. Holdout-v1 and challenge-v1 showed that the laboratory is now mature enough to ask about failure surfaces rather than simply accumulating supportive mechanisms.
+The current laboratory has a coherent question: **what develops among bounded minds when they exchange selected public evidence and permission while preserving independent interiors**. Protocols 01-08 now have development evidence; P03-P07 were challenged through frozen holdout, adversarial generator search, and controlled causal surfaces; P08 additionally completed a fresh twenty-seed holdout and five strategic-influence falsification surfaces.
 
-`parameterized-falsification-v1` is now complete and consumed. Its controlled surfaces showed interpretable failure regions in P03-P07 and were sufficient to stop sweeping the old local equations. Version 0.11 remains inside this lab for a different reason: Protocol 08 addresses a still-open social assumption, strategic self-presentation by an already-perceptible peer.
+Protocol 08 therefore no longer blocks closure. Its result is frozen and characterized: receiver-owned, consequence-grounded permission can preserve useful strategic social influence without private-state inspection, but delayed/noisy consequence, pervasive divergence, and weak/late betrayal expose real costs.
 
-A reasonable closure criterion is:
+One final social question remains genuinely distinct enough to test rather than merely discuss: **authority ancestry / circular standing**.
+
+A reasonable closure criterion is now:
 
 1. controlled failure surfaces exist for the important P03-P07 mechanisms (**complete**);
-2. Protocol 04 has faced a competent equal-budget alternative rather than only early semantic smoothing (**complete**);
-3. strategic public influence is tested without private-state inspection (**Protocol 08 active**);
-4. authority/standing cascades are either tested or explicitly judged redundant after Protocol 08;
-5. any final synthesis/closeout needed to reconcile the social findings is completed before translation into the next lab or eventual Rust organism.
+2. Protocol 04 has faced a competent equal-budget alternative (**complete**);
+3. strategic public influence has faced fresh validation and controlled falsification (**complete**);
+4. circular authority / permission ancestry is either demonstrated as a distinct failure mode or judged redundant (**Protocol 09 active**);
+5. the laboratory writes a final behavioral synthesis before the next lab begins.
 
-## Protocols that may still belong here
+## Final candidate protocol in this laboratory
 
-Two protocol families remain plausible enough that the lab should not be closed before deciding whether to run them.
-
-### Protocol 08 - strategic public influence (active)
+### Protocol 09 - authority ancestry / circular standing (active)
 
 Question:
 
-> Can a bounded mind learn to limit a peer that strategically shapes its public posture to gain influence, without requiring access to that peer's private state?
+> Can a bounded ecology distinguish authority earned from independent consequence from permission that has recursively circulated through locally reasonable endorsements?
 
 Why it belongs here:
 
-Protocols 03, 04, 06, and 07 assume public signals are noisy, incomplete, or locally mismatched, but not strategically optimized to exploit the receiver's standing rules. A developing social ecology should eventually face signals whose public confidence, provenance hints, recommendation relationships, or agreement patterns are adversarially selected.
+P06 studies evidence ancestry. P07 studies second-hand standing. P08 studies strategic public presentation. None of them directly tests a network in which standing itself circulates through several peers and returns as apparently independent legitimacy.
 
-This is not a generic cybersecurity simulation. The implemented CPA question is whether **consequence can make public influence answerable when interiors remain private**. The sender learns which public confidence posture gains influence from observed outcomes but cannot inspect the receiver's private standing/calibration state. A local-only baseline prevents success by simply silencing social input.
+Protocol 09 therefore treats **permission to matter** as something that can have ancestry. The development world contains independently grounded authority roots and circular traps. The ancestry-aware condition carries compact root/path sketches so a mind can recognize returned or overlapping permission without inspecting private interiors or consulting a global reputation registry. The recursive control keeps each local endorsement individually plausible while discarding authority ancestry, allowing a network-level cascade to emerge if the loop is sufficient.
 
-### Candidate Protocol 09 - coalition / authority cascade
+This should be the final protocol unless its result exposes a genuinely new social mechanism that cannot be expressed as evidence ancestry, standing transfer, strategic influence, or authority ancestry. No Protocol 10 is planned by default.
 
-Question:
-
-> Can several bounded minds form a mutually reinforcing authority cluster without independent consequence, and can the ecology distinguish genuine distributed corroboration from a social standing cascade?
-
-Why it belongs here:
-
-P06 studies evidential ancestry and P07 studies transferred standing one relationship at a time. A network can still fail when standing itself circulates through several peers and creates apparent legitimacy. This is different from copied evidence: it is copied **permission to matter**.
-
-A useful final social protocol would test whether local standing remains grounded when recommendations form loops, factions, bridge nodes, or prestige cascades.
-
-Protocol 08 development-v1 is complete and frozen. Version 0.12 now subjects it to a fresh holdout and controlled falsification. Protocol 09 should be judged only after those results. If strategic influence plus the existing ancestry/standing findings already explain circular authority well enough, the lab should close rather than manufacture extra protocols. If permission can still become self-supporting through a network in a way P06-P08 do not capture, Protocol 09 remains justified.
+If P09 is coherent and distinct, freeze it and stress it before closeout. If it proves redundant, close the lab immediately rather than tuning it into novelty.
 
 ## Candidate next lab: Trace and Interface Laboratory
 
@@ -117,11 +107,11 @@ The likely sequence is now:
 
 ```text
 Bounded Minds Lab
-  -> parameterized falsification (complete / consumed)
-  -> Protocol 08 strategic public influence
-  -> decide Protocol 09 authority cascade from P08 evidence
-  -> final social synthesis if needed
-  -> freeze lab retrospective + handoff
+  -> P03-P07 validation + falsification (complete / consumed)
+  -> Protocol 08 strategic public influence (validated / characterized)
+  -> Protocol 09 authority ancestry / circular standing (active)
+  -> freeze/stress P09 if warranted
+  -> final social synthesis + retrospective + handoff
 
 Trace & Interface Lab (candidate)
   -> hidden causal influence through bounded senses
@@ -136,11 +126,12 @@ later synthesis
 
 The successor should inherit behavioral pressures, failure surfaces, and experimental discipline. It should not inherit the current laboratory's constants as architecture.
 
-## v0.12 transition checkpoint
+## v0.13 transition checkpoint
 
-The Bounded Minds Laboratory is now close enough to its natural boundary that no new social protocol should be added by momentum alone. Protocol 08 is frozen and under fresh validation plus controlled falsification. The next decision is explicit:
+The Bounded Minds Laboratory is now close enough to closure that **Protocol 09 is being treated as the last currently justified social protocol**. Protocol 08 no longer needs more evidence before this decision; its holdout and controlled falsification are consumed.
 
-- if circular recommendation/standing can create a failure not already explained by evidence ancestry, provisional standing, and strategic public influence, run Protocol 09 as the likely final bounded-minds protocol;
-- otherwise close the lab with a synthesis/handoff rather than expanding the protocol count.
+The next decision after the Protocol 09 development matrix is explicit:
 
-The candidate Trace and Interface Laboratory remains the natural successor because it changes the starting assumption. Bounded Minds begins with another mind already represented as a peer. Trace and Interface begins with only structured causal residue at an observer boundary and asks whether another source process can be inferred at all.
+- if circular permission creates a failure mode not reducible to P06 evidence ancestry, P07 standing transfer, or P08 strategic influence, freeze and stress P09 before closeout;
+- if it does not, stop protocol expansion and write the final Bounded Minds synthesis;
+- in either case, the candidate Trace and Interface Laboratory remains the natural successor because it changes the starting assumption from an already-recognized peer to structured causal residue at an observer boundary.

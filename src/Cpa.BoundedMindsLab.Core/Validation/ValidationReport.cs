@@ -171,7 +171,7 @@ public static class ValidationReportBuilder
 
         return new ValidationReport(
             "cpa-bounded-minds-validation-v1",
-            "0.12.0",
+            "0.13.0",
             seedSet,
             seeds,
             fullProtocolSet,

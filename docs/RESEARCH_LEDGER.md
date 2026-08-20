@@ -435,3 +435,42 @@ The aligned surface is especially important because it contains no hidden confli
 ### Laboratory boundary
 
 Do not add Protocol 09 until these results are interpreted. Authority/standing cascades remain a plausible final bounded-minds problem, but only if circular permission is still distinct from strategic public influence plus the existing ancestry/standing findings. If it is not distinct, the lab should move to synthesis and closeout, then hand off to the Trace and Interface Laboratory.
+
+## 2026-08-20 - Protocol 08 independently validated; authority ancestry becomes Protocol 09
+
+### P08 fresh holdout
+
+The frozen twenty-seed `p08-holdout-v1` returned **20/20 Support with 200/200 checks passing**. Mean accountable total RMSE was `0.17873`, compared with `0.35608` for self-report naive and `0.18599` for local-only. Accountable early aligned RMSE was `0.23478` versus `0.41033` local-only. Late divergent and betrayal RMSE fell to about `0.03049` and `0.02973`, while the naive receiver remained near `0.41716` and `0.42072`.
+
+The result was not cost-free. Accountable influence was worse than local-only in 5/20 histories, with the worst case close to the frozen 5% opportunity-cost ceiling. This makes the holdout more informative than a simple dominance result.
+
+### P08 controlled falsification
+
+`strategic-influence-falsification-v1` completed five `7 x 7` surfaces with seven replicates per cell: **245 cells / 1,715 runs**. `128/245` cells had negative mean primary margins.
+
+The surfaces revised the interpretation rather than refuting the dyadic mechanism wholesale:
+
+- delayed consequence progressively removed accountability's advantage but generally pushed behavior toward local-only rather than runaway capture;
+- mild or late betrayal could leave authority sticky because contradiction strength and corrective latency were conflated;
+- persistent divergence eventually made keeping the peer socially available more costly than local learning, implying a participation/eligibility pressure distinct from context standing;
+- public feedback was both an exploit-learning channel and an accountability-learning channel;
+- noisy consequence could make a genuinely useful peer appear unreliable, exposing the need to separate source uncertainty from observation-channel uncertainty.
+
+Protocol 08 is now frozen and accepted as **supported within a characterized operating envelope**. Its scalar equations remain laboratory instruments.
+
+### Why Protocol 09 remains distinct
+
+P06 concerns ancestry of factual evidence. P07 concerns transfer of standing from one relationship to another. P08 concerns strategic optimization of one peer's public posture. None asks whether **permission to matter can recursively circulate through several minds and acquire the appearance of independent support**.
+
+Protocol 09 therefore opens as `09-authority-ancestry-circular-standing`. Five endorsing peers develop local standing and exchange locally plausible recommendations. Some contexts have several independent direct authority roots; others have one weak root feeding a circular endorsement loop. The assay compares compact authority-ancestry/path sketches, recursive endorsement without ancestry-sensitive governance, and direct-only learning.
+
+The root/path sketches are deliberately experimental. A positive result would support the need to distinguish independently grounded authority from returned/circulated authority, not the particular bit representation or update formula.
+
+### Next evidence
+
+1. verify Protocol 01-08 frozen hashes and build under .NET 10;
+2. run all **37 self-tests**;
+3. run P09 only on development-v1 (`101,211,307,401,503`);
+4. interpret whether P09 is genuinely distinct from P06-P08 before freezing it;
+5. only then decide whether a fresh P09 holdout/falsification phase is justified;
+6. if P09 is distinct and survives an operating-envelope phase, move Bounded Minds toward synthesis/closeout rather than inventing Protocol 10 by default.

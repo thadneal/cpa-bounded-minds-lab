@@ -170,45 +170,66 @@ The surfaces are now consumed exploratory evidence. Any mechanism revised from t
 
 ### Protocol 08: strategic public influence
 
-Status: **development-v1 Supported 5/5; exact v0.11 implementation frozen in v0.12 for fresh holdout and operating-envelope falsification**.
+Status: **frozen; fresh holdout 20/20 Support; controlled operating envelope characterized in v0.12**.
+
+The preregistered `p08-holdout-v1` run returned 20/20 Support with all 200 assertions passing. Mean accountable RMSE was about `0.17873`, versus `0.35608` for naive self-report authority and `0.18599` for local-only learning. Accountable early aligned RMSE was about `0.23478` versus `0.41033` local-only, while late divergent and betrayal RMSE remained near `0.03` versus roughly `0.42` for the naive receiver.
+
+The five controlled strategic-influence surfaces then exposed the operating envelope:
+
+- delayed consequence erodes the advantage over a manipulable receiver, although the accountable path tends toward local learning rather than runaway capture in the tested range;
+- weak or late betrayal can leave standing sticky because revocation has finite latency;
+- keeping a persistently divergent peer available becomes an attention/opportunity cost when divergence is common enough;
+- public feedback is not intrinsically unsafe because it is also the channel through which accountable consequence reshapes sender incentives;
+- noisy consequence can reduce standing for a genuinely aligned peer, so source reliability and consequence-channel reliability require distinct uncertainty.
+
+Narrow result: public influence can remain useful and strategically adaptive without private-state inspection when permission is receiver-owned and consequence-grounded. Carry forward the behavioral constraints, not the scalar standing equations. See `PROTOCOL_08_VALIDATION_RESULTS.md`.
+
+### Protocol 09: authority ancestry / circular standing
+
+Status: **active development protocol in v0.13**.
 
 Question:
 
-> Can direct consequence keep a strategically self-presenting peer useful where objectives align while limiting capture where the peer learns to optimize its public posture for influence?
+> Can a bounded ecology distinguish authority earned from independent consequence from permission that has recursively circulated through locally reasonable endorsements?
 
-Why it remains in this lab:
+Why it remains distinct:
 
-Protocols 01-07 already assume independent private interiors and bounded public surfaces. Their senders can be wrong, noisy, correlated, or locally mismatched, but they do not learn how to shape the public surface itself to gain more influence. Strategic public influence is therefore still a relation among already-perceptible bounded minds, not a hidden-source/interface problem for the successor lab.
+- P06 studied duplicated **evidence ancestry**.
+- P07 studied one-hop **standing transfer**.
+- P08 studied **strategic presentation** by one peer.
+- P09 studies whether **permission itself** can become self-supporting through a social loop even when every local transfer looks reasonable.
 
-Protocol 08 uses a peer B with a private objective. B can observe C's resulting public prediction and adapt among calibrated, assertive, and hedged confidence presentations according to how well that response fits B's objective. B cannot inspect C's private standing, calibration state, local estimate, counterfactual prediction, or implementation.
+Each world contains five endorsing peers and twelve contexts: four independently grounded contexts with several direct authority roots, four circular traps with one weak direct root, two mixed contexts, and two sparse-grounding contexts.
 
-Seed-generated worlds contain genuine alignment, persistent divergence, and two betrayal contexts where B is initially aligned long enough to earn influence before its private objective changes. Three paired paths compare:
+Three paired conditions compare:
 
-1. **accountable-consequence** - C owns source standing and confidence calibration; direct consequence revises both;
-2. **self-report-naive** - self-reported confidence gets direct leverage and standing changes only weakly;
-3. **local-only** - C refuses peer influence and learns only from consequence.
+1. **authority-ancestry** - compact root and path sketches let peers discount duplicated or returned permission, and let the receiver avoid counting overlapping authority roots as independent warrant;
+2. **recursive-endorsement** - local standing transfer remains individually reasonable but discards authority ancestry, allowing circular amplification to emerge at the network level;
+3. **direct-only** - the receiver ignores social permission and learns only from its own consequence.
 
-Ten preregistered checks cover world composition, learned strategic leverage, useful aligned help, strategic-capture reduction, reduced exploitability, betrayal repair, residual authority, opportunity cost, preservation of useful standing, and bounded public exchange.
+Direct consequence remains sovereign in every path. Authority ancestry is only a way to shape initial permission, not a truth detector. The bit sketches, five-peer ring, and fixed update constants are assay instruments rather than proposed CPA anatomy.
+
+Ten preregistered checks require the control to instantiate real circular amplification, require ancestry-sensitive transfer to preserve independently grounded benefit, require materially less circular capture, preserve later revocation and useful grounded standing, and keep communication cost exactly paired. See `PROTOCOL_09_DESIGN.md`.
 
 ### Current-lab closure question
 
-The Bounded Minds Laboratory is **not closed by v0.12**. Protocol 08 has earned fresh validation and controlled falsification before the lab decides whether authority cascades remain a distinct final social problem.
+The Bounded Minds Laboratory is **approaching closeout but not yet closed**. Protocol 09 is the last currently identified social-epistemic question that appears distinct rather than merely a stronger stress test of an earlier mechanism.
 
-After Protocol 08, decide whether **Protocol 09 - coalition / authority cascade** remains distinct. The question is whether permission itself can circulate through recommendation loops, factions, prestige, or bridge nodes and acquire apparently independent support without enough fresh consequence. This is different from P06 evidence ancestry and from P07 one-hop standing transfer.
+If Protocol 09 produces a coherent new effect, freeze it and subject it to the same evidence discipline used for P08 before synthesis. If it collapses into P06-P08, do not manufacture distinctness by tuning. Close the protocol sequence and move to final Bounded Minds synthesis.
 
-Do not add Protocol 09 automatically. If Protocol 08 plus the existing P06/P07 findings already answer the cascade question, close the lab instead. If it remains a genuine social failure mode, run it before final synthesis.
+No Protocol 10 is planned. A new social protocol should appear only if Protocol 09 exposes another independent failure mode that cannot be expressed as evidence ancestry, standing transfer, strategic influence, or authority ancestry.
 
 The candidate successor **Trace and Interface Laboratory** remains documented in `NEXT_LAB.md`. Its question begins one layer earlier: how an observer detects structured causal influence when the source itself is only indirectly available through an interface.
 
 ## Result cadence
 
-For v0.12 Protocol 08:
+For v0.13 Protocol 09:
 
-1. rebuild under the pinned .NET 10 SDK and run the **35** invariant/regression checks;
+1. rebuild under the pinned .NET 10 SDK and run the **37** invariant/regression checks;
 2. verify `docs/FROZEN_PROTOCOL_SHA256.txt` so the exact Protocol 01-08 frozen sources remain unchanged;
-3. run `p08-holdout-v1` exactly once with `--p08-validation` before changing Protocol 08 or inspecting controlled failure surfaces;
-4. preserve and interpret holdout category failures rather than reducing the result to another Support count;
-5. then run `strategic-influence-falsification-v1` with `--p08-falsify`;
-6. inspect consequence delay, betrayal timing/severity, divergence prevalence, sender adaptation/feedback, and aligned over-deterrence separately;
-7. decide from those results whether Protocol 09 remains a genuinely distinct authority-cascade problem;
-8. only after that decision consider Bounded Minds closeout and handoff to the Trace and Interface Laboratory.
+3. run Protocol 09 on `development-v1` (`101,211,307,401,503`);
+4. inspect whether recursive endorsement actually creates circular authority rather than assuming the manipulation worked;
+5. inspect early independently grounded benefit, early circular capture, whole-history cost, and later receiver-owned revocation separately;
+6. if the result is distinct and coherent, freeze the exact P09 experiment/world source before designing any holdout or controlled falsification;
+7. if it is redundant or incoherent, stop protocol expansion and move directly to Bounded Minds closeout;
+8. after the final social evidence is preserved, write the behavioral handoff for the successor Trace and Interface Laboratory.

@@ -605,16 +605,11 @@ Version 0.10 adds no Protocol 08. `challenge-v1` is consumed with 78 Support / 2
 
 These probes deliberately isolate selected frozen equations from the full protocol worlds. Their purpose is to locate operating boundaries, not to create new protocol Support counts. They write signed margins and surface CSVs rather than new protocol verdicts.
 
-## Remaining social questions in this laboratory
+## Remaining social question in this laboratory
 
-The current laboratory should not be closed merely because the first seven protocols are frozen and their local mechanisms have been stressed. The parameterized surfaces are now consumed. They left one social assumption clearly unresolved and one further question still plausible:
+The laboratory is now close to its natural boundary. Protocol 08 has completed development, fresh frozen holdout, and controlled falsification. One social problem remains distinct enough to justify a protocol rather than a prose conclusion: **authority ancestry / circular standing**.
 
-1. **Protocol 08 - strategic public influence (implemented in v0.11)**: a peer learns which public confidence posture gains influence while private state remains inaccessible. The question is whether consequence-grounded standing and calibration can limit strategic presentation without granting a central inspector or silencing useful peers.
-2. **Candidate Protocol 09 - coalition / authority cascade**: recommendation and standing circulate through several peers or factions and become mutually reinforcing without enough independent consequence. This differs from P06's copied evidence because the duplicated object is permission/authority rather than the evidence claim itself.
-
-Protocol 09 should not be added automatically. It belongs here only if Protocol 08 results leave circular permission/authority as a genuinely distinct failure mode among already-perceptible bounded minds. Otherwise the lab should move to synthesis and closeout rather than manufacture another protocol.
-
-The proposed successor in `NEXT_LAB.md` begins at a different boundary: the observer may not have direct access to the source process at all and must infer structured influence through an interface.
+The proposed successor in `NEXT_LAB.md` begins at a different boundary: the observer may not have direct access to the source process at all and must infer structured influence through an interface. Protocol 09 remains inside Bounded Minds because every participant is already represented as a peer; the unresolved issue is what their recursively transferred permission is allowed to mean.
 
 ## Parameterized falsification result: v0.10 consumed
 
@@ -630,7 +625,7 @@ The most important revisions are:
 
 ## Protocol 08: strategic public influence
 
-Status: **development-v1 Supported 5/5; exact implementation frozen for p08-holdout-v1 and controlled falsification**.
+Status: **frozen; p08-holdout-v1 20/20 Support; controlled operating envelope characterized**.
 
 Name: `08-strategic-public-influence`
 
@@ -638,80 +633,94 @@ Question:
 
 > Can direct consequence keep a strategically self-presenting peer useful where objectives align while limiting capture where the peer learns to optimize its public posture for influence?
 
-### Why this is a distinct bounded-minds question
+### Accepted evidence
 
-Earlier protocols assume that a public signal can be incomplete, noisy, correlated, overconfident, or locally wrong. They do not let the sender adapt its public presentation because particular presentations move the receiver more effectively.
+The development matrix returned 5/5 Support with 50/50 checks. The later preregistered twenty-seed holdout returned **20/20 Support with 200/200 checks passing**. Mean fresh-holdout total RMSE was `0.17873` for accountable consequence, `0.35608` for self-report naive, and `0.18599` for local-only. Accountable early aligned RMSE was `0.23478` versus `0.41033` local-only. Late divergent and betrayal RMSE were about `0.03049` and `0.02973`, versus `0.41716` and `0.42072` under naive self-report authority.
 
-Protocol 08 keeps both interiors private. Peer B has a private objective and sees only public feedback: after publishing an estimate and self-reported confidence, it can observe C's resulting public prediction and score how closely that response fits B's objective. B never reads C's source-standing array, calibration state, local estimate, counterfactual prediction, or implementation.
+The strategic sender's mean late divergent assertive rate was about `0.36386` under accountability versus `0.66606` against the naive receiver. Final accountable aligned standing remained `0.91084`; divergent and betrayal standing fell to about `0.02557` and `0.02530`.
 
-B adaptively chooses among three presentation tactics:
+### Controlled falsification
 
-- **calibrated** confidence, derived from B's own evidence quality;
-- **assertive** confidence (`0.98`);
-- **hedged** confidence (`0.35`).
+`strategic-influence-falsification-v1` then ran five 7 x 7 surfaces with seven deterministic replicates per cell: **245 cells / 1,715 runs**. The operating-envelope conclusions are:
 
-The tactic learner receives sender-side influence utility only. It is therefore able to discover leverage without being granted hidden access to the receiver.
+- consequence delay erodes accountability's advantage, but in the tested range the accountable path tends toward local-only performance rather than runaway capture;
+- weak or late betrayal can leave standing sticky because revocation has finite latency and mild contradiction resembles ordinary variation;
+- social openness becomes net costly when persistent objective divergence is common enough, suggesting a participation/eligibility pressure distinct from context standing;
+- public feedback is not intrinsically unsafe because it is also how consequence changes the sender's incentives;
+- noisy consequence can reduce standing for a genuinely aligned peer, so source uncertainty and consequence-channel uncertainty must remain distinct.
 
-### Seed-generated social world
+Narrow result:
 
-Each world contains twelve contexts and thirty receiver observations per context. Every seed contains at least:
+> Receiver-owned, consequence-grounded permission can keep an adaptively self-presenting peer useful without private-state inspection, but only inside a characterized operating envelope.
 
-- four genuinely aligned contexts;
-- four persistently divergent contexts;
-- two betrayal contexts that begin aligned for ten local exposures and then switch to a divergent sender objective.
+The exact confidence values, learning rates, standing update, and penalty constants remain assay instruments. See `PROTOCOL_08_DEVELOPMENT_RESULTS.md`, `PROTOCOL_08_VALIDATION_RESULTS.md`, and `STRATEGIC_INFLUENCE_VALIDATION.md`. `p08-holdout-v1` and `strategic-influence-falsification-v1` are consumed evidence.
 
-The remaining two contexts are seed-selected from aligned, divergent, or partial-alignment conditions. Receiver targets, noise, sender evidence quality, context placement, and divergent objectives vary with the seed.
+## Protocol 09: authority ancestry / circular standing
 
-The seed label is evaluator metadata. C never receives the context-kind label as evidence.
+Status: **active development protocol in v0.13**.
+
+Name: `09-authority-ancestry-circular-standing`
+
+Question:
+
+> Can a bounded ecology distinguish authority earned from independent consequence from permission that has recursively circulated through locally reasonable endorsements?
+
+### Distinction from earlier protocols
+
+Protocol 06 asks whether several agreeing reports descend from one evidence episode. Protocol 07 asks whether one mind's standing for another can buy a receiver provisional opportunity. Protocol 08 asks whether a sender can strategically shape its public posture to gain more influence.
+
+Protocol 09 asks a different network question: **can permission itself acquire apparently independent support by circulating?**
+
+A peer can rationally trust a neighbor. That neighbor can rationally trust another. If each later recommendation becomes evidence for the next peer's standing, a ring can generate high apparent authority without new consequence anywhere in the loop. The pathology belongs to the relation among locally plausible transfers.
+
+### Seed-generated authority world
+
+Each world contains five endorsing peers and twelve receiver contexts:
+
+- four `IndependentGrounding` contexts with three or four direct authority roots and a candidate estimate that is locally useful;
+- four `CircularAuthorityTrap` contexts with one weak direct root and a candidate estimate materially wrong for the receiver;
+- two `MixedAuthority` contexts with two direct roots and partial mismatch;
+- two `SparseGrounding` contexts with one useful direct root.
+
+Seed changes alter context placement, receiver targets, candidate estimates, consequence noise, direct-root position, base direct standing, and local peer trust. Context-kind labels remain evaluator metadata rather than receiver evidence.
 
 ### Conditions
 
-**Accountable consequence**
+**Authority ancestry**
 
-C owns source standing and a separate calibration-trust value. B's self-reported confidence can affect immediate opportunity, but only through those receiver-owned terms. After direct consequence, C updates local prediction, source standing, and confidence calibration. Large source error applies an additional standing penalty.
+Each public endorsement carries a compact root sketch and path sketch. Root overlap limits how much apparently new permission an endorsement can contribute. A returning path is strongly discounted when the endorsement has already passed through the receiving peer. The receiver similarly discounts overlapping authority roots when combining the final public endorsements.
 
-**Self-report naive**
+This is not a global authority registry. The sketches travel with the public message; peers retain only local standing and the compact ancestry of the influence they have accepted.
 
-C gives self-reported confidence direct leverage. Source standing changes only weakly and does not meaningfully govern immediate peer weight. This control is intentionally exploitable, but unlike earlier static controls the sender must actually discover that exploitability from interaction.
+**Recursive endorsement**
 
-**Local only**
+Control. Peers exchange the same number of packets at the same explicit cost. Each peer locally uses a trusted predecessor's standing to strengthen its own candidate standing, but authority ancestry is not allowed to govern the update. This permits standing to become self-reinforcing through the loop.
 
-C ignores B and learns only from direct consequence. This bounds the cost of keeping a potentially strategic peer available.
+**Direct only**
+
+The receiver refuses social permission and learns only from direct consequence. This bounds the value and cost of preserving social authority at all.
 
 ### Preregistered checks
 
-1. `seed-generates-strategic-social-world` - every seed contains substantial aligned/divergent exposure plus exactly two betrayal contexts;
-2. `strategic-sender-discovers-naive-leverage` - late divergent assertive presentation rate in the naive receiver is at least `0.50`;
-3. `accountable-public-influence-preserves-useful-help` - accountable early aligned RMSE is at least 25% lower than local-only;
-4. `consequence-limits-strategic-capture` - accountable total RMSE is at least 40% lower than self-report naive;
-5. `accountable-consequence-reduces-exploitability` - late divergent assertive rate falls by at least `0.15` relative to naive;
-6. `betrayal-remains-correctable` - late betrayal RMSE is at most 20% of naive and final betrayal standing is at most `0.10`;
-7. `public-claims-do-not-become-authority` - final divergent standing is at most `0.08` and at least four times lower than naive;
-8. `opportunity-cost-remains-bounded-versus-local` - accountable total RMSE may be at most 5% worse than local-only;
-9. `aligned-standing-remains-earned` - repeated aligned consequence retains final source standing of at least `0.85`;
-10. `strategic-public-exchange-is-bounded` - the two peer paths exchange exactly one compact posture per interaction at equal explicit cost, while local-only receives none.
+1. `seed-generates-authority-cascade-world`
+2. `recursive-endorsement-amplifies-circular-authority`
+3. `authority-ancestry-preserves-grounded-opportunity`
+4. `authority-ancestry-discounts-circular-permission`
+5. `authority-ancestry-reduces-circular-capture`
+6. `independent-grounding-remains-distinct-from-circular-authority`
+7. `direct-consequence-revokes-circular-authority`
+8. `grounded-standing-remains-earned`
+9. `whole-history-authority-ancestry-benefit`
+10. `bounded-authority-exchange`
 
 All ten checks are required for Support. Eight or nine passing checks produce Mixed; fewer than eight produce Disconfirm.
 
 ### Interpretation boundary
 
-A positive result would **not** show that manipulation has been solved generally. The sender has only three confidence-presentation tactics, one scalar estimate, and a simple influence objective. The result would establish a narrower property:
+A Supported development result would not establish the five-peer ring, bit sketches, fixed update rates, or scalar authority reducer as CPA anatomy. The durable question is whether **authority needs ancestry distinct from evidence ancestry** and whether returned permission should count less than independently grounded permission before direct local consequence has time to settle the matter.
 
-> Receiver-owned standing and calibration can make an adaptive public influence channel answerable to consequence without requiring private-state inspection, while still preserving useful influence where objectives remain aligned.
+See `PROTOCOL_09_DESIGN.md` for the full preregistered development design.
 
-The exact confidence values, learning rates, standing update, and penalty constants remain protocol instruments. The candidate architectural pressure is that self-presented confidence should not be allowed to become its own authority.
+### Current evidence cadence
 
-### Accepted development result and v0.12 evidence status
-
-The canonical development-v1 run returned **5/5 Support with 50/50 checks passing**. Mean total RMSE was `0.17793` for accountable consequence, `0.34698` for self-report naive, and `0.17824` for local-only. Accountable early aligned RMSE was `0.23370` versus `0.40223` local-only, while late divergent RMSE was `0.02922` versus `0.40325` naive and late betrayal RMSE was `0.02631` versus `0.34351` naive.
-
-The sender's mean late divergent assertive rate fell from `0.60788` under naive self-report authority to `0.33667` under accountable consequence. Mean final accountable aligned standing remained `0.90109`; divergent and betrayal standing fell to `0.02588` and `0.03158` respectively.
-
-The result is intentionally not read as cost-free dominance. Accountable total RMSE was worse than local-only in seeds 101 and 503, and naive self-report extracted more early benefit when the sender really was aligned. Seed 503 also motivates an over-deterrence question because accountable aligned assertiveness fell almost to zero while useful aligned influence still survived.
-
-Version 0.12 freezes the exact Protocol 08 experiment/world sources and registers two new evidence paths:
-
-- `p08-holdout-v1`: twenty previously unused seeds for fresh frozen validation;
-- `strategic-influence-falsification-v1`: controlled surfaces over consequence delay, sender adaptation, betrayal timing/severity, divergence prevalence, feedback observability, and aligned-noise over-deterrence.
-
-See `PROTOCOL_08_DEVELOPMENT_RESULTS.md` and `STRATEGIC_INFLUENCE_VALIDATION.md`.
+Protocol 09 starts only with `development-v1` (`101,211,307,401,503`). If the result is distinct and intelligible, freeze the exact experiment/world sources before designing a fresh holdout or controlled falsification. If it proves redundant with P06-P08, close the protocol sequence instead of tuning it into a separate finding.

@@ -362,3 +362,24 @@ Judge strategic capture and useful influence
 Run notes explain that the sender may learn from receiver public prediction but cannot inspect receiver-private standing or calibration. New graph guidance distinguishes sender objective, self-reported confidence, receiver-owned calibration trust, peer influence weight, sender utility, and presentation tactic.
 
 No visualization mechanics changed in v0.11. Incremental graph updates, table wrapping/resizing, per-metric show/hide controls, seed-scoped telemetry, and experiment/UI isolation remain unchanged.
+
+## v0.13 Protocol 09 workbench
+
+Protocol 08 now appears as frozen, independently validated evidence. Protocol 09 is the active development assay and Protocol Progress follows:
+
+```text
+Generate authority world
+  independent grounding + circular authority traps
+Develop social authority
+  ancestry-sensitive endorsement
+  recursive-endorsement control
+Apply receiver consequence
+  direct experience revises standing
+Judge authority ancestry
+  ten preregistered checks
+  protocol verdict
+```
+
+The visualization remains observer-only. Root coverage, social authority, cycle-return rate, standing, and receiver error are projected telemetry; no graph selection, legend state, table width, render cadence, or progress state can feed back into experiment cognition.
+
+Metric guidance now distinguishes authority magnitude from authority quality. Higher social authority is not universally preferred; it is useful only when independently grounded or later confirmed. Root coverage is likewise contextual, while RMSE retains the ordinary lower-is-better interpretation.

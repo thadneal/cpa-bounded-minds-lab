@@ -25,6 +25,7 @@ public partial class MainWindow : Window
     private const string Protocol06Name = "06-incomplete-epistemic-ancestry";
     private const string Protocol07Name = "07-provisional-standing-transfer";
     private const string Protocol08Name = "08-strategic-public-influence";
+    private const string Protocol09Name = "09-authority-ancestry-circular-standing";
     private static readonly int[] BoundaryDelays = [0, 2, 10];
     private static readonly char[] SeedSeparators = [',', ';', ' ', '\t', '\r', '\n'];
     private readonly DesktopRunCoordinator _coordinator = new();
@@ -584,7 +585,11 @@ public partial class MainWindow : Window
         if (!string.Equals(_progressExperiment, experiment, StringComparison.Ordinal))
         {
             _progressExperiment = experiment;
-            if (string.Equals(experiment, Protocol08Name, StringComparison.Ordinal))
+            if (string.Equals(experiment, Protocol09Name, StringComparison.Ordinal))
+            {
+                SetProtocol09ProgressLabels();
+            }
+            else if (string.Equals(experiment, Protocol08Name, StringComparison.Ordinal))
             {
                 SetProtocol08ProgressLabels();
             }
@@ -618,6 +623,12 @@ public partial class MainWindow : Window
             }
 
             SetAllProgressPending();
+        }
+
+        if (string.Equals(experiment, Protocol09Name, StringComparison.Ordinal))
+        {
+            UpdateProtocol09Progress(timeline);
+            return;
         }
 
         if (string.Equals(experiment, Protocol08Name, StringComparison.Ordinal))
@@ -757,6 +768,49 @@ public partial class MainWindow : Window
             experimentComplete ? ProgressMark.Complete : syncComplete ? ProgressMark.Current : ProgressMark.Pending);
     }
 
+
+    private void UpdateProtocol09Progress(TelemetryTimelineSnapshot timeline)
+    {
+        var experimentStarted = HasTimelineEvent(timeline, Protocol09Name, ExperimentFrameKind.ExperimentStarted);
+        var scenarioGenerated = HasTimelineEvent(timeline, Protocol09Name, ExperimentFrameKind.DevelopmentalEvent, "scenario", "authority-world-generated");
+        var ancestryStarted = HasTimelineEvent(timeline, Protocol09Name, ExperimentFrameKind.PhaseChanged, "authority-ancestry", "authority-development");
+        var ancestryReceiverStarted = HasTimelineEvent(timeline, Protocol09Name, ExperimentFrameKind.PhaseChanged, "authority-ancestry", "receiver-consequence");
+        var ancestryComplete = HasTimelineEvent(timeline, Protocol09Name, ExperimentFrameKind.DevelopmentalEvent, "authority-ancestry", "path-complete");
+        var recursiveStarted = HasTimelineEvent(timeline, Protocol09Name, ExperimentFrameKind.PhaseChanged, "recursive-endorsement", "authority-development");
+        var recursiveComplete = HasTimelineEvent(timeline, Protocol09Name, ExperimentFrameKind.DevelopmentalEvent, "recursive-endorsement", "path-complete");
+        var directStarted = HasTimelineEvent(timeline, Protocol09Name, ExperimentFrameKind.PhaseChanged, "direct-only", "receiver-consequence");
+        var directComplete = HasTimelineEvent(timeline, Protocol09Name, ExperimentFrameKind.DevelopmentalEvent, "direct-only", "path-complete");
+        var experimentComplete = HasTimelineEvent(timeline, Protocol09Name, ExperimentFrameKind.ExperimentCompleted);
+
+        SetProgressLine(SourceDirectProgressText,
+            scenarioGenerated ? ProgressMark.Complete : experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(SourcePublishProgressText,
+            ancestryReceiverStarted || ancestryComplete ? ProgressMark.Complete : ancestryStarted ? ProgressMark.Current : scenarioGenerated ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(SourceStepText,
+            ancestryReceiverStarted || ancestryComplete || experimentComplete ? ProgressMark.Complete : experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressCard(SourceProgressCard,
+            ancestryReceiverStarted || ancestryComplete || experimentComplete ? ProgressMark.Complete : experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
+
+        SetProgressLine(ReceiverLocalProgressText,
+            ancestryComplete || recursiveStarted ? ProgressMark.Complete : ancestryReceiverStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(ReceiverProvisionalProgressText,
+            recursiveComplete || directStarted ? ProgressMark.Complete : recursiveStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(ReceiverLivedProgressText,
+            directComplete ? ProgressMark.Complete : directStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(ReceiverStepText,
+            directComplete || experimentComplete ? ProgressMark.Complete : ancestryReceiverStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressCard(ReceiverProgressCard,
+            directComplete || experimentComplete ? ProgressMark.Complete : ancestryReceiverStarted ? ProgressMark.Current : ProgressMark.Pending);
+
+        SetProgressLine(EvaluationAssertionsProgressText,
+            experimentComplete ? ProgressMark.Complete : directComplete ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(EvaluationVerdictProgressText,
+            experimentComplete ? ProgressMark.Complete : ProgressMark.Pending);
+        SetProgressLine(EvaluationStepText,
+            experimentComplete ? ProgressMark.Complete : directComplete ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressCard(EvaluationProgressCard,
+            experimentComplete ? ProgressMark.Complete : directComplete ? ProgressMark.Current : ProgressMark.Pending);
+    }
 
     private void UpdateProtocol08Progress(TelemetryTimelineSnapshot timeline)
     {
@@ -1058,6 +1112,20 @@ public partial class MainWindow : Window
     }
 
 
+    private void SetProtocol09ProgressLabels()
+    {
+        SetProgressLabel(SourceStepText, "1. Let authority circulate");
+        SetProgressLabel(SourceDirectProgressText, "Seed-specific independent roots + circular traps");
+        SetProgressLabel(SourcePublishProgressText, "Peers exchange locally reasonable endorsements");
+        SetProgressLabel(ReceiverStepText, "2. Compare authority boundaries");
+        SetProgressLabel(ReceiverLocalProgressText, "Authority ancestry + direct consequence");
+        SetProgressLabel(ReceiverProvisionalProgressText, "Recursive-endorsement control");
+        SetProgressLabel(ReceiverLivedProgressText, "Direct-only baseline");
+        SetProgressLabel(EvaluationStepText, "3. Judge permission ancestry");
+        SetProgressLabel(EvaluationAssertionsProgressText, "Ten falsification checks");
+        SetProgressLabel(EvaluationVerdictProgressText, "Protocol verdict");
+    }
+
     private void SetProtocol08ProgressLabels()
     {
         SetProgressLabel(SourceStepText, "1. Let a peer learn public leverage");
@@ -1182,7 +1250,7 @@ public partial class MainWindow : Window
     private void ResetProtocolProgress()
     {
         _progressExperiment = null;
-        SetProtocol08ProgressLabels();
+        SetProtocol09ProgressLabels();
         SetAllProgressPending();
     }
 

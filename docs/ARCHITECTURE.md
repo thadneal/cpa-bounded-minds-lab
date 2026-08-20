@@ -402,3 +402,27 @@ Protocol 08 is now frozen at the exact v0.11 development implementation. The lab
 The falsification probes deliberately do not become new runtime architecture. Their purpose is to reveal where the Protocol 08 mechanism stops being useful. In particular, the aligned-noise surface supplies a null-harm condition: if every sender is genuinely aligned, reduced social influence is not a defensive success.
 
 This keeps a core CPA distinction visible: **private strategy may remain inaccessible, but public influence must still be governable by local consequence**. The lab is testing the boundary of that pressure, not installing the current standing equation as durable CPA machinery.
+
+## v0.13 authority ancestry is an experimental social boundary
+
+Protocol 08 is now reconciled as frozen evidence: receiver-owned consequence can discipline strategically optimized public influence without inspecting sender-private state, but the operating envelope depends on consequence timing, social usefulness, and observation quality. The architectural implication is not a fixed strategic-defense equation. It is the preservation of distinct pressures for source reliability, consequence-channel reliability, context-specific standing, and whether a peer remains worth recruiting.
+
+Protocol 09 adds a different social relation: **ancestry of permission**. A locally reasonable endorsement can be copied by another peer, then another, and eventually return to its region of origin. If each recipient treats the incoming standing as new independent warrant, a network can create high apparent authority without adding new consequence.
+
+The experimental boundary is:
+
+```text
+independent consequence roots
+        |
+        v
+local standing --> public endorsement --> local standing
+        ^                                 |
+        |_________________________________|
+              possible returned permission
+```
+
+The assay's compact `rootSketch` and `pathSketch` fields are not proposed engine anatomy. They make a falsifiable distinction observable inside a small synthetic network. A future CPA implementation may represent dependence probabilistically, developmentally, or through another learned local substrate.
+
+The durable architectural question is narrower: **does permission require provenance/ancestry distinct from the ancestry of factual evidence?** If several endorsements descend from one authority root, repeated circulation should not automatically manufacture independent warrant. Conversely, independently grounded social authority must remain able to reinforce a useful peer.
+
+Direct receiver consequence remains sovereign in all Protocol 09 treatments. Authority ancestry shapes provisional social opportunity before direct experience accumulates; it does not become a hidden global reputation oracle.

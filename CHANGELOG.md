@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.13.0 - 2026-08-20
+
+- Recorded the fresh Protocol 08 holdout result: **20/20 Support with 200/200 preregistered checks passing**, including 80/80 mechanism-outcome, 60/60 safety-boundary, 40/40 manipulation, and 20/20 accounting checks.
+- Recorded `strategic-influence-falsification-v1` as consumed operating-envelope evidence: five 7 x 7 controlled surfaces, 245 cells, and 1,715 deterministic replicates. Revised the durable conclusion around delayed/noisy consequence, pervasive divergence, betrayal latency, public feedback, and the distinction between source standing and participation eligibility.
+- Added `docs/PROTOCOL_08_VALIDATION_RESULTS.md` and revised the research record so Protocol 08 is now frozen and supported within a characterized operating envelope rather than described as active development.
+- Added Protocol 09, `09-authority-ancestry-circular-standing`, testing whether permission itself can become apparently independent by recursively circulating through locally reasonable social endorsements.
+- Added `AuthorityAncestryWorld`, with four independently grounded contexts, four circular-authority traps, two mixed-authority contexts, and two sparse-grounding contexts per seed. Seed changes alter context placement, targets, candidate estimates, direct-root positions, standing strength, peer trust, and consequence noise.
+- Added three Protocol 09 conditions: `authority-ancestry`, `recursive-endorsement`, and `direct-only`. The ancestry path carries compact authority-root and path sketches; the control discards ancestry while keeping locally reasonable standing transfer; both social paths use identical public packet counts and cost.
+- Added ten preregistered Protocol 09 checks covering circular-amplification manipulation, preservation of independently grounded social opportunity, circular-permission discounting, early capture reduction, authority-root discrimination, consequence-driven revocation, retained grounded standing, whole-history benefit, and bounded exchange.
+- Added `docs/PROTOCOL_09_DESIGN.md`, Protocol 09 telemetry/metric guidance, Desktop Protocol Progress, and Run Notes.
+- Added two Protocol 09 development invariants, bringing the suite from 35 to **37 tests**. The seed-101 check remains a development fixture rather than independent validation.
+- Kept every frozen Protocol 01-08 experiment/world source file byte-for-byte unchanged under `docs/FROZEN_PROTOCOL_SHA256.txt`. Protocol 09 remains outside the frozen boundary until its development result is reviewed.
+- Updated CLI help, artifact versions, assembly versions, and window fallback titles to v0.13.0. The current research run is the Protocol 09 canonical development matrix.
+
 ## 0.12.0 - 2026-08-20
 
 - Froze the exact Protocol 08 development experiment and world-generator sources under `docs/FROZEN_PROTOCOL_SHA256.txt` after the canonical development matrix returned 5/5 Support with 50/50 preregistered checks passing.

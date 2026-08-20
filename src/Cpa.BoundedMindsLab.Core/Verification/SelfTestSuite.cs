@@ -36,6 +36,8 @@ public static class SelfTestSuite
         Run("protocol-07-development-fixture-seed-101", TestProtocolSeven, passed);
         Run("protocol-08-default-seeds-create-distinct-strategic-influence-worlds", TestProtocolEightSeedSemantics, passed);
         Run("protocol-08-development-fixture-seed-101", TestProtocolEight, passed);
+        Run("protocol-09-default-seeds-create-distinct-authority-cascade-worlds", TestProtocolNineSeedSemantics, passed);
+        Run("protocol-09-development-fixture-seed-101", TestProtocolNine, passed);
         Run("validation-seed-sets-are-frozen-and-disjoint", TestValidationSeedSets, passed);
         Run("validation-check-taxonomy-separates-evidence-types", TestValidationTaxonomy, passed);
         Run("validation-report-identifies-development-regression", TestValidationReport, passed);
@@ -362,6 +364,46 @@ public static class SelfTestSuite
     }
 
 
+    private static void TestProtocolNineSeedSemantics()
+    {
+        var fingerprints = new HashSet<ulong>();
+        var layouts = new HashSet<string>(StringComparer.Ordinal);
+        var rootOffsets = new HashSet<int>();
+        foreach (var seed in ExperimentDefaults.DevelopmentSeeds)
+        {
+            var scenario = AuthorityAncestryWorld.CreateScenario(seed);
+            Assert(fingerprints.Add(scenario.Fingerprint), $"Default seed {seed} should produce a distinct authority-cascade fingerprint.");
+            layouts.Add(string.Join(",", scenario.Cells.Select(cell => (int)cell.ContextKind)));
+            foreach (var cell in scenario.Cells)
+            {
+                rootOffsets.Add(cell.RootOffset);
+            }
+
+            Assert(AuthorityAncestryWorld.CountKind(scenario, AuthorityAncestryContextKind.IndependentGrounding) == 4, "Each Protocol 09 world should contain four independently grounded authority contexts.");
+            Assert(AuthorityAncestryWorld.CountKind(scenario, AuthorityAncestryContextKind.CircularAuthorityTrap) == 4, "Each Protocol 09 world should contain four circular authority traps.");
+            Assert(scenario.Cells.Where(cell => cell.ContextKind == AuthorityAncestryContextKind.IndependentGrounding).All(cell => cell.DirectRootCount >= 3), "Independent authority contexts must begin with several direct roots.");
+            Assert(scenario.Cells.Where(cell => cell.ContextKind == AuthorityAncestryContextKind.CircularAuthorityTrap).All(cell => cell.DirectRootCount == 1), "Circular authority traps must begin from one weak direct root before permission circulates.");
+        }
+
+        Assert(layouts.Count >= 4, "The canonical Protocol 09 seeds should vary where independently grounded, circular, mixed, and sparse authority contexts occur.");
+        Assert(rootOffsets.Count >= 4, "Protocol 09 development worlds should vary which peers originate direct authority rather than privilege one fixed network position.");
+    }
+
+    private static void TestProtocolNine()
+    {
+        var output = CreateTemporaryDirectory();
+        try
+        {
+            var run = ExperimentRunner.Run([ExperimentCatalog.Get("09-authority-ancestry-circular-standing")], 101, output, quiet: true);
+            Assert(run.Experiments.Single().Verdict == ExperimentVerdict.Support, "Protocol 09 should meet its preregistered synthetic development boundaries for seed 101.");
+        }
+        finally
+        {
+            Directory.Delete(output, recursive: true);
+        }
+    }
+
+
     private static void TestValidationSeedSets()
     {
         Assert(ExperimentDefaults.DevelopmentSeeds.Count == 5, "development-v1 must remain the frozen five-seed regression set.");
@@ -382,6 +424,9 @@ public static class SelfTestSuite
         Assert(ValidationCheckTaxonomy.Classify("strategic-sender-discovers-naive-leverage") == ValidationCheckTaxonomy.Manipulation, "Protocol 08 leverage discovery should remain a manipulation check.");
         Assert(ValidationCheckTaxonomy.Classify("betrayal-remains-correctable") == ValidationCheckTaxonomy.SafetyBoundary, "Protocol 08 betrayal repair should remain a safety-boundary check.");
         Assert(ValidationCheckTaxonomy.Classify("strategic-public-exchange-is-bounded") == ValidationCheckTaxonomy.AccountingConstraint, "Protocol 08 public exchange should remain an accounting check.");
+        Assert(ValidationCheckTaxonomy.Classify("recursive-endorsement-amplifies-circular-authority") == ValidationCheckTaxonomy.Manipulation, "Protocol 09 circular amplification should remain a manipulation check.");
+        Assert(ValidationCheckTaxonomy.Classify("direct-consequence-revokes-circular-authority") == ValidationCheckTaxonomy.SafetyBoundary, "Protocol 09 revocation should remain a safety-boundary check.");
+        Assert(ValidationCheckTaxonomy.Classify("bounded-authority-exchange") == ValidationCheckTaxonomy.AccountingConstraint, "Protocol 09 endorsement traffic should remain an accounting check.");
     }
 
     private static void TestValidationReport()

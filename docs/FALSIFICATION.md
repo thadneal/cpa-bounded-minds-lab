@@ -664,3 +664,106 @@ dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
 ```
 
 Negative primary margins are useful. Do not tune the receiver from these surfaces and then describe the same surface as confirmation.
+
+---
+
+## Protocol 08 evidence status after v0.12
+
+The fresh Protocol 08 holdout and `strategic-influence-falsification-v1` are now consumed. Protocol 08 is frozen and supported within a characterized operating envelope. Its controlled surfaces should not be reused as confirmation after any future mechanism change. See `PROTOCOL_08_VALIDATION_RESULTS.md` and `STRATEGIC_INFLUENCE_VALIDATION.md`.
+
+---
+
+## Protocol 09: authority ancestry / circular standing
+
+Protocol 09 asks whether recursively circulated **permission** can acquire the appearance of independent authority without new consequence.
+
+### Manipulation checks
+
+`seed-generates-authority-cascade-world`
+
+Each development world must contain independently grounded authority, circular authority traps, mixed authority, and sparse grounding with seed-dependent placement/root ownership.
+
+`recursive-endorsement-amplifies-circular-authority`
+
+```text
+recursive circular receiver authority >= 0.80
+recursive circular receiver authority >= 5 * initial mean peer standing
+```
+
+The control must actually instantiate the authority-cascade failure rather than merely exchange harmless endorsements.
+
+### Mechanism outcomes
+
+`authority-ancestry-preserves-grounded-opportunity`
+
+```text
+ancestry early grounded RMSE <= 0.65 * direct-only early grounded RMSE
+```
+
+Ancestry defense may not solve circular authority by refusing useful social standing.
+
+`authority-ancestry-discounts-circular-permission`
+
+```text
+ancestry circular initial authority <= 0.40
+ancestry circular initial authority <= 0.45 * recursive circular initial authority
+```
+
+Returned/copy-derived permission should not count like independently grounded warrant.
+
+`authority-ancestry-reduces-circular-capture`
+
+```text
+ancestry early circular RMSE <= 0.88 * recursive early circular RMSE
+```
+
+The ancestry distinction must change receiver behavior, not merely produce prettier provenance metadata.
+
+`independent-grounding-remains-distinct-from-circular-authority`
+
+```text
+ancestry grounded initial authority >= ancestry circular initial authority + 0.30
+ancestry grounded initial authority >= 0.55
+```
+
+Independent consequence roots must remain able to create useful social opportunity.
+
+`whole-history-authority-ancestry-benefit`
+
+```text
+ancestry total RMSE <= 0.95 * recursive total RMSE
+ancestry total RMSE <= direct-only total RMSE
+```
+
+The social mechanism must not merely shift error between phases.
+
+### Safety boundaries
+
+`direct-consequence-revokes-circular-authority`
+
+```text
+final circular standing <= 0.08
+late circular RMSE <= 0.08
+```
+
+Whatever provisional authority survives ancestry filtering must remain locally revocable.
+
+`grounded-standing-remains-earned`
+
+```text
+final grounded standing >= 0.82
+```
+
+The defense must not flatten useful social authority into generalized suspicion.
+
+### Accounting constraint
+
+`bounded-authority-exchange`
+
+Both social paths use the same modeled public packet count and communication cost. Direct-only uses no social packet traffic.
+
+### Verdict
+
+All ten checks are required for Support. Eight or nine passing checks produce Mixed. Fewer than eight produce Disconfirm.
+
+A Supported development result would not validate the five-peer ring, bit sketches, scalar standing update, or exact thresholds. It would support the narrower hypothesis that **authority ancestry is behaviorally distinct from evidence ancestry and can matter before direct consequence settles social permission**.

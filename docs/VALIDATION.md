@@ -1,27 +1,28 @@
 # Validation and Operating-Envelope Method
 
-Version 0.12.0 keeps Protocols 01-07 frozen, records parameterized-falsification-v1 as consumed exploratory evidence, and returns to targeted mechanism discovery for Protocol 08 strategic public influence.
+Version 0.13.0 keeps Protocols 01-08 frozen, records the completed Protocol 08 holdout and strategic falsification as consumed evidence, and opens Protocol 09 authority ancestry / circular standing as development work.
 
-The distinction matters:
+The evidence sets have different jobs:
 
-- `development-v1` is construction/regression data;
-- `holdout-v1` was the first frozen confirmatory set and is now consumed;
-- `challenge-v1` is consumed adversarial exploration, not a second holdout;
-- `parameterized-falsification-v1` is controlled causal exploration outside the frozen generator support, not confirmation.
+- `development-v1` is construction and regression data;
+- `holdout-v1` is the consumed Protocol 01-07 frozen holdout;
+- `challenge-v1` is consumed adversarial exploration;
+- `parameterized-falsification-v1` is consumed controlled causal exploration for P03-P07;
+- `p08-holdout-v1` is the consumed fresh Protocol 08 holdout;
+- `strategic-influence-falsification-v1` is consumed controlled operating-envelope evidence for P08;
+- Protocol 09 begins again at development-v1 and must earn a fresh holdout only after its development result is interpreted and its exact assay is frozen.
 
 ## Why the validation method changed
 
-The canonical development matrix produced Support for every protocol and every seed. Inspection did not reveal duplicated or corrupted data, and many near-overlapping plots were explained by paired treatments sharing the same generated world. The deeper methodological problem was that those five seeds had been repeatedly used during implementation sanity checks. They were therefore development data even when thresholds were nominally preregistered.
+The canonical development matrix originally produced Support for every protocol and every seed. Inspection did not reveal duplicated or corrupted data, and many near-overlapping plots were explained by paired treatments sharing the same generated world. The methodological problem was that the five canonical seeds had been repeatedly used during implementation sanity checks. They are therefore development data even when thresholds were written before the user's run.
 
-Version 0.8 froze Protocols 01-07 and their world generators, registered twenty previously unused seeds, separated evidence categories, and ran the complete set without retuning.
-
-That holdout was consumed on 2026-08-20.
+Version 0.8 froze Protocols 01-07 and their world generators, registered twenty unused seeds, separated evidence categories, and ran the complete set without retuning. Later versions added adversarial seed selection and then controlled causal surfaces. Protocol 08 repeated the improved cadence: development, exact-source freeze, unused holdout, then controlled falsification.
 
 ## Frozen source boundary
 
-`docs/FROZEN_PROTOCOL_SHA256.txt` contains SHA-256 hashes for all seven experiment files and their seven world generators. `scripts/verify.ps1` and `scripts/verify.sh` check those hashes before build/self-test.
+`docs/FROZEN_PROTOCOL_SHA256.txt` contains SHA-256 hashes for **eight experiment files and eight world generators**, Protocols 01-08. `scripts/verify.ps1` and `scripts/verify.sh` check those hashes before build/self-test.
 
-Version 0.12.0 leaves those files byte-for-byte unchanged. Challenge and parameterized-falsification tooling remain beside the frozen assays. Protocol 08 is new development work and is deliberately outside the Protocol 01-07 frozen source boundary.
+Version 0.13.0 leaves all sixteen files byte-for-byte unchanged. Protocol 09 is new development work and is deliberately outside the frozen Protocol 01-08 boundary until its development result is reviewed.
 
 ## Seed sets
 
@@ -33,7 +34,7 @@ Version 0.12.0 leaves those files byte-for-byte unchanged. Challenge and paramet
 
 Purpose: deterministic regression and development comparison only.
 
-### holdout-v1
+### holdout-v1, Protocols 01-07
 
 ```text
 809, 977, 1201, 1429, 1693, 2017, 2371, 2741, 3163, 3581,
@@ -42,200 +43,138 @@ Purpose: deterministic regression and development comparison only.
 
 Status: **consumed on 2026-08-20**.
 
-Rerunning this set is useful for reproducibility. It is no longer fresh validation and must not be used to confirm a mechanism that has been changed after seeing its results.
+The frozen run produced 121 Support / 19 Mixed / 0 Disconfirm across 140 protocol runs, with 981/1000 preregistered checks passing. Category totals were 399/400 mechanism outcomes, 288/300 safety boundaries, 174/180 manipulation checks, and 120/120 accounting constraints.
 
-## Holdout-v1 result
-
-The frozen seven-protocol run produced:
+### p08-holdout-v1
 
 ```text
-140 protocol runs
-121 Support
-19 Mixed
-0 Disconfirm
-
-1000 preregistered checks
-981 passed
-19 failed
+41047, 42131, 43391, 44621, 45893,
+47237, 48611, 49919, 51307, 52709,
+54139, 55603, 57143, 58661, 60209,
+61781, 63347, 64997, 66617, 68213
 ```
 
-Evidence categories:
+Status: **consumed on 2026-08-20**.
 
-| Category | Passed | Checks | Failed |
-| --- | ---: | ---: | ---: |
-| mechanism outcome | 399 | 400 | 1 |
-| safety boundary | 288 | 300 | 12 |
-| manipulation | 174 | 180 | 6 |
-| accounting constraint | 120 | 120 | 0 |
+Protocol 08 returned **20/20 Support with 200/200 checks passing**. Mean total RMSE was `0.17873` for accountable consequence, `0.35608` for self-report naive, and `0.18599` for local-only. Accountable early aligned RMSE was `0.23478` versus `0.41033` local-only. Late divergent and betrayal RMSE were `0.03049` and `0.02973`, versus `0.41716` and `0.42072` in the naive condition.
 
-Per protocol:
+The holdout does not imply social influence is free. Accountable treatment was worse than local-only in 5/20 histories, with the worst case remaining just inside the frozen 5% opportunity-cost allowance. See `PROTOCOL_08_VALIDATION_RESULTS.md`.
 
-| Protocol | Support | Mixed | Main holdout lesson |
-| --- | ---: | ---: | --- |
-| P01 | 20 | 0 | Mechanism demonstration remained stable, but old seed semantics limit generalization value. |
-| P02 | 20 | 0 | Same qualification as P01; holdout mostly perturbs ordering/noise. |
-| P03 | 19 | 1 | Developmental context helps calibration but is not guaranteed to beat doctrine on whole-history error. |
-| P04 | 19 | 1 | Frozen typed-vs-smoothing mechanism remained robust; the only Mixed run missed the intended manipulation strength. |
-| P05 | 13 | 7 | Cultural revisability can leak into contexts that should remain stable; plasticity and retention compete. |
-| P06 | 16 | 4 | Ancestry inference can suppress genuinely independent evidence when dependence is inferred too aggressively. |
-| P07 | 14 | 6 | Provisional standing has real opportunity cost and can leave excessive residual authority under fragile transfer. |
+## Evidence taxonomy
 
-The challenge slices from the holdout were informative but unevenly populated. In particular, P05 high-regime-shift matched only two worlds. P06 weak-ancestry-visibility and P07 fragile-recommender-transfer were much more useful because they produced substantial Mixed rates.
+Assertions are classified as:
 
-## Revised implementation conclusions
-
-The holdout supports carrying forward behavioral pressures, not the protocol-local formulas.
-
-Reasonable implementation pressures now include:
-
-- foreign evidence remains distinguishable from lived consequence;
-- private developmental histories are not collapsed merely because minds communicate;
-- transferred conclusions may carry bounded information about how they were earned;
-- public communication should preserve enough epistemic shape and source distinction to avoid indiscriminate smoothing;
-- convention may compress coordination, but must balance revisability against stable retention;
-- ancestry is uncertain evidence about dependence, not a hard duplicate identity relation;
-- second-hand standing can grant conditional opportunity, but durable authority must remain answerable to local consequence.
-
-The exact standing caps, learning rates, packet costs, thresholds, grouping heuristics, and control implementations remain experimental instruments.
-
-## Check taxonomy
-
-Assertions continue to be classified as:
-
-1. **manipulation**: did the generated world/control actually contain the intended pressure?
+1. **manipulation**: did the generated world/control contain the intended pressure?
 2. **mechanism outcome**: did the proposed behavior produce the predicted functional effect?
 3. **safety boundary**: did the mechanism avoid the failure mode that would make the apparent gain unsafe or brittle?
 4. **accounting constraint**: did communication or compute remain inside the explicit budget?
 
-These categories do not change a frozen protocol verdict. They change how much evidential weight should be assigned to different passing checks.
+These categories do not change a frozen protocol verdict. They prevent assay mechanics such as packet accounting from being psychologically counted as independent theoretical confirmations.
 
-## challenge-v1
+## Consumed exploratory evidence
 
-`challenge-v1` is now **consumed exploratory evidence**. The frozen challenge returned 78 Support / 22 Mixed / 0 Disconfirm across 100 adversarial runs. Category results were 317/320 mechanism, 207/220 safety, 133/140 manipulation, and 78/80 accounting checks.
+### challenge-v1
 
-The most important methodological result was that the composite descriptor rankings were not reliably monotonic causal stress variables. Several descriptor components could strengthen the mechanism they were intended to challenge. P04 was the clearest example: more conflict density often increased the value of preserving typed epistemic shape.
+The frozen challenge returned 78 Support / 22 Mixed / 0 Disconfirm across 100 adversarial runs. Category totals were 317/320 mechanism, 207/220 safety, 133/140 manipulation, and 78/80 accounting.
 
-The profile-specific conclusions and exact failure examples are preserved in `CHALLENGE_V1_RESULTS.md`. `challenge-v1` can be reproduced, but it must not be used as a new holdout or as confirmation after mechanism changes.
+Its most important methodological result was negative: composite descriptor rankings were not reliably monotonic causal stress variables. Several descriptor components could strengthen the mechanism they were intended to challenge. The exact result is preserved in `CHALLENGE_V1_RESULTS.md`.
 
-## parameterized-falsification-v1
+### parameterized-falsification-v1
 
-Status: **consumed exploratory evidence**.
+The controlled P03-P07 phase produced **294 cells / 2,058 deterministic runs**. `176/294` cells had negative mean primary margins and `1,201/2,058` replicates crossed at least one registered boundary.
 
-Version 0.10 replaced composite seed ranking with controlled causal intervention. This was **not validation** in the confirmatory sense. It was exploratory falsification designed to map null, useful, crossover, and harmful regions. The completed phase produced 294 controlled cells / 2,058 deterministic runs; 176/294 cells had a negative mean primary boundary margin and 1,201/2,058 replicates crossed at least one registered boundary. Full interpretation is preserved in `PARAMETERIZED_FALSIFICATION_V1_RESULTS.md`.
+The durable revisions were behavioral rather than formula-level:
 
-The runner does not change frozen Protocol 01-07 experiment or world-generator source. Instead, protocol-local micro-assays copy selected frozen equations into independent controlled probes so causal variables can be separated and pushed beyond the support of the original generated worlds.
+- P03: developmental instability is information about uncertainty, not an automatic scalar trust penalty;
+- P04: preserve epistemic shape, but do not privilege one universal reducer;
+- P05: convention can become stale while still performing well enough to reinforce itself;
+- P06: ancestry needs positive and negative dependence evidence and should not collapse to hard identity grouping;
+- P07: recommender credibility and local generalizability are distinct, while revocation has proportional cost and latency.
 
-Registered surfaces:
+See `PARAMETERIZED_FALSIFICATION_V1_RESULTS.md`.
 
-```text
-P03  history instability      x present rule error
-P04  warrant asymmetry        x minority-correct fraction
-P05  change frequency         x change magnitude
-P06  origin missingness       x signature separation
-P07  recommender credibility  x mismatch prevalence
-P07  recommender credibility  x strong mismatch severity
-```
+### strategic-influence-falsification-v1
 
-Each surface is 7 x 7 with seven deterministic replicates per cell. P04 uses the same public estimate/standing/uncertainty packets and equal communication cost in both arms, strengthening the comparator without promoting the comparator into CPA architecture.
+After the fresh P08 holdout was consumed, five 7 x 7 surfaces with seven replicates per cell produced **245 cells / 1,715 controlled runs**. `128/245` cells had a negative mean primary margin. Component interpretation matters more than the raw negative-cell count.
 
-P07 has two surfaces because challenge-v1 showed that opportunity cost and residual authority are distinct failure modes. The severity axis starts at strong mismatch rather than zero, because the frozen residual-standing ceiling applies to strong local contradiction.
+The operating-envelope conclusions are:
 
-A negative primary margin is useful boundary evidence. It does not automatically refute the entire originating protocol, because the micro-assay intentionally isolates one local mechanism from the full protocol ecology.
+- consequence delay progressively removes accountability's advantage over a manipulable receiver, but the tested accountable path generally degrades toward local-only rather than runaway capture;
+- mild or late betrayal can leave authority sticky because revocation has finite latency and weak contradiction resembles ordinary variation;
+- social openness becomes net costly when persistent objective divergence becomes common enough, suggesting peer eligibility/participation pressure distinct from context standing;
+- public feedback is not intrinsically unsafe because it is also the channel through which consequence changes sender incentives;
+- noisy consequence can lower standing for a genuinely aligned peer, so source reliability and consequence-channel reliability require distinct uncertainty.
 
-### Confirmation rule after parameterized falsification
+This evidence is consumed. Do not revise the P08 receiver and then describe these same surfaces as confirmation.
 
-If a frozen mechanism is later revised in response to these surfaces, none of `development-v1`, `holdout-v1`, `challenge-v1`, or `parameterized-falsification-v1` can serve as fresh confirmation of the revision. A future validation set must be registered before its outcomes are examined.
+## Revised implementation conclusions
 
-## Automated outputs
+The accumulated evidence supports carrying forward behavioral pressures, not protocol-local constants:
 
-The consumed falsification reproducer writes:
+- foreign evidence remains distinguishable from lived consequence;
+- private developmental histories do not collapse merely because minds communicate;
+- developmental context can shape uncertainty without becoming doctrine;
+- communication preserves enough epistemic type/source structure for later local aggregation;
+- convention can compress recurring coordination, but stability and revisability are competing pressures;
+- ancestry is uncertain evidence about dependence, not hard duplicate identity;
+- second-hand standing can grant conditional opportunity, but durable authority remains answerable to local consequence;
+- receiver-owned consequence can discipline strategically optimized public influence without inspecting another mind's private objective;
+- source uncertainty, channel uncertainty, context generalizability, and participation eligibility should not be silently collapsed into one standing scalar.
 
-```text
-parameterized-plan.json
-parameterized-report.json
-parameterized-summary.md
-p03-history-informativeness.csv
-p04-equal-budget-comparator.csv
-p05-volatility-surface.csv
-p06-ancestry-opacity.csv
-p07-reliability-prevalence.csv
-p07-reliability-severity.csv
-```
+The exact standing caps, learning rates, packet costs, thresholds, bit sketches, grouping rules, and control implementations remain assay instruments.
 
-`parameterized-plan.json` records the registered axes, replicate count, primary margin, and interpretation limit. `parameterized-report.json` records every cell's mean/min/max margin, negative-replicate count, and diagnostic metrics. `parameterized-summary.md` presents the complete surface in human-readable form.
+## Protocol 09 development evidence cadence
 
-Consumed `challenge-v1` and `holdout-v1` keep their historical artifacts for reproduction. They are not rewritten by the parameterized runner.
+Protocol 09 asks whether **permission itself** can acquire apparently independent warrant by recursively circulating through a network of locally reasonable endorsements. This is distinct from P06 evidence ancestry and P08 strategic self-presentation.
 
-## Invariant suite
-
-Version 0.12.0 defines **35 self-tests**. In addition to the existing protocol, telemetry, validation, and challenge checks, parameterized-falsification tests verify that:
-
-- challenge-v1 selection is deterministic;
-- development-v1 and consumed holdout-v1 seeds are excluded;
-- each profile contains all five registered bands with four unique seeds per band;
-- selected stress is nondecreasing by band.
-- all six registered parameterized profiles expose complete 7 x 7 grids;
-- the P04 stronger comparator consumes exactly the same public communication work as the typed path;
-- the P06 probe reaches complete origin blindness while retaining finite measurable outputs;
-- the two P07 surfaces intervene on prevalence and severity separately;
-- Protocol 08 canonical seeds generate distinct strategic social worlds with aligned, divergent, and betrayal contexts;
-- the Protocol 08 seed-101 development fixture completes with the preregistered experiment contract intact.
-
-The parameterized items are assay-integrity checks and do not assert that any controlled cell should remain positive. The Protocol 08 fixture is a development regression, not fresh confirmation.
-
-## Authoritative Windows sequence
-
-Protocol 08 development-v1 is complete. The current fresh evidence run is `p08-holdout-v1`:
+The first authoritative run is development-v1 only:
 
 ```powershell
 ./scripts/verify.ps1
 
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
-  --p08-validation `
-  --output _artifacts/p08-holdout-v1
+  --experiment 09-authority-ancestry-circular-standing `
+  --replicate 101,211,307,401,503 `
+  --output _artifacts/protocol-09-development-v1
 ```
 
-Preserve and interpret that first-run artifact before running `--p08-falsify`.
+A clean five-seed result is **development evidence**, not validation. Do not register or inspect a P09 holdout until the development result has been interpreted and the exact Protocol 09 experiment/world files have either been frozen or the protocol has been judged redundant.
 
-To reproduce parameterized-falsification-v1 without making a new confirmation claim:
+## Invariant suite
+
+Version 0.13.0 defines **37 self-tests**. Existing validation, challenge, parameterized-falsification, and P08 validation/falsification integrity checks remain. Two new Protocol 09 tests verify that:
+
+- the canonical development seeds generate distinct authority-cascade worlds with the required independent-grounding and circular-trap structure;
+- the seed-101 Protocol 09 development fixture satisfies the preregistered synthetic contract.
+
+Those are development/assay-integrity checks. They are not fresh evidence for the Protocol 09 hypothesis.
+
+## Reproducibility commands
+
+Consumed evidence can still be reproduced, but not reclassified as fresh validation:
 
 ```powershell
+# Protocols 01-07 holdout
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
-  --falsify `
-  --output _artifacts/parameterized-falsification-v1-repro
-```
+  --validation --output _artifacts/validation-holdout-v1-repro
 
-To reproduce the consumed holdout without making a new validation claim:
-
-```powershell
+# Protocols 03-07 challenge
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
-  --validation `
-  --output _artifacts/validation-holdout-v1-repro
+  --challenge --output _artifacts/challenge-v1-repro
+
+# P03-P07 controlled surfaces
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
+  --falsify --output _artifacts/parameterized-falsification-v1-repro
+
+# Protocol 08 holdout
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
+  --p08-validation --output _artifacts/p08-holdout-v1-repro
+
+# Protocol 08 controlled surfaces
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
+  --p08-falsify --output _artifacts/strategic-influence-falsification-v1-repro
 ```
 
 ## Interpretation rule
 
-Do not tune a frozen mechanism from challenge-v1 or parameterized-falsification-v1 and then describe the same evidence as validation. Both are developmental pressure. If a mechanism is revised and later deserves confirmation, register a new future holdout before seeing its outcomes.
-
-
----
-
-## v0.12 Protocol 08 fresh validation
-
-Protocol 08 development-v1 completed **5/5 Support with 50/50 preregistered checks passing**. That matrix remains development evidence. Version 0.12 freezes the exact Protocol 08 experiment and world-generator sources and registers a separate twenty-seed `p08-holdout-v1`.
-
-`p08-holdout-v1` is intentionally Protocol 08-only. It is not an extension of the already-consumed Protocol 01-07 `holdout-v1` and does not alter that historical validation report.
-
-Run it once with:
-
-```powershell
-./scripts/verify.ps1
-
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -c Release --no-build -- `
-  --p08-validation `
-  --output _artifacts/p08-holdout-v1
-```
-
-The first execution consumes the set. The ordinary ten Protocol 08 assertions and verdict thresholds remain frozen. Validation reporting continues to separate manipulation, mechanism-outcome, safety-boundary, and accounting evidence.
-
-After the holdout has been preserved and interpreted, `--p08-falsify` locates controlled failure surfaces. Those surfaces are exploratory falsification and must not be described as a second holdout. See `STRATEGIC_INFLUENCE_VALIDATION.md`.
+Do not tune a frozen mechanism from a consumed holdout or falsification surface and then describe the same evidence as validation. If a mechanism is revised and later deserves confirmation, register a new future holdout before seeing its outcomes.

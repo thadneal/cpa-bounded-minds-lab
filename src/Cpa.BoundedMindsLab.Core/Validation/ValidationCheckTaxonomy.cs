@@ -17,7 +17,8 @@ public static class ValidationCheckTaxonomy
             or "typed-surface-preserves-public-disagreement"
             or "provenance-is-partial-rather-than-clean"
             or "seed-generates-strategic-social-world"
-            or "strategic-sender-discovers-naive-leverage")
+            or "strategic-sender-discovers-naive-leverage"
+            or "recursive-endorsement-amplifies-circular-authority")
         {
             return Manipulation;
         }
@@ -28,7 +29,8 @@ public static class ValidationCheckTaxonomy
             or "typed-communication-remains-bounded"
             or "earned-convention-compresses-communication"
             or "standing-transfer-is-bounded-public-communication"
-            or "strategic-public-exchange-is-bounded")
+            or "strategic-public-exchange-is-bounded"
+            or "bounded-authority-exchange")
         {
             return AccountingConstraint;
         }
@@ -50,7 +52,9 @@ public static class ValidationCheckTaxonomy
             or "direct-consequence-revokes-strong-local-mismatch"
             or "betrayal-remains-correctable"
             or "public-claims-do-not-become-authority"
-            or "opportunity-cost-remains-bounded-versus-local")
+            or "opportunity-cost-remains-bounded-versus-local"
+            or "direct-consequence-revokes-circular-authority"
+            or "grounded-standing-remains-earned")
         {
             return SafetyBoundary;
         }

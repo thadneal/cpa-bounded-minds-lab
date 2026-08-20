@@ -174,3 +174,13 @@ New v0.12 code lives outside that frozen boundary:
 - `Falsification/StrategicInfluenceProbes.cs` copies the frozen accountable-receiver equations into intervention micro-assays.
 
 The probe sender can be made faster than the frozen Protocol 08 sender, and consequence can be delayed beyond the original world schedule. Those changes are adversarial assay dimensions, not source changes to the frozen experiment and not proposed CPA components.
+
+## v0.13 Protocol 08 evidence reconciliation and Protocol 09 boundary
+
+The fresh Protocol 08 holdout and controlled falsification strengthen the source-level distinction between **public representation** and **permission to influence**. A peer can report confidence strategically, yet receiver-owned consequence can still revise the authority granted to that report. The falsification phase also shows why typed coherence matters: poor source behavior and noisy consequence are different reasons for low confidence and should not be compressed into one undifferentiated standing value.
+
+Protocol 09 remains compatible with the CPA source framing while testing a relation not explicitly resolved by the book. The book emphasizes provenance, preserved disagreement, public/private boundaries, and influence that remains answerable to consequence. Protocol 09 asks what happens when the thing being propagated is not a factual claim but **another mind's permission to matter**.
+
+The assay therefore does not treat endorsement as truth. It keeps endorsement lineage separate from direct consequence and asks whether a loop of locally plausible transfers can generate unjustified apparent independence. The experiment's root/path bit sketches are intentionally illustrative instrumentation. They should not be read back into the CPA technical outline as a prescribed authority registry.
+
+This remains inside Bounded Minds because every participant is already a perceptible peer with an explicit public channel. The candidate Trace and Interface Laboratory begins earlier, where a source process may be available only through observer-side causal traces rather than through an already established peer identity.
