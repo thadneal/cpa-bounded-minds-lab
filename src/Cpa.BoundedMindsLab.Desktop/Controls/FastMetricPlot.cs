@@ -190,7 +190,7 @@ public sealed class FastMetricPlot : FrameworkElement
 
         if (snapshot.Series.Count == 0)
         {
-            DrawText(drawingContext, "No committed observations for this metric/path selection yet.", new Point(18, 88), 12, MutedBrush);
+            DrawText(drawingContext, "No observations for this metric/path selection.", new Point(18, 88), 12, MutedBrush);
             return;
         }
 

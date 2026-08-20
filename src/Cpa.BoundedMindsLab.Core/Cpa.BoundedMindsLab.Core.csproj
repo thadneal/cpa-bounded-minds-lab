@@ -3,6 +3,6 @@
     <TargetFramework>net10.0</TargetFramework>
     <AssemblyName>Cpa.BoundedMindsLab.Core</AssemblyName>
     <RootNamespace>Cpa.BoundedMindsLab</RootNamespace>
-    <Version>0.5.2</Version>
+    <Version>0.6.0</Version>
   </PropertyGroup>
 </Project>

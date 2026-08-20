@@ -239,7 +239,7 @@ The accepted interpretation remains narrow: source-specific epistemic shape can 
 
 Name: `05-emergent-convention-artificial-culture`
 
-Status: **implemented in v0.5.0, result pending**.
+Status: **frozen Supported**.
 
 ### Question
 
@@ -282,3 +282,75 @@ A successful result would support a narrow claim:
 > Repeated successful coordination can create a distributed collective compression that makes routine interaction cheaper, while direct consequence can still reopen and selectively rewrite the convention when its supporting conditions change.
 
 It would not establish that mature culture is a context-to-action table, that the protocol's public reducer belongs in final CPA, or that collective cognition requires a permanent shared state object.
+
+### Accepted Protocol 05 result
+
+The canonical five-seed matrix returned **5/5 Support with 35/35 checks passing**. Earned-convention mean utility was approximately `0.8547` versus `0.8581` for fresh negotiation while mean communication work fell from about `9.072` to `2.173`. Changed-context late utility recovered to about `0.8598`, while the frozen control remained near `0.6976`. The accepted claim is limited to distributed, revisable convention formation under this synthetic coordination family.
+
+---
+
+## Protocol 06: incomplete epistemic ancestry
+
+Name: `06-incomplete-epistemic-ancestry`
+
+Status: **implemented in v0.6.0, result pending**.
+
+### Question
+
+Can a bounded receiver distinguish independent convergence from echoed ancestry when provenance is missing or partial, without requiring a perfect global lineage registry?
+
+### Why this follows Protocol 05
+
+The first five protocols progressively preserved the path by which influence was earned: foreign versus lived evidence, independent private histories, developmental warrant, source-specific public disagreement, and distributed convention. Protocol 06 makes provenance harder. Surface agreement is no longer enough to tell whether several reports represent several histories or one history copied several times.
+
+### Seed-generated ancestry world
+
+Seven peers report into fourteen anonymous contexts. Every seed includes at least three `EchoTrap` contexts and at least three `IndependentConvergence` contexts, plus `MixedLineage` and `AmbiguousLineage` contexts.
+
+Hidden evidence roots carry an estimate, standing, evidence depth, and a compact three-value developmental signature. Public reports may descend directly or indirectly from those roots. Copies preserve the estimate and signature imperfectly.
+
+The public report surface contains:
+
+```text
+sender mind id
+context id
+estimate
+standing
+evidence count
+optional opaque origin hint
+compact developmental signature
+```
+
+The receiver never sees the hidden root ID in the ordinary treatment. A substantial share of reports omit origin hints. Another substantial share exposes only an immediate-sender alias, which is locally truthful but does not reveal common upstream ancestry.
+
+### Ancestry-inferred condition
+
+The receiver merges two reports when their non-empty public origin hints match or their developmental signatures fall within a preregistered similarity radius. Within each inferred lineage, report estimates may improve the lineage estimate, but repeated copies do not multiply corroborative support. One inferred lineage contributes one bounded support weight.
+
+This is deliberately a simple ancestry heuristic. It is an assay instrument for the value of incomplete lineage recovery, not a claim that final CPA should use Euclidean signature clustering.
+
+### Naive-agreement control
+
+Every report is treated as an independent corroborating source. If one upstream episode has been copied across four peers, it receives roughly four opportunities to influence the aggregate. This is the failure mode Protocol 06 is designed to expose.
+
+### Oracle-ancestry calibration control
+
+Reports are grouped by their hidden true root. This control represents the best result available to the same bounded public report set if ancestry were perfectly known. It is not a proposed shared provenance service and is not available to the ordinary path.
+
+### Metrics
+
+Live paths publish prediction, target, absolute error, rolling RMSE, report count, hidden true-root count for evaluator scoring, effective support-group count, context echo-pair recall, context false-merge rate, and cumulative communication work.
+
+Final metrics include whole-history RMSE, echo-trap RMSE, independent-convergence RMSE, mixed/ambiguous RMSE, aggregate echo-pair recall, false-merge rate, mean effective support groups, packet count, and communication work.
+
+### Communication cost
+
+All three treatments receive exactly the same `98` public reports (`14` contexts x `7` peers). Each report costs `0.004` work units. Ancestry inference is local computation and cannot silently purchase additional public evidence.
+
+### What success would mean
+
+A successful result would support a narrow claim:
+
+> A bounded mind can recover enough ancestry structure from incomplete public traces to stop copied agreement from masquerading as independent corroboration, while still preserving genuinely independent convergence.
+
+It would not establish a final provenance format, a universal ancestry detector, or a hidden central registry. The oracle path exists only to show how much error remains because ancestry is incomplete.

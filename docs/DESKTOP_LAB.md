@@ -268,3 +268,26 @@ Every graph now explains the selected metric in-place. The header reports the y-
 `Show all` and `Hide all` act on every series key for the current metric. Clicking an individual legend key still toggles only that line/bar. The embedded and maximized plots continue sharing the same hidden-series state.
 
 Live rendering is now boundary-batched. The background projector still ingests numeric frames continuously, but the graph does not rebuild for each incremental sample. A metric series accumulates privately in the display store until a series transition, protocol phase/developmental boundary, or terminal boundary commits that accumulated segment. Only committed-through points are eligible for plotting, so when the next path starts its partial samples do not appear in the graph that was just committed for the previous path. This reduces dispatcher/render churn at Maximum pace without slowing the experiment or weakening durable telemetry. The UI may intentionally lag the currently accumulating segment until its next meaningful boundary; `frames.ndjson` remains the complete record.
+
+## v0.6.0 Protocol 06, incremental plotting restored, and table inspection
+
+Protocol 06 is now the newest protocol and is selected by default. Protocol Progress follows the incomplete-ancestry assay:
+
+```text
+Generate incomplete ancestry
+  seed-specific echo and independent histories
+  publish partial origin hints + developmental signatures
+Compare corroboration rules
+  infer ancestry from incomplete public cues
+  naive agreement-count control
+  perfect-ancestry oracle calibration
+Judge ancestry discrimination
+  eight falsification checks
+  protocol verdict
+```
+
+Protocol 05 now appears in Run notes as a frozen Supported baseline.
+
+The v0.5.2 boundary-batched graph experiment is **reverted**. It did not produce a noticeable responsiveness improvement in use. Numeric telemetry remains projected off the dispatcher and display-bounded, but graph snapshots again include the latest accumulated points and may update incrementally at the existing adaptive graph cadence. Durable scientific telemetry remains unchanged.
+
+Data-grid text now wraps inside cells instead of silently clipping long words/phrases. The dark column-header template restores WPF's left/right resize grippers, so table columns can be resized interactively. Resizing a column changes only the internal allocation of the existing DataGrid surface; it does not resize the containing table, right pane, tab, or window. Rows may grow to show wrapped content and the existing table scroll surface absorbs the additional content.

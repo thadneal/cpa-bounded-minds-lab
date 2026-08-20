@@ -206,3 +206,57 @@ If a result lands near a boundary, interpretation changes before thresholds do.
 ## Protocol 05 replication interpretation
 
 The canonical seeds should produce unique coordination-world fingerprints and materially different changed-context layouts. Variation in convention outcome and utility is expected because seed now changes what was lived.
+
+### Accepted Protocol 05 result
+
+The canonical `101,211,307,401,503` run returned **5/5 Support with 35/35 checks passing**. The seven boundaries above are frozen. Earned convention preserved approximately `99.6%` of fresh-negotiation mean utility while using about `24%` of its communication work. Changed contexts revised, unchanged contexts retained their convention, and the frozen control failed under changed conditions.
+
+---
+
+## 06 incomplete epistemic ancestry
+
+Protocol 06 uses **eight** preregistered component checks. Thresholds are fixed before the five-seed result set is interpreted.
+
+### A. Seed generates incomplete ancestry
+
+Every seed must contain at least three echo-trap contexts and at least three independent-convergence contexts. At least `30%` of reports must omit an explicit origin hint.
+
+### B. Explicit provenance remains partial
+
+At least `20%` of reports must carry only an immediate-sender alias rather than the hidden upstream root. Exact public labels alone must be insufficient to reconstruct lineage.
+
+### C. Echoed agreement is discounted
+
+On echo-trap contexts, ancestry-inferred RMSE must be <= `90%` of naive-agreement RMSE.
+
+### D. Whole-history judgment improves
+
+Across all generated contexts, ancestry-inferred RMSE must be <= `88%` of naive-agreement RMSE.
+
+### E. Independent convergence remains independent
+
+On independent-convergence contexts, inferred RMSE may be at most `15%` worse than naive agreement. Echo resistance cannot be purchased by collapsing genuine independent corroboration.
+
+### F. Shared ancestry is recovered from partial cues
+
+At least `85%` of report pairs that truly share a hidden root must land in the same inferred ancestry group.
+
+### G. Independent roots are not overmerged
+
+No more than `12%` of report pairs from different hidden roots may be falsely merged.
+
+### H. Inference approaches the perfect-ancestry calibration control
+
+Ancestry-inferred whole-history RMSE must be within `0.03` of the oracle-ancestry RMSE. All three treatments must consume the same `98` public report packets (`14` contexts x `7` peers), and inferred communication work must equal the preregistered bounded cost.
+
+## Protocol 06 verdict rule
+
+- `Support`: all eight checks pass.
+- `Mixed`: at least six checks pass.
+- `Disconfirm`: fewer than six checks pass.
+
+The oracle path is a calibration ceiling only. Passing Protocol 06 would support inference from incomplete public ancestry cues, not a hidden global provenance registry.
+
+## Protocol 06 replication interpretation
+
+The canonical five seeds should produce unique ancestry-world fingerprints and materially different placements/prevalence of echo traps, independent convergence, mixed lineage, and ambiguous lineage. Report ancestry itself varies through missing origin hints, immediate-sender aliases, evidence depth, source quality, and signature distortion. A seed should change the social evidence circumstance, not only report order.

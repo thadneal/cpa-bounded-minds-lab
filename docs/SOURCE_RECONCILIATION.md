@@ -88,3 +88,13 @@ Repeated successful coordination can make separate local memories converge on a 
 This keeps repetition distinct from authority. A convention persists because it keeps working, not merely because it has been repeated. The frozen control tests the failure mode where a once-useful social compression becomes doctrine after its supporting conditions disappear.
 
 The experiment remains an assay. It does not establish that mature culture is a context-to-action table, that speaker-triggered invocation is final architecture, or that the protocol reducer belongs in CPA.
+
+## Protocol 06 reconciliation: ancestry without omniscience
+
+The successor handoff explicitly identified incomplete epistemic ancestry as a harder continuation of the earlier provenance work. Protocol 06 implements that pressure by allowing public evidence to be copied across peers while upstream origin becomes missing, partial, or replaced by an immediate-sender label.
+
+The CPA commitment being tested is narrower than perfect provenance. Surface agreement should not automatically count as independent support when several apparently distinct reports may descend from one prior contact. At the same time, genuine convergence among independently developed histories must retain its value.
+
+The protocol's compact developmental signature is an experimental residue of history, not a prescribed memory identifier. Its purpose is to ask whether imperfect lineage cues can be useful when exact causal ancestry is unavailable. The hidden-root oracle remains evaluator-only and exists solely to show how much performance is lost because ancestry is incomplete.
+
+A passing result would support preserving and reasoning over ancestry uncertainty. It would not justify a global provenance graph, exact source tracing, or the particular signature-distance heuristic as final CPA machinery.

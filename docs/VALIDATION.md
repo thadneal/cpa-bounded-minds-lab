@@ -1,60 +1,66 @@
 # Validation
 
-## Automated invariants
+Version 0.6.0 defines **18 self-tests**. Protocol-specific invariants include distinct seed-generated worlds and seed-101 implementation fixtures for Protocols 03, 04, 05, and 06.
 
-Version 0.5.2 retains **16 self-tests**. Current protocol-specific checks include distinct seed-generated worlds and seed-101 implementation fixtures for Protocols 03, 04, and 05.
-
-Protocol 05 adds:
-
-- `protocol-05-default-seeds-create-distinct-coordination-worlds`;
-- `protocol-05-supports-seed-101`.
-
-The seed-101 fixtures are implementation invariants, not experimental evidence.
+## Required build validation
 
 ```powershell
+dotnet restore Cpa.BoundedMindsLab.sln
+dotnet build Cpa.BoundedMindsLab.sln -c Release
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
 ```
 
-## Protocol 05 result set
+Expected result: all 18 self-tests pass with zero analyzer warnings/errors.
+
+The source-generation environment used for v0.6.0 does not provide the .NET SDK. Build and self-test claims are deferred to the Windows development environment.
+
+## Protocol 06 result set
 
 ```powershell
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- `
-  --experiment 05-emergent-convention-artificial-culture `
+  --experiment 06-incomplete-epistemic-ancestry `
   --replicate 101,211,307,401,503 `
-  --output _artifacts/protocol-05-five-seed
+  --output _artifacts/protocol-06-five-seed
 ```
 
-Before interpreting outcomes, verify unique scenario fingerprints and materially different changed-context layouts. Do not alter the seven preregistered boundaries after seeing results.
+Before interpretation confirm:
+
+- all five seed directories exist;
+- each seed contains result JSON, metrics CSV, manifest, and frame journal;
+- `replication-report.json` contains five completed histories;
+- each seed has a distinct Protocol 06 scenario fingerprint;
+- every world contains at least three echo-trap and three independent-convergence contexts;
+- missing-origin rate is >= 0.30;
+- immediate-sender hint rate is >= 0.20;
+- all paths consumed the same 98 report packets.
+
+Then evaluate the eight preregistered checks without changing thresholds.
 
 ## Desktop validation
 
-On Windows 11 verify:
+1. Launch the Desktop Lab and confirm the title reports `v0.6.0`.
+2. Confirm Seeds defaults to `101, 211, 307, 401, 503` and Protocol 06 is selected by default.
+3. Start a five-seed Protocol 06 session at Maximum pace.
+4. Confirm the active-seed badge changes as histories advance and the graph Seed selector retains completed seed histories.
+5. Confirm Protocol Progress exposes incomplete-ancestry generation, inferred/naive/oracle comparison, and eight-check evaluation.
+6. Select a Focus path and verify Metric contains only values published by that path.
+7. Confirm time-series metrics update incrementally during an active path rather than waiting for a phase/path boundary.
+8. Confirm final scalar metrics with several paths use categorical bars, while multi-point metrics remain line plots.
+9. Confirm axis guidance describes x/y meaning and whether higher/lower/context-dependent values are preferred.
+10. Toggle individual legend entries and Show all/Hide all. Hidden-series state must not affect experiment output.
+11. Maximize the graph and verify the selected seed, metric, focus path, visibility state, and axis guidance remain coherent.
+12. In Timeline, Protocol results, assertion detail, Public mind state, and Trace surface tables, resize several column headers. The table/pane/window dimensions must remain fixed while internal column widths change.
+13. Narrow a text-heavy table column and verify cell text wraps and rows grow/scroll rather than clipping the text or resizing the containing table.
+14. Confirm dropped display frames, graph freeze, selection changes, resizing, and maximized graph use never alter durable artifacts.
 
-- main and maximized graph titles include the running application version;
-- Seeds opens with `101, 211, 307, 401, 503`;
-- seed-scoped graph inspection still switches graph, path/metric catalogs, details, Timeline, and Protocol Progress;
-- Protocol Progress recognizes Protocols 01 through 05;
-- Protocol 05 progress exposes convention formation, earned/fresh/frozen comparison, regime shift, and evaluation;
-- graph freeze/maximize/metric selection/line hiding remain presentation-only;
-- Focus path restricts Metric choices to data that path publishes;
-- final-only one-point metrics remain visible;
-- protocol judgments accumulate independently of display telemetry drops;
-- `frames.ndjson` remains complete even if display-only frames are dropped.
+## Full-suite checkpoint
 
-## Environment note
+After Protocol 06 is interpreted:
 
-The source-generation environment used for v0.5.2 does not provide the .NET SDK. Build and self-test claims are deferred to the Windows development environment.
+```powershell
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- `
+  --replicate 101,211,307,401,503 `
+  --output _artifacts/full-suite-0.6.0
+```
 
-
-### Desktop scalar comparison rendering (v0.5.1)
-
-After a Protocol 05 run, select `communication_packet_count`. With multiple treatment paths present, the graph should render one categorical bar per visible path rather than isolated points on a tick axis. Toggle a legend entry and confirm the bar and y-scale update. Multi-point metrics must continue to render as time-series lines.
-
-
-### Desktop metric guidance and boundary-batched rendering (v0.5.2)
-
-On a multi-path metric, verify that the graph header identifies x-axis meaning, y-value meaning, and preferred direction/context. Check at least `rmse`, `communication_work`, `mean_utility`, `standing`, and a disagreement metric.
-
-Use `Hide all`, confirm every current-series line/bar disappears while legend keys remain available, then use `Show all` to restore them. Repeat in the maximized graph and confirm visibility state stays synchronized.
-
-At `Maximum` pace, observe a multi-point metric while an experiment is running. Numeric publication/projection counters should continue advancing, but the graph should rebuild at completed series/phase boundaries rather than on every projected sample. When one path finishes and the next begins, the completed path may appear while the new path remains absent until its own commit boundary. The experiment thread, durable `frames.ndjson`, Timeline, and Protocol results must continue independently.
+This should reproduce the frozen Protocol 01-05 verdict families while adding Protocol 06 histories. Investigate any regression before proceeding.

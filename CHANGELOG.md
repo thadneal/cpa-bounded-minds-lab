@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.6.0 - 2026-08-19
+
+- Froze Protocol 05 as Supported after the canonical five-seed run returned 5/5 Support and 35/35 preregistered checks. Earned convention retained essentially all fresh-negotiation utility while reducing communication work by about 76%, revised changed contexts, retained stable contexts, and outperformed the frozen culture after the world changed.
+- Added Protocol 06, `06-incomplete-epistemic-ancestry`, asking whether a bounded receiver can distinguish independent convergence from echoed ancestry when public provenance is missing, partial, or stops at the immediate sender.
+- Added `EpistemicAncestryWorld`, a seed-generated fourteen-context/seven-peer family with echo traps, independent convergence, mixed lineages, ambiguous lineages, incomplete origin hints, evidence-depth variation, and imperfect developmental-signature copying.
+- Added ancestry-inferred, naive-agreement, and perfect-ancestry oracle treatments. The ordinary path groups likely shared roots from incomplete public hints/signatures and caps corroborative support per inferred lineage; the oracle remains evaluator-only calibration.
+- Added eight preregistered Protocol 06 checks covering incomplete provenance, echo discounting, whole-history error, preservation of independent convergence, true-echo recovery, false merging, oracle proximity, and equal bounded communication.
+- Added two Protocol 06 self-tests, bringing the invariant suite to 18 checks, including canonical-seed ancestry-world diversity and a seed-101 implementation-drift fixture.
+- Reverted the v0.5.2 boundary-batched graph experiment after it produced no noticeable responsiveness gain. Graph snapshots again include the latest accumulated numeric points and update incrementally at the existing adaptive display cadence; experiment execution remains isolated from WPF.
+- Added wrapping text to DataGrid text cells and restored functional WPF column resize grippers in the dark header template. Column resizing redistributes width inside the existing table surface without resizing the containing pane/window.
+- Added Protocol 06 progress/run-note visualization and metric guidance for ancestry recall, false merges, and effective support-group counts.
+- Updated plan, experiments, falsification, architecture, source reconciliation, runbook, validation, README, artifacts, CLI, and assembly versioning for v0.6.0.
+
 ## 0.5.2 - 2026-08-19
 
 - Added metric guidance directly to the graph surface: the y-value meaning, x-axis interpretation, and preferred direction/context are shown for every selected metric. Scalar comparison graphs identify the x-axis as treatment/focus path, while time-series graphs identify it as observation/tick order.

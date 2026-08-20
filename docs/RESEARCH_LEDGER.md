@@ -165,3 +165,36 @@ A useful convention must compress communication, remain near fresh-negotiation u
 4. inspect world diversity, convention coverage, shortcut use, utility, communication work, changed-context revision, stable retention, and the frozen-control contrast together;
 5. interpret before changing any mechanism;
 6. then run the five-protocol five-seed full-suite checkpoint.
+
+---
+
+## 2026-08-19 - Protocol 05 accepted; ancestry becomes the next pressure
+
+### Accepted result
+
+Protocol 05 returned **5/5 Support with 35/35 preregistered checks passing**. Earned convention retained essentially all fresh-negotiation utility while reducing communication work by roughly three quarters. After the seeded regime change, locally stored conventions revised on changed contexts and remained stable elsewhere. The frozen control demonstrated the expected cost of cultural inertia.
+
+The accepted claim remains narrow: repeated bounded coordination can produce a distributed, revisable collective compression without introducing a persistent central culture owner. Protocol 05 is frozen.
+
+### Remaining pressure
+
+The first five protocols all benefited from preserving some structure about where influence came from. Yet their provenance remained relatively legible. A harder social world allows one evidence episode to be copied through several peers until surface agreement looks like independent corroboration.
+
+Perfect causal ancestry is itself expensive and often unavailable. The next assay should ask whether useful ancestry can be reconstructed from incomplete public residue without installing an omniscient lineage registry.
+
+### Protocol 06
+
+Protocol 06 generates fourteen-context worlds with seven public reporters. Hidden evidence roots may be echoed through several reports or may represent genuinely independent convergence. Public reports reveal only an estimate, standing, evidence depth, optional opaque origin hint, and an imperfect developmental signature.
+
+The ordinary path groups likely shared ancestry from those incomplete cues and caps corroborative weight per inferred lineage. A naive control counts every report independently. A perfect-ancestry oracle provides only a calibration ceiling.
+
+The protocol fails if ancestry inference merely suppresses agreement in general. Independent convergence must remain useful. It also fails if the heuristic overmerges unrelated roots, if true echo ancestry is rarely recovered, or if its gains require more public communication than the controls.
+
+### Next evidence
+
+1. rebuild under the pinned .NET 10 SDK;
+2. run the 18 invariant tests;
+3. run Protocol 06 across `101,211,307,401,503` without changing its eight thresholds;
+4. inspect echo-trap error, independent-convergence error, echo recall, false merges, and oracle proximity together;
+5. interpret before changing the ancestry heuristic;
+6. then run the six-protocol five-seed full-suite checkpoint.

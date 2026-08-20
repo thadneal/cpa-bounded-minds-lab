@@ -73,6 +73,27 @@ public sealed record MetricGuidance(
                 "Higher is better for the named desired condition.");
         }
 
+        if (normalized.Contains("echo_pair_recall", StringComparison.Ordinal))
+        {
+            return Guidance(
+                "Share of truly shared-root report pairs recovered into the same inferred ancestry group.",
+                "Higher is better.");
+        }
+
+        if (normalized.Contains("false_merge_rate", StringComparison.Ordinal))
+        {
+            return Guidance(
+                "Share of report pairs from independent hidden roots incorrectly merged as one ancestry group.",
+                "Lower is better.");
+        }
+
+        if (normalized.Contains("effective_support_groups", StringComparison.Ordinal))
+        {
+            return Guidance(
+                "Number of ancestry-distinct support groups the reducer treats as independently corroborative.",
+                "Context-dependent; closer to the true number of independent roots is preferred.");
+        }
+
         if (normalized.Contains("agreement", StringComparison.Ordinal))
         {
             return Guidance(
@@ -123,7 +144,7 @@ public sealed record MetricGuidance(
         }
 
         if (normalized.Contains("fingerprint", StringComparison.Ordinal) ||
-            normalized is "seed" or "context_cell" or "history_kind" or "regime" or "selected_action" or "target")
+            normalized is "seed" or "context_cell" or "context_kind" or "history_kind" or "regime" or "selected_action" or "target")
         {
             return Guidance(
                 "Diagnostic identity or categorical value used to distinguish generated circumstances.",

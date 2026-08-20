@@ -19,7 +19,7 @@ public static class ArtifactWriter
         var manifest = new
         {
             schema = "cpa-bounded-minds-run-v1",
-            version = "0.5.2",
+            version = "0.6.0",
             status,
             seed = run.Seed,
             experimentCount = run.Experiments.Count,
@@ -67,7 +67,7 @@ public static class ArtifactWriter
         var manifest = new
         {
             schema = "cpa-bounded-minds-session-v1",
-            version = "0.5.2",
+            version = "0.6.0",
             status,
             plannedSeeds,
             completedSeeds,

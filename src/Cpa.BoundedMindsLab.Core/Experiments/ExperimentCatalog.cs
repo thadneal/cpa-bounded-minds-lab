@@ -9,6 +9,7 @@ public static class ExperimentCatalog
         new DevelopmentalVersusDoctrinalTransferExperiment(),
         new BoundedCommunicationBeforeLanguageExperiment(),
         new EmergentConventionArtificialCultureExperiment(),
+        new IncompleteEpistemicAncestryExperiment(),
     ];
 
     public static IReadOnlyList<IExperiment> All => Experiments;

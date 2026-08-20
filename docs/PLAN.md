@@ -33,7 +33,7 @@ The canonical matrix remains:
 101, 211, 307, 401, 503
 ```
 
-`SelfTestSuite` verifies that these five values produce distinct Protocol 03 developmental-world fingerprints, distinct Protocol 04 social-history fingerprints/layouts, and distinct Protocol 05 coordination-world fingerprints with different changed-context layouts.
+`SelfTestSuite` verifies that these five values produce distinct Protocol 03 developmental-world fingerprints, distinct Protocol 04 social-history fingerprints/layouts, distinct Protocol 05 coordination-world fingerprints, and distinct Protocol 06 incomplete-ancestry worlds.
 
 ## Experimental arc
 
@@ -73,28 +73,34 @@ Narrow result: preserving source-specific epistemic shape before commitment can 
 
 ### Protocol 05: emergent convention / artificial culture
 
-Status: **implemented in v0.5.0, result pending**.
+Status: **frozen Supported**.
 
-Can repeated bounded interaction create a distributed convention that becomes cheaper than fresh negotiation while remaining grounded in consequence and revisable when the world changes?
+Accepted result: 5/5 Support, 35/35 checks. Earned convention retained about 99.6% of fresh-negotiation utility while reducing public communication work by about 76%. Changed contexts revised locally, stable contexts retained convention, and the frozen control remained cheap but failed under changed conditions.
 
-Three peers coordinate in a seed-generated twelve-context world. The ordinary path contains no central convention object. Each peer independently stores a local context-to-action convention plus standing. Repeated successful coordination can make those private copies converge.
+Narrow result: repeated bounded interaction can compress into a distributed, revisable convention without introducing a persistent central culture owner.
+
+### Protocol 06: incomplete epistemic ancestry
+
+Status: **implemented in v0.6.0, result pending**.
+
+Can a receiver distinguish independent convergence from echoed ancestry when explicit provenance is missing, partial, or stops at the immediate sender?
+
+Seven peers report into fourteen seed-generated contexts. Hidden evidence roots can be copied into several public reports. Other contexts contain several genuinely independent roots that happen to converge. The public surface carries an estimate, standing, evidence depth, an optional opaque origin hint, and a compact developmental signature. Copies preserve those signatures imperfectly, so they are useful ancestry cues rather than exact lineage IDs.
 
 Treatments:
 
-- `earned-convention`: negotiate while convention standing is weak, use one compact invocation after it is earned, and let poor consequence withdraw standing and reopen negotiation;
-- `fresh-negotiation`: retain no durable convention and pay three public preference packets every episode;
-- `frozen-convention`: form the same convention as the earned path, then refuse revision after the regime shift.
+- `ancestry-inferred`: likely shared roots are clustered from exact public-hint matches or sufficiently similar developmental signatures, then one lineage contributes only one bounded unit of corroborative support;
+- `naive-agreement`: every peer report is counted as independent support;
+- `oracle-ancestry`: hidden true root IDs are used only as a calibration ceiling.
 
-The world later changes `4..6` contexts so the formerly expensive third action becomes useful. Stable contexts change only slightly. Success requires communication compression without significant utility loss, revision on changed contexts, and retention of useful stable convention.
+The generated family contains echo traps, independent convergence, mixed lineages, and deliberately ambiguous lineages. Success requires lower echo and whole-world error than naive agreement, preservation of independent convergence, high true-echo recovery, bounded false merging, and performance close to the perfect-ancestry calibration control.
 
 ## Result cadence
 
-For Protocol 05 in v0.5.0:
+For Protocol 06 in v0.6.0:
 
-1. build and run the full invariant suite, now 16 checks;
-2. run Protocol 05 across `101,211,307,401,503` without changing its seven thresholds;
-3. inspect world diversity, convention coverage, shortcut use, utility, communication work, revision coverage, stable retention, and the frozen-control contrast together;
+1. build and run the full invariant suite, now 18 checks;
+2. run Protocol 06 across `101,211,307,401,503` without changing its eight thresholds;
+3. inspect world diversity, missing-origin rate, immediate-sender alias rate, echo-trap RMSE, independent-convergence RMSE, echo-pair recall, false-merge rate, and oracle proximity together;
 4. interpret before changing any mechanism;
-5. after Protocol 05 is understood, run the five-protocol five-seed full-suite checkpoint because v0.5.0 changes the experiment catalog and progress visualization.
-
-Later candidate: incomplete epistemic ancestry, where causal origin is missing, partial, or copied across peers.
+5. after Protocol 06 is understood, run the six-protocol five-seed full-suite checkpoint because v0.6.0 changes the experiment catalog and visualization progress model.

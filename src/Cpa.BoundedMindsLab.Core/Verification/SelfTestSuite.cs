@@ -27,6 +27,8 @@ public static class SelfTestSuite
         Run("protocol-04-supports-seed-101", TestProtocolFour, passed);
         Run("protocol-05-default-seeds-create-distinct-coordination-worlds", TestProtocolFiveSeedSemantics, passed);
         Run("protocol-05-supports-seed-101", TestProtocolFive, passed);
+        Run("protocol-06-default-seeds-create-distinct-incomplete-ancestry-worlds", TestProtocolSixSeedSemantics, passed);
+        Run("protocol-06-supports-seed-101", TestProtocolSix, passed);
         Run("frame-sequence-is-contiguous", TestFrameSequence, passed);
         return passed;
     }
@@ -226,6 +228,41 @@ public static class SelfTestSuite
         {
             var run = ExperimentRunner.Run([ExperimentCatalog.Get("05-emergent-convention-artificial-culture")], 101, output, quiet: true);
             Assert(run.Experiments.Single().Verdict == ExperimentVerdict.Support, "Protocol 05 should meet its preregistered synthetic boundaries for seed 101.");
+        }
+        finally
+        {
+            Directory.Delete(output, recursive: true);
+        }
+    }
+
+
+    private static void TestProtocolSixSeedSemantics()
+    {
+        var fingerprints = new HashSet<ulong>();
+        var layouts = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var seed in ExperimentDefaults.ReplicationSeeds)
+        {
+            var scenario = EpistemicAncestryWorld.CreateScenario(seed);
+            Assert(fingerprints.Add(scenario.Fingerprint), $"Default seed {seed} should produce a distinct incomplete-ancestry fingerprint.");
+            var layout = string.Join(",", scenario.Cells.Select(cell => (int)cell.ContextKind));
+            layouts.Add(layout);
+            Assert(EpistemicAncestryWorld.CountKind(scenario, AncestryContextKind.EchoTrap) >= 3, "Each Protocol 06 world should contain repeated-source echo traps.");
+            Assert(EpistemicAncestryWorld.CountKind(scenario, AncestryContextKind.IndependentConvergence) >= 3, "Each Protocol 06 world should contain genuine independent convergence.");
+            Assert(EpistemicAncestryWorld.MissingOriginRate(scenario) >= 0.30, "Each Protocol 06 world should omit explicit ancestry on a substantial fraction of reports.");
+        }
+
+        Assert(
+            layouts.Count >= 4,
+            "The canonical five-seed matrix should vary the placement and prevalence of ancestry conditions, not merely reorder one fixed report set.");
+    }
+
+    private static void TestProtocolSix()
+    {
+        var output = CreateTemporaryDirectory();
+        try
+        {
+            var run = ExperimentRunner.Run([ExperimentCatalog.Get("06-incomplete-epistemic-ancestry")], 101, output, quiet: true);
+            Assert(run.Experiments.Single().Verdict == ExperimentVerdict.Support, "Protocol 06 should meet its preregistered synthetic boundaries for seed 101.");
         }
         finally
         {

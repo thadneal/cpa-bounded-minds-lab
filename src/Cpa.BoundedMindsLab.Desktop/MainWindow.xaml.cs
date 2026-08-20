@@ -21,6 +21,7 @@ public partial class MainWindow : Window
     private const string Protocol03Name = "03-developmental-versus-doctrinal-transfer";
     private const string Protocol04Name = "04-bounded-communication-before-language";
     private const string Protocol05Name = "05-emergent-convention-artificial-culture";
+    private const string Protocol06Name = "06-incomplete-epistemic-ancestry";
     private static readonly int[] BoundaryDelays = [0, 2, 10];
     private static readonly char[] SeedSeparators = [',', ';', ' ', '\t', '\r', '\n'];
     private readonly DesktopRunCoordinator _coordinator = new();
@@ -333,22 +334,12 @@ public partial class MainWindow : Window
             var width = Math.Max(64, (int)Math.Round(activePlot.ActualWidth));
             var now = Stopwatch.GetTimestamp();
             var graphDue = now >= _nextGraphRefreshTimestamp;
-            var plotVersion = selectedStore.GetMetricPlotVersion(metric);
-            if (plotVersion == 0 && _lastPlotStoreVersion != 0)
-            {
-                activePlot.SetSnapshot(new MetricPlotSnapshot(0, metric, []));
-                _lastPlotStoreVersion = 0;
-                _lastPlotWidth = width;
-            }
-            else if (plotVersion > 0 && graphDue && (plotVersion != _lastPlotStoreVersion || width != _lastPlotWidth))
+            if (graphDue && (selectedStore.Version != _lastPlotStoreVersion || width != _lastPlotWidth))
             {
                 var snapshot = selectedStore.GetPlotSnapshot(metric, selectedSeries, width);
                 activePlot.SetSnapshot(snapshot);
-                _lastPlotStoreVersion = plotVersion;
+                _lastPlotStoreVersion = selectedStore.Version;
                 _lastPlotWidth = width;
-                // Plot depictions are committed at metric-series/phase boundaries rather
-                // than on every numeric sample. The adaptive delay remains as a second
-                // guard for unusually expensive completed snapshots.
                 var refreshMilliseconds = status.Backlog > 4_096 || activePlot.LastBuildMilliseconds >= 16.0
                     ? 250
                     : activePlot.LastBuildMilliseconds >= 8.0
@@ -531,7 +522,11 @@ public partial class MainWindow : Window
         if (!string.Equals(_progressExperiment, experiment, StringComparison.Ordinal))
         {
             _progressExperiment = experiment;
-            if (string.Equals(experiment, Protocol05Name, StringComparison.Ordinal))
+            if (string.Equals(experiment, Protocol06Name, StringComparison.Ordinal))
+            {
+                SetProtocol06ProgressLabels();
+            }
+            else if (string.Equals(experiment, Protocol05Name, StringComparison.Ordinal))
             {
                 SetProtocol05ProgressLabels();
             }
@@ -553,6 +548,12 @@ public partial class MainWindow : Window
             }
 
             SetAllProgressPending();
+        }
+
+        if (string.Equals(experiment, Protocol06Name, StringComparison.Ordinal))
+        {
+            UpdateProtocol06Progress(timeline);
+            return;
         }
 
         if (string.Equals(experiment, Protocol05Name, StringComparison.Ordinal))
@@ -674,6 +675,48 @@ public partial class MainWindow : Window
             experimentComplete ? ProgressMark.Complete : syncComplete ? ProgressMark.Current : ProgressMark.Pending);
     }
 
+
+    private void UpdateProtocol06Progress(TelemetryTimelineSnapshot timeline)
+    {
+        var experimentStarted = HasTimelineEvent(timeline, Protocol06Name, ExperimentFrameKind.ExperimentStarted);
+        var scenarioGenerated = HasTimelineEvent(timeline, Protocol06Name, ExperimentFrameKind.DevelopmentalEvent, "scenario", "ancestry-world-generated");
+        var inferredStarted = HasTimelineEvent(timeline, Protocol06Name, ExperimentFrameKind.PhaseChanged, "ancestry-inferred", "infer-ancestry");
+        var inferredComplete = HasTimelineEvent(timeline, Protocol06Name, ExperimentFrameKind.DevelopmentalEvent, "ancestry-inferred", "path-complete");
+        var naiveStarted = HasTimelineEvent(timeline, Protocol06Name, ExperimentFrameKind.PhaseChanged, "naive-agreement", "evaluate-reports");
+        var naiveComplete = HasTimelineEvent(timeline, Protocol06Name, ExperimentFrameKind.DevelopmentalEvent, "naive-agreement", "path-complete");
+        var oracleStarted = HasTimelineEvent(timeline, Protocol06Name, ExperimentFrameKind.PhaseChanged, "oracle-ancestry", "evaluate-reports");
+        var oracleComplete = HasTimelineEvent(timeline, Protocol06Name, ExperimentFrameKind.DevelopmentalEvent, "oracle-ancestry", "path-complete");
+        var experimentComplete = HasTimelineEvent(timeline, Protocol06Name, ExperimentFrameKind.ExperimentCompleted);
+
+        SetProgressLine(SourceDirectProgressText,
+            scenarioGenerated || inferredStarted ? ProgressMark.Complete : experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(SourcePublishProgressText,
+            inferredStarted ? ProgressMark.Complete : scenarioGenerated ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(SourceStepText,
+            inferredStarted || experimentComplete ? ProgressMark.Complete : experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressCard(SourceProgressCard,
+            inferredStarted || experimentComplete ? ProgressMark.Complete : experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
+
+        SetProgressLine(ReceiverLocalProgressText,
+            inferredComplete || naiveStarted ? ProgressMark.Complete : inferredStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(ReceiverProvisionalProgressText,
+            naiveComplete || oracleStarted ? ProgressMark.Complete : naiveStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(ReceiverLivedProgressText,
+            oracleComplete ? ProgressMark.Complete : oracleStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(ReceiverStepText,
+            oracleComplete || experimentComplete ? ProgressMark.Complete : inferredStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressCard(ReceiverProgressCard,
+            oracleComplete || experimentComplete ? ProgressMark.Complete : inferredStarted ? ProgressMark.Current : ProgressMark.Pending);
+
+        SetProgressLine(EvaluationAssertionsProgressText,
+            experimentComplete ? ProgressMark.Complete : oracleComplete ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(EvaluationVerdictProgressText,
+            experimentComplete ? ProgressMark.Complete : ProgressMark.Pending);
+        SetProgressLine(EvaluationStepText,
+            experimentComplete ? ProgressMark.Complete : oracleComplete ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressCard(EvaluationProgressCard,
+            experimentComplete ? ProgressMark.Complete : oracleComplete ? ProgressMark.Current : ProgressMark.Pending);
+    }
 
     private void UpdateProtocol05Progress(TelemetryTimelineSnapshot timeline)
     {
@@ -848,6 +891,20 @@ public partial class MainWindow : Window
     }
 
 
+    private void SetProtocol06ProgressLabels()
+    {
+        SetProgressLabel(SourceStepText, "1. Generate incomplete ancestry");
+        SetProgressLabel(SourceDirectProgressText, "Seed-specific echo and independent histories");
+        SetProgressLabel(SourcePublishProgressText, "Publish partial origin hints + developmental signatures");
+        SetProgressLabel(ReceiverStepText, "2. Compare corroboration rules");
+        SetProgressLabel(ReceiverLocalProgressText, "Infer ancestry from incomplete public cues");
+        SetProgressLabel(ReceiverProvisionalProgressText, "Naive agreement-count control");
+        SetProgressLabel(ReceiverLivedProgressText, "Perfect-ancestry oracle calibration");
+        SetProgressLabel(EvaluationStepText, "3. Judge ancestry discrimination");
+        SetProgressLabel(EvaluationAssertionsProgressText, "Eight falsification checks");
+        SetProgressLabel(EvaluationVerdictProgressText, "Protocol verdict");
+    }
+
     private void SetProtocol05ProgressLabels()
     {
         SetProgressLabel(SourceStepText, "1. Let a culture form");
@@ -930,7 +987,7 @@ public partial class MainWindow : Window
     private void ResetProtocolProgress()
     {
         _progressExperiment = null;
-        SetProtocol05ProgressLabels();
+        SetProtocol06ProgressLabels();
         SetAllProgressPending();
     }
 

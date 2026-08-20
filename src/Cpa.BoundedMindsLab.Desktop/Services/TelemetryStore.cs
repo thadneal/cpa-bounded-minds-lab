@@ -14,9 +14,6 @@ public sealed class TelemetryStore : IDisposable
     private readonly Dictionary<string, SeriesHistory> _series = new(StringComparer.Ordinal);
     private readonly HashSet<string> _metrics = new(StringComparer.Ordinal);
     private readonly Queue<TelemetryTimelineItem> _timeline = new();
-    private readonly Dictionary<string, string> _activeSeriesByMetric = new(StringComparer.Ordinal);
-    private readonly Dictionary<string, long> _metricPlotVersions = new(StringComparer.Ordinal);
-    private readonly HashSet<string> _dirtyPlotMetrics = new(StringComparer.Ordinal);
     private long _version;
     private long _catalogVersion;
     private long _timelineVersion;
@@ -26,21 +23,6 @@ public sealed class TelemetryStore : IDisposable
     public long CatalogVersion => Interlocked.Read(ref _catalogVersion);
 
     public long TimelineVersion => Interlocked.Read(ref _timelineVersion);
-
-    public long GetMetricPlotVersion(string metric)
-    {
-        ArgumentException.ThrowIfNullOrWhiteSpace(metric);
-
-        _gate.EnterReadLock();
-        try
-        {
-            return _metricPlotVersions.TryGetValue(metric, out var version) ? version : 0;
-        }
-        finally
-        {
-            _gate.ExitReadLock();
-        }
-    }
 
     public void ApplyBatch(IReadOnlyList<ExperimentFrame> frames)
     {
@@ -182,9 +164,6 @@ public sealed class TelemetryStore : IDisposable
             _series.Clear();
             _metrics.Clear();
             _timeline.Clear();
-            _activeSeriesByMetric.Clear();
-            _metricPlotVersions.Clear();
-            _dirtyPlotMetrics.Clear();
             Interlocked.Increment(ref _version);
             Interlocked.Increment(ref _catalogVersion);
             Interlocked.Increment(ref _timelineVersion);
@@ -221,15 +200,6 @@ public sealed class TelemetryStore : IDisposable
                     Interlocked.Increment(ref _catalogVersion);
                 }
 
-                if (_activeSeriesByMetric.TryGetValue(pair.Key, out var activeSeries) &&
-                    !string.Equals(activeSeries, key, StringComparison.Ordinal))
-                {
-                    CommitMetricPlot(pair.Key);
-                }
-
-                _activeSeriesByMetric[pair.Key] = key;
-                _dirtyPlotMetrics.Add(pair.Key);
-
                 if (!history.Metrics.TryGetValue(pair.Key, out var series))
                 {
                     series = new MultiResolutionSeries(BucketSizes);
@@ -256,11 +226,6 @@ public sealed class TelemetryStore : IDisposable
             history.DetailVersion++;
         }
 
-        if (IsPlotCommitBoundary(frame.Kind))
-        {
-            CommitDirtyMetricPlots();
-        }
-
         if (ShouldRecordTimeline(frame))
         {
             _timeline.Enqueue(new TelemetryTimelineItem(
@@ -279,47 +244,6 @@ public sealed class TelemetryStore : IDisposable
             Interlocked.Increment(ref _timelineVersion);
         }
     }
-
-    private void CommitMetricPlot(string metric)
-    {
-        if (!_dirtyPlotMetrics.Remove(metric))
-        {
-            return;
-        }
-
-        if (_activeSeriesByMetric.TryGetValue(metric, out var activeSeries) &&
-            _series.TryGetValue(activeSeries, out var history) &&
-            history.Metrics.TryGetValue(metric, out var series))
-        {
-            series.Commit();
-        }
-
-        _metricPlotVersions[metric] = _metricPlotVersions.TryGetValue(metric, out var version)
-            ? version + 1
-            : 1;
-    }
-
-    private void CommitDirtyMetricPlots()
-    {
-        if (_dirtyPlotMetrics.Count == 0)
-        {
-            return;
-        }
-
-        var dirty = _dirtyPlotMetrics.ToArray();
-        foreach (var metric in dirty)
-        {
-            CommitMetricPlot(metric);
-        }
-    }
-
-    private static bool IsPlotCommitBoundary(ExperimentFrameKind kind) => kind is
-        ExperimentFrameKind.PhaseChanged or
-        ExperimentFrameKind.DevelopmentalEvent or
-        ExperimentFrameKind.ExperimentCompleted or
-        ExperimentFrameKind.RunCompleted or
-        ExperimentFrameKind.RunCancelled or
-        ExperimentFrameKind.RunFaulted;
 
     private static string SeriesKey(ExperimentFrame frame) =>
         string.Concat(frame.Experiment, "/", frame.Series);
@@ -368,7 +292,6 @@ public sealed class TelemetryStore : IDisposable
         private readonly List<IndexedPoint> _raw = [];
         private readonly EnvelopeLevel[] _levels;
         private long _count;
-        private long _committedThroughIndex = long.MinValue;
 
         public MultiResolutionSeries(int[] bucketSizes)
         {
@@ -400,29 +323,9 @@ public sealed class TelemetryStore : IDisposable
             }
         }
 
-        public void Commit()
-        {
-            if (_count == 0)
-            {
-                return;
-            }
-
-            if (_raw.Count > 0)
-            {
-                _committedThroughIndex = _raw[^1].Index;
-                return;
-            }
-
-            _committedThroughIndex = _levels
-                .Where(level => level.IsAvailable)
-                .Select(level => level.LastObservedIndex)
-                .DefaultIfEmpty(_committedThroughIndex)
-                .Max();
-        }
-
         public PlotPoint[] GetDisplayPoints(int pixelWidth)
         {
-            if (_count == 0 || _committedThroughIndex == long.MinValue)
+            if (_count == 0)
             {
                 return [];
             }
@@ -430,10 +333,7 @@ public sealed class TelemetryStore : IDisposable
             var pointBudget = Math.Max(128, pixelWidth * 2);
             if (_raw.Count == _count && _count <= pointBudget)
             {
-                return _raw
-                    .Where(point => point.Index <= _committedThroughIndex)
-                    .Select(point => new PlotPoint(point.X, point.Y))
-                    .ToArray();
+                return _raw.Select(point => new PlotPoint(point.X, point.Y)).ToArray();
             }
 
             EnvelopeLevel? selected = null;
@@ -447,7 +347,7 @@ public sealed class TelemetryStore : IDisposable
             }
 
             selected ??= _levels.Last(level => level.IsAvailable);
-            return selected.Flatten(_committedThroughIndex);
+            return selected.Flatten();
         }
     }
 
@@ -458,7 +358,6 @@ public sealed class TelemetryStore : IDisposable
         private readonly List<Envelope> _completed = [];
         private EnvelopeBuilder _current;
         private bool _retired;
-        private long _lastObservedIndex = long.MinValue;
 
         public EnvelopeLevel(int bucketSize, int? maximumCompletedEnvelopes)
         {
@@ -467,8 +366,6 @@ public sealed class TelemetryStore : IDisposable
         }
 
         public bool IsAvailable => !_retired;
-
-        public long LastObservedIndex => _lastObservedIndex;
 
         public int EstimatedDisplayPointCount => (_completed.Count + (_current.Count > 0 ? 1 : 0)) * 4;
 
@@ -479,7 +376,6 @@ public sealed class TelemetryStore : IDisposable
                 return;
             }
 
-            _lastObservedIndex = point.Index;
             _current.Add(point);
             if (_current.Count < _bucketSize)
             {
@@ -501,7 +397,7 @@ public sealed class TelemetryStore : IDisposable
             _current = default;
         }
 
-        public PlotPoint[] Flatten(long committedThroughIndex)
+        public PlotPoint[] Flatten()
         {
             if (_retired)
             {
@@ -520,7 +416,6 @@ public sealed class TelemetryStore : IDisposable
             }
 
             return points
-                .Where(point => point.Index <= committedThroughIndex)
                 .OrderBy(point => point.Index)
                 .DistinctBy(point => point.Index)
                 .Select(point => new PlotPoint(point.X, point.Y))

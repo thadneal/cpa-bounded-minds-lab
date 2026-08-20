@@ -1,6 +1,6 @@
 # CPA Bounded Minds Laboratory
 
-Version **0.5.2**
+Version **0.6.0**
 
 This repository is the successor experimental program to the completed CPA Cognitive Development Lab. The earlier lab studied development inside one bounded organism. This laboratory moves the boundary outward:
 
@@ -48,17 +48,23 @@ Narrow result: preserving source-specific epistemic shape through a compact publ
 
 ### Protocol 05 - emergent convention / artificial culture
 
-`05-emergent-convention-artificial-culture` is the current targeted protocol. Three bounded peers repeatedly coordinate in a seed-generated twelve-context world. For each context, two coordinated actions begin close enough in cost that no single convention is installed in advance, while private peers often prefer different actions. Repeated successful negotiation can cause the peers' separate local convention memories to converge on one shared habit. Once that habit has standing, one compact convention invocation can replace fresh three-peer negotiation.
+`05-emergent-convention-artificial-culture` is frozen Supported. The canonical five-seed matrix returned Support in all five histories with all 35 preregistered checks passing. Earned convention preserved about `99.6%` of fresh-negotiation utility while reducing public communication work by about `76%`. Changed contexts were locally revised, stable contexts retained their convention, and the frozen-culture control remained cheap but materially less useful after the world changed.
+
+Narrow result: repeated bounded interaction can produce a distributed convention that compresses routine coordination without requiring a central culture owner, provided local consequence can reopen and revise that convention.
+
+### Protocol 06 - incomplete epistemic ancestry
+
+`06-incomplete-epistemic-ancestry` is the current targeted protocol. Seven peers report into seed-generated contexts where apparent agreement can arise in two importantly different ways: several genuinely independent roots may converge, or several peer reports may descend from one upstream episode that has been copied through the social field.
+
+Public ancestry is deliberately incomplete. Some reports preserve an opaque upstream hint, many omit it, and many expose only an immediate-sender alias. Every report also carries a compact developmental signature that is copied imperfectly rather than acting as a perfect lineage identifier.
 
 The experiment compares:
 
-- `earned-convention`, convention is retained locally, earns standing through successful consequence, compresses later communication, and can lose standing when the world changes;
-- `fresh-negotiation`, no convention is retained and three public preference packets are paid on every episode;
-- `frozen-convention`, the same culture forms before the regime shift but later consequence cannot revise it.
+- `ancestry-inferred`, the receiver groups likely shared ancestry using only the incomplete public hints and signature similarity, then lets each inferred lineage contribute one bounded unit of corroborative support;
+- `naive-agreement`, every peer report is counted as independent corroboration;
+- `oracle-ancestry`, true hidden roots are supplied only as a calibration ceiling and are not proposed CPA machinery.
 
-A seed determines the private cost landscape and which `4..6` contexts later change. Stable contexts remain approximately as lived. Changed contexts make the formerly expensive third action newly useful. There is no central convention registry in the ordinary path.
-
-Protocol 05 asks whether something collective can emerge between bounded minds, reduce coordination cost, remain near the utility of fresh negotiation, and still be locally rewritten by consequence rather than hardening into doctrine.
+The generated world contains echo traps, genuine independent convergence, mixed lineages, and deliberately ambiguous lineages. Protocol 06 succeeds only if inferred ancestry reduces echo-driven error, preserves independent convergence, recovers most true shared-root pairs, avoids excessive false merges, and remains close to the oracle while using the same bounded public report set.
 
 The canonical matrix remains `101,211,307,401,503`. See `docs/EXPERIMENTS.md` and `docs/FALSIFICATION.md` before interpreting results.
 
@@ -81,8 +87,8 @@ Projects target .NET 10. The WPF Desktop Lab targets `net10.0-windows`.
 ```powershell
 dotnet build Cpa.BoundedMindsLab.sln -c Release
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --experiment 05-emergent-convention-artificial-culture --seed 101
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --experiment 05-emergent-convention-artificial-culture --replicate 101,211,307,401,503 --output _artifacts/protocol-05-five-seed
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --experiment 06-incomplete-epistemic-ancestry --seed 101
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --experiment 06-incomplete-epistemic-ancestry --replicate 101,211,307,401,503 --output _artifacts/protocol-06-five-seed
 ```
 
 For live inspection on Windows 11:
@@ -91,7 +97,7 @@ For live inspection on Windows 11:
 dotnet run --project src/Cpa.BoundedMindsLab.Desktop
 ```
 
-The Desktop Lab opens with `101, 211, 307, 401, 503` already entered in **Seeds**, selects the newest protocol by default, and includes the running application version in the main and maximized-graph window titles. Graphs explain axis meaning and preferred metric direction/context, provide show-all/hide-all series controls, and rebuild from committed metric batches rather than every incremental numeric sample.
+The Desktop Lab opens with `101, 211, 307, 401, 503` already entered in **Seeds**, selects the newest protocol by default, and includes the running application version in the main and maximized-graph window titles. Graphs explain axis meaning and preferred metric direction/context, provide show-all/hide-all series controls, and update incrementally from bounded background telemetry at an adaptive display cadence.
 
 ## Visualization boundary
 

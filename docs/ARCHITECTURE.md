@@ -222,3 +222,38 @@ The public reducer receives only current preferred action and preference strengt
 The one-packet shortcut replaces three fresh preference packets only after local standing is high. Listeners still act from their own convention copies. If copies diverge, coordination can fail and consequence withdraws standing.
 
 The `frozen-convention` control forms the same culture as the adaptive path, then refuses to revise after the world changes. It is a pathological contrast for social inertia, not proposed CPA anatomy.
+
+## Protocol 06 incomplete ancestry boundary
+
+Protocol 06 separates **surface agreement** from **independent evidential origin** without assuming that perfect provenance exists.
+
+```text
+hidden evidence root A ----> peer 1 report ----+
+          |               \-> peer 2 report ----+--> bounded receiver
+          |               \-> peer 3 report ----+      |
+          |                                             v
+hidden evidence root B --------> peer 4 report ------> ancestry grouping
+                                                        |
+hidden evidence root C --------> peer 5 report ------> bounded support
+```
+
+The ordinary receiver never sees the hidden root IDs. Each report exposes only a compact public surface:
+
+```text
+sender id
+estimate
+standing
+evidence depth
+optional opaque origin hint
+three-value developmental signature
+```
+
+An origin hint may be absent, may preserve a shared upstream alias, or may stop at the immediate sender. The developmental signature is copied with noise, so it can suggest common ancestry but is not a perfect hash.
+
+The `ancestry-inferred` reducer merges reports when a non-empty origin hint matches or the developmental signatures are sufficiently close. Reports inside one inferred lineage can refine that lineage's estimate, but the lineage's corroborative weight saturates at the strongest member rather than multiplying with every echo.
+
+The `naive-agreement` control assigns every report its own corroborative group. The `oracle-ancestry` control groups by hidden root and is visible only to the evaluator. It is a calibration ceiling, not an architecture proposal.
+
+All paths receive the same 98 reports and pay the same communication cost. The only treatment difference is how public corroboration is reduced locally. This prevents ancestry inference from hiding extra retrieval, consultation, or communication work.
+
+The signature distance and clustering rule are protocol instruments. A passing result would support the need to preserve ancestry uncertainty and discount probable echoes. It would not establish Euclidean signature clustering, a universal provenance packet, or a global ancestry service as CPA anatomy.
