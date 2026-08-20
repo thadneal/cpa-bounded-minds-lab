@@ -189,7 +189,7 @@ When several experiments run within one seed, the progress surface changes as th
 
 ## Default experiment selection
 
-The newest protocol is selected by default when the Desktop Lab opens, while frozen earlier protocols remain available but unselected. In v0.4.0 this means Protocol 04 is the ordinary targeted run. `Select all` remains available for the full-suite checkpoint.
+The newest protocol is selected by default when the Desktop Lab opens, while frozen earlier protocols remain available but unselected. In v0.5.0 this means Protocol 05 is the ordinary targeted run. `Select all` remains available for the full-suite checkpoint.
 
 ## v0.3.0 seed and Protocol 03 updates
 
@@ -232,3 +232,39 @@ Evaluate
 ```
 
 Protocol 03 is now displayed in Run notes as a frozen Supported baseline. The existing Seed selector, active-seed badge, per-seed telemetry stores, metric/path filtering, line visibility, maximized graph, Timeline, and judged Protocol results require no protocol-specific changes for the new telemetry.
+
+
+## v0.5.0 Protocol 05 and version display
+
+The main Desktop Lab and maximized graph window derive their displayed version from the running Desktop assembly. This makes screenshots and result-review sessions attributable to the application build.
+
+The Desktop Lab recognizes `05-emergent-convention-artificial-culture` as the newest protocol and selects it by default. Protocol Progress follows the assay:
+
+```text
+Let a culture form
+  seed-specific plural coordination world
+  repeated success earns local convention standing
+Compare coordination modes
+  earned distributed convention
+  fresh negotiation baseline
+  frozen-convention control
+Change the world and judge
+  regime shift + seven falsification checks
+  protocol verdict
+```
+
+Protocol 04 now appears in Run notes as a frozen Supported baseline. Existing seed-scoped stores, graph filtering, line visibility, maximized view, Timeline, and judged Protocol results remain observer-only.
+
+
+## v0.5.1 scalar comparison plots
+
+The graph surface chooses presentation from the observed telemetry topology. Ordinary multi-point metrics remain ordered time-series lines. When two or more candidate paths each publish exactly one observation for a metric, the surface treats that metric as a terminal scalar comparison and renders bars by path. This prevents incidental result-publication ticks from becoming a misleading x-axis for values such as final RMSE or communication packet count. Legend visibility and hover inspection remain available in both modes.
+
+
+## v0.5.2 metric guidance, visibility controls, and boundary-batched plotting
+
+Every graph now explains the selected metric in-place. The header reports the y-value meaning, the preferred direction or context for interpretation, and the x-axis semantics. Time-series plots use observation/tick order on x; terminal scalar comparisons use treatment/focus path categories. Standing, disagreement, uncertainty, evidence volume, and other non-monotonic quantities are explicitly marked context-dependent rather than being assigned a false universal "higher" or "lower" preference.
+
+`Show all` and `Hide all` act on every series key for the current metric. Clicking an individual legend key still toggles only that line/bar. The embedded and maximized plots continue sharing the same hidden-series state.
+
+Live rendering is now boundary-batched. The background projector still ingests numeric frames continuously, but the graph does not rebuild for each incremental sample. A metric series accumulates privately in the display store until a series transition, protocol phase/developmental boundary, or terminal boundary commits that accumulated segment. Only committed-through points are eligible for plotting, so when the next path starts its partial samples do not appear in the graph that was just committed for the previous path. This reduces dispatcher/render churn at Maximum pace without slowing the experiment or weakening durable telemetry. The UI may intentionally lag the currently accumulating segment until its next meaningful boundary; `frames.ndjson` remains the complete record.

@@ -8,6 +8,7 @@ public static class ExperimentCatalog
         new PeerDisagreementPreservedInteriorsExperiment(),
         new DevelopmentalVersusDoctrinalTransferExperiment(),
         new BoundedCommunicationBeforeLanguageExperiment(),
+        new EmergentConventionArtificialCultureExperiment(),
     ];
 
     public static IReadOnlyList<IExperiment> All => Experiments;

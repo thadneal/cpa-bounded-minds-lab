@@ -9,6 +9,7 @@ public partial class MetricPlotWindow : Window
     public MetricPlotWindow()
     {
         InitializeComponent();
+        Title = $"CPA Bounded Minds Laboratory v{ApplicationVersion.Current} - Maximized graph";
         UpdateSelection(null, null);
     }
 
@@ -28,6 +29,10 @@ public partial class MetricPlotWindow : Window
     }
 
     private void WindowSourceInitialized(object? sender, EventArgs eventArgs) => WindowsDarkMode.Apply(this);
+
+    private void ShowAllClicked(object sender, RoutedEventArgs eventArgs) => Plot.ShowAllCurrentSeries();
+
+    private void HideAllClicked(object sender, RoutedEventArgs eventArgs) => Plot.HideAllCurrentSeries();
 
     private void CloseClicked(object sender, RoutedEventArgs eventArgs) => Close();
 }

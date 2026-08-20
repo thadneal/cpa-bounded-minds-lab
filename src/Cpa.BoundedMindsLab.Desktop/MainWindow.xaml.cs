@@ -20,6 +20,7 @@ public partial class MainWindow : Window
     private const string Protocol02Name = "02-peer-disagreement-preserved-interiors";
     private const string Protocol03Name = "03-developmental-versus-doctrinal-transfer";
     private const string Protocol04Name = "04-bounded-communication-before-language";
+    private const string Protocol05Name = "05-emergent-convention-artificial-culture";
     private static readonly int[] BoundaryDelays = [0, 2, 10];
     private static readonly char[] SeedSeparators = [',', ';', ' ', '\t', '\r', '\n'];
     private readonly DesktopRunCoordinator _coordinator = new();
@@ -50,6 +51,7 @@ public partial class MainWindow : Window
                 experiment.Question,
                 string.Equals(experiment.Name, latestExperiment, StringComparison.Ordinal))));
         InitializeComponent();
+        Title = $"CPA Bounded Minds Laboratory v{ApplicationVersion.Current}";
         MetricPlot.SeriesVisibilityChanged += PlotSeriesVisibilityChanged;
         DataContext = this;
         SeedTextBox.Text = string.Join(", ", ExperimentDefaults.ReplicationSeeds);
@@ -213,6 +215,18 @@ public partial class MainWindow : Window
 
     private void NextGraphSeedClicked(object sender, RoutedEventArgs eventArgs) => StepSelection(GraphSeedComboBox, 1);
 
+    private void ShowAllPlotLinesClicked(object sender, RoutedEventArgs eventArgs)
+    {
+        var plot = _maximizedPlotWindow?.Plot ?? MetricPlot;
+        plot.ShowAllCurrentSeries();
+    }
+
+    private void HideAllPlotLinesClicked(object sender, RoutedEventArgs eventArgs)
+    {
+        var plot = _maximizedPlotWindow?.Plot ?? MetricPlot;
+        plot.HideAllCurrentSeries();
+    }
+
     private void MaximizeGraphClicked(object sender, RoutedEventArgs eventArgs)
     {
         if (_maximizedPlotWindow is not null)
@@ -319,12 +333,22 @@ public partial class MainWindow : Window
             var width = Math.Max(64, (int)Math.Round(activePlot.ActualWidth));
             var now = Stopwatch.GetTimestamp();
             var graphDue = now >= _nextGraphRefreshTimestamp;
-            if (graphDue && (selectedStore.Version != _lastPlotStoreVersion || width != _lastPlotWidth))
+            var plotVersion = selectedStore.GetMetricPlotVersion(metric);
+            if (plotVersion == 0 && _lastPlotStoreVersion != 0)
+            {
+                activePlot.SetSnapshot(new MetricPlotSnapshot(0, metric, []));
+                _lastPlotStoreVersion = 0;
+                _lastPlotWidth = width;
+            }
+            else if (plotVersion > 0 && graphDue && (plotVersion != _lastPlotStoreVersion || width != _lastPlotWidth))
             {
                 var snapshot = selectedStore.GetPlotSnapshot(metric, selectedSeries, width);
                 activePlot.SetSnapshot(snapshot);
-                _lastPlotStoreVersion = selectedStore.Version;
+                _lastPlotStoreVersion = plotVersion;
                 _lastPlotWidth = width;
+                // Plot depictions are committed at metric-series/phase boundaries rather
+                // than on every numeric sample. The adaptive delay remains as a second
+                // guard for unusually expensive completed snapshots.
                 var refreshMilliseconds = status.Backlog > 4_096 || activePlot.LastBuildMilliseconds >= 16.0
                     ? 250
                     : activePlot.LastBuildMilliseconds >= 8.0
@@ -507,7 +531,11 @@ public partial class MainWindow : Window
         if (!string.Equals(_progressExperiment, experiment, StringComparison.Ordinal))
         {
             _progressExperiment = experiment;
-            if (string.Equals(experiment, Protocol04Name, StringComparison.Ordinal))
+            if (string.Equals(experiment, Protocol05Name, StringComparison.Ordinal))
+            {
+                SetProtocol05ProgressLabels();
+            }
+            else if (string.Equals(experiment, Protocol04Name, StringComparison.Ordinal))
             {
                 SetProtocol04ProgressLabels();
             }
@@ -525,6 +553,12 @@ public partial class MainWindow : Window
             }
 
             SetAllProgressPending();
+        }
+
+        if (string.Equals(experiment, Protocol05Name, StringComparison.Ordinal))
+        {
+            UpdateProtocol05Progress(timeline);
+            return;
         }
 
         if (string.Equals(experiment, Protocol04Name, StringComparison.Ordinal))
@@ -640,6 +674,50 @@ public partial class MainWindow : Window
             experimentComplete ? ProgressMark.Complete : syncComplete ? ProgressMark.Current : ProgressMark.Pending);
     }
 
+
+    private void UpdateProtocol05Progress(TelemetryTimelineSnapshot timeline)
+    {
+        var experimentStarted = HasTimelineEvent(timeline, Protocol05Name, ExperimentFrameKind.ExperimentStarted);
+        var scenarioGenerated = HasTimelineEvent(timeline, Protocol05Name, ExperimentFrameKind.DevelopmentalEvent, "scenario", "scenario-generated");
+        var earnedStarted = HasTimelineEvent(timeline, Protocol05Name, ExperimentFrameKind.PhaseChanged, "earned-convention", "convention-formation");
+        var earnedFormed = HasTimelineEvent(timeline, Protocol05Name, ExperimentFrameKind.DevelopmentalEvent, "earned-convention", "convention-formed");
+        var earnedShifted = HasTimelineEvent(timeline, Protocol05Name, ExperimentFrameKind.PhaseChanged, "earned-convention", "regime-shift");
+        var earnedComplete = HasTimelineEvent(timeline, Protocol05Name, ExperimentFrameKind.DevelopmentalEvent, "earned-convention", "path-complete");
+        var freshStarted = HasTimelineEvent(timeline, Protocol05Name, ExperimentFrameKind.PhaseChanged, "fresh-negotiation", "convention-formation");
+        var freshComplete = HasTimelineEvent(timeline, Protocol05Name, ExperimentFrameKind.DevelopmentalEvent, "fresh-negotiation", "path-complete");
+        var frozenStarted = HasTimelineEvent(timeline, Protocol05Name, ExperimentFrameKind.PhaseChanged, "frozen-convention", "convention-formation");
+        var frozenComplete = HasTimelineEvent(timeline, Protocol05Name, ExperimentFrameKind.DevelopmentalEvent, "frozen-convention", "path-complete");
+        var experimentComplete = HasTimelineEvent(timeline, Protocol05Name, ExperimentFrameKind.ExperimentCompleted);
+
+        SetProgressLine(SourceDirectProgressText,
+            scenarioGenerated || earnedStarted ? ProgressMark.Complete : experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(SourcePublishProgressText,
+            earnedFormed || earnedShifted ? ProgressMark.Complete : earnedStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(SourceStepText,
+            earnedShifted || earnedComplete || freshStarted || frozenStarted || experimentComplete ? ProgressMark.Complete : experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressCard(SourceProgressCard,
+            earnedShifted || earnedComplete || freshStarted || frozenStarted || experimentComplete ? ProgressMark.Complete : experimentStarted ? ProgressMark.Current : ProgressMark.Pending);
+
+        SetProgressLine(ReceiverLocalProgressText,
+            earnedComplete || freshStarted ? ProgressMark.Complete : earnedStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(ReceiverProvisionalProgressText,
+            freshComplete || frozenStarted ? ProgressMark.Complete : freshStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(ReceiverLivedProgressText,
+            frozenComplete ? ProgressMark.Complete : frozenStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(ReceiverStepText,
+            frozenComplete || experimentComplete ? ProgressMark.Complete : earnedStarted ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressCard(ReceiverProgressCard,
+            frozenComplete || experimentComplete ? ProgressMark.Complete : earnedStarted ? ProgressMark.Current : ProgressMark.Pending);
+
+        SetProgressLine(EvaluationAssertionsProgressText,
+            experimentComplete ? ProgressMark.Complete : frozenComplete ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressLine(EvaluationVerdictProgressText,
+            experimentComplete ? ProgressMark.Complete : ProgressMark.Pending);
+        SetProgressLine(EvaluationStepText,
+            experimentComplete ? ProgressMark.Complete : frozenComplete ? ProgressMark.Current : ProgressMark.Pending);
+        SetProgressCard(EvaluationProgressCard,
+            experimentComplete ? ProgressMark.Complete : frozenComplete ? ProgressMark.Current : ProgressMark.Pending);
+    }
 
     private void UpdateProtocol04Progress(TelemetryTimelineSnapshot timeline)
     {
@@ -770,6 +848,20 @@ public partial class MainWindow : Window
     }
 
 
+    private void SetProtocol05ProgressLabels()
+    {
+        SetProgressLabel(SourceStepText, "1. Let a culture form");
+        SetProgressLabel(SourceDirectProgressText, "Seed-specific plural coordination world");
+        SetProgressLabel(SourcePublishProgressText, "Repeated success earns local convention standing");
+        SetProgressLabel(ReceiverStepText, "2. Compare coordination modes");
+        SetProgressLabel(ReceiverLocalProgressText, "Earned distributed convention");
+        SetProgressLabel(ReceiverProvisionalProgressText, "Fresh negotiation baseline");
+        SetProgressLabel(ReceiverLivedProgressText, "Frozen-convention control");
+        SetProgressLabel(EvaluationStepText, "3. Change the world and judge");
+        SetProgressLabel(EvaluationAssertionsProgressText, "Regime shift + seven falsification checks");
+        SetProgressLabel(EvaluationVerdictProgressText, "Protocol verdict");
+    }
+
     private void SetProtocol04ProgressLabels()
     {
         SetProgressLabel(SourceStepText, "1. Build private plurality");
@@ -838,7 +930,7 @@ public partial class MainWindow : Window
     private void ResetProtocolProgress()
     {
         _progressExperiment = null;
-        SetProtocol04ProgressLabels();
+        SetProtocol05ProgressLabels();
         SetAllProgressPending();
     }
 

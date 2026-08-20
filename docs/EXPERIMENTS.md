@@ -149,7 +149,7 @@ Mean lifetime RMSE was approximately `0.17585` for developmental transfer, `0.18
 
 Name: `04-bounded-communication-before-language`
 
-Status: **result pending**.
+Status: **frozen Supported**.
 
 ### Question
 
@@ -226,3 +226,59 @@ A successful result would support a narrow claim:
 > Public disagreement can carry useful information when source-specific warrant remains attached to distinct signals long enough for external consequence to adjudicate it. Early mutual smoothing can destroy some of that value even when private interiors remain intact.
 
 It would not establish that natural language is intrinsically harmful, that all consensus is premature, or that this small weighted decision rule belongs in final CPA anatomy.
+
+
+### Accepted Protocol 04 result
+
+The canonical five-seed matrix returned **5/5 Support with 35/35 checks passing**. Mean total RMSE was approximately `0.04915` for typed signals versus `0.05341` for early semantic smoothing. Informative-dissent early RMSE was about `0.15252` versus `0.16238`, and misleading-dissent early RMSE was about `0.04778` versus `0.06402`. Typed public disagreement began around `0.2514` and fell to about `0.00348` under later shared consequence.
+
+The accepted interpretation remains narrow: source-specific epistemic shape can carry useful information before commitment, and premature public convergence can erase some of it.
+
+
+## Protocol 05: emergent convention / artificial culture
+
+Name: `05-emergent-convention-artificial-culture`
+
+Status: **implemented in v0.5.0, result pending**.
+
+### Question
+
+Can repeated bounded interaction produce distributed conventions that reduce coordination cost, remain grounded in successful use, and revise when the conditions that sustained them change?
+
+### Why this follows Protocol 04
+
+Protocols 01 through 04 tested what crosses a mind boundary, whether private plurality matters, whether developmental warrant helps transfer, and whether public epistemic shape should remain distinct before consequence. Protocol 05 asks whether repeated interaction can create something that belongs to the group without requiring a central group mind.
+
+### Seed-generated coordination world
+
+Three peers coordinate across twelve anonymous contexts and three possible actions. In each initial context two actions have similar group cost and the third is clearly expensive. Private peers often disagree over which of the two viable actions is best. The world does not label a convention in advance.
+
+Each seed changes the cost landscape, peer-specific preferences, encounter order, and which `4..6` contexts later change. In shifted contexts the formerly expensive third action becomes cheap while the old viable pair becomes expensive. Stable contexts drift only slightly.
+
+### Earned-convention condition
+
+Peers begin with fresh bounded negotiation. Each publishes only its currently preferred action and the strength of that preference. A stateless public reducer chooses a coordinated action. Successful consequence lets each peer independently retain that action as a local convention and increase its standing.
+
+Once the current speaker's convention standing reaches the shortcut threshold, one compact convention invocation replaces the three fresh preference packets. Every peer still consults its own local convention copy. No global convention table exists. Poor consequence reduces standing and can reopen negotiation.
+
+### Fresh-negotiation control
+
+This control retains no convention. It always pays for three public preference postures and the same stateless reducer. It provides a flexible utility baseline and an explicit communication-cost baseline. Across the standard `504` episodes it emits `1512` packets and costs `9.072` work units.
+
+### Frozen-convention control
+
+The frozen path forms convention exactly as the earned path does before the regime shift. After the shift it continues to experience consequence but refuses to revise convention action or standing. This is a pathological control for cultural inertia, not proposed CPA anatomy.
+
+### Metrics
+
+Live paths publish group utility, rolling mean utility, regret, rolling regret, coordination success, shortcut use, context convention agreement, mean convention standing, speaker standing, communication work, and selected action. State snapshots expose compact peer and local convention public surfaces.
+
+Final metrics include convention coverage, late shortcut rate, changed-context utility, changed revision coverage, stable retention, convention switch count, communication packets/work, and convention fingerprints.
+
+### What success would mean
+
+A successful result would support a narrow claim:
+
+> Repeated successful coordination can create a distributed collective compression that makes routine interaction cheaper, while direct consequence can still reopen and selectively rewrite the convention when its supporting conditions change.
+
+It would not establish that mature culture is a context-to-action table, that the protocol's public reducer belongs in final CPA, or that collective cognition requires a permanent shared state object.

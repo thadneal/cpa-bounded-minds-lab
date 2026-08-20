@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
+using Cpa.BoundedMindsLab.Desktop.Services;
 using Cpa.BoundedMindsLab.Desktop.ViewModels;
 
 namespace Cpa.BoundedMindsLab.Desktop.Controls;
@@ -28,6 +29,7 @@ public sealed class FastMetricPlot : FrameworkElement
     private readonly DispatcherTimer _resizeTimer;
     private readonly List<RenderedSeries> _rendered = [];
     private readonly List<LegendHit> _legendHits = [];
+    private readonly List<BarHit> _barHits = [];
     private readonly HashSet<string> _hiddenSeriesVisibility = new(StringComparer.Ordinal);
     private MetricPlotSnapshot? _snapshot;
     private DrawingGroup? _staticDrawing;
@@ -80,6 +82,17 @@ public sealed class FastMetricPlot : FrameworkElement
         }
     }
 
+
+    public void ShowAllCurrentSeries()
+    {
+        SetCurrentSeriesVisibility(visible: true);
+    }
+
+    public void HideAllCurrentSeries()
+    {
+        SetCurrentSeriesVisibility(visible: false);
+    }
+
     public void SetSnapshot(MetricPlotSnapshot snapshot)
     {
         ArgumentNullException.ThrowIfNull(snapshot);
@@ -100,6 +113,7 @@ public sealed class FastMetricPlot : FrameworkElement
         _staticDrawing = null;
         _rendered.Clear();
         _legendHits.Clear();
+        _barHits.Clear();
         _hiddenSeriesVisibility.Clear();
         _mouse = null;
         _pendingMouse = null;
@@ -142,6 +156,7 @@ public sealed class FastMetricPlot : FrameworkElement
         var drawing = new DrawingGroup();
         _rendered.Clear();
         _legendHits.Clear();
+        _barHits.Clear();
         DisplayPointCount = 0;
         using (var context = drawing.Open())
         {
@@ -162,10 +177,20 @@ public sealed class FastMetricPlot : FrameworkElement
 
     private void DrawStatic(DrawingContext drawingContext, MetricPlotSnapshot snapshot)
     {
-        DrawText(drawingContext, snapshot.Metric, new Point(14, 10), 15, TextBrush);
+        var scalarComparison = snapshot.Series.Count >= 2 &&
+            snapshot.Series.All(series => series.Points.Count == 1);
+        var guidance = MetricGuidance.For(snapshot.Metric);
+        DrawText(drawingContext, snapshot.Metric, new Point(14, 8), 15, TextBrush);
+        DrawGuidanceLine(drawingContext, $"Y: {guidance.ValueDescription}", 29);
+        DrawGuidanceLine(drawingContext, $"Preferred: {guidance.Preference}", 44);
+        DrawGuidanceLine(
+            drawingContext,
+            $"X: {(scalarComparison ? guidance.ComparisonXAxisDescription : guidance.TimeXAxisDescription)}",
+            59);
+
         if (snapshot.Series.Count == 0)
         {
-            DrawText(drawingContext, "No observations for this metric/path selection.", new Point(18, 46), 12, MutedBrush);
+            DrawText(drawingContext, "No committed observations for this metric/path selection yet.", new Point(18, 88), 12, MutedBrush);
             return;
         }
 
@@ -202,6 +227,12 @@ public sealed class FastMetricPlot : FrameworkElement
                 12,
                 MutedBrush);
             _plotRect = Rect.Empty;
+            return;
+        }
+
+        if (scalarComparison)
+        {
+            DrawScalarComparison(drawingContext, visibleSeries);
             return;
         }
 
@@ -243,9 +274,9 @@ public sealed class FastMetricPlot : FrameworkElement
             DisplayPointCount += locations.Length;
             if (locations.Length == 1)
             {
-                // Final/result metrics often publish exactly one observation per path.
-                // A one-point StreamGeometry has no stroked segment, so render an
-                // explicit marker instead of leaving a valid metric looking empty.
+                // A single observation has no stroked line segment. Keep it visible
+                // for a one-series metric while multi-series scalar result metrics
+                // use the comparison-bar path above.
                 drawingContext.DrawEllipse(brush, new Pen(BackgroundBrush, 1.2), locations[0], 4.2, 4.2);
             }
             else
@@ -256,6 +287,126 @@ public sealed class FastMetricPlot : FrameworkElement
 
             _rendered.Add(new RenderedSeries(entry.Series, brush, locations));
         }
+    }
+
+
+    private void DrawScalarComparison(
+        DrawingContext drawingContext,
+        List<(int Index, PlotSeriesSnapshot Series)> visibleSeries)
+    {
+        var values = visibleSeries.Select(entry => entry.Series.Points[0].Y).ToArray();
+        var minimumValue = values.Min();
+        var maximumValue = values.Max();
+        var minimumY = Math.Min(0.0, minimumValue);
+        var maximumY = Math.Max(0.0, maximumValue);
+        if (Math.Abs(maximumY - minimumY) < 1e-12)
+        {
+            maximumY = minimumY + 1.0;
+        }
+        else
+        {
+            var padding = (maximumY - minimumY) * 0.08;
+            if (minimumY < 0.0)
+            {
+                minimumY -= padding;
+            }
+
+            if (maximumY > 0.0)
+            {
+                maximumY += padding;
+            }
+        }
+
+        DrawComparisonGrid(drawingContext, minimumY, maximumY);
+        DrawText(
+            drawingContext,
+            "scalar comparison",
+            new Point(Math.Max(14.0, ActualWidth - 150.0), 10),
+            10.5,
+            MutedBrush);
+
+        var zeroY = MapY(0.0, minimumY, maximumY);
+        var slotWidth = _plotRect.Width / visibleSeries.Count;
+        var barWidth = Math.Max(10.0, Math.Min(92.0, slotWidth * 0.58));
+        for (var index = 0; index < visibleSeries.Count; index++)
+        {
+            var entry = visibleSeries[index];
+            var point = entry.Series.Points[0];
+            var brush = SeriesBrushes[entry.Index % SeriesBrushes.Length];
+            var centerX = _plotRect.Left + (slotWidth * (index + 0.5));
+            var valueY = MapY(point.Y, minimumY, maximumY);
+            var top = Math.Min(zeroY, valueY);
+            var height = Math.Max(1.5, Math.Abs(zeroY - valueY));
+            var bar = new Rect(centerX - (barWidth / 2.0), top, barWidth, height);
+            drawingContext.DrawRectangle(brush, new Pen(BackgroundBrush, 1.0), bar);
+
+            var valueText = point.Y.ToString("0.###", CultureInfo.InvariantCulture);
+            var valueYPosition = point.Y >= 0.0 ? Math.Max(_plotRect.Top, top - 18.0) : Math.Min(_plotRect.Bottom - 16.0, bar.Bottom + 3.0);
+            var valueBounds = MeasureText(valueText, 9.5);
+            DrawText(
+                drawingContext,
+                valueText,
+                new Point(centerX - (valueBounds.Width / 2.0), valueYPosition),
+                9.5,
+                TextBrush);
+
+            var category = Shorten(TerminalLabel(entry.Series.Label), Math.Max(8, (int)(slotWidth / 7.0)));
+            var categoryBounds = MeasureText(category, 9.0);
+            DrawText(
+                drawingContext,
+                category,
+                new Point(centerX - (categoryBounds.Width / 2.0), _plotRect.Bottom + 7.0),
+                9.0,
+                MutedBrush);
+
+            var location = new Point(centerX, valueY);
+            _barHits.Add(new BarHit(entry.Series, bar, point));
+            _rendered.Add(new RenderedSeries(entry.Series, brush, [location]));
+            DisplayPointCount++;
+        }
+    }
+
+    private void DrawComparisonGrid(DrawingContext drawingContext, double minimumY, double maximumY)
+    {
+        var borderPen = new Pen(GridBrush, 1.0);
+        var gridPen = new Pen(GridBrush, 0.55);
+        drawingContext.DrawRectangle(null, borderPen, _plotRect);
+        for (var index = 0; index <= 4; index++)
+        {
+            var fraction = index / 4.0;
+            var y = _plotRect.Bottom - (_plotRect.Height * fraction);
+            drawingContext.DrawLine(gridPen, new Point(_plotRect.Left, y), new Point(_plotRect.Right, y));
+            var value = minimumY + ((maximumY - minimumY) * fraction);
+            DrawText(drawingContext, value.ToString("0.###", CultureInfo.InvariantCulture), new Point(6, y - 7), 9.5, MutedBrush);
+        }
+
+        if (minimumY < 0.0 && maximumY > 0.0)
+        {
+            var zeroY = MapY(0.0, minimumY, maximumY);
+            drawingContext.DrawLine(new Pen(MutedBrush, 0.9), new Point(_plotRect.Left, zeroY), new Point(_plotRect.Right, zeroY));
+        }
+    }
+
+    private double MapY(double value, double minimumY, double maximumY) =>
+        _plotRect.Bottom - (((value - minimumY) / (maximumY - minimumY)) * _plotRect.Height);
+
+    private Size MeasureText(string text, double size)
+    {
+        var formatted = new FormattedText(
+            text,
+            CultureInfo.InvariantCulture,
+            FlowDirection.LeftToRight,
+            new Typeface("Segoe UI"),
+            size,
+            TextBrush,
+            VisualTreeHelper.GetDpi(this).PixelsPerDip);
+        return new Size(formatted.Width, formatted.Height);
+    }
+
+    private static string TerminalLabel(string label)
+    {
+        var slash = label.LastIndexOf('/');
+        return slash >= 0 && slash < label.Length - 1 ? label[(slash + 1)..] : label;
     }
 
     private void DrawGrid(DrawingContext drawingContext, Axis axis)
@@ -274,6 +425,12 @@ public sealed class FastMetricPlot : FrameworkElement
 
         DrawText(drawingContext, axis.MinimumX.ToString("0", CultureInfo.InvariantCulture), new Point(axis.Plot.Left, axis.Plot.Bottom + 7), 9.5, MutedBrush);
         DrawText(drawingContext, axis.MaximumX.ToString("0", CultureInfo.InvariantCulture), new Point(axis.Plot.Right - 36, axis.Plot.Bottom + 7), 9.5, MutedBrush);
+    }
+
+    private void DrawGuidanceLine(DrawingContext drawingContext, string text, double y)
+    {
+        var maximumCharacters = Math.Max(24, (int)Math.Floor((ActualWidth - 28.0) / 6.3));
+        DrawText(drawingContext, Shorten(text, maximumCharacters), new Point(14, y), 9.5, MutedBrush);
     }
 
     private void DrawLegend(
@@ -306,7 +463,7 @@ public sealed class FastMetricPlot : FrameworkElement
     private LegendLayout CalculateLegendLayout(int itemCount)
     {
         const double left = 16.0;
-        const double top = 34.0;
+        const double top = 82.0;
         const double rowHeight = 20.0;
         const double bottomPadding = 12.0;
         var usableWidth = Math.Max(1.0, ActualWidth - (left * 2.0));
@@ -353,6 +510,25 @@ public sealed class FastMetricPlot : FrameworkElement
 
         if (!_plotRect.Contains(mouse) || _rendered.Count == 0)
         {
+            return;
+        }
+
+        for (var index = 0; index < _barHits.Count; index++)
+        {
+            var bar = _barHits[index];
+            if (!bar.Bounds.Contains(mouse))
+            {
+                continue;
+            }
+
+            drawingContext.DrawRectangle(null, new Pen(TextBrush, 1.2), bar.Bounds);
+            var linesForBar = WrapCalloutLines(
+            [
+                bar.Series.Label,
+                $"{_snapshot?.Metric} {bar.Point.Y:0.######}",
+                "scalar comparison",
+            ]);
+            DrawCallout(drawingContext, linesForBar, new Point(mouse.X, bar.Bounds.Top));
             return;
         }
 
@@ -476,6 +652,32 @@ public sealed class FastMetricPlot : FrameworkElement
             eventArgs.Handled = true;
             return;
         }
+    }
+
+    private void SetCurrentSeriesVisibility(bool visible)
+    {
+        if (_snapshot is null || _snapshot.Series.Count == 0)
+        {
+            return;
+        }
+
+        var changed = false;
+        foreach (var series in _snapshot.Series)
+        {
+            var key = VisibilityKey(_snapshot.Metric, series.Key);
+            changed |= visible
+                ? _hiddenSeriesVisibility.Remove(key)
+                : _hiddenSeriesVisibility.Add(key);
+        }
+
+        if (!changed)
+        {
+            return;
+        }
+
+        _signature = 0;
+        RebuildStaticDrawing();
+        SeriesVisibilityChanged?.Invoke(this, EventArgs.Empty);
     }
 
     private bool IsLegendLocation(Point location)
@@ -663,6 +865,11 @@ public sealed class FastMetricPlot : FrameworkElement
         PlotSeriesSnapshot Series,
         Brush Brush,
         Rect Bounds);
+
+    private sealed record BarHit(
+        PlotSeriesSnapshot Series,
+        Rect Bounds,
+        PlotPoint Point);
 
     private sealed record NearestPoint(
         PlotSeriesSnapshot Series,

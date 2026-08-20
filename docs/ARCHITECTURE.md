@@ -199,3 +199,26 @@ Communication cost is explicit. Typed communication emits three compact postures
 `CommunicationBeforeLanguageWorld` follows the Protocol 03 seed policy. A seed changes the social-history circumstance itself, including the prevalence/placement of informative dissent, misleading dissent, complementary expertise, convergence, evidence depth, target values, and noise. Evaluator labels and future target parameters are never visible to the peers.
 
 Nothing in Protocol 04 establishes a permanent CPA language architecture. The readout and smoothing equations are assay instruments. The architectural candidate being tested is narrower: keep public epistemic shape distinct long enough for consequence to act on it.
+
+
+## Protocol 05 distributed convention boundary
+
+Protocol 05 introduces no collective-mind object and no central convention registry. Each peer owns a private context-to-action convention memory with local standing. Convention becomes collective only when repeated successful interaction causes those separate memories to converge.
+
+```text
+peer preferences --> stateless public negotiation --> shared consequence
+                                                    |
+                                                    v
+                                      each peer updates its own
+                                      local convention + standing
+
+after convention earns standing:
+
+one convention invocation --> peers consult local copies --> consequence
+```
+
+The public reducer receives only current preferred action and preference strength. It cannot inspect private convention arrays, evaluator context kind, future costs, or the regime-shift label.
+
+The one-packet shortcut replaces three fresh preference packets only after local standing is high. Listeners still act from their own convention copies. If copies diverge, coordination can fail and consequence withdraws standing.
+
+The `frozen-convention` control forms the same culture as the adaptive path, then refuses to revise after the world changes. It is a pathological contrast for social inertia, not proposed CPA anatomy.

@@ -2,54 +2,59 @@
 
 ## Automated invariants
 
-Version 0.4.0 defines **14 self-tests**. In addition to the deterministic-random, communication-cost, provenance/standing, Protocol 01, Protocol 02, and frame-sequence checks, the current experiment-specific invariants include:
+Version 0.5.2 retains **16 self-tests**. Current protocol-specific checks include distinct seed-generated worlds and seed-101 implementation fixtures for Protocols 03, 04, and 05.
 
-- `protocol-03-default-seeds-create-distinct-lived-histories` - all five canonical seeds must produce unique developmental-world fingerprints, with at least four distinct context-history layouts;
-- `protocol-03-supports-seed-101` - frozen implementation-drift fixture for Protocol 03;
-- `protocol-04-default-seeds-create-distinct-social-histories` - all five canonical seeds must produce unique social-world fingerprints, at least four distinct class layouts, and both informative and misleading dissent in every world;
-- `protocol-04-supports-seed-101` - implementation-drift fixture for the preregistered Protocol 04 mechanism.
+Protocol 05 adds:
 
-The seed-101 protocol fixtures are invariant checks, not experimental evidence.
+- `protocol-05-default-seeds-create-distinct-coordination-worlds`;
+- `protocol-05-supports-seed-101`.
 
-Run:
+The seed-101 fixtures are implementation invariants, not experimental evidence.
 
 ```powershell
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
 ```
 
-## Protocol 04 result set
+## Protocol 05 result set
 
 ```powershell
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- `
-  --experiment 04-bounded-communication-before-language `
+  --experiment 05-emergent-convention-artificial-culture `
   --replicate 101,211,307,401,503 `
-  --output _artifacts/protocol-04-five-seed
+  --output _artifacts/protocol-05-five-seed
 ```
 
-Before interpreting treatment outcomes, verify that `scenario-generated` events differ in history-class layout/prevalence, salient peer assignment, evidence depth, target landscape, and noise. Do not change the seven Protocol 04 falsification boundaries after viewing results.
+Before interpreting outcomes, verify unique scenario fingerprints and materially different changed-context layouts. Do not alter the seven preregistered boundaries after seeing results.
 
 ## Desktop validation
 
 On Windows 11 verify:
 
-- the Seeds field opens with `101, 211, 307, 401, 503`;
-- multiple seeds execute sequentially and the active-seed badge changes correctly;
-- the Live metrics Seed selector accumulates each started seed and can move backward/forward through retained histories;
-- selecting an earlier seed switches its graph, Focus path/Metric catalogs, detail tables, Timeline, and Protocol Progress without changing the active experiment;
-- the maximized graph reports the graph-selected seed, even when a different seed is currently executing;
-- Protocol progress switches correctly among Protocols 01, 02, 03, and 04;
-- Protocol 04 progress exposes seed-specific social circumstance, private peer development, typed communication, early semantic smoothing, shared-consequence convergence, and evaluation;
-- controls remain interactive during maximum-pace execution;
-- pause/step/resume/cancel stop or release experiment observation boundaries rather than UI frames;
-- graph freeze/maximize/metric selection/line hiding change presentation only;
-- Focus path restricts Metric choices to telemetry actually published by that path;
-- final-only one-point metrics such as `rmse` remain visible;
-- dynamic legend height prevents overlap as key count changes;
-- protocol judgments accumulate across seeds independently of display telemetry drops;
-- seed visualization stores remain isolated rather than overlaying independent developmental histories;
-- advancing to a new seed retains the completed seed for inspection and does not clip its final projected display frames;
-- `frames.ndjson` remains complete even if the status bar reports dropped display-only frames.
+- main and maximized graph titles include the running application version;
+- Seeds opens with `101, 211, 307, 401, 503`;
+- seed-scoped graph inspection still switches graph, path/metric catalogs, details, Timeline, and Protocol Progress;
+- Protocol Progress recognizes Protocols 01 through 05;
+- Protocol 05 progress exposes convention formation, earned/fresh/frozen comparison, regime shift, and evaluation;
+- graph freeze/maximize/metric selection/line hiding remain presentation-only;
+- Focus path restricts Metric choices to data that path publishes;
+- final-only one-point metrics remain visible;
+- protocol judgments accumulate independently of display telemetry drops;
+- `frames.ndjson` remains complete even if display-only frames are dropped.
 
 ## Environment note
 
-The source-generation environment used for v0.4.0 does not provide the .NET SDK. Build and self-test claims are intentionally deferred to the Windows development environment.
+The source-generation environment used for v0.5.2 does not provide the .NET SDK. Build and self-test claims are deferred to the Windows development environment.
+
+
+### Desktop scalar comparison rendering (v0.5.1)
+
+After a Protocol 05 run, select `communication_packet_count`. With multiple treatment paths present, the graph should render one categorical bar per visible path rather than isolated points on a tick axis. Toggle a legend entry and confirm the bar and y-scale update. Multi-point metrics must continue to render as time-series lines.
+
+
+### Desktop metric guidance and boundary-batched rendering (v0.5.2)
+
+On a multi-path metric, verify that the graph header identifies x-axis meaning, y-value meaning, and preferred direction/context. Check at least `rmse`, `communication_work`, `mean_utility`, `standing`, and a disagreement metric.
+
+Use `Hide all`, confirm every current-series line/bar disappears while legend keys remain available, then use `Show all` to restore them. Repeat in the maximized graph and confirm visibility state stays synchronized.
+
+At `Maximum` pace, observe a multi-point metric while an experiment is running. Numeric publication/projection counters should continue advancing, but the graph should rebuild at completed series/phase boundaries rather than on every projected sample. When one path finishes and the next begins, the completed path may appear while the new path remains absent until its own commit boundary. The experiment thread, durable `frames.ndjson`, Timeline, and Protocol results must continue independently.

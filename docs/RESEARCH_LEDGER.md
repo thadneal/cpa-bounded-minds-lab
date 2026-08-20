@@ -141,11 +141,27 @@ The world includes both informative and misleading dissent. This is essential. A
 
 All peers in both treatments later receive the same external consequence. If typed disagreement remains permanently high, the protocol fails. Plurality earns standing only if it remains correctable.
 
+### Protocol 04 accepted result
+
+The canonical matrix returned **5/5 Support with 35/35 checks passing**. Mean lifetime RMSE was approximately `0.04915` for typed communication and `0.05341` for early semantic smoothing. Typed communication preserved both useful dissent and the distinction that kept misleading dissent proportionate. Later shared consequence reduced public disagreement from roughly `0.251` to `0.0035`.
+
+The accepted claim remains narrow: preserving source-specific epistemic shape through a compact public surface can outperform premature semantic convergence while a situation is unresolved. Protocol 04 is frozen.
+
+### Protocol 05
+
+The next pressure is whether something genuinely collective can develop among bounded minds without becoming a central mind. Three peers repeatedly coordinate in twelve anonymous contexts. Two actions begin similarly viable, while private preferences often differ.
+
+The earned path begins with bounded negotiation. Successful consequence lets each peer independently retain the selected action and grow local convention standing. Once standing is high, one compact convention invocation can replace three fresh preference packets. No shared convention table exists.
+
+Fresh negotiation retains no habit. The frozen control forms the same culture, then refuses revision after a seeded subset of contexts changes cost regime.
+
+A useful convention must compress communication, remain near fresh-negotiation utility, reopen when consequence makes an old habit expensive, repair changed contexts, and preserve useful stable conventions elsewhere.
+
 ### Next evidence
 
 1. rebuild under the pinned .NET 10 SDK;
-2. run the 14 invariant tests;
-3. run Protocol 04 across `101,211,307,401,503` without changing its seven thresholds;
-4. inspect scenario diversity, informative/misleading dissent, whole-history error, disagreement retention, convergence, and communication work together;
+2. run the 16 invariant tests;
+3. run Protocol 05 across `101,211,307,401,503` without changing its seven thresholds;
+4. inspect world diversity, convention coverage, shortcut use, utility, communication work, changed-context revision, stable retention, and the frozen-control contrast together;
 5. interpret before changing any mechanism;
-6. then run the four-protocol five-seed full-suite checkpoint.
+6. then run the five-protocol five-seed full-suite checkpoint.

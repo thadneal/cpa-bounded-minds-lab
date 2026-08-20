@@ -1,6 +1,6 @@
 # CPA Bounded Minds Laboratory
 
-Version **0.4.0**
+Version **0.5.2**
 
 This repository is the successor experimental program to the completed CPA Cognitive Development Lab. The earlier lab studied development inside one bounded organism. This laboratory moves the boundary outward:
 
@@ -42,16 +42,23 @@ Narrow result: bounded evidence about how a foreign conclusion was earned improv
 
 ### Protocol 04 - bounded communication before language
 
-`04-bounded-communication-before-language` is the current targeted protocol. Three peers develop different private histories in a seed-generated social world. The experiment then compares two public communication surfaces while keeping private interiors intact in both conditions:
+`04-bounded-communication-before-language` is frozen Supported. The accepted five-seed matrix returned Support in all five histories with all 35 preregistered checks passing. Mean total RMSE was about `0.04915` for typed communication versus `0.05341` for early semantic smoothing. Typed communication preserved informative dissent, spread less low-quality dissent, and converged under later shared consequence.
 
-- `typed-signals`: one bounded source-specific posture per peer and observation containing estimate, standing, and uncertainty;
-- `early-semantic-smoothing`: the same initial public postures undergo two peer-to-peer smoothing rounds before commitment and before external consequence.
+Narrow result: preserving source-specific epistemic shape through a compact public surface can outperform premature semantic convergence while a situation is unresolved. This does not establish that language itself is harmful.
 
-The control is a model of **premature semantic convergence**, not a claim that natural language necessarily destroys disagreement. It deliberately asks what can be lost when public statements become mutually assimilated before the world has supplied a verdict.
+### Protocol 05 - emergent convention / artificial culture
 
-Seeds now generate different mixtures of informative dissent, misleading dissent, complementary expertise, convergent histories, evidence depths, target landscapes, and noise. All treatments within one seed receive the same generated circumstance.
+`05-emergent-convention-artificial-culture` is the current targeted protocol. Three bounded peers repeatedly coordinate in a seed-generated twelve-context world. For each context, two coordinated actions begin close enough in cost that no single convention is installed in advance, while private peers often prefer different actions. Repeated successful negotiation can cause the peers' separate local convention memories to converge on one shared habit. Once that habit has standing, one compact convention invocation can replace fresh three-peer negotiation.
 
-Protocol 04 asks whether typed communication can preserve useful dissent, avoid spreading low-quality dissent, reduce whole-history error, remain bounded in communication work, and still converge when peers later share direct external consequence.
+The experiment compares:
+
+- `earned-convention`, convention is retained locally, earns standing through successful consequence, compresses later communication, and can lose standing when the world changes;
+- `fresh-negotiation`, no convention is retained and three public preference packets are paid on every episode;
+- `frozen-convention`, the same culture forms before the regime shift but later consequence cannot revise it.
+
+A seed determines the private cost landscape and which `4..6` contexts later change. Stable contexts remain approximately as lived. Changed contexts make the formerly expensive third action newly useful. There is no central convention registry in the ordinary path.
+
+Protocol 05 asks whether something collective can emerge between bounded minds, reduce coordination cost, remain near the utility of fresh negotiation, and still be locally rewritten by consequence rather than hardening into doctrine.
 
 The canonical matrix remains `101,211,307,401,503`. See `docs/EXPERIMENTS.md` and `docs/FALSIFICATION.md` before interpreting results.
 
@@ -74,8 +81,8 @@ Projects target .NET 10. The WPF Desktop Lab targets `net10.0-windows`.
 ```powershell
 dotnet build Cpa.BoundedMindsLab.sln -c Release
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --experiment 04-bounded-communication-before-language --seed 101
-dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --experiment 04-bounded-communication-before-language --replicate 101,211,307,401,503 --output _artifacts/protocol-04-five-seed
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --experiment 05-emergent-convention-artificial-culture --seed 101
+dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --experiment 05-emergent-convention-artificial-culture --replicate 101,211,307,401,503 --output _artifacts/protocol-05-five-seed
 ```
 
 For live inspection on Windows 11:
@@ -84,7 +91,7 @@ For live inspection on Windows 11:
 dotnet run --project src/Cpa.BoundedMindsLab.Desktop
 ```
 
-The Desktop Lab now opens with `101, 211, 307, 401, 503` already entered in **Seeds** and selects the newest protocol by default.
+The Desktop Lab opens with `101, 211, 307, 401, 503` already entered in **Seeds**, selects the newest protocol by default, and includes the running application version in the main and maximized-graph window titles. Graphs explain axis meaning and preferred metric direction/context, provide show-all/hide-all series controls, and rebuild from committed metric batches rather than every incremental numeric sample.
 
 ## Visualization boundary
 

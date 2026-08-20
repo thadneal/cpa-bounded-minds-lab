@@ -77,3 +77,14 @@ Protocol 04 translates only the experimental core of that claim. It does **not**
 This is intentionally conservative. Rich language can preserve disagreement, provenance, modality, and uncertainty when designed to do so. The control represents one failure mode of early semantic smoothing, not language as a category. If the typed condition wins, the justified conclusion is about preserving epistemic shape before commitment, not about forbidding linguistic negotiation.
 
 The seed-generated social worlds also continue the Protocol 03 correction. Different seeds now alter who has strong evidence, where useful dissent appears, where dissent is misleading, and how noisy each local history is. If inter-mind cognition is meant to develop from lived circumstance, the assay must allow those circumstances to matter.
+
+
+## Protocol 05 reconciliation: convention without a central mind
+
+The successor handoff proposed emergent convention / artificial culture after bounded transfer and disagreement. Protocol 05 implements that question without adding a culture manager, shared belief store, or centrally owned social model.
+
+Repeated successful coordination can make separate local memories converge on a shorthand. In CPA/WHUP terms, the convention earns standing because it survives practical consequence while reducing cost. When the cost landscape changes, poor outcome withdraws permission and reopens negotiation.
+
+This keeps repetition distinct from authority. A convention persists because it keeps working, not merely because it has been repeated. The frozen control tests the failure mode where a once-useful social compression becomes doctrine after its supporting conditions disappear.
+
+The experiment remains an assay. It does not establish that mature culture is a context-to-action table, that speaker-triggered invocation is final architecture, or that the protocol reducer belongs in CPA.

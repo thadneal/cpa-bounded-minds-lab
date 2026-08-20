@@ -93,7 +93,7 @@ Conversely, more variable outcomes are not automatically a defect. They may fina
 
 ## 04 bounded communication before language
 
-Protocol 04 uses **seven** preregistered component checks. Its control is early public semantic smoothing, not language in general. Thresholds are fixed before the five-seed result set is interpreted.
+Protocol 04 is frozen Supported: 5/5 Support, 35/35 checks. The boundaries below remain the accepted preregistration. Its control is early public semantic smoothing, not language in general.
 
 ### A. Seed generates a social circumstance
 
@@ -159,3 +159,50 @@ If a result lands near a boundary, interpretation changes before thresholds do.
 ## Protocol 04 replication interpretation
 
 The canonical five seeds should produce unique social-world fingerprints and materially different placements/prevalence of the four history classes. Variation in RMSE is expected. A five-seed sweep is evidence about one declared world family, not five claims that natural-language interaction is harmful.
+
+
+---
+
+## 05 emergent convention / artificial culture
+
+Protocol 05 uses **seven** preregistered component checks. Thresholds are fixed before the five-seed result set is interpreted.
+
+### A. Seed generates a plural coordination circumstance
+
+Each world must contain `4..6` shifted contexts, at least `6` stable contexts, at least `8` preference-diverse contexts, and a mean initial gap <= `0.05` between the two viable coordinated actions.
+
+### B. Distributed convention emerges
+
+Before the regime shift, earned convention coverage must be >= `0.90`, late shortcut use >= `0.80`, late utility >= `98%` of fresh negotiation, and the earned/frozen formation fingerprints must match.
+
+### C. Earned convention compresses communication
+
+Fresh negotiation must emit exactly `1512` packets and cost `9.072` work units. Earned convention work must be <= `2.75`, <= `35%` of fresh work, and use fewer packets.
+
+### D. Collective habit remains useful
+
+Earned-convention lifetime mean utility must be at least `98%` of fresh-negotiation lifetime utility.
+
+### E. Changed conditions revise convention
+
+Changed-context revision coverage must be >= `0.85`, late changed-context utility >= `95%` of fresh negotiation, and final convention coverage >= `0.90`.
+
+### F. Frozen culture fails under pressure
+
+The frozen control must begin from the same formation fingerprint, retain changed-context revision coverage <= `0.10`, and trail adaptive changed-context late utility by at least `0.20`.
+
+### G. Localized change preserves stable conventions
+
+Stable-context convention retention must be >= `0.90` and late post-shift shortcut use >= `0.80`.
+
+## Protocol 05 verdict rule
+
+- `Support`: all seven checks pass.
+- `Mixed`: at least five checks pass.
+- `Disconfirm`: fewer than five checks pass.
+
+If a result lands near a boundary, interpretation changes before thresholds do.
+
+## Protocol 05 replication interpretation
+
+The canonical seeds should produce unique coordination-world fingerprints and materially different changed-context layouts. Variation in convention outcome and utility is expected because seed now changes what was lived.

@@ -25,6 +25,8 @@ public static class SelfTestSuite
         Run("protocol-03-supports-seed-101", TestProtocolThree, passed);
         Run("protocol-04-default-seeds-create-distinct-social-histories", TestProtocolFourSeedSemantics, passed);
         Run("protocol-04-supports-seed-101", TestProtocolFour, passed);
+        Run("protocol-05-default-seeds-create-distinct-coordination-worlds", TestProtocolFiveSeedSemantics, passed);
+        Run("protocol-05-supports-seed-101", TestProtocolFive, passed);
         Run("frame-sequence-is-contiguous", TestFrameSequence, passed);
         return passed;
     }
@@ -191,6 +193,39 @@ public static class SelfTestSuite
         {
             var run = ExperimentRunner.Run([ExperimentCatalog.Get("04-bounded-communication-before-language")], 101, output, quiet: true);
             Assert(run.Experiments.Single().Verdict == ExperimentVerdict.Support, "Protocol 04 should meet its preregistered synthetic boundaries for seed 101.");
+        }
+        finally
+        {
+            Directory.Delete(output, recursive: true);
+        }
+    }
+
+    private static void TestProtocolFiveSeedSemantics()
+    {
+        var fingerprints = new HashSet<ulong>();
+        var shiftedLayouts = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var seed in ExperimentDefaults.ReplicationSeeds)
+        {
+            var scenario = EmergentConventionWorld.CreateScenario(seed);
+            Assert(fingerprints.Add(scenario.Fingerprint), $"Default seed {seed} should produce a distinct coordination-world fingerprint.");
+            var layout = string.Join(",", scenario.Cells.Select(cell => cell.ContextKind == ConventionContextKind.Shifted ? "1" : "0"));
+            shiftedLayouts.Add(layout);
+            Assert(EmergentConventionWorld.CountKind(scenario, ConventionContextKind.Shifted) is >= 4 and <= 6, "Each Protocol 05 world should contain four to six changed contexts.");
+            Assert(EmergentConventionWorld.CountPreferenceDiverseContexts(scenario) >= 8, "Each Protocol 05 world should contain substantial private preference plurality before convention formation.");
+        }
+
+        Assert(
+            shiftedLayouts.Count >= 4,
+            "The canonical five-seed matrix should vary which contexts undergo later coordination pressure, not merely shuffle one fixed convention history.");
+    }
+
+    private static void TestProtocolFive()
+    {
+        var output = CreateTemporaryDirectory();
+        try
+        {
+            var run = ExperimentRunner.Run([ExperimentCatalog.Get("05-emergent-convention-artificial-culture")], 101, output, quiet: true);
+            Assert(run.Experiments.Single().Verdict == ExperimentVerdict.Support, "Protocol 05 should meet its preregistered synthetic boundaries for seed 101.");
         }
         finally
         {

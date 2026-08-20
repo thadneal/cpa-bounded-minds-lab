@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.5.2 - 2026-08-19
+
+- Added metric guidance directly to the graph surface: the y-value meaning, x-axis interpretation, and preferred direction/context are shown for every selected metric. Scalar comparison graphs identify the x-axis as treatment/focus path, while time-series graphs identify it as observation/tick order.
+- Added `Show all` and `Hide all` controls for the current metric's plotted series in both the embedded and maximized graph views. Existing per-key click visibility remains available.
+- Changed live plot rebuilding from incremental sample-driven refresh to boundary-batched depiction. Numeric samples continue to accumulate in the background telemetry store, but a series is exposed to the renderer only after a series transition, phase/developmental boundary, or terminal experiment/run boundary commits the accumulated values.
+- Added committed-through tracking to the bounded multi-resolution telemetry series so an in-progress next series cannot leak partial points into a graph whose previous series has just committed.
+- Kept selector catalogs, details, timeline, protocol results, durable NDJSON output, and experiment execution independent from the new render batching. No Protocol 01-05 mechanics, thresholds, or scientific telemetry were changed.
+
+## 0.5.1 - 2026-08-19
+
+- Added topology-aware graph rendering for terminal scalar comparison metrics. When two or more plotted paths each publish exactly one value, the Desktop Lab now renders a categorical bar comparison instead of forcing the values onto a time-series line plot.
+- Final scalar comparisons ignore incidental completion-tick differences on the x-axis, so metrics such as `communication_packet_count` and final `rmse` compare treatment magnitude directly.
+- Preserved clickable legend visibility, dynamic legend sizing, maximized-graph behavior, and bounded rendering. Hidden series are removed from the comparison scale exactly as they are from time-series scaling.
+- Added bar hover details and compact treatment labels while keeping the full path available through the existing legend hover surface.
+- Kept single-series one-point metrics on the existing point renderer so live time-series metrics do not switch graph type after their first observation.
+- No Protocol 01-05 experiment behavior, thresholds, telemetry values, or durable artifacts changed.
+
+## 0.5.0 - 2026-08-19
+
+- Froze Protocol 04 as Supported after the canonical five-seed run returned 5/5 Support and 35/35 preregistered checks. Mean total RMSE was about `0.04915` for typed communication versus `0.05341` for early semantic smoothing, with useful dissent preserved, low-quality dissent kept proportionate, and later shared consequence restoring convergence.
+- Added Protocol 05, `05-emergent-convention-artificial-culture`, asking whether repeated bounded coordination can create a useful distributed convention without introducing a central culture owner.
+- Added `EmergentConventionWorld`, a seed-generated twelve-context, three-peer coordination family where two actions are initially viable, private preferences often differ, and `4..6` contexts later change cost regime.
+- Added earned-convention, fresh-negotiation, and frozen-convention treatments with explicit communication cost. The earned path can replace three fresh preference packets with one compact convention invocation after standing is earned.
+- Added seven preregistered Protocol 05 checks covering world plurality, convention formation, communication compression, utility, revision after changed conditions, frozen-culture failure, and stable-convention retention.
+- Added two Protocol 05 self-tests, bringing the invariant suite to 16 checks, including canonical-seed coordination-world diversity and a seed-101 implementation-drift fixture.
+- Added the running Desktop assembly version to the main visualization and maximized graph window titles.
+- Updated Desktop Protocol Progress and Run notes for Protocol 05. The newest protocol remains the default selection and the canonical five seeds remain the default session value.
+- Updated plan, experiment, falsification, architecture, source-reconciliation, runbook, validation, README, artifact, CLI, and assembly versioning for v0.5.0.
+
 ## 0.4.0 - 2026-08-19
 
 - Froze Protocol 03 as Supported after the canonical five-seed run returned 5/5 Support and 35/35 preregistered checks. The accepted record notes that developmental transfer consistently improved calibration over doctrinal transfer while remaining only modestly different from local-only learning overall.

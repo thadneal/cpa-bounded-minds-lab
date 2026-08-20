@@ -14,42 +14,40 @@ dotnet build Cpa.BoundedMindsLab.sln -c Release
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- --self-test
 ```
 
-Treat analyzer failures as build failures. Warnings are errors.
+Treat analyzer failures as build failures. Warnings are errors. Version 0.5.0 defines 16 invariant tests.
 
-## Targeted Protocol 04 check
-
-After invariants pass, a single deterministic smoke history is useful:
+## Targeted Protocol 05 check
 
 ```powershell
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- `
-  --experiment 04-bounded-communication-before-language `
+  --experiment 05-emergent-convention-artificial-culture `
   --seed 101 `
-  --output _artifacts/protocol-04-seed-101
+  --output _artifacts/protocol-05-seed-101
 ```
 
-Do not interpret the protocol from the smoke history alone. Run the canonical five-world matrix without changing thresholds:
+Then run the canonical matrix without changing thresholds:
 
 ```powershell
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- `
-  --experiment 04-bounded-communication-before-language `
+  --experiment 05-emergent-convention-artificial-culture `
   --replicate 101,211,307,401,503 `
-  --output _artifacts/protocol-04-five-seed
+  --output _artifacts/protocol-05-five-seed
 ```
 
-Review each seed's `scenario-generated` event alongside treatment outcomes. Protocol 04 seeds vary social-history composition and evidence, not just observation ordering.
+Review `scenario-generated`, `convention-formed`, `regime-shift`, and `path-complete` events alongside the seven assertions.
 
 ## Full-suite checkpoint
 
-After Protocol 04 is interpreted:
+After Protocol 05 is interpreted:
 
 ```powershell
 dotnet run --project src/Cpa.BoundedMindsLab.Cli -- `
   --all `
   --replicate 101,211,307,401,503 `
-  --output _artifacts/full-suite-0.4.0
+  --output _artifacts/full-suite-0.5.0
 ```
 
-This runs 20 protocol histories under one replication report.
+This runs 25 protocol histories.
 
 ## Desktop inspection
 
@@ -57,33 +55,23 @@ This runs 20 protocol histories under one replication report.
 dotnet run --project src/Cpa.BoundedMindsLab.Desktop
 ```
 
-The Seeds field defaults to:
+The main window title includes the running assembly version. Seeds default to `101, 211, 307, 401, 503`. Protocol 05 is selected by default.
+
+Protocol 05 progress should move through:
 
 ```text
-101, 211, 307, 401, 503
-```
-
-The newest protocol is selected by default. Seeds run in succession. Each started seed retains its own bounded visualization store for the session, and the Live metrics Seed selector can step among them without overlaying histories. Prior judged results remain in the Protocol results tab, while the accent seed badge identifies the actively executing seed and its `current/total` position.
-
-Protocol 04 progress should move through:
-
-```text
-Build private plurality
-  seed-specific social circumstance
-  three peers develop private histories
-Compare communication forms
-  low-dimensional typed signals
-  early semantic-smoothing control
-  same shared consequence remains sovereign
-Evaluate
-  seven falsification checks
+Let a culture form
+  seed-specific plural coordination world
+  repeated success earns local convention standing
+Compare coordination modes
+  earned distributed convention
+  fresh negotiation baseline
+  frozen-convention control
+Change the world and judge
+  regime shift + seven falsification checks
   protocol verdict
 ```
 
 ## Artifacts
 
-Desktop sessions default to `<repo>/_artifacts/desktop-YYYYMMDD-HHMMSS`.
-
-Each seed directory contains `frames.ndjson`, `manifest.json`, and one result/metrics directory per selected protocol. A completed multi-seed session also writes `replication-report.json` at the session root.
-
-`frames.ndjson` is the authoritative high-resolution observation record. The live graph is intentionally a bounded presentation of that record.
+Desktop sessions default to `<repo>/_artifacts/desktop-YYYYMMDD-HHMMSS`. Each seed keeps its own journal and result directories. `frames.ndjson` remains the authoritative high-resolution observation record.

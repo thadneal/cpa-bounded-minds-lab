@@ -33,7 +33,7 @@ The canonical matrix remains:
 101, 211, 307, 401, 503
 ```
 
-`SelfTestSuite` verifies that these five values produce distinct Protocol 03 developmental-world fingerprints and distinct Protocol 04 social-history fingerprints/layouts.
+`SelfTestSuite` verifies that these five values produce distinct Protocol 03 developmental-world fingerprints, distinct Protocol 04 social-history fingerprints/layouts, and distinct Protocol 05 coordination-world fingerprints with different changed-context layouts.
 
 ## Experimental arc
 
@@ -65,45 +65,36 @@ Narrow result: some of the developmental path by which a conclusion was earned c
 
 ### Protocol 04: bounded communication before language
 
-Status: **implemented in v0.4.0, result pending**.
+Status: **frozen Supported**.
 
-Test whether low-dimensional typed public signals preserve useful disagreement better than early semantic negotiation that smooths peers toward a common statement before external consequence.
+Accepted result: 5/5 Support, 35/35 checks. Typed public postures produced lower mean total RMSE than early semantic smoothing, preserved useful disagreement, bounded misleading dissent, and later converged under shared consequence.
 
-Each seed generates a twelve-context, three-peer social circumstance containing at least two examples of each evaluator-only pressure:
+Narrow result: preserving source-specific epistemic shape before commitment can have value while the situation is unresolved.
 
-- `InformativeDissent`: a deeper, more stable minority history is locally right while two peers share a weaker bias;
-- `MisleadingDissent`: one sparse/noisy dissenter is locally wrong while two peers have stronger compatible histories;
-- `Complementary`: peer histories differ in quality and bias without a simple majority/minority interpretation;
-- `Convergent`: all three private histories are broadly compatible.
+### Protocol 05: emergent convention / artificial culture
 
-The typed condition publishes one bounded posture per peer and observation:
+Status: **implemented in v0.5.0, result pending**.
 
-```text
-source identity
-estimate
-standing
-uncertainty
-evidence count
-```
+Can repeated bounded interaction create a distributed convention that becomes cheaper than fresh negotiation while remaining grounded in consequence and revisable when the world changes?
 
-Only estimate, standing, and uncertainty participate in the public decision. Source identity/evidence remain visible for audit and cost accounting. The richer control begins from the same postures but performs two peer-to-peer public smoothing rounds before commitment. Private peer state is unchanged by either communication surface; both conditions then receive the same direct shared consequence.
+Three peers coordinate in a seed-generated twelve-context world. The ordinary path contains no central convention object. Each peer independently stores a local context-to-action convention plus standing. Repeated successful coordination can make those private copies converge.
 
-The control should be read narrowly. It represents premature semantic smoothing, not language itself. A future language layer could preserve typed distinctions perfectly well. The experiment asks whether *timing and form of public convergence* matter before external contact has adjudicated disagreement.
+Treatments:
 
-### Protocol 05 candidate: emergent convention
+- `earned-convention`: negotiate while convention standing is weak, use one compact invocation after it is earned, and let poor consequence withdraw standing and reopen negotiation;
+- `fresh-negotiation`: retain no durable convention and pay three public preference packets every episode;
+- `frozen-convention`: form the same convention as the earned path, then refuse revision after the regime shift.
 
-Ask whether repeated interaction can form useful shared conventions that earn persistence and remain revisable.
-
-### Later candidate: incomplete epistemic ancestry
-
-Ask whether common origin can be inferred when provenance is missing, partial, copied, or misleading.
+The world later changes `4..6` contexts so the formerly expensive third action becomes useful. Stable contexts change only slightly. Success requires communication compression without significant utility loss, revision on changed contexts, and retention of useful stable convention.
 
 ## Result cadence
 
-For the Protocol 04 baseline introduced in v0.4.0:
+For Protocol 05 in v0.5.0:
 
-1. build and run the full invariant suite, now 14 checks;
-2. run Protocol 04 across `101,211,307,401,503` without changing its seven thresholds;
-3. inspect both verdict consistency and seed-generated social-world differences;
-4. interpret informative dissent, misleading dissent, whole-history error, disagreement retention, convergence, and communication cost before changing any mechanism;
-5. after Protocol 04 is understood, run the four-protocol five-seed full-suite checkpoint because v0.4.0 changes the experiment catalog and protocol-progress visualization.
+1. build and run the full invariant suite, now 16 checks;
+2. run Protocol 05 across `101,211,307,401,503` without changing its seven thresholds;
+3. inspect world diversity, convention coverage, shortcut use, utility, communication work, revision coverage, stable retention, and the frozen-control contrast together;
+4. interpret before changing any mechanism;
+5. after Protocol 05 is understood, run the five-protocol five-seed full-suite checkpoint because v0.5.0 changes the experiment catalog and progress visualization.
+
+Later candidate: incomplete epistemic ancestry, where causal origin is missing, partial, or copied across peers.
